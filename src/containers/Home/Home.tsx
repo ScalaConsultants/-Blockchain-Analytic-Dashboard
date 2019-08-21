@@ -7,8 +7,8 @@ const Home = (): React.ReactElement => {
         textAlign: "center"
       }}
     >
-      <h1>Blokchain Analytic Dashboard</h1>
-      <h3><a href="https://github.com/ScalaConsultants/Blokchain-Analytic-Dashboard">https://github.com/ScalaConsultants/Blokchain-Analytic-Dashboard</a></h3>
+      <h1>Blockchain Analytic Dashboard</h1>
+      <h3><a href="https://github.com/ScalaConsultants/Blockchain-Analytic-Dashboard" target="_blank">https://github.com/ScalaConsultants/Blockchain-Analytic-Dashboard</a></h3>
     </div>
   );
 };
