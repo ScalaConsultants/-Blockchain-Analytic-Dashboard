@@ -8,6 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid/Grid";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import TableSortLabel from "@material-ui/core/TableSortLabel/TableSortLabel";
+import DetailsModal from "./DetailsModal";
 
 import { stableSort, getSorting } from "../../helpers/helpers";
 
@@ -70,14 +71,23 @@ const TransactionList = (): React.ReactElement => {
 
     return dateWithHour.toString();
   };
+  const [open, setOpen] = React.useState(false);
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
 
   return (
     <Grid container spacing={9} className="Container">
-      
+
       <Grid item xs={12} lg={12}>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow onClick={handleClickOpen}>
               {headerCols.map(row => (
                 <TableCell
                   key={row.id}
@@ -120,6 +130,7 @@ const TransactionList = (): React.ReactElement => {
           </TableBody>
         </Table>
       </Grid>
+      <DetailsModal open={open} />
     </Grid>
   );
 };
