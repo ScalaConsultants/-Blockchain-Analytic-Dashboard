@@ -16,7 +16,6 @@ export default (): React.ReactElement => {
       <Route exact path="/charts" component={Charts} />
       <Route exact path="/top-seller" component={LiveChart} />
       <Route exact path="/top-buyer" component={LiveChart2} />
-      <Route exact path="/top-buyer" component={LiveChart2} />
       <Route exact path="/custom-chart" component={CustomChartView} />
     </Container>
   );
