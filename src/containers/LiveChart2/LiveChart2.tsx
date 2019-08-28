@@ -16,7 +16,7 @@ function calculateSize(max: number, transactions: number): number {
 }
 
 const mapState = (state: any): any => ({
-  blokchain: state.blokchain.blocks
+  blokchain: state.tezos.blocks
 });
 
 function LiveChart2(): React.ReactElement {

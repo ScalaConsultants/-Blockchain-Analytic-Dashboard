@@ -26,7 +26,7 @@ type Order = "asc" | "desc";
 type OrderBy = string;
 
 const mapState = (state: any) => ({
-  blokchain: state.blokchain.blocks
+  blokchain: state.tezos.blocks
 });
 
 const Transactions = (): React.ReactElement => {
@@ -47,8 +47,6 @@ const Transactions = (): React.ReactElement => {
   const createSortHandler = (property: any) => (event: any) => {
     handleRequestSort(event, property);
   };
-
-
 
   const timestampToDate = (timestamp: number) => {
     const newDate = new Date(timestamp);

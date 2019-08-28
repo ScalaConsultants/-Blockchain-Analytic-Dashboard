@@ -9,25 +9,24 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import { Blockchain, Block, State } from "../../types";
+import { Blockchain, Block, State, EventTarget } from "../../types";
 import {
   convertTimeStampToHour,
   convertTimeStamp,
   getDayTime,
   selectWhichDayTime,
-  convertDateArray,
-  getSelectedDate
+  convertDateArray
 } from "./helpers";
 
 const mapState = (state: State): Blockchain => ({
-  blokchain: state.blokchain.blocks
+  blokchain: state.tezos.blocks
 });
 
 const Charts = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { blokchain } = useMappedState(mapState);
-  const [dateFrom, setDateFrom] = useState(getSelectedDate(7));
-  const [dateTo, setDateTo] = useState(getSelectedDate(0));
+  const [dateFrom, setDateFrom] = useState("2019-07-25");
+  const [dateTo, setDateTo] = useState("2019-08-15");
   const [label, setLabel] = useState([
     "19-04-2019",
     "20-04-2019",
@@ -119,7 +118,7 @@ const Charts = (): React.ReactElement => {
     setLoaderFalse();
   };
 
-  const triggerSetDateFrom = (e:React.ChangeEvent<HTMLInputElement>): void => {
+  const triggerSetDateFrom = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setLoaderTrue();
     setDateFrom(e.target.value);
   };
@@ -222,9 +221,9 @@ const Charts = (): React.ReactElement => {
             name="dateFrom"
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
               e.persist();
-              setTimeout(() => triggerSetDateFrom(e), 100);              
+              setTimeout(() => triggerSetDateFrom(e), 100);
             }}
-            defaultValue={getSelectedDate(7)}
+            defaultValue="2019-07-25"
             style={{ width: "33%" }}
           />
           <TextField
@@ -232,10 +231,10 @@ const Charts = (): React.ReactElement => {
             label="Date To"
             type="date"
             name="dateTo"
-            defaultValue={getSelectedDate(0)}
+            defaultValue="2019-08-15"
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
               e.persist();
-              setTimeout(() =>  triggerSetDateTo(e), 100);  
+              setTimeout(() => triggerSetDateTo(e), 100);
             }}
             style={{ width: "33%" }}
           />
@@ -243,7 +242,7 @@ const Charts = (): React.ReactElement => {
             <InputLabel>Select chart</InputLabel>
             <Select
               value={select}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 e.persist();
                 setTimeout(() => handleChartChange(e), 100);
               }}

@@ -1,8 +1,8 @@
 import {
   BLOKCHAIN_SUM_TRANSACTIONS,
   BLOKCHAIN_SET_MORE_TRANSACTIONS
-} from "../actions/blokchain";
-import { Block, SummedBlock } from "../../types";
+} from "../../actions/tezos/blokchain";
+import { Block, SummedBlock } from "../../../types";
 
 const initState: SummedBlock[] = [];
 
