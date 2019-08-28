@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CustomChart from '../../components/customCharts/CustomChart';
 
 const CustomChartView = () => {
   const [chart1, setChart1] = useState(200);
@@ -7,7 +6,6 @@ const CustomChartView = () => {
 
   return (
     <div>
-      <CustomChart data={[chart1, chart2]}/>
       <input
         type="number"
         value={chart1}
