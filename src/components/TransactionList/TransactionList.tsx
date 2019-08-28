@@ -71,9 +71,11 @@ const TransactionList = (): React.ReactElement => {
 
     return dateWithHour.toString();
   };
-  const [open, setOpen] = React.useState(false);
 
-  function handleClickOpen() {
+  const [open, setOpen] = React.useState(true);
+  const [selectedRow, setSelectedRow ] = React.useState({});
+  function handleClickOpen(data: Object) {
+    setSelectedRow(data);
     setOpen(true);
   }
 
@@ -83,11 +85,10 @@ const TransactionList = (): React.ReactElement => {
 
   return (
     <Grid container spacing={9} className="Container">
-
       <Grid item xs={12} lg={12}>
         <Table>
           <TableHead>
-            <TableRow onClick={handleClickOpen}>
+            <TableRow>
               {headerCols.map(row => (
                 <TableCell
                   key={row.id}
@@ -119,7 +120,7 @@ const TransactionList = (): React.ReactElement => {
               blokchain.slice(0, 100),
               getSorting(order, orderBy)
             ).map((row: any, index: any) => (
-              <TableRow hover key={index}>
+              <TableRow onClick={() => handleClickOpen(row)} hover key={index}>
                 <TableCell component="th" scope="row">
                   {timestampToDate(row.timestamp)}
                 </TableCell>
@@ -130,7 +131,7 @@ const TransactionList = (): React.ReactElement => {
           </TableBody>
         </Table>
       </Grid>
-      <DetailsModal open={open} />
+      <DetailsModal open={open} handleClose={handleClose} data={selectedRow}/>
     </Grid>
   );
 };
