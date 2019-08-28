@@ -14,15 +14,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TablePaginationActions from './components/TablePaginationActions'
 import { stableSort, getSorting } from "../../helpers/helpers";
 
-const headerCols = [
+interface HeaderColsInterface {
+    id: string,
+    numeric: boolean,
+    disablePadding: boolean,
+    label: string
+}
+
+const headerCols: Array<HeaderColsInterface> = [
     { id: "timestamp", numeric: false, disablePadding: true, label: "Timestamp" },
     { id: "source", numeric: false, disablePadding: false, label: "Source" },
-    {
-        id: "destination",
-        numeric: false,
-        disablePadding: false,
-        label: "Destination"
-    }
+    { id: "destination", numeric: false, disablePadding: false, label: "Destination" }
 ];
 
 type Order = "asc" | "desc";
@@ -90,8 +92,8 @@ const TransactionList = (): React.ReactElement => {
         return dateWithHour.toString();
     };
 
-    const transactionListHeaderGenerate = (headerCols: Array<Object>) => {
-        return (headerCols.map((row: any) => (
+    const transactionListHeaderGenerate = (headerCols: Array<HeaderColsInterface>) => {
+        return (headerCols.map((row: HeaderColsInterface) => (
             <TableCell
                 key={row.id}
                 align={row.numeric ? "right" : "left"}
@@ -131,46 +133,45 @@ const TransactionList = (): React.ReactElement => {
     }
 
     const tablePaginationProps = {
-        rowsPerPageOptions:  [15, 25, 50, 100],
-        colSpan:  3,
-        count:  blokchain.length ,
-        rowsPerPage: rowsPerPage ,
-        page :  page ,
+        rowsPerPageOptions: [15, 25, 50, 100],
+        colSpan: 3,
+        count: blokchain.length,
+        rowsPerPage: rowsPerPage,
+        page: page,
         SelectProps: {
-        inputProps: { 'aria-label': 'rows per page' },
+            inputProps: { 'aria-label': 'rows per page' },
             native: true,
-         },
-        
-        onChangePage :  handleChangePage ,
-        onChangeRowsPerPage :  handleChangeRowsPerPage ,
-        ActionsComponent :  TablePaginationActions 
+        },
+        onChangePage: handleChangePage,
+        onChangeRowsPerPage: handleChangeRowsPerPage,
+        ActionsComponent: TablePaginationActions
     }
 
-return (
-    <Grid container spacing={9} className="Container">
-        <Grid item xs={12} lg={12}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        {transactionListHeaderGenerate(headerCols)}
-                        <TableCell />
-                        <TableCell />
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {transactionListRowsGenerate(blokchain)}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TablePagination
-                            {...tablePaginationProps}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
+    return (
+        <Grid container spacing={9} className="Container">
+            <Grid item xs={12} lg={12}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            {transactionListHeaderGenerate(headerCols)}
+                            <TableCell />
+                            <TableCell />
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {transactionListRowsGenerate(blokchain)}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                {...tablePaginationProps}
+                            />
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </Grid>
         </Grid>
-    </Grid>
-);
+    );
 };
 
 export default TransactionList;
