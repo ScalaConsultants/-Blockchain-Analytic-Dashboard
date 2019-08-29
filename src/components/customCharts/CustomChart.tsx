@@ -6,7 +6,7 @@ interface Props {
 }
 
 const CHART_WIDTH = 1300;
-const CHART_HEIGHT = 640;
+const CHART_HEIGHT = 400;
 const CHART_PADDING = 10;
 
 const BAR_WIDTH = 30;
@@ -22,10 +22,10 @@ const getClickPosition = (e: any, canvas: any) => {
 const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
   objects.forEach((element: any) => {
     if (
-      clickPositions.y > element.y &&
-      clickPositions.y < element.y + element.height &&
-      clickPositions.x > element.x &&
-      clickPositions.x < element.x + element.width
+      clickPositions.y >= element.y &&
+      clickPositions.y <= element.y + element.height &&
+      clickPositions.x >= element.x &&
+      clickPositions.x <= element.x + element.width
     ) {
       setClickedCallback(element.key)
     }
@@ -46,9 +46,8 @@ const CustomChart = ({
       // @ts-ignore
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, CHART_WIDTH, CHART_HEIGHT);
-      ctx.fillStyle = 'rgb(98,156,200)';
 
-      const test = chartData.map((e, index) => {
+      const objects = chartData.map((e, index) => {
         const element = {
           x: CHART_PADDING + ((BAR_WIDTH + SPACE_BETWEEN_BARS) * index),
           y: CHART_HEIGHT - CHART_PADDING - e.value * scale,
@@ -57,16 +56,17 @@ const CustomChart = ({
           value: e.value,
           key: e.key,
         };
+        ctx.fillStyle = selectedItem === e.key ? 'rgb(44,123,200)' : 'rgb(98,156,200)';
+        console.log(element.x, element.y, element.width, element.height)
         ctx.fillRect(element.x, element.y, element.width, element.height);
         return element
       });
       // @ts-ignore
-      setCanvasObjects(test)
+      setCanvasObjects(objects)
     }
-  }, [scale, chartData]);
+  }, [scale, chartData, selectedItem]);
 
-  const selectedRecord = fullData.find((element: any) => element.source === selectedItem) || {};
-console.log(selectedRecord)
+  const selectedRecord = fullData.find((element: any) => element.destination === selectedItem) || {};
 
   return (
     <div style={{
@@ -78,7 +78,11 @@ console.log(selectedRecord)
       <canvas
         width={CHART_WIDTH}
         height={CHART_HEIGHT}
-        style={{ border: '1px solid black' }}
+        style={{
+          border: '1px solid black',
+          width: CHART_WIDTH,
+          height: CHART_HEIGHT,
+        }}
         ref={canvasRef}
         onClick={(e) => handleElementClick(setSelectedItem, canvasObjects, getClickPosition(e, canvasRef.current))}
       >
@@ -91,14 +95,14 @@ console.log(selectedRecord)
       />
       <div>
         <p>Selected record details:</p>
-        <p>source: {selectedRecord.source}</p>
         <p>destination: {selectedRecord.destination}</p>
+        <p>source: {selectedRecord.source}</p>
         <p>amount: {selectedRecord.amount}</p>
+        <p>date: {new Date(selectedRecord.timestamp).toDateString()}</p>
         <p>block level: {selectedRecord.block_level}</p>
         <p>counter: {selectedRecord.counter}</p>
         <p>fee: {selectedRecord.fee}</p>
         <p>transactions: {selectedRecord.transactions}</p>
-        <p>date: {new Date(selectedRecord.timestamp).toDateString()}</p>
       </div>
     </div>
   );
