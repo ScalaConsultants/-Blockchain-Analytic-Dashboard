@@ -10,6 +10,12 @@ interface Props {
   chartData: any[];
   recordSelectCallback: (arg: any) => any;
   selectedRecordKey: string;
+  width?: number,
+  height?: number,
+  spaceBetweenBars?: number,
+  barWidth?: number,
+  barColor?: string,
+  selectedBarColor?: string,
 }
 
 const useStyles = makeStyles(theme => ({
@@ -19,12 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CHART_WIDTH = 1200;
-const CHART_HEIGHT = 400;
 const CHART_PADDING = 10;
-
-const BAR_WIDTH = 30;
-const SPACE_BETWEEN_BARS = 1;
 
 const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
   objects.forEach((element: any) => {
@@ -43,6 +44,12 @@ const CustomColumnChart = ({
   chartData,
   recordSelectCallback,
   selectedRecordKey,
+  width = 1200,
+  height = 400,
+  barWidth = 30,
+  spaceBetweenBars = 1,
+  barColor = 'rgb(98,156,200)',
+  selectedBarColor = 'rgb(44,123,200)',
 }: Props) => {
   const canvasRef = useRef(null);
   const [scale, setScale] = useState(0.2);
@@ -53,23 +60,23 @@ const CustomColumnChart = ({
     if (canvasRef.current) {
       // @ts-ignore
       const ctx = canvasRef.current.getContext('2d');
-      ctx.clearRect(0, 0, CHART_WIDTH, CHART_HEIGHT);
+      ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = 'black';
       ctx.font = '12px Arial';
-      ctx.fillText('0', 4, CHART_HEIGHT - 4);
-      const valueOnChartTop = Math.floor((CHART_HEIGHT - (2 * CHART_PADDING)) / scale);
+      ctx.fillText('0', 4, height - 4);
+      const valueOnChartTop = Math.floor((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
       const objects = chartData.map((e, index) => {
         const element = {
-          x: 20 + CHART_PADDING + ((BAR_WIDTH + SPACE_BETWEEN_BARS) * index),
-          y: CHART_HEIGHT - CHART_PADDING - e.value * scale,
-          width: BAR_WIDTH,
+          x: 20 + CHART_PADDING + ((barWidth + spaceBetweenBars) * index),
+          y: height - CHART_PADDING - e.value * scale,
+          width: barWidth,
           height: e.value * scale,
           value: e.value,
           key: e.key,
         };
-        ctx.fillStyle = selectedRecordKey === e.key ? 'rgb(44,123,200)' : 'rgb(98,156,200)';
+        ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
         ctx.fillRect(element.x, element.y, element.width, element.height);
         return element
       });
@@ -86,12 +93,12 @@ const CustomColumnChart = ({
       flexDirection: 'column'
     }}>
       <canvas
-        width={CHART_WIDTH}
-        height={CHART_HEIGHT}
+        width={width}
+        height={height}
         style={{
           border: '1px solid black',
-          width: CHART_WIDTH,
-          height: CHART_HEIGHT,
+          width: width,
+          height: height,
           marginBottom: 10,
         }}
         ref={canvasRef}
