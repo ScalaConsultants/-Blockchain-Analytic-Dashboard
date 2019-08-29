@@ -40,7 +40,7 @@ const TransactionList = (): React.ReactElement => {
     const [orderBy, setOrderBy] = useState<OrderBy>("name");
 
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
+    const [rowsPerPage, setRowsPerPage] = React.useState(100);
 
     function handleChangePage(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
@@ -133,7 +133,7 @@ const TransactionList = (): React.ReactElement => {
     }
 
     const tablePaginationProps = {
-        rowsPerPageOptions: [15, 25, 50, 100],
+        rowsPerPageOptions: [15, 25, 50, 100, 250],
         colSpan: 3,
         count: blokchain.length,
         rowsPerPage: rowsPerPage,
