@@ -8,6 +8,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import { getClickPosition } from './helpers';
 
 interface Props {
   chartData: any[];
@@ -28,13 +29,6 @@ const CHART_PADDING = 10;
 const BAR_WIDTH = 30;
 const SPACE_BETWEEN_BARS = 1;
 
-const getClickPosition = (e: any, canvas: any) => {
-  const xClick = e.pageX - canvas.offsetLeft;
-  const yClick = e.pageY - canvas.offsetTop;
-
-  return { x: xClick, y: yClick }
-};
-
 const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
   objects.forEach((element: any) => {
     if (
@@ -48,7 +42,7 @@ const handleElementClick = (setClickedCallback: any, objects: any, clickPosition
   });
 };
 
-const CustomChart = ({
+const CustomColumnChart = ({
   chartData,
   fullData,
 }: Props) => {
@@ -65,8 +59,8 @@ const CustomChart = ({
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, CHART_WIDTH, CHART_HEIGHT);
       ctx.fillStyle = 'black';
-      ctx.font = "12px Arial";
-      ctx.fillText("0", 4, CHART_HEIGHT - 4);
+      ctx.font = '12px Arial';
+      ctx.fillText('0', 4, CHART_HEIGHT - 4);
       const valueOnChartTop = Math.floor((CHART_HEIGHT - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
@@ -115,11 +109,21 @@ const CustomChart = ({
         className={classes.root}
       >
         <span>Zoom {Math.floor(scale * 10)}</span>
-        <IconButton size="small" color="secondary" aria-label="minus">
-          <RemoveIcon onClick={() => scale >= 0.2 ? setScale(scale - 0.1) : null} />
+        <IconButton
+          size="small"
+          color="secondary"
+          aria-label="minus"
+          onClick={() => scale >= 0.2 ? setScale(scale - 0.1) : null}
+        >
+          <RemoveIcon  />
         </IconButton>
-        <IconButton size="small" color="secondary" aria-label="plus">
-          <AddIcon onClick={() => setScale(scale + 0.1)} />
+        <IconButton
+          size="small"
+          color="secondary"
+          aria-label="plus"
+          onClick={() => setScale(scale + 0.1)}
+        >
+          <AddIcon />
         </IconButton>
       </Paper>
       {selectedRecordKey && (
@@ -184,4 +188,4 @@ const CustomChart = ({
   );
 };
 
-export default CustomChart;
+export default CustomColumnChart;
