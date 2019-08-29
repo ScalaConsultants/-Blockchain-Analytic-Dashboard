@@ -72,7 +72,7 @@ const TransactionList = (): React.ReactElement => {
     return dateWithHour.toString();
   };
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow ] = React.useState({});
   function handleClickOpen(data: Object) {
     setSelectedRow(data);
