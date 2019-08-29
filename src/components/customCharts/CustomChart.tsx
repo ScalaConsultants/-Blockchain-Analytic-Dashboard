@@ -64,10 +64,15 @@ const CustomChart = ({
       // @ts-ignore
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, CHART_WIDTH, CHART_HEIGHT);
+      ctx.fillStyle = 'black';
+      ctx.font = "12px Arial";
+      ctx.fillText("0", 4, CHART_HEIGHT - 4);
+      const valueOnChartTop = Math.floor((CHART_HEIGHT - (2 * CHART_PADDING)) / scale);
+      ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
       const objects = chartData.map((e, index) => {
         const element = {
-          x: CHART_PADDING + ((BAR_WIDTH + SPACE_BETWEEN_BARS) * index),
+          x: 20 + CHART_PADDING + ((BAR_WIDTH + SPACE_BETWEEN_BARS) * index),
           y: CHART_HEIGHT - CHART_PADDING - e.value * scale,
           width: BAR_WIDTH,
           height: e.value * scale,
@@ -123,6 +128,11 @@ const CustomChart = ({
           <Grid container spacing={3}>
             <Grid item xs={6}>
               <List>
+                <ListItem>
+                  <h4 style={{ marginRight: 10 }}>transactions</h4>
+                  {selectedRecord.transactions}
+                </ListItem>
+                <Divider light />
                 <ListItem>
                   <h4 style={{ marginRight: 10 }}>destination</h4>
                   {selectedRecord.destination}
