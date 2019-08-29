@@ -4,15 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
 import { getClickPosition } from './helpers';
 
 interface Props {
   chartData: any[];
-  fullData: any[];
+  recordSelectCallback: (arg: any) => any;
+  selectedRecordKey: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -44,13 +41,12 @@ const handleElementClick = (setClickedCallback: any, objects: any, clickPosition
 
 const CustomColumnChart = ({
   chartData,
-  fullData,
+  recordSelectCallback,
+  selectedRecordKey,
 }: Props) => {
   const canvasRef = useRef(null);
   const [scale, setScale] = useState(0.2);
   const [canvasObjects, setCanvasObjects] = useState([]);
-  const [selectedRecordKey, setSelectedRecordKey] = useState(null);
-
   const classes = useStyles();
 
   useEffect(() => {
@@ -82,8 +78,6 @@ const CustomColumnChart = ({
     }
   }, [scale, chartData, selectedRecordKey]);
 
-  const selectedRecord = fullData.find((element: any) => element.destination === selectedRecordKey) || {};
-
   return (
     <div style={{
       padding: 10,
@@ -101,7 +95,7 @@ const CustomColumnChart = ({
           marginBottom: 10,
         }}
         ref={canvasRef}
-        onClick={(e) => handleElementClick(setSelectedRecordKey, canvasObjects, getClickPosition(e, canvasRef.current))}
+        onClick={(e) => handleElementClick(recordSelectCallback, canvasObjects, getClickPosition(e, canvasRef.current))}
       >
         This element is not supported by your browser.
       </canvas>
@@ -126,64 +120,6 @@ const CustomColumnChart = ({
           <AddIcon />
         </IconButton>
       </Paper>
-      {selectedRecordKey && (
-        <Paper className={classes.root}>
-          <h3>Selected record details</h3>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <List>
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>transactions</h4>
-                  {selectedRecord.transactions}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>destination</h4>
-                  {selectedRecord.destination}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>source</h4>
-                  {selectedRecord.source}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>transactions</h4>
-                  {selectedRecord.transactions}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>amount</h4>
-                  {selectedRecord.amount}
-                </ListItem>
-              </List>
-            </Grid>
-            <Grid item xs={6}>
-              <List>
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>date</h4>
-                  {new Date(selectedRecord.timestamp).toDateString()}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>block level</h4>
-                  {selectedRecord.block_level}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>counter</h4>
-                  {selectedRecord.counter}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>fee</h4>
-                  {selectedRecord.fee}
-                </ListItem>
-              </List>
-            </Grid>
-          </Grid>
-        </Paper>
-      )}
     </div>
   );
 };
