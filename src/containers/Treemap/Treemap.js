@@ -426,20 +426,19 @@ const root = {
 };
 
 const Treemap1 = () => (
-  <div style={{ width: "800px", height: "500px" }}>
+  <div style={{ height: "700px" }}>
     <ResponsiveTreeMap
       root={root}
       identity="name"
       value="loc"
+      tile="binary"
       innerPadding={3}
-      outerPadding={3}
+      outerPadding={1}
       margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-      label="loc"
-      labelFormat=".0s"
-      labelSkipSize={12}
-      labelTextColor={{ from: "color", modifiers: [["darker", 1.2]] }}
-      colors={{ scheme: "nivo" }}
-      borderColor={{ from: "color", modifiers: [["darker", 0.3]] }}
+      label="name"
+      labelTextColor="#ffffff"
+      colors={{ scheme: 'blue_purple' }}
+      labelSkipSize={24}
       animate={true}
       motionStiffness={90}
       motionDamping={11}
