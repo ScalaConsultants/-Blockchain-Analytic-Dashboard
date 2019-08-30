@@ -5,6 +5,7 @@ import Charts from "../containers/Charts/Charts";
 import Home from "../containers/Home/Home";
 import LiveChart from "../containers/LiveChart/LiveChart";
 import LiveChart2 from "../containers/LiveChart2/LiveChart2";
+import CustomChartDemo from "../containers/CustomChartDemo/CustomChartDemo";
 import { Container } from "@material-ui/core";
 
 export default (): React.ReactElement => {
@@ -15,6 +16,7 @@ export default (): React.ReactElement => {
       <Route exact path="/charts" component={Charts} />
       <Route exact path="/top-seller" component={LiveChart} />
       <Route exact path="/top-buyer" component={LiveChart2} />
+      <Route exact path="/top-buyer-with-custom" component={CustomChartDemo} />
     </Container>
   );
 
