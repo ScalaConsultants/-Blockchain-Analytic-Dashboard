@@ -63,37 +63,35 @@ type Props = {
 const DetailsModal = ({ open, handleClose, data }: Props): React.ReactElement => {
     const classes = useStyles();
     return (
-        <div>
-            <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-slide-title"
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle className={classes.dialogTitle} onClick={handleClose}>
-                    {"Transaction Details"}
-                    <IconButton onClick={handleClose} color="primary">
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle>
-                <DialogContent>
-                    <Grid item xs={12} lg={12}>
-                        <Table>
-                            <TableBody>
-                                {tableRowGenerator(data)}
-                            </TableBody>
-                        </Table>
-                    </Grid>
-                </DialogContent>
-                <DialogActions className={classes.dialogAction} >
-                    <Button onClick={handleClose} color="primary">
-                        Close
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+        >
+            <DialogTitle className={classes.dialogTitle} onClick={handleClose}>
+                {"Transaction Details"}
+                <IconButton onClick={handleClose} color="primary">
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent>
+                <Grid item xs={12} lg={12}>
+                    <Table>
+                        <TableBody>
+                            {tableRowGenerator(data)}
+                        </TableBody>
+                    </Table>
+                </Grid>
+            </DialogContent>
+            <DialogActions className={classes.dialogAction} >
+                <Button onClick={handleClose} color="primary">
+                    Close
                     </Button>
-                </DialogActions>
-            </Dialog>
-        </div >
+            </DialogActions>
+        </Dialog>
     );
 };
 
