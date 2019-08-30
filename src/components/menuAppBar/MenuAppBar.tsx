@@ -7,15 +7,12 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from "@material-ui/core/InputLabel";
+import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
 
 import "./style.css";
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [blockchainName, setBlockchainName] = React.useState("tezos");
   const menuItems = [
     { name: 'Home', route: '/' },
     { name: 'Transactions', route: '/transactions' },
@@ -36,9 +33,6 @@ const ButtonAppBar = (props: any): React.ReactElement => {
   const handleClose = (): void => {
     setAnchorEl(null);
   };
-  const handleBlockchainChange = (event: any) => {
-    setBlockchainName(event.target.value);
-  };
 
   return (
     <AppBar position="static" className="MenuAppBar">
@@ -56,20 +50,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           Tezos Data Analytics Dashboard v0.01
         </Button>
         <div style={{marginLeft: "1rem"}}>
-          <FormControl style={{ minWidth: "100px"}}>
-            <InputLabel style={{ color: "#ffffff" }}>Blockchain</InputLabel>
-            <Select
-              style={{ color: "#ffffff" }}
-              value={blockchainName}
-              onChange={(e: any) => {
-                e.persist();
-                setTimeout(() => handleBlockchainChange(e), 100);
-              }}
-            >
-              <MenuItem value="tezos">Tezos</MenuItem>
-              <MenuItem value="ethereum">Ethereum</MenuItem>
-            </Select>
-          </FormControl>
+          <BlockchainSwitch />
         </div>
         <Menu
           id="simple-menu"
