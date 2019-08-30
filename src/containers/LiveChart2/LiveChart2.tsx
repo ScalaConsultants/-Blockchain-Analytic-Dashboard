@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DataPresentation from './DataPresentation';
 
 const mapState = (state: any): any => ({
-  blokchain: state.blokchain.blocks
+  blokchain: state.tezos.blocks
 });
 
 function LiveChart2(): React.ReactElement {
