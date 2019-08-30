@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./router/routes";
 import MenuAppBar from "./components/menuAppBar/MenuAppBar";
-import * as BlokchainActions from "./store/actions/tezos/blokchain";
+import * as BlokchainActions from "./store/actions/blokchain";
 import { useDispatch, useMappedState } from "redux-react-hook";
 import "./App.css";
 import Loader from "./components/loader/Loader";
@@ -10,7 +10,7 @@ import Loader from "./components/loader/Loader";
 const fetchMoreIntervalSeconds = 10;
 
 const mapState = (state: any) => ({
-  blokchain: state.tezos.blocks,
+  blokchain: state.blokchain,
   loader: state.loader
 });
 
