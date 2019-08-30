@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -52,7 +52,7 @@ const CustomColumnChart = ({
   selectedBarColor = 'rgb(44,123,200)',
 }: Props) => {
   const canvasRef = useRef(null);
-  const [scale, setScale] = useState(0.2);
+  const [scale, setScale] = useState(0.1);
   const [canvasObjects, setCanvasObjects] = useState([]);
   const classes = useStyles();
 
@@ -63,21 +63,32 @@ const CustomColumnChart = ({
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = 'black';
       ctx.font = '12px Arial';
-      ctx.fillText('0', 4, height - 4);
+      ctx.fillText('0', 4, height - 8);
       const valueOnChartTop = Math.floor((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
+      ctx.beginPath();
+      ctx.moveTo(35, 10);
+      ctx.lineTo(45, 10);
+      ctx.moveTo(40, 10);
+      ctx.lineTo(40, height - CHART_PADDING);
+      ctx.moveTo(35, height - CHART_PADDING);
+      ctx.lineTo(45, height - CHART_PADDING);
+      ctx.stroke();
+
       const objects = chartData.map((e, index) => {
         const element = {
-          x: 20 + CHART_PADDING + ((barWidth + spaceBetweenBars) * index),
+          x: 40 + CHART_PADDING + ((barWidth + spaceBetweenBars) * index),
           y: height - CHART_PADDING - e.value * scale,
           width: barWidth,
           height: e.value * scale,
           value: e.value,
           key: e.key,
         };
-        ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
-        ctx.fillRect(element.x, element.y, element.width, element.height);
+        if (element.x < width - CHART_PADDING) {
+          ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
+          ctx.fillRect(element.x, element.y, element.width, element.height);
+        }
         return element
       });
       // @ts-ignore
@@ -96,7 +107,6 @@ const CustomColumnChart = ({
         width={width}
         height={height}
         style={{
-          border: '1px solid black',
           width: width,
           height: height,
           marginBottom: 10,
