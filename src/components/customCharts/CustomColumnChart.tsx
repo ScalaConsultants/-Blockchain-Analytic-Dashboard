@@ -64,7 +64,7 @@ const CustomColumnChart = ({
       ctx.fillStyle = 'black';
       ctx.font = '12px Arial';
       ctx.fillText('0', 4, height - 8);
-      const valueOnChartTop = Math.floor((height - (2 * CHART_PADDING)) / scale);
+      const valueOnChartTop = Math.round((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
       ctx.beginPath();
