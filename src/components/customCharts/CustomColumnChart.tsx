@@ -87,17 +87,17 @@ const CustomColumnChart = ({
             if (element.height > height) {
               ctx.fillStyle = 'rgb(255,255,255)';
               ctx.beginPath();
-              ctx.moveTo(element.x, CHART_PADDING + 10);
+              ctx.moveTo(element.x, CHART_PADDING + 5);
               ctx.bezierCurveTo(
+                element.x + (element.width / 3), CHART_PADDING,
+                element.x + (element.width / 3 * 2), CHART_PADDING + 12,
+                element.x + element.width, CHART_PADDING + 8);
+              ctx.lineTo(element.x + element.width, CHART_PADDING + 13);
+              ctx.bezierCurveTo(
+                element.x + (element.width / 3 * 2), CHART_PADDING + 17,
                 element.x + (element.width / 3), CHART_PADDING + 5,
-                element.x + (element.width / 3 * 2), CHART_PADDING + 20,
-                element.x + element.width, CHART_PADDING + 15);
-              ctx.lineTo(element.x + element.width, CHART_PADDING + 20);
-              ctx.bezierCurveTo(
-                element.x + (element.width / 3 * 2), CHART_PADDING + 25,
-                element.x + (element.width / 3), CHART_PADDING + 10,
-                element.x, CHART_PADDING + 15);
-              ctx.lineTo(element.x, CHART_PADDING + 10);
+                element.x, CHART_PADDING + 10);
+              ctx.lineTo(element.x, CHART_PADDING + 5);
               ctx.fill();
             }
           }
