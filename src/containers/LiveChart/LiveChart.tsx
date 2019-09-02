@@ -3,7 +3,7 @@ import { useMappedState, useDispatch } from "redux-react-hook";
 import Box from "@material-ui/core/Box";
 import LiveChartBubble from "../../components/LiveChart/LiveChartBubble";
 import DatePicker from "../../components/DatePicker/DatePicker";
-import * as BlokchainActions from "../../store/actions/tezos/blokchain";
+import * as BlokchainActions from "../../store/actions/blokchain";
 import { colors } from "../../helpers/colors";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -18,8 +18,8 @@ function calculateSize(max: number, transactions: number): number {
 }
 
 const mapState = (state: any): any => ({
-  summedBlocks: state.tezos.summedBlocks,
-  blocks: state.tezos.blocks
+  summedBlocks: state.blokchain.summedBlocks,
+  blocks: state.blokchain.blocks
 });
 
 function LiveChart(): React.ReactElement {

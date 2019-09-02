@@ -1,4 +1,4 @@
-import { put, call, select, takeEvery } from "redux-saga/effects";
+import { put, call, select } from "redux-saga/effects";
 import {
   ConseilDataClient,
   ConseilOperator,
@@ -7,8 +7,8 @@ import {
 } from "conseiljs";
 import apiConfig from "./api-config";
 
-import * as blokchainActions from "../../actions/tezos/blokchain";
-import { Block } from "../../../types";
+import * as blokchainActions from "../actions/blokchain";
+import { Block } from "../../types";
 
 const consecutiveFetchAmount = 100;
 
@@ -94,11 +94,4 @@ export function* doFetchMoreTransactions(): any {
   } else {
     console.log("There were no new transactions.");
   }
-}
-
-export function* watchDoFetchMoreTransactions(): any {
-  yield takeEvery(
-    blokchainActions.BLOKCHAIN_FETCH_MORE_TRANSACTIONS,
-    doFetchMoreTransactions
-  );
 }

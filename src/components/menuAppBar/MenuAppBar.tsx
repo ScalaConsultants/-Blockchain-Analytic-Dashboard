@@ -17,7 +17,9 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     { name: 'Transactions', route: '/transactions' },
     { name: 'Charts', route: '/charts' },
     { name: 'Top seller', route: '/top-seller' },
-    { name: 'Top buyer', route: '/top-buyer' }
+    { name: 'Top buyer', route: '/top-buyer' },
+    { name: 'Treemap', route: '/treemap' }
+
   ];
 
   const goTo = (route: string): void => {
