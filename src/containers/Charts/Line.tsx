@@ -80,7 +80,7 @@ const LineCharts = (): React.ReactElement => {
     };
 
     const triggerSetDateFrom = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setLoaderTrue();
+        // setLoaderTrue();
         setDateFrom(e.target.value);
     };
 
@@ -98,8 +98,12 @@ const LineCharts = (): React.ReactElement => {
         });
     };
 
-    const handleChartChange = (e: any): void => {
+    const btnClick = () => {
         setLoaderTrue();
+        setTimeout(() => filterChart(blokchain, config.chartType), 100);
+    }
+
+    const handleChartChange = (e: any): void => {
 
         setSelect(e.target.value);
         switch (e.target.value) {
@@ -123,7 +127,7 @@ const LineCharts = (): React.ReactElement => {
 
     useEffect((): void => {
         filterChart(blokchain, config.chartType);
-    }, [dateFrom, config, blokchain]);
+    }, [blokchain]);
 
     const chartLineData = {
         labels: label,
@@ -154,9 +158,9 @@ const LineCharts = (): React.ReactElement => {
                             setTimeout(() => triggerSetDateFrom(e), 100);
                         }}
                         defaultValue={getSelectedDate(7)}
-                        style={{ width: "33%" }}
+                        style={{ width: "30%" }}
                     />
-                    <FormControl style={{ width: "33%" }}>
+                    <FormControl style={{ width: "30%" }}>
                         <InputLabel>Select chart</InputLabel>
                         <Select
                             value={select}
@@ -169,10 +173,26 @@ const LineCharts = (): React.ReactElement => {
                             <MenuItem value="selers">Sellers</MenuItem>
                         </Select>
                     </FormControl>
-                    <Button variant="contained" color="secondary">
-                        Submit
+                    <FormControl style={{ width: "30%" }}>
+                        <InputLabel>Select buyer</InputLabel>
+                        <Select
+                            value={select}
+                            onChange={(e: any) => {
+                                e.persist();
+                                setTimeout(() => handleChartChange(e), 100);
+                            }}
+                        >
+                            <MenuItem value="buyers">XYZ1</MenuItem>
+                            <MenuItem value="selers">XYZ2</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <Button variant="contained" color="secondary" onClick={(): void => {
+                    setTimeout(() => btnClick(), 100);
+                }} style={{marginLeft:20, marginTop:10}}>
+                    Submit
                     </Button>
                 </div>
+                
                 <h1 style={{ textAlign: "center" }}>{config.title}</h1>
                 <LineChart
                     data={chartLineData}
