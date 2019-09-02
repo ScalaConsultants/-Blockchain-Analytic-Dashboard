@@ -4,10 +4,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from "@material-ui/core/InputLabel";
-import { SET_DATA_SOURCE } from "../../store/actions/dataSource";
 
 const mapState = (state: any):any => ({
-  source: state.dataSource
+  dataSource: state.dataSource
 });
 
 const BlockchainSwitch = (props: any): React.ReactElement => {
@@ -19,7 +18,7 @@ const BlockchainSwitch = (props: any): React.ReactElement => {
     dispatch({
       type: "SET_DATA_SOURCE",
       source: event.target.value
-    })
+    });
   };
 
   return (
@@ -27,7 +26,7 @@ const BlockchainSwitch = (props: any): React.ReactElement => {
       <InputLabel style={{ color: "#ffffff" }}>Blockchain</InputLabel>
       <Select
         style={{ color: "#ffffff" }}
-        value={blockchainName}
+        value={dataSource}
         onChange={(e: any) => {
           e.persist();
           setTimeout(() => handleBlockchainChange(e), 100);
