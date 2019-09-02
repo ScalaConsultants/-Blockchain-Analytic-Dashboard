@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import { getClickPosition } from './helpers';
+import { getClickPosition, drawLine } from './helpers';
 
 interface Props {
   chartData: any[];
@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CHART_PADDING = 10;
+const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
 const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
   objects.forEach((element: any) => {
@@ -61,36 +62,48 @@ const CustomColumnChart = ({
       // @ts-ignore
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'black';
+      ctx.fillStyle = CHART_DETAILS_COLOR;
       ctx.font = '12px Arial';
       ctx.fillText('0', 4, height - 8);
       const valueOnChartTop = Math.round((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
-      ctx.beginPath();
-      ctx.moveTo(35, 10);
-      ctx.lineTo(45, 10);
-      ctx.moveTo(40, 10);
-      ctx.lineTo(40, height - CHART_PADDING);
-      ctx.moveTo(35, height - CHART_PADDING);
-      ctx.lineTo(45, height - CHART_PADDING);
-      ctx.stroke();
+      drawLine(35, 10, 45, 10, ctx, CHART_DETAILS_COLOR);
+      drawLine(40, 10, 40, height - CHART_PADDING, ctx, CHART_DETAILS_COLOR);
+      drawLine(35, height - CHART_PADDING, 45, height - CHART_PADDING, ctx, CHART_DETAILS_COLOR);
 
       const objects = chartData.map((e, index) => {
-        const element = {
-          x: 40 + CHART_PADDING + ((barWidth + spaceBetweenBars) * index),
-          y: height - CHART_PADDING - e.value * scale,
-          width: barWidth,
-          height: e.value * scale,
-          value: e.value,
-          key: e.key,
-        };
-        if (element.x < width - CHART_PADDING) {
-          ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
-          ctx.fillRect(element.x, element.y, element.width, element.height);
+          const element = {
+            x: 40 + CHART_PADDING + ((barWidth + spaceBetweenBars) * index),
+            y: height - CHART_PADDING - e.value * scale,
+            width: barWidth,
+            height: e.value * scale,
+            value: e.value,
+            key: e.key,
+          };
+          if (element.x < width - CHART_PADDING) {
+            ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
+            ctx.fillRect(element.x, element.y, element.width, element.height);
+            if (element.height > height) {
+              ctx.fillStyle = 'rgb(255,255,255)';
+              ctx.beginPath();
+              ctx.moveTo(element.x, CHART_PADDING + 10);
+              ctx.bezierCurveTo(
+                element.x + (element.width / 3), CHART_PADDING + 5,
+                element.x + (element.width / 3 * 2), CHART_PADDING + 20,
+                element.x + element.width, CHART_PADDING + 15);
+              ctx.lineTo(element.x + element.width, CHART_PADDING + 20);
+              ctx.bezierCurveTo(
+                element.x + (element.width / 3 * 2), CHART_PADDING + 25,
+                element.x + (element.width / 3), CHART_PADDING + 10,
+                element.x, CHART_PADDING + 15);
+              ctx.lineTo(element.x, CHART_PADDING + 10);
+              ctx.fill();
+            }
+          }
+          return element
         }
-        return element
-      });
+      );
       // @ts-ignore
       setCanvasObjects(objects)
     }
@@ -126,7 +139,7 @@ const CustomColumnChart = ({
           aria-label="minus"
           onClick={() => scale >= 0.2 ? setScale(scale - 0.1) : null}
         >
-          <RemoveIcon  />
+          <RemoveIcon />
         </IconButton>
         <IconButton
           size="small"
