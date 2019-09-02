@@ -9,9 +9,9 @@ import Grid from "@material-ui/core/Grid/Grid";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import TableSortLabel from "@material-ui/core/TableSortLabel/TableSortLabel";
 import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
 
-import TablePaginationActions from './components/TablePaginationActions'
+import TransactionListPagination from './components/TransactionListPagination';
+import TransactionListFilter from './components/TransactionListFilter';
 import { stableSort, getSorting } from "../../helpers/helpers";
 
 interface HeaderColsInterface {
@@ -31,7 +31,7 @@ type Order = "asc" | "desc";
 type OrderBy = string;
 
 const mapState = (state: any) => ({
-    blokchain: state.blokchain.blocks
+    blokchain: state.tezos.blocks
 });
 
 const TransactionList = (): React.ReactElement => {
@@ -41,6 +41,21 @@ const TransactionList = (): React.ReactElement => {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(100);
+
+    const tablePaginationProps = {
+        rowsPerPageOptions: [15, 25, 50, 100, 250],
+        colSpan: 3,
+        count: blokchain.length,
+        rowsPerPage: rowsPerPage,
+        page: page,
+        SelectProps: {
+            inputProps: { 'aria-label': 'rows per page' },
+            native: true,
+        },
+        onChangePage: handleChangePage,
+        onChangeRowsPerPage: handleChangeRowsPerPage,
+        ActionsComponent: TransactionListPagination
+    }
 
     function handleChangePage(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
@@ -92,8 +107,8 @@ const TransactionList = (): React.ReactElement => {
         return dateWithHour.toString();
     };
 
-    const transactionListHeaderGenerate = (headerCols: Array<HeaderColsInterface>) => {
-        return (headerCols.map((row: HeaderColsInterface) => (
+    const transactionListHeaderGenerate = (headerCols: Array<HeaderColsInterface>) =>
+        (headerCols.map((row: HeaderColsInterface) => (
             <TableCell
                 key={row.id}
                 align={row.numeric ? "right" : "left"}
@@ -115,13 +130,13 @@ const TransactionList = (): React.ReactElement => {
                 </Tooltip>
             </TableCell>
         )))
-    }
 
-    const transactionListRowsGenerate = (blokchain: any) => {
-        return (stableSort(
+
+    const transactionListRowsGenerate = (blokchain: any) =>
+        (stableSort(
             blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
             getSorting(order, orderBy)
-        ).map((row: any, index: any) => (
+        ).map((row: any, index: number) => (
             <TableRow hover key={index}>
                 <TableCell component="th" scope="row">
                     {timestampToDate(row.timestamp)}
@@ -130,48 +145,84 @@ const TransactionList = (): React.ReactElement => {
                 <TableCell>{row.destination}</TableCell>
             </TableRow>
         )))
-    }
 
-    const tablePaginationProps = {
-        rowsPerPageOptions: [15, 25, 50, 100, 250],
-        colSpan: 3,
-        count: blokchain.length,
-        rowsPerPage: rowsPerPage,
-        page: page,
-        SelectProps: {
-            inputProps: { 'aria-label': 'rows per page' },
-            native: true,
-        },
-        onChangePage: handleChangePage,
-        onChangeRowsPerPage: handleChangeRowsPerPage,
-        ActionsComponent: TablePaginationActions
-    }
+    const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
+        headerCols.map((row: HeaderColsInterface) => (
+            <TableCell>
+                <TransactionListFilter name={row.label} onInputChange={filterHandler} />
+            </TableCell>
+        ))  
+    
 
-    return (
-        <Grid container spacing={9} className="Container">
-            <Grid item xs={12} lg={12}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {transactionListHeaderGenerate(headerCols)}
-                            <TableCell />
-                            <TableCell />
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {transactionListRowsGenerate(blokchain)}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                {...tablePaginationProps}
-                            />
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </Grid>
+const filterHandler = (value: string, inputName: string) => {
+    const name : string = inputName.toString().toLowerCase();
+    let propsName:any;
+    propsName = name === 'source' ? propsName = 'source' : name === 'timestamp' ? propsName = 'timestamp' : name === 'destination' ? propsName = 'destination' : null
+    //blokchain.map    
+    console.log('filter handler', value, name);
+
+    // const filter1 = name === 'source' && Object.keys(blokchain)
+    //        .map(igKey => {
+    //     const item = blokchain[igKey].source;
+    //     return item.indexOf(value) !== -1;
+    //        })
+    // const filter2 = name === 'timestamp' && Object.keys(blokchain)
+    //        .map(igKey => {
+    //         const item = blokchain[igKey].timestamp;
+    //     return item.indexOf(value) !== -1;
+    //        })
+    // const filter3 = name === 'destination' && Object.keys(blokchain)
+    //        .map(igKey => {
+    //             const item = blokchain[igKey].destination;
+    //             return item.indexOf(value);
+    //        })
+    //         .reduce((arr, el) => {
+    //             return [...arr.concat(el)]
+    //         }, [])
+
+
+    //console.log(filter1, filter2, filter3);
+    // return blokchain[0];
+        // blokchain.filter((item:any, index: number) => {
+        //     console.log('item', item.);
+        //     //return item.indexOf(value);
+        // })
+        // const la = Object.keys(blokchain)
+        //        .map(igKey => {
+        //            return [igKey, blokchain[igKey].name];
+        //        })
+       //console.log(la);
+    
+}
+
+return (
+    <Grid container spacing={9} className="Container">
+        <Grid item xs={12} lg={12}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        {transactionListHeaderGenerate(headerCols)}
+                        <TableCell />
+                        <TableCell />
+                    </TableRow>
+                    <TableRow>
+                        {transactionListFilterGenerate(headerCols)}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {transactionListRowsGenerate(blokchain)}
+                </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <TransactionListPagination
+                            {...tablePaginationProps}
+                        />
+                    </TableRow>
+                </TableFooter>
+            </Table>
         </Grid>
-    );
+    </Grid>
+);
 };
 
 export default TransactionList;

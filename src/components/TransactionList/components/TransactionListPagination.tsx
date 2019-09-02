@@ -25,7 +25,7 @@ interface TablePaginationActionsProps {
     onChangePage: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, newPage: number) => void;
 }
 
-const TablePaginationActions = (props: TablePaginationActionsProps) => {
+const TransactionListPagination = (props: TablePaginationActionsProps) => {
     const classes = useStyles1();
     const theme = useTheme();
     const { count, page, rowsPerPage, onChangePage } = props;
@@ -76,4 +76,4 @@ const TablePaginationActions = (props: TablePaginationActionsProps) => {
     );
 }
 
-export default TablePaginationActions;
+export default TransactionListPagination;
