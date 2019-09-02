@@ -52,3 +52,8 @@ export interface LoaderActionType extends ActionType {
   type: string;
   show: boolean;
 }
+
+export interface DataSourceActionType extends ActionType {
+  type: string,
+  source: string
+}

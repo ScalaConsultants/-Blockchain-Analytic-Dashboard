@@ -4,10 +4,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import blokchain from "./reducers/blokchain";
 import { loader } from "./reducers/loader";
+import { dataSource } from "./reducers/dataSource";
 
 const rootReducer = combineReducers({
   blokchain,
-  loader
+  loader,
+  dataSource
 });
 
 export default function configureStore() {
