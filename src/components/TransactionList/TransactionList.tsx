@@ -27,6 +27,14 @@ const headerCols: Array<HeaderColsInterface> = [
     { id: "destination", numeric: false, disablePadding: false, label: "Destination" }
 ];
 
+const filtersName: Array<HeaderColsInterface> = [
+    { id: "dateStart", numeric: false, disablePadding: true, label: "Date Start" },
+    { id: "dateEnd", numeric: false, disablePadding: true, label: "Date End" },
+    { id: "source", numeric: false, disablePadding: false, label: "Source" },
+    { id: "destination", numeric: false, disablePadding: false, label: "Destination" },
+    { id: "amount", numeric: false, disablePadding: false, label: "Amount" },
+];
+
 type Order = "asc" | "desc";
 type OrderBy = string;
 
@@ -56,6 +64,8 @@ const TransactionList = (): React.ReactElement => {
         onChangeRowsPerPage: handleChangeRowsPerPage,
         ActionsComponent: TransactionListPagination
     }
+
+    let filteredTable = null;
 
     function handleChangePage(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
@@ -147,82 +157,66 @@ const TransactionList = (): React.ReactElement => {
         )))
 
     const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
-        headerCols.map((row: HeaderColsInterface) => (
+        filtersName.map((row: HeaderColsInterface) => (
             <TableCell>
                 <TransactionListFilter name={row.label} onInputChange={filterHandler} />
             </TableCell>
-        ))  
-    
+        ))
 
-const filterHandler = (value: string, inputName: string) => {
-    const name : string = inputName.toString().toLowerCase();
-    let propsName:any;
-    propsName = name === 'source' ? propsName = 'source' : name === 'timestamp' ? propsName = 'timestamp' : name === 'destination' ? propsName = 'destination' : null
-    //blokchain.map    
-    console.log('filter handler', value, name);
+    const filteredValue = (name: string, query: string) => {
+        switch (name) {
+            // case 'timestamp':
 
-    // const filter1 = name === 'source' && Object.keys(blokchain)
-    //        .map(igKey => {
-    //     const item = blokchain[igKey].source;
-    //     return item.indexOf(value) !== -1;
-    //        })
-    // const filter2 = name === 'timestamp' && Object.keys(blokchain)
-    //        .map(igKey => {
-    //         const item = blokchain[igKey].timestamp;
-    //     return item.indexOf(value) !== -1;
-    //        })
-    // const filter3 = name === 'destination' && Object.keys(blokchain)
-    //        .map(igKey => {
-    //             const item = blokchain[igKey].destination;
-    //             return item.indexOf(value);
-    //        })
-    //         .reduce((arr, el) => {
-    //             return [...arr.concat(el)]
-    //         }, [])
+            case 'destination':
+                    return Object.keys(blokchain)
+                        .filter((e: any) => blokchain[e].destination.includes(query))
+                        .map(elem => blokchain[elem]);
 
+            case 'source':
+                    return Object.keys(blokchain)
+                        .filter((e: any) => blokchain[e].source.includes(query))
+                        .map(elem => blokchain[elem]);
 
-    //console.log(filter1, filter2, filter3);
-    // return blokchain[0];
-        // blokchain.filter((item:any, index: number) => {
-        //     console.log('item', item.);
-        //     //return item.indexOf(value);
-        // })
-        // const la = Object.keys(blokchain)
-        //        .map(igKey => {
-        //            return [igKey, blokchain[igKey].name];
-        //        })
-       //console.log(la);
-    
-}
+            default:
+                console.warn('Sorry, we are out of ' + query + '.');
+        }
+    }
 
-return (
-    <Grid container spacing={9} className="Container">
-        <Grid item xs={12} lg={12}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        {transactionListHeaderGenerate(headerCols)}
-                        <TableCell />
-                        <TableCell />
-                    </TableRow>
-                    <TableRow>
-                        {transactionListFilterGenerate(headerCols)}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {transactionListRowsGenerate(blokchain)}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TransactionListPagination
-                            {...tablePaginationProps}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
+    const filterHandler = (query: string, inputName: string) => {
+        const name: string = inputName.toLowerCase();
+        filteredTable = [filteredValue(name, query)];
+        console.log('filteredTable', filteredTable);
+        return filteredTable;
+    }
+
+    return (
+        <Grid container spacing={9} className="Container">
+            <Grid item xs={12} lg={12}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            {transactionListFilterGenerate(headerCols)}
+                        </TableRow>
+                        <TableRow>
+                            {transactionListHeaderGenerate(headerCols)}
+                            <TableCell />
+                            <TableCell />
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {transactionListRowsGenerate(blokchain)}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TransactionListPagination
+                                {...tablePaginationProps}
+                            />
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </Grid>
         </Grid>
-    </Grid>
-);
+    );
 };
 
 export default TransactionList;
