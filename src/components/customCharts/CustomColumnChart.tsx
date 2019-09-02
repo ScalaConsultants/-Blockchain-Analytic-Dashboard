@@ -4,7 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import { getClickPosition, drawLine } from './helpers';
+import {
+  getClickPosition,
+  drawLine,
+  setFontStyle,
+} from './helpers';
 
 interface Props {
   chartData: any[];
@@ -62,15 +66,14 @@ const CustomColumnChart = ({
       // @ts-ignore
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = CHART_DETAILS_COLOR;
-      ctx.font = '12px Arial';
+      setFontStyle(ctx, 12, CHART_DETAILS_COLOR, 'Arial');
       ctx.fillText('0', 4, height - 8);
       const valueOnChartTop = Math.round((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
-      drawLine(35, 10, 45, 10, ctx, CHART_DETAILS_COLOR);
-      drawLine(40, 10, 40, height - CHART_PADDING, ctx, CHART_DETAILS_COLOR);
-      drawLine(35, height - CHART_PADDING, 45, height - CHART_PADDING, ctx, CHART_DETAILS_COLOR);
+      drawLine(ctx,35, 10, 45, 10, CHART_DETAILS_COLOR);
+      drawLine(ctx,40, 10, 40, height - CHART_PADDING, CHART_DETAILS_COLOR);
+      drawLine(ctx,35, height - CHART_PADDING, 45, height - CHART_PADDING, CHART_DETAILS_COLOR);
 
       const objects = chartData.map((e, index) => {
           const element = {
