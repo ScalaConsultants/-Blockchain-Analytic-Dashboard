@@ -50,11 +50,6 @@ const DataPresentation = ({
                 </ListItem>
                 <Divider light />
                 <ListItem>
-                  <h4 style={{ marginRight: 10 }}>transactions</h4>
-                  {selectedRecord.transactions}
-                </ListItem>
-                <Divider light />
-                <ListItem>
                   <h4 style={{ marginRight: 10 }}>amount</h4>
                   {selectedRecord.amount}
                 </ListItem>
