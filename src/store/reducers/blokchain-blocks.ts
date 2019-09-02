@@ -2,8 +2,8 @@ import {
   BLOKCHAIN_SET_TRANSACTIONS,
   BLOKCHAIN_FLUSH_TRANSACTIONS,
   BLOKCHAIN_SET_MORE_TRANSACTIONS
-} from "../../actions/tezos/blokchain";
-import { Block } from "../../../types";
+} from "../actions/blokchain";
+import { Block } from "../../types";
 
 const initState: Block[] = [];
 
