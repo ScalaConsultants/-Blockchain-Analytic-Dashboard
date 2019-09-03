@@ -1,4 +1,4 @@
-import {FetchTransactionsAction, ActionType, Block} from "../../types";
+import { FetchTransactionsAction, ActionType, Block } from "../../../types";
 
 export const BLOKCHAIN_FETCH_TRANSACTIONS = "BLOKCHAIN_FETCH_TRANSACTIONS";
 export const BLOKCHAIN_FLUSH_TRANSACTIONS = "BLOKCHAIN_FLUSH_TRANSACTIONS";

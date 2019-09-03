@@ -13,7 +13,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TransactionListPagination from './components/TransactionListPagination';
 import TransactionListFilter from './components/TransactionListFilter';
 import { stableSort, getSorting } from "../../helpers/helpers";
-import * as BlokchainActions from "../../store/actions/blokchain";
+import * as BlokchainActions from "../../store/actions/tezos/blokchain";
 
 interface HeaderColsInterface {
     id: string,
@@ -39,7 +39,7 @@ type Order = "asc" | "desc";
 type OrderBy = string;
 
 const mapState = (state: any) => ({
-    blokchain: state.blokchain.blocks
+    blokchain: state.tezos.blocks
 });
 
 let initState: any[] = [];
