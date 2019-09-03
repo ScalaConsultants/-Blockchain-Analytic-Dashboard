@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import CustomColumnChart from './CustomColumnChart';
 import { Paper } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,7 +25,7 @@ describe('CustomColumnChart', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render with once', () => {
+  it('should render only once', () => {
     const wrapper = shallow(<CustomColumnChart {...props}/>);
     expect(wrapper).toHaveLength(1);
   });
