@@ -9,6 +9,8 @@ export const BLOKCHAIN_SET_MORE_TRANSACTIONS =
   "BLOKCHAIN_SET_MORE_TRANSACTIONS";
 export const BLOKCHAIN_SUM_TRANSACTIONS = "BLOKCHAIN_SUM_TRANSACTIONS";
 
+export const BLOKCHAIN_FILTER_TRANSACTIONS = 'BLOKCHAIN_FILTER_TRANSACTIONS';
+
 export const BlokchainFlushTransactions = (): ActionType => ({
   type: BLOKCHAIN_FLUSH_TRANSACTIONS
 });
@@ -22,6 +24,13 @@ export const BlokchainSetTransactions = (
 ): FetchTransactionsAction => ({
   type: BLOKCHAIN_SET_TRANSACTIONS,
   transactions: transactions
+});
+
+export const BlockchainFilterTransactions = (
+  blokchain: any
+): any => ({
+  type: BLOKCHAIN_FILTER_TRANSACTIONS,
+  transactions: blokchain
 });
 
 export const BlokchainFetchMoreTransactions = (): ActionType => ({

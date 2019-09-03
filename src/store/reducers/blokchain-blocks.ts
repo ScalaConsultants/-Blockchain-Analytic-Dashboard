@@ -1,7 +1,8 @@
 import {
   BLOKCHAIN_SET_TRANSACTIONS,
   BLOKCHAIN_FLUSH_TRANSACTIONS,
-  BLOKCHAIN_SET_MORE_TRANSACTIONS
+  BLOKCHAIN_SET_MORE_TRANSACTIONS,
+  BLOKCHAIN_FILTER_TRANSACTIONS
 } from "../actions/blokchain";
 import { Block } from "../../types";
 
@@ -15,6 +16,8 @@ export const blocks = (state = initState, action: any): Block[] => {
       return action.transactions;
     case BLOKCHAIN_SET_MORE_TRANSACTIONS:
       return [...state, ...action.transactions];
+    case BLOKCHAIN_FILTER_TRANSACTIONS:
+      return action.blokchain;
     default:
       return state;
   }

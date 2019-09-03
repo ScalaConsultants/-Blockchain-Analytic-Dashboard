@@ -38,7 +38,7 @@ type Order = "asc" | "desc";
 type OrderBy = string;
 
 const mapState = (state: any) => ({
-    blokchain: state.tezos.blocks
+    blokchain: state.blokchain.blocks
 });
 
 const TransactionList = (): React.ReactElement => {
@@ -195,15 +195,18 @@ const TransactionList = (): React.ReactElement => {
     const filterHandler = (query: string, inputName: string) => {
         const name: string = inputName.toLowerCase();
         filteredTable = [filteredValue(name, query)];
-       // return updateFilteredTransactions(filteredTable);
+        console.log('[blokchain]', blokchain);
+        console.log(filteredTable);
+       return updateFilteredTransactions(filteredTable[0]);
     }
 
-    // const updateFilteredTransactions = (filteredTable:any): void => {
-    //     dispatch({
-    //         type: 'BLOKCHAIN_FLUSH_TRANSACTIONS',
-    //       //blokchain: filteredTable
-    //     });
-    //   };
+    const updateFilteredTransactions = (filteredTable:any): void => {
+        console.log('updateFilteredTransactions');
+        dispatch({
+            type: 'BLOKCHAIN_FILTER_TRANSACTIONS',
+            blokchain: filteredTable
+        });
+      };
 
     return (
         <Grid container spacing={9} className="Container">
