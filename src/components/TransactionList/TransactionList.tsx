@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMappedState } from "redux-react-hook";
+import { useMappedState, useDispatch } from "redux-react-hook";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -28,11 +28,10 @@ const headerCols: Array<HeaderColsInterface> = [
 ];
 
 const filtersName: Array<HeaderColsInterface> = [
-    { id: "dateStart", numeric: false, disablePadding: true, label: "Date Start" },
-    { id: "dateEnd", numeric: false, disablePadding: true, label: "Date End" },
     { id: "source", numeric: false, disablePadding: false, label: "Source" },
     { id: "destination", numeric: false, disablePadding: false, label: "Destination" },
-    { id: "amount", numeric: false, disablePadding: false, label: "Amount" },
+    { id: "amountMin", numeric: false, disablePadding: false, label: "Amount min" },
+    { id: "amountMax", numeric: false, disablePadding: false, label: "Amount max" }
 ];
 
 type Order = "asc" | "desc";
@@ -65,7 +64,10 @@ const TransactionList = (): React.ReactElement => {
         ActionsComponent: TransactionListPagination
     }
 
-    let filteredTable = null;
+    let filteredTable:any = null;
+
+    const dispatch = useDispatch();
+
 
     function handleChangePage(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
@@ -165,17 +167,25 @@ const TransactionList = (): React.ReactElement => {
 
     const filteredValue = (name: string, query: string) => {
         switch (name) {
-            // case 'timestamp':
+            case 'amount min':
+                return Object.keys(blokchain)
+                    .filter((e: any) => blokchain[e].amount > parseInt(query))
+                    .map(elem => blokchain[elem]);
+
+            case 'amount max':
+                return Object.keys(blokchain)
+                    .filter((e: any) => blokchain[e].amount < parseInt(query))
+                    .map(elem => blokchain[elem]);
 
             case 'destination':
-                    return Object.keys(blokchain)
-                        .filter((e: any) => blokchain[e].destination.includes(query))
-                        .map(elem => blokchain[elem]);
+                return Object.keys(blokchain)
+                    .filter((e: any) => blokchain[e].destination.includes(query))
+                    .map(elem => blokchain[elem]);
 
             case 'source':
-                    return Object.keys(blokchain)
-                        .filter((e: any) => blokchain[e].source.includes(query))
-                        .map(elem => blokchain[elem]);
+                return Object.keys(blokchain)
+                    .filter((e: any) => blokchain[e].source.includes(query))
+                    .map(elem => blokchain[elem]);
 
             default:
                 console.warn('Sorry, we are out of ' + query + '.');
@@ -185,18 +195,22 @@ const TransactionList = (): React.ReactElement => {
     const filterHandler = (query: string, inputName: string) => {
         const name: string = inputName.toLowerCase();
         filteredTable = [filteredValue(name, query)];
-        console.log('filteredTable', filteredTable);
-        return filteredTable;
+       // return updateFilteredTransactions(filteredTable);
     }
+
+    // const updateFilteredTransactions = (filteredTable:any): void => {
+    //     dispatch({
+    //         type: 'BLOKCHAIN_FLUSH_TRANSACTIONS',
+    //       //blokchain: filteredTable
+    //     });
+    //   };
 
     return (
         <Grid container spacing={9} className="Container">
             <Grid item xs={12} lg={12}>
+                {transactionListFilterGenerate(headerCols)}
                 <Table>
                     <TableHead>
-                        <TableRow>
-                            {transactionListFilterGenerate(headerCols)}
-                        </TableRow>
                         <TableRow>
                             {transactionListHeaderGenerate(headerCols)}
                             <TableCell />
