@@ -36,47 +36,47 @@ const LineCharts = (): React.ReactElement => {
         title: "Transactions for the selected buyer and day"
     });
     const [select, setSelect] = useState("buyers");
+    const [buyer, setBuyer] = useState("buyer");
+    const [seller, setSeller] = useState("xyz2");
+    const [chartType, setChartType] = useState("buyer");
+
+    const handleBuyerChange = (e: any) => {
+        setTimeout(() => setBuyer(e.target.value), 100)
+    };
 
     const filterChart = (blokchain: Block[], chartType: string): void => {
         const labels: any[] = [];
-
         let elements: number[] = [];
-        let tempArray: number[] = [];
-        let previousEl = 0;
-        // console.log('tutaj', dateFrom)
+
         blokchain.forEach((item: Block): void => {
             const timeStampConverted: string = convertTimeStamp(item.timestamp);
 
             if (timeStampConverted === dateFrom) {
                 switch (chartType) {
                     case "selers":
-                        if (item.source !== previousEl) {
-                            tempArray.push(item.amount);
-                            previousEl = item.amount;
+                        if (item.source == seller) {
+                            elements.push(item.amount);
                         }
-                        elements = tempArray;
 
                         break;
                     case "buyers":
-                        if (item.destination !== previousEl) {
-                            tempArray.push(item.amount);
-                            previousEl = item.amount;
+                        if (item.destination == buyer) {
+                            elements.push(item.amount);
                         }
-                        elements = tempArray
 
                         break;
                     default:
                 }
             }
         });
-        // chainArray.push(elements);
         elements.forEach(() => {
             labels.push(dateFrom);
         });
 
-        setLabel(labels.slice(50, 100));
-        setData(elements.slice(50, 100));
+        setLabel(labels.slice(0, 100));
+        setData(elements.slice(0, 100));
         setLoaderFalse();
+
     };
 
     const triggerSetDateFrom = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -98,7 +98,7 @@ const LineCharts = (): React.ReactElement => {
         });
     };
 
-    const btnClick = () => {
+    const submitChart = () => {
         setLoaderTrue();
         setTimeout(() => filterChart(blokchain, config.chartType), 100);
     }
@@ -106,6 +106,7 @@ const LineCharts = (): React.ReactElement => {
     const handleChartChange = (e: any): void => {
 
         setSelect(e.target.value);
+
         switch (e.target.value) {
             case "selers":
                 setConfig({
@@ -127,6 +128,7 @@ const LineCharts = (): React.ReactElement => {
 
     useEffect((): void => {
         filterChart(blokchain, config.chartType);
+
     }, [blokchain]);
 
     const chartLineData = {
@@ -173,26 +175,63 @@ const LineCharts = (): React.ReactElement => {
                             <MenuItem value="selers">Sellers</MenuItem>
                         </Select>
                     </FormControl>
+                    {chartType == 'buyer' ?
+
                     <FormControl style={{ width: "30%" }}>
                         <InputLabel>Select buyer</InputLabel>
                         <Select
-                            value={select}
+                            value={buyer}
                             onChange={(e: any) => {
-                                e.persist();
-                                setTimeout(() => handleChartChange(e), 100);
+                                handleBuyerChange(e);
                             }}
                         >
-                            <MenuItem value="buyers">XYZ1</MenuItem>
-                            <MenuItem value="selers">XYZ2</MenuItem>
+                            <MenuItem value='buyer'>Select buyer</MenuItem>
+
+                            {blokchain.slice(0, 50).map(item => {
+                                let prev;
+                                if (item.destination != prev) {
+                                    prev = item.destination;
+                                    return (
+                                        <MenuItem value={item.destination}>{item.destination}</MenuItem>
+                                    );
+                                }
+                                return;
+                            })}
                         </Select>
                     </FormControl>
+                    :
+
+                    <FormControl style={{ width: "30%" }}>
+                        <InputLabel>Select seller</InputLabel>
+                        <Select
+                            value={buyer}
+                            onChange={(e: any) => {
+                                handleBuyerChange(e);
+                            }}
+                        >
+                            <MenuItem value='buyer'>Select seller</MenuItem>
+
+                            {blokchain.slice(0, 50).map(item => {
+                                let prev;
+                                if (item.source != prev) {
+                                    prev = item.source;
+                                    return (
+                                        <MenuItem value={item.source}>{item.source}</MenuItem>
+                                    );
+                                }
+                                return;
+                            })}
+                        </Select>
+                    </FormControl>
+                    }
+
                     <Button variant="contained" color="secondary" onClick={(): void => {
-                    setTimeout(() => btnClick(), 100);
-                }} style={{marginLeft:20, marginTop:10}}>
-                    Submit
+                        setTimeout(() => submitChart(), 100);
+                    }} style={{ marginLeft: 20, marginTop: 10 }}>
+                        Submit
                     </Button>
                 </div>
-                
+
                 <h1 style={{ textAlign: "center" }}>{config.title}</h1>
                 <LineChart
                     data={chartLineData}
