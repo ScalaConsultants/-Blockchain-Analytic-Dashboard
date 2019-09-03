@@ -35,7 +35,7 @@ const LineCharts = (): React.ReactElement => {
         label: "Amount of the currency",
         title: "Transactions for the selected buyer and day"
     });
-    const [select, setSelect] = useState("buyers");
+    const [select, setSelect] = useState("buyer");
     const [buyer, setBuyer] = useState("buyer");
     const [seller, setSeller] = useState("xyz2");
     const [chartType, setChartType] = useState("buyer");
@@ -43,6 +43,10 @@ const LineCharts = (): React.ReactElement => {
     const handleBuyerChange = (e: any) => {
         setTimeout(() => setBuyer(e.target.value), 100)
     };
+
+    const changeUserType = (e: any) => {
+        setChartType(e.target.value);
+    }
 
     const filterChart = (blokchain: Block[], chartType: string): void => {
         const labels: any[] = [];
@@ -168,11 +172,11 @@ const LineCharts = (): React.ReactElement => {
                             value={select}
                             onChange={(e: any) => {
                                 e.persist();
-                                setTimeout(() => handleChartChange(e), 100);
+                                setTimeout(() => changeUserType(e), 100);
                             }}
                         >
-                            <MenuItem value="buyers">Buyers</MenuItem>
-                            <MenuItem value="selers">Sellers</MenuItem>
+                            <MenuItem value="buyer">Buyers</MenuItem>
+                            <MenuItem value="seler">Sellers</MenuItem>
                         </Select>
                     </FormControl>
                     {chartType == 'buyer' ?
