@@ -17,7 +17,7 @@ export const blocks = (state = initState, action: any): Block[] => {
     case BLOKCHAIN_SET_MORE_TRANSACTIONS:
       return [...state, ...action.transactions];
     case BLOKCHAIN_FILTER_TRANSACTIONS:
-      return action.blokchain;
+      return [...action.blokchain];
     default:
       return state;
   }

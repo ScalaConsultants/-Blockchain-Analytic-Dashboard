@@ -1,4 +1,4 @@
-import { FetchTransactionsAction, ActionType } from "../../types";
+import {FetchTransactionsAction, ActionType, Block} from "../../types";
 
 export const BLOKCHAIN_FETCH_TRANSACTIONS = "BLOKCHAIN_FETCH_TRANSACTIONS";
 export const BLOKCHAIN_FLUSH_TRANSACTIONS = "BLOKCHAIN_FLUSH_TRANSACTIONS";
@@ -20,17 +20,10 @@ export const BlokchainFetchTransactions = (): ActionType => ({
 });
 
 export const BlokchainSetTransactions = (
-  transactions: any
+  transactions: Block[]
 ): FetchTransactionsAction => ({
   type: BLOKCHAIN_SET_TRANSACTIONS,
   transactions: transactions
-});
-
-export const BlockchainFilterTransactions = (
-  blokchain: any
-): any => ({
-  type: BLOKCHAIN_FILTER_TRANSACTIONS,
-  transactions: blokchain
 });
 
 export const BlokchainFetchMoreTransactions = (): ActionType => ({

@@ -7,7 +7,7 @@ const Transactions = (): React.ReactElement => {
         <Grid container spacing={9} className="Container">
             <Grid item xs={12} lg={12}>
                 <h1 id="client-manager-title" className="Transactions__header">
-                    Last 100 transactions
+                    Transactions list
                 </h1>
             </Grid>
             <Grid>

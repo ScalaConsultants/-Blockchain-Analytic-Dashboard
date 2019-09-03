@@ -13,6 +13,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TransactionListPagination from './components/TransactionListPagination';
 import TransactionListFilter from './components/TransactionListFilter';
 import { stableSort, getSorting } from "../../helpers/helpers";
+import * as BlokchainActions from "../../store/actions/blokchain";
 
 interface HeaderColsInterface {
     id: string,
@@ -41,8 +42,15 @@ const mapState = (state: any) => ({
     blokchain: state.blokchain.blocks
 });
 
+let initState: any[] = [];
+
 const TransactionList = (): React.ReactElement => {
     const { blokchain } = useMappedState(mapState);
+
+    if (initState.length === 0) {
+        initState = [ ...blokchain ];
+    }
+
     const [order, setOrder] = useState<Order>("asc");
     const [orderBy, setOrderBy] = useState<OrderBy>("name");
 
@@ -166,26 +174,28 @@ const TransactionList = (): React.ReactElement => {
         ))
 
     const filteredValue = (name: string, query: string) => {
+        const filteredBlokchain = [...initState];
+
         switch (name) {
             case 'amount min':
-                return Object.keys(blokchain)
-                    .filter((e: any) => blokchain[e].amount > parseInt(query))
-                    .map(elem => blokchain[elem]);
+                return Object.keys(filteredBlokchain)
+                    .filter((e: any) => query.length ? filteredBlokchain[e].amount > parseInt(query) : true)
+                    .map((elem: any) => filteredBlokchain[elem]);
 
             case 'amount max':
-                return Object.keys(blokchain)
-                    .filter((e: any) => blokchain[e].amount < parseInt(query))
-                    .map(elem => blokchain[elem]);
+                return Object.keys(filteredBlokchain)
+                    .filter((e: any) => query.length ? filteredBlokchain[e].amount < parseInt(query) : true)
+                    .map((elem: any) => filteredBlokchain[elem]);
 
             case 'destination':
-                return Object.keys(blokchain)
-                    .filter((e: any) => blokchain[e].destination.includes(query))
-                    .map(elem => blokchain[elem]);
+                return Object.keys(filteredBlokchain)
+                    .filter((e: any) => query.length ? filteredBlokchain[e].destination.includes(query) : true)
+                    .map((elem: any) => filteredBlokchain[elem]);
 
             case 'source':
-                return Object.keys(blokchain)
-                    .filter((e: any) => blokchain[e].source.includes(query))
-                    .map(elem => blokchain[elem]);
+                return Object.keys(filteredBlokchain)
+                    .filter((e: any) => query.length ? filteredBlokchain[e].source.includes(query) : true)
+                    .map((elem: any) => filteredBlokchain[elem]);
 
             default:
                 console.warn('Sorry, we are out of ' + query + '.');
@@ -195,23 +205,26 @@ const TransactionList = (): React.ReactElement => {
     const filterHandler = (query: string, inputName: string) => {
         const name: string = inputName.toLowerCase();
         filteredTable = [filteredValue(name, query)];
-        console.log('[blokchain]', blokchain);
-        console.log(filteredTable);
+        console.log('filteredTable', filteredTable);
        return updateFilteredTransactions(filteredTable[0]);
     }
 
     const updateFilteredTransactions = (filteredTable:any): void => {
-        console.log('updateFilteredTransactions');
         dispatch({
-            type: 'BLOKCHAIN_FILTER_TRANSACTIONS',
+            type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
             blokchain: filteredTable
         });
       };
+
+    const filteredUpdateMessage = () => {
+        return <p>Find <strong>{blokchain.length}</strong> results</p>
+    }
 
     return (
         <Grid container spacing={9} className="Container">
             <Grid item xs={12} lg={12}>
                 {transactionListFilterGenerate(headerCols)}
+                {filteredUpdateMessage()}
                 <Table>
                     <TableHead>
                         <TableRow>
