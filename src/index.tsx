@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { StoreContext } from "redux-react-hook";
 import configureStore from "./store/index";
-import rootSaga from "./store/sagas/sagas";
+import rootSaga from "./store/sagas/root";
 
 const store = configureStore();
 store.runSaga(rootSaga);

@@ -23,7 +23,7 @@ export interface Blockchain {
 }
 
 export interface State {
-  blokchain: {
+  tezos: {
     blocks: Block[];
   };
 }
