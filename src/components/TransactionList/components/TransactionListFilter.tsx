@@ -17,7 +17,7 @@ const TransactionListFilter = (props: any) => {
                 <input
                     style={styleInput}
                     type="text"
-                    name={props.name}
+                    name={props.id}
                     onChange={e => props.onInputChange(e.target.value, e.target.name)}
                 />
             </label>

@@ -43,6 +43,7 @@ const mapState = (state: any) => ({
 });
 
 let initState: any[] = [];
+let filtersOptions: {[key: string]: string} = {};
 
 const TransactionList = (): React.ReactElement => {
     const { blokchain } = useMappedState(mapState);
@@ -169,44 +170,43 @@ const TransactionList = (): React.ReactElement => {
     const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
         filtersName.map((row: HeaderColsInterface) => (
             <TableCell>
-                <TransactionListFilter name={row.label} onInputChange={filterHandler} />
+                <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id}/>
             </TableCell>
         ))
 
-    const filteredValue = (name: string, query: string) => {
-        const filteredBlokchain = [...initState];
+    const filteredValue = (filtersOptions: {[key: string]: string}) => {
+        let filteredBlokchain = [...initState];
 
-        switch (name) {
-            case 'amount min':
-                return Object.keys(filteredBlokchain)
-                    .filter((e: any) => query.length ? filteredBlokchain[e].amount > parseInt(query) : true)
-                    .map((elem: any) => filteredBlokchain[elem]);
+        for (let key in filtersOptions) {
 
-            case 'amount max':
-                return Object.keys(filteredBlokchain)
-                    .filter((e: any) => query.length ? filteredBlokchain[e].amount < parseInt(query) : true)
-                    .map((elem: any) => filteredBlokchain[elem]);
+            if (key === 'amountMin') {
+                filteredBlokchain = filteredBlokchain
+                    .filter((block: any) =>  filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
+            }
 
-            case 'destination':
-                return Object.keys(filteredBlokchain)
-                    .filter((e: any) => query.length ? filteredBlokchain[e].destination.includes(query) : true)
-                    .map((elem: any) => filteredBlokchain[elem]);
+            if (key === 'amountMax') {
+                filteredBlokchain = filteredBlokchain
+                    .filter((block: any) => filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true);
+            }
 
-            case 'source':
-                return Object.keys(filteredBlokchain)
-                    .filter((e: any) => query.length ? filteredBlokchain[e].source.includes(query) : true)
-                    .map((elem: any) => filteredBlokchain[elem]);
+            if (key === 'destination') {
+                filteredBlokchain = filteredBlokchain
+                    .filter((block: any) => filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true);
+            }
 
-            default:
-                console.warn('Sorry, we are out of ' + query + '.');
+            if (key === 'source') {
+                filteredBlokchain = filteredBlokchain
+                    .filter((block: any) => filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true);
+            }
         }
+
+        return filteredBlokchain;
     }
 
     const filterHandler = (query: string, inputName: string) => {
-        const name: string = inputName.toLowerCase();
-        filteredTable = [filteredValue(name, query)];
-        console.log('filteredTable', filteredTable);
-       return updateFilteredTransactions(filteredTable[0]);
+        filtersOptions[inputName] = query;
+        filteredTable = filteredValue(filtersOptions);
+       return updateFilteredTransactions(filteredTable);
     }
 
     const updateFilteredTransactions = (filteredTable:any): void => {
