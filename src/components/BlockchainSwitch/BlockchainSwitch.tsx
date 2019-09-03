@@ -5,13 +5,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from "@material-ui/core/InputLabel";
 
-const mapState = (state: any):any => ({
+const mapState = (state: any): any => ({
   dataSource: state.dataSource
 });
 
 const BlockchainSwitch = (props: any): React.ReactElement => {
-  const { dataSource }  = useMappedState(mapState)
-  const [blockchainName, setBlockchainName] = React.useState(dataSource);
+  const { dataSource } = useMappedState(mapState)
+  const [blockchainName] = React.useState(dataSource);
   const dispatch = useDispatch();
 
   const handleBlockchainChange = (event: any) => {
@@ -31,12 +31,11 @@ const BlockchainSwitch = (props: any): React.ReactElement => {
           e.persist();
           setTimeout(() => handleBlockchainChange(e), 100);
         }}
-        defaultValue = {blockchainName}
+        defaultValue={blockchainName}
       >
         <MenuItem value="tezos">Tezos</MenuItem>
         <MenuItem value="ethereum">Ethereum</MenuItem>
       </Select>
-      <div>{dataSource}</div>
     </FormControl>
   );
 };
