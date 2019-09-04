@@ -47,8 +47,3 @@ export interface ActionType {
 export interface FetchTransactionsAction extends ActionType {
   transactions: any[];
 }
-
-export interface LoaderActionType extends ActionType {
-  type: string;
-  show: boolean;
-}
