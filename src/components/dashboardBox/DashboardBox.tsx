@@ -14,13 +14,11 @@ import { IconClassKey } from "@material-ui/core/Icon";
 
 type Props = {
     icon: any, //sprawdzic czy to sie sprawdzi
-    title: string,
+    name: string,
     route: string
 }
 
-const DasshboardBox = ({ icon, title, route }: Props): React.ReactElement => {
-
-
+const DasshboardBox = ({ icon, name, route }: Props): React.ReactElement => {
     return (
         <Card>
             <CardHeader
@@ -32,12 +30,13 @@ const DasshboardBox = ({ icon, title, route }: Props): React.ReactElement => {
                     <IconButton
                         href={route}
                         aria-label="Open subpage">
-                        <ExitToAppIcon />
+                        {icon}
                     </IconButton>
                 }
-                title={title}
+                title={name}
                 subheader={route}
             />
+            zobaczmy {icon}
             <CardContent>
                 <Typography gutterBottom> Word of the Day </Typography>
             </CardContent>
