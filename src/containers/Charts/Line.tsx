@@ -35,18 +35,17 @@ const LineCharts = (): React.ReactElement => {
         label: "Amount of the currency",
         title: "Transactions for the selected buyer and day"
     });
-    const [select, setSelect] = useState("buyer");
+    const [select, setSelect] = useState("buyers");
     const [buyer, setBuyer] = useState("buyer");
-    const [seller, setSeller] = useState("xyz2");
-    const [chartType, setChartType] = useState("buyer");
+    const [seller, setSeller] = useState("seler");
 
     const handleBuyerChange = (e: any) => {
         setTimeout(() => setBuyer(e.target.value), 100)
     };
 
-    const changeUserType = (e: any) => {
-        setChartType(e.target.value);
-    }
+    const handleSellerChange = (e: any) => {
+        setTimeout(() => setSeller(e.target.value), 100)
+    };
 
     const filterChart = (blokchain: Block[], chartType: string): void => {
         const labels: any[] = [];
@@ -58,13 +57,13 @@ const LineCharts = (): React.ReactElement => {
             if (timeStampConverted === dateFrom) {
                 switch (chartType) {
                     case "selers":
-                        if (item.source == seller) {
+                        if (item.source === seller) {
                             elements.push(item.amount);
                         }
 
                         break;
                     case "buyers":
-                        if (item.destination == buyer) {
+                        if (item.destination === buyer) {
                             elements.push(item.amount);
                         }
 
@@ -84,7 +83,6 @@ const LineCharts = (): React.ReactElement => {
     };
 
     const triggerSetDateFrom = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        // setLoaderTrue();
         setDateFrom(e.target.value);
     };
 
@@ -149,6 +147,8 @@ const LineCharts = (): React.ReactElement => {
             }
         ]
     };
+    const sellers: Array<string> = [];
+    const buyers: Array<string> = [];
 
     return (
         <>
@@ -172,77 +172,73 @@ const LineCharts = (): React.ReactElement => {
                             value={select}
                             onChange={(e: any) => {
                                 e.persist();
-                                setTimeout(() => changeUserType(e), 100);
+                                setTimeout(() => handleChartChange(e), 100);
                             }}
                         >
-                            <MenuItem value="buyer">Buyers</MenuItem>
-                            <MenuItem value="seler">Sellers</MenuItem>
+                            <MenuItem value="buyers">Buyers</MenuItem>
+                            <MenuItem value="selers">Sellers</MenuItem>
                         </Select>
                     </FormControl>
-                    {chartType == 'buyer' ?
+                    {config.chartType == 'buyers' ?
 
-                    <FormControl style={{ width: "30%" }}>
-                        <InputLabel>Select buyer</InputLabel>
-                        <Select
-                            value={buyer}
-                            onChange={(e: any) => {
-                                handleBuyerChange(e);
-                            }}
-                        >
-                            <MenuItem value='buyer'>Select buyer</MenuItem>
+                        <FormControl style={{ width: "30%" }}>
+                            <InputLabel>Select buyer</InputLabel>
+                            <Select
+                                value={buyer}
+                                onChange={(e: any) => {
+                                    handleBuyerChange(e);
+                                }}
+                            >
+                                <MenuItem value='buyer'>Select buyer</MenuItem>
 
-                            {blokchain.slice(0, 50).map(item => {
-                                let prev;
-                                if (item.destination != prev) {
-                                    prev = item.destination;
-                                    return (
-                                        <MenuItem value={item.destination}>{item.destination}</MenuItem>
-                                    );
-                                }
-                                return;
-                            })}
-                        </Select>
-                    </FormControl>
-                    :
+                                {blokchain.slice(0, 50).map(item => {
+                                    if (!buyers.includes(item.destination)) {
+                                        buyers.push(item.destination)
+                                        return (
+                                            <MenuItem value={item.destination}>{item.destination}</MenuItem>
+                                        );
+                                    }
+                                    return;
+                                })}
+                            </Select>
+                        </FormControl>
+                        :
 
-                    <FormControl style={{ width: "30%" }}>
-                        <InputLabel>Select seller</InputLabel>
-                        <Select
-                            value={buyer}
-                            onChange={(e: any) => {
-                                handleBuyerChange(e);
-                            }}
-                        >
-                            <MenuItem value='buyer'>Select seller</MenuItem>
+                        <FormControl style={{ width: "30%" }}>
+                            <InputLabel>Select seller</InputLabel>
+                            <Select
+                                value={seller}
+                                onChange={(e: any) => {
+                                    handleSellerChange(e);
+                                }}
+                            >
+                                <MenuItem value='seler'>Select seller</MenuItem>
 
-                            {blokchain.slice(0, 50).map(item => {
-                                let prev;
-                                if (item.source != prev) {
-                                    prev = item.source;
-                                    return (
-                                        <MenuItem value={item.source}>{item.source}</MenuItem>
-                                    );
-                                }
-                                return;
-                            })}
-                        </Select>
-                    </FormControl>
+                                {blokchain.slice(0, 50).map(item => {
+                                    if (!sellers.includes(item.source)) {
+                                        sellers.push(item.source)
+                                        return (
+                                            <MenuItem value={item.source}>{item.source}</MenuItem>
+                                        );
+                                    }
+                                    return;
+                                })}
+                            </Select>
+                        </FormControl>
                     }
-
                     <Button variant="contained" color="secondary" onClick={(): void => {
                         setTimeout(() => submitChart(), 100);
                     }} style={{ marginLeft: 20, marginTop: 10 }}>
                         Submit
                     </Button>
                 </div>
-
                 <h1 style={{ textAlign: "center" }}>{config.title}</h1>
                 <LineChart
                     data={chartLineData}
                     width={100}
                     height={100}
                     options={{
-                        maintainAspectRatio: true
+                        maintainAspectRatio: false
                     }}
                 />
             </div>
