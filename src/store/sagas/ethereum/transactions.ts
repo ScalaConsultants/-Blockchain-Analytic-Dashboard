@@ -7,7 +7,9 @@ import * as loaderActions from "../../actions/loader";
 export const getPage = (state: any): number => state.ethereum.page;
 
 async function fetchTransactions(page: number): Promise<any> {
-  const res = await fetch(`/api/transactions?page=${page}`);
+  const res = await fetch(
+    `${process.env.REACT_APP_CORS_PROXY}https://be-api-dev.scalac.io/api/transactions?page=${page}`
+  );
   return res.json();
 }
 
