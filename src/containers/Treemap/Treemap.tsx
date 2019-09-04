@@ -3,19 +3,19 @@
 // @ts-ignore
 import { ResponsiveTreeMap } from "@nivo/treemap";
 import React, { Component } from "react";
-import * as BlokchainActions from "../../store/actions/blokchain";
+import * as BlokchainActions from "../../store/actions/tezos/blokchain";
 import { useMappedState, useDispatch } from "redux-react-hook";
 
-const mapState = (state:any) => ({
-  summedBlocks: state.blokchain.summedBlocks,
-  blocks: state.blokchain.blocks
+const mapState = (state: any) => ({
+  summedBlocks: state.tezos.summedBlocks,
+  blocks: state.tezos.blocks
 });
 
 const Treemap = () => {
   const { summedBlocks, blocks } = useMappedState(mapState);
   const dispatch = useDispatch();
 
-  const test = summedBlocks.slice(0, 80).map((item:any) => ({
+  const test = summedBlocks.slice(0, 80).map((item: any) => ({
     name: item.source.substring(0, 8),
     loc: item.counter
   }));

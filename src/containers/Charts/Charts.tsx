@@ -20,7 +20,7 @@ import {
 } from "./helpers";
 
 const mapState = (state: State): Blockchain => ({
-  blokchain: state.blokchain.blocks
+  blokchain: state.tezos.blocks
 });
 
 const Charts = (): React.ReactElement => {
@@ -119,7 +119,7 @@ const Charts = (): React.ReactElement => {
     setLoaderFalse();
   };
 
-  const triggerSetDateFrom = (e:React.ChangeEvent<HTMLInputElement>): void => {
+  const triggerSetDateFrom = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setLoaderTrue();
     setDateFrom(e.target.value);
   };
@@ -235,7 +235,7 @@ const Charts = (): React.ReactElement => {
             defaultValue={getSelectedDate(0)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
               e.persist();
-              setTimeout(() =>  triggerSetDateTo(e), 100);
+              setTimeout(() => triggerSetDateTo(e), 100);
             }}
             style={{ width: "33%" }}
           />
@@ -243,7 +243,7 @@ const Charts = (): React.ReactElement => {
             <InputLabel>Select chart</InputLabel>
             <Select
               value={select}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 e.persist();
                 setTimeout(() => handleChartChange(e), 100);
               }}
