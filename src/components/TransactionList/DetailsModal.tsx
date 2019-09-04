@@ -43,16 +43,14 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const tableRowGenerator = (data: any) => {
-    return (
-        Object.keys(data).map(item => {
-            return (<TableRow key={item}>
-                <TableCell>{item}</TableCell>
-                <TableCell>{data[item]}</TableCell>
-            </TableRow>)
-        })
-    );
-};
+const tableRowGenerator = (data: any) => (
+    Object.keys(data).map(item => (
+        <TableRow key={item}>
+            <TableCell>{item}</TableCell>
+            <TableCell>{data[item]}</TableCell>
+        </TableRow>
+    ))
+);
 
 type Props = {
     open: boolean,
