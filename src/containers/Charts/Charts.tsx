@@ -222,7 +222,7 @@ const Charts = (): React.ReactElement => {
             name="dateFrom"
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
               e.persist();
-              setTimeout(() => triggerSetDateFrom(e), 100);              
+              setTimeout(() => triggerSetDateFrom(e), 100);
             }}
             defaultValue={getSelectedDate(7)}
             style={{ width: "33%" }}
@@ -235,7 +235,7 @@ const Charts = (): React.ReactElement => {
             defaultValue={getSelectedDate(0)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
               e.persist();
-              setTimeout(() =>  triggerSetDateTo(e), 100);  
+              setTimeout(() =>  triggerSetDateTo(e), 100);
             }}
             style={{ width: "33%" }}
           />
