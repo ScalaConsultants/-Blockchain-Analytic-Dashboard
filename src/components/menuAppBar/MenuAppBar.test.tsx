@@ -9,7 +9,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 
-
 describe("MenuAppBar", () => {
   const props = {
     data: "test"
@@ -29,7 +28,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: "/", key: "testKey" } ]}>
       <ButtonAppBar {...props}/>
-    </MemoryRouter>);
+    </MemoryRouter>
+    );
     expect(wrapper.find(ButtonAppBar)).toHaveLength(1);
   });
 
@@ -37,7 +37,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: "/", key: "testKey" } ]}>
         <ButtonAppBar {...props}/>
-      </MemoryRouter>);
+      </MemoryRouter>
+    );
     const buttonAppBarElement = wrapper.find(ButtonAppBar);
     expect(buttonAppBarElement.find(AppBar)).toHaveLength(1);
   });
@@ -46,7 +47,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: "/", key: "testKey" } ]}>
         <ButtonAppBar {...props}/>
-      </MemoryRouter>);
+      </MemoryRouter>
+    );
     const buttonAppBarElement = wrapper.find(ButtonAppBar);
     expect(buttonAppBarElement.find(Toolbar)).toHaveLength(1);
   });
@@ -55,7 +57,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: '/', key: 'testKey' } ]}>
         <ButtonAppBar {...props}/>
-      </MemoryRouter>);
+      </MemoryRouter>
+    );
     const buttonAppBarElement = wrapper.find(ButtonAppBar);
     expect(buttonAppBarElement.find(Button)).toHaveLength(1);
   });
@@ -64,7 +67,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: "/", key: "testKey" } ]}>
         <ButtonAppBar {...props}/>
-      </MemoryRouter>);
+      </MemoryRouter>
+    );
     const buttonAppBarElement = wrapper.find(ButtonAppBar);
     expect(buttonAppBarElement.find(IconButton)).toHaveLength(1);
   });
@@ -73,7 +77,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: "/", key: "testKey" } ]}>
         <ButtonAppBar {...props}/>
-      </MemoryRouter>);
+      </MemoryRouter>
+    );
     const buttonAppBarElement = wrapper.find(ButtonAppBar);
     const iconButtonElement = buttonAppBarElement.find(IconButton);
     expect(iconButtonElement.find(MenuIcon)).toHaveLength(1);
@@ -83,7 +88,8 @@ describe("MenuAppBar", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ { pathname: "/", key: "testKey" } ]}>
         <ButtonAppBar {...props}/>
-      </MemoryRouter>);
+      </MemoryRouter>
+    );
     const buttonAppBarElement = wrapper.find(ButtonAppBar);
     expect(buttonAppBarElement.find(Menu)).toHaveLength(1);
   });

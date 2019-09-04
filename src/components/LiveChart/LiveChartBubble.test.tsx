@@ -23,8 +23,8 @@ describe("LiveChartBubble", () => {
 
   it("should render with one Box element", () => {
     const wrapper = shallow(<LiveChartBubble {...props}/>);
-    const canvasElement = wrapper.find(Box);
-    expect(canvasElement).toHaveLength(1);
+    const boxElement = wrapper.find(Box);
+    expect(boxElement).toHaveLength(1);
   });
 
   it("should render with one Tooltip element", () => {
@@ -40,21 +40,18 @@ describe("LiveChartBubble", () => {
   it("should render second Typography element with proper title", () => {
     const wrapper = mount(<LiveChartBubble {...props}/>);
     const typographyElement = wrapper.find(Typography).at(1);
-
     expect(typographyElement.text()).toEqual('test2');
   });
 
   it("should render with one Typography element inside Tooltip", () => {
     const wrapper = mount(<LiveChartBubble {...props}/>);
     const tooltipElement = wrapper.find(Tooltip);
-
     expect(tooltipElement.find(Typography)).toHaveLength(1);
   });
 
   it("should render Typography element inside Tooltip with proper title", () => {
     const wrapper = mount(<LiveChartBubble {...props}/>);
     const tooltipElement = wrapper.find(Tooltip);
-
     expect(tooltipElement.find(Typography).text()).toEqual("test1");
   });
 });

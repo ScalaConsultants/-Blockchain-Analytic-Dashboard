@@ -1,6 +1,5 @@
 import { getClickPosition } from "./helpers";
 
-
 describe("CustomColumnChart helpers", () => {
 
   const e = {

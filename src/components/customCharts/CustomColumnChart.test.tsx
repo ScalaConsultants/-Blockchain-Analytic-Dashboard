@@ -19,7 +19,6 @@ describe("CustomColumnChart", () => {
     selectedBarColor: "rgb(44,123,200)"
   };
 
-
   it("should render", () => {
     const wrapper = shallow(<CustomColumnChart {...props}/>);
     expect(wrapper).toMatchSnapshot();

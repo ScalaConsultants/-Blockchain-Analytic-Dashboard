@@ -14,7 +14,6 @@ describe("DatePicker", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-
   it("should render only one", () => {
     const wrapper = shallow(<DatePicker {...props}/>);
     expect(wrapper).toHaveLength(1);
