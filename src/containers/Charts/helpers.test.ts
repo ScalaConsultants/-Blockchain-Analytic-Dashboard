@@ -30,12 +30,12 @@ describe("Charts helpers", () => {
     const donutArray = [0, 0, 0, 0];
 
     const item = {
-      source: "tz1eVqFjPz15FZmRxMuw1KNagQnXhMssWyZL",
+      source: 123,
       timestamp: 1567156636000,
       block_leve: 617866,
       amount: 1017726,
       counter: 863689,
-      destination: "tz1Yxhg9zsECapHvgzCQnrGN8P3cLqzNij1C",
+      destination: 123,
       fee: 1420
     };
 
