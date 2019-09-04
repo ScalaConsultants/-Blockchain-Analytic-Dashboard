@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import { useMappedState } from "redux-react-hook";
 import "react-datepicker/dist/react-datepicker.css";
-import DataPresentation from './DataPresentation';
+import DataPresentation from "./DataPresentation";
 
 const mapState = (state: any): any => ({
-  blokchain: state.blokchain.blocks
+  blokchain: state.tezos.blocks
 });
 
 function CustomChartDemo(): React.ReactElement {
@@ -28,7 +28,10 @@ function CustomChartDemo(): React.ReactElement {
   const transactionsToDisplay = summedTransactions
     .sort((a: any, b: any): number => b.transactions - a.transactions)
     .slice(0, 50);
-  const dataParsedForCustom = transactionsToDisplay.map((buyer: any) => ({value: buyer.transactions, key: buyer.destination}));
+  const dataParsedForCustom = transactionsToDisplay.map((buyer: any) => ({
+    value: buyer.transactions,
+    key: buyer.destination
+  }));
 
   return (
     <>

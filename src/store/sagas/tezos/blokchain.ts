@@ -1,4 +1,4 @@
-import { put, call } from "redux-saga/effects";
+import { put, call, takeEvery } from "redux-saga/effects";
 import {
   ConseilDataClient,
   ConseilOperator,
@@ -7,8 +7,8 @@ import {
 } from "conseiljs";
 
 import apiConfig from "./api-config";
-import * as blokchainActions from "../actions/blokchain";
-import * as loaderActions from "../actions/loader";
+import * as blokchainActions from "../../actions/tezos/blokchain";
+import * as loaderActions from "../../actions/loader";
 
 const initialFetchAmount = 10000;
 
@@ -72,4 +72,11 @@ export function* doFetchTransactions(): any {
   else {
     yield put(blokchainActions.BlokchainSetTransactions([]));
   }
+}
+
+export function* watchDoFetchTransactions(): any {
+  yield takeEvery(
+    blokchainActions.BLOKCHAIN_FETCH_TRANSACTIONS,
+    doFetchTransactions
+  );
 }

@@ -23,7 +23,7 @@ export interface Blockchain {
 }
 
 export interface State {
-  blokchain: {
+  tezos: {
     blocks: Block[];
   };
 }
@@ -45,7 +45,7 @@ export interface ActionType {
 }
 
 export interface FetchTransactionsAction extends ActionType {
-  transactions: any[];
+  transactions: Block[];
 }
 
 export interface LoaderActionType extends ActionType {
