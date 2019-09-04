@@ -1,7 +1,7 @@
-import { getClickPosition } from './helpers';
+import { getClickPosition } from "./helpers";
 
 
-describe('CustomColumnChart helpers', () => {
+describe("CustomColumnChart helpers", () => {
 
   const e = {
     pageX: 10,
@@ -18,7 +18,7 @@ describe('CustomColumnChart helpers', () => {
     y: 16
   };
 
-  it('should return proper value', () => {
+  it("should return proper value", () => {
     expect(getClickPosition(e, canvas)).toEqual(result)
   });
 });

@@ -2,7 +2,7 @@ import {
   desc,
   getSorting,
   stableSort
-} from './helpers';
+} from "./helpers";
 
 describe("helpers", () => {
   const a = {

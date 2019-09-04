@@ -5,7 +5,7 @@ import {
   getDayTime,
   getSelectedDate,
   selectWhichDayTime
-} from './helpers';
+} from "./helpers";
 
 describe("Charts helpers", () => {
   it("convertTimeStampToHour should return proper value", () => {
