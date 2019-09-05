@@ -49,7 +49,7 @@ const handleElementClick = (
   });
 };
 
-const CustomColumnChart = ({
+const SimpleBarChart = ({
   chartData,
   recordSelectCallback,
   selectedRecordKey,
@@ -162,4 +162,4 @@ const CustomColumnChart = ({
   );
 };
 
-export default CustomColumnChart;
+export default SimpleBarChart;

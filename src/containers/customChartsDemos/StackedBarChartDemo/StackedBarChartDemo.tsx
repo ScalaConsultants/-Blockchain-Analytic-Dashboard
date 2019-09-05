@@ -1,13 +1,11 @@
 import React from "react";
 import { useMappedState } from "redux-react-hook";
-import "react-datepicker/dist/react-datepicker.css";
-import DataPresentation from "./DataPresentation";
 
 const mapState = (state: any): any => ({
   blokchain: state.tezos.blocks
 });
 
-function CustomChartDemo(): React.ReactElement {
+function SimpleBarChartDemo(): React.ReactElement {
   const { blokchain } = useMappedState(mapState);
 
   if (!blokchain.length) return <div />;
@@ -35,13 +33,9 @@ function CustomChartDemo(): React.ReactElement {
 
   return (
     <>
-      <h1>Top buyer (amount of transactions)</h1>
-      <DataPresentation
-        dataForChart={dataParsedForCustom}
-        fullData={transactionsToDisplay}
-      />
+      <h1>Stacked bar chart demo</h1>
     </>
   );
 }
 
-export default CustomChartDemo;
+export default SimpleBarChartDemo;
