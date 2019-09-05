@@ -6,18 +6,15 @@ import {
 } from './helpers';
 
 interface Props {
-  chartData: any[];
-  recordSelectCallback: (arg: any) => any;
-  selectedRecordKey: string;
+  data: any[];
   width?: number;
   height?: number;
   spaceBetweenBars?: number;
-  barWidth?: number;
+  barHeight?: number;
   barColor?: string;
   selectedBarColor?: string;
 }
 
-const CHART_PADDING = 10;
 const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
 const handleElementClick = (
@@ -38,19 +35,13 @@ const handleElementClick = (
 };
 
 const SimpleBarChart = ({
-  chartData,
-  recordSelectCallback,
-  selectedRecordKey,
+  data,
   width = 1200,
-  height = 400,
-  barWidth = 30,
-  spaceBetweenBars = 1,
-  barColor = 'rgb(98,156,200)',
-  selectedBarColor = 'rgb(44,123,200)',
+  height = 1000,
+  barHeight = 60,
 }: Props) => {
   const canvasRef = useRef(null);
-  const [canvasObjects, setCanvasObjects] = useState([]);
-
+  const totalDataValues = data.reduce((acc, next) => acc + next.value, 0);
   useEffect(() => {
     if (canvasRef.current) {
       // @ts-ignore
@@ -58,26 +49,19 @@ const SimpleBarChart = ({
       ctx.clearRect(0, 0, width, height);
       setFontStyle(ctx, 12, CHART_DETAILS_COLOR, 'Arial');
 
-      const objects = chartData.map((e, index) => {
-          const element = {
-            x: 40 + CHART_PADDING + ((barWidth + spaceBetweenBars) * index),
-            y: height - CHART_PADDING - e.value,
-            width: barWidth,
-            height: e.value,
-            value: e.value,
-            key: e.key,
-          };
-          if (element.x < width - CHART_PADDING) {
-            ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
-            ctx.fillRect(element.x, element.y, element.width, element.height);
-          }
-          return element
-        }
-      );
-      // @ts-ignore
-      setCanvasObjects(objects)
+      const objects = data.map(item => ({
+        width: width * (item.value * 100 / totalDataValues) / 100,
+        color: `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
+      }));
+
+      objects.reduce((acc, object) => {
+        ctx.fillStyle = object.color;
+        ctx.fillRect(acc, 0, object.width, barHeight);
+        return acc + object.width;
+      }, 0);
     }
-  }, [chartData, selectedRecordKey]);
+  }, [data]);
+
 
   return (
     <div
@@ -96,7 +80,6 @@ const SimpleBarChart = ({
           marginBottom: 10,
         }}
         ref={canvasRef}
-        onClick={(e) => handleElementClick(recordSelectCallback, canvasObjects, getClickPosition(e, canvasRef.current))}
       >
         This element is not supported by your browser.
       </canvas>
