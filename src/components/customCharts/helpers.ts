@@ -3,7 +3,14 @@ export const getClickPosition = (e: any, canvas: any) => ({
   y: e.pageY - canvas.offsetTop
 });
 
-export const drawLine = (ctx: any, x1: number, y1: number, x2: number, y2: number, color = 'black') => {
+export const drawLine = (
+  ctx: any,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  color = 'black',
+) => {
   ctx.strokeStyle = color;
   ctx.beginPath();
   ctx.moveTo(x1, y1);
@@ -11,7 +18,12 @@ export const drawLine = (ctx: any, x1: number, y1: number, x2: number, y2: numbe
   ctx.stroke();
 };
 
-export const setFontStyle = (ctx: any, size = 12, color = 'black', font = 'Arial') => {
+export const setFontStyle = (
+  ctx: any,
+  size = 12,
+  color = 'black',
+  font = 'Arial',
+) => {
   ctx.fillStyle = color;
   ctx.font = `${size}px ${font}`;
 };

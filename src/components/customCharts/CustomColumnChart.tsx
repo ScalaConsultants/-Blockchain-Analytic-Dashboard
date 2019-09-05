@@ -14,12 +14,12 @@ interface Props {
   chartData: any[];
   recordSelectCallback: (arg: any) => any;
   selectedRecordKey: string;
-  width?: number,
-  height?: number,
-  spaceBetweenBars?: number,
-  barWidth?: number,
-  barColor?: string,
-  selectedBarColor?: string,
+  width?: number;
+  height?: number;
+  spaceBetweenBars?: number;
+  barWidth?: number;
+  barColor?: string;
+  selectedBarColor?: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +32,11 @@ const useStyles = makeStyles(theme => ({
 const CHART_PADDING = 10;
 const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
-const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
+const handleElementClick = (
+  setClickedCallback: any,
+  objects: any,
+  clickPositions: any
+) => {
   objects.forEach((element: any) => {
     if (
       clickPositions.y >= element.y &&
@@ -40,7 +44,7 @@ const handleElementClick = (setClickedCallback: any, objects: any, clickPosition
       clickPositions.x >= element.x &&
       clickPositions.x <= element.x + element.width
     ) {
-      setClickedCallback(element.key)
+      setClickedCallback(element.key);
     }
   });
 };
@@ -71,9 +75,9 @@ const CustomColumnChart = ({
       const valueOnChartTop = Math.round((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
-      drawLine(ctx,35, 10, 45, 10, CHART_DETAILS_COLOR);
-      drawLine(ctx,40, 10, 40, height - CHART_PADDING, CHART_DETAILS_COLOR);
-      drawLine(ctx,35, height - CHART_PADDING, 45, height - CHART_PADDING, CHART_DETAILS_COLOR);
+      drawLine(ctx, 35, 10, 45, 10, CHART_DETAILS_COLOR);
+      drawLine(ctx, 40, 10, 40, height - CHART_PADDING, CHART_DETAILS_COLOR);
+      drawLine(ctx, 35, height - CHART_PADDING, 45, height - CHART_PADDING, CHART_DETAILS_COLOR);
 
       const objects = chartData.map((e, index) => {
           const element = {
@@ -113,12 +117,13 @@ const CustomColumnChart = ({
   }, [scale, chartData, selectedRecordKey]);
 
   return (
-    <div style={{
-      padding: 10,
-      display: 'flex',
-      justifyContent: 'center',
-      flexDirection: 'column'
-    }}>
+    <div
+      style={{
+        padding: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column'
+      }}>
       <canvas
         width={width}
         height={height}
