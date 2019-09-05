@@ -28,19 +28,22 @@ function SimpleBarChartDemo(): React.ReactElement {
 
   return (
     <>
-      <h1>Stacked bar chart demo</h1>
+      <h1 style={{ marginBottom: 60 }}>Stacked bar chart demo</h1>
       {/*<p>group by</p>*/}
       {/*<button onClick={() => setGroupingKey(groupingKey === 'source' ? 'destination' : 'source')}>*/}
       {/*  {groupingKey}*/}
       {/*</button>*/}
-      <p>Wallets by total buying value</p>
+      <h2>Wallets by total transactions values</h2>
+
+      <h4>Buying transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('source').sort((a: any, b: any) => b.value - a.value)}
       />
-      <p>Wallets by total selling value</p>
+      <h4>Selling transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('destination').sort((a: any, b: any) => b.value - a.value)}
       />
+      <p>(grey area are values that are less then 0.1% of total)</p>
     </>
   );
 }
