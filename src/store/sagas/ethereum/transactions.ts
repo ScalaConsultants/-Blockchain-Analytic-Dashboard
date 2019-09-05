@@ -8,7 +8,7 @@ export const getPage = (state: any): number => state.ethereum.page;
 
 async function fetchTransactions(page: number): Promise<any> {
   const res = await fetch(
-    `${process.env.REACT_APP_CORS_PROXY}https://be-api-dev.scalac.io/api/transactions?page=${page}`
+    `${process.env.REACT_APP_CORS_PROXY}https://blockchain-ethereum-api-dev.scalac.io/api/transactions?page=${page}`
   );
   return res.json();
 }
