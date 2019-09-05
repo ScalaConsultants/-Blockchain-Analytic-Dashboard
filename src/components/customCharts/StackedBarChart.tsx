@@ -37,7 +37,7 @@ const handleElementClick = (
 const SimpleBarChart = ({
   data,
   width = 1200,
-  height = 1000,
+  height = 80,
   barHeight = 60,
 }: Props) => {
   const canvasRef = useRef(null);
@@ -49,9 +49,10 @@ const SimpleBarChart = ({
       ctx.clearRect(0, 0, width, height);
       setFontStyle(ctx, 12, CHART_DETAILS_COLOR, 'Arial');
 
-      const objects = data.map(item => ({
+      const objects = data.map((item, index) => ({
         width: width * (item.value * 100 / totalDataValues) / 100,
-        color: `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
+        // color: `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
+        color: index % 2 === 0 ? 'rgb(83,131,185)' : 'rgb(134,180,233)',
       }));
 
       objects.reduce((acc, object) => {
