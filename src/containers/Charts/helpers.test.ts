@@ -57,6 +57,11 @@ describe("Charts helpers", () => {
   });
 
   it("getSelectedDate should return proper value", () => {
-    expect(getSelectedDate(7)).toEqual("2019-08-28");
+    const daysNumber = 9;
+    const date = new Date();
+    const last = new Date(date.getTime() - (daysNumber * 24 * 60 * 60 * 1000));
+    const data = last.toJSON().slice(0,10).replace(/-/g,'-');
+    const result =  data.toString();
+    expect(getSelectedDate(daysNumber)).toEqual(result);
   });
 });
