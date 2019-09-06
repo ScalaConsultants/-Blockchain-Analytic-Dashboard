@@ -25,7 +25,12 @@ interface HeaderColsInterface {
 const headerCols: Array<HeaderColsInterface> = [
     { id: "timestamp", numeric: false, disablePadding: true, label: "Timestamp" },
     { id: "source", numeric: false, disablePadding: false, label: "Source" },
-    { id: "destination", numeric: false, disablePadding: false, label: "Destination" }
+    { id: "destination", numeric: false, disablePadding: false, label: "Destination" },
+    { id: "amount", numeric: false, disablePadding: false, label: "Amount" },
+    { id: "counter", numeric: false, disablePadding: false, label: "Counter" },
+    { id: "fee", numeric: false, disablePadding: false, label: "Fee" },
+    { id: "block_level", numeric: false, disablePadding: false, label: "Block level" }
+
 ];
 
 const filtersName: Array<HeaderColsInterface> = [
@@ -47,7 +52,6 @@ let filtersOptions: {[key: string]: string} = {};
 
 const TransactionList = (): React.ReactElement => {
     const { blokchain } = useMappedState(mapState);
-
     if (initState.length === 0) {
         initState = [ ...blokchain ];
     }
@@ -164,6 +168,10 @@ const TransactionList = (): React.ReactElement => {
                 </TableCell>
                 <TableCell>{row.source}</TableCell>
                 <TableCell>{row.destination}</TableCell>
+                <TableCell>{row.amount}</TableCell>
+                <TableCell>{row.counter}</TableCell>
+                <TableCell>{row.fee}</TableCell>
+                <TableCell>{row.block_level}</TableCell>
             </TableRow>
         )))
 
