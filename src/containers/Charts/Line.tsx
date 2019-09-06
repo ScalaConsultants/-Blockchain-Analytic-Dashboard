@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from '@material-ui/core/Button';
+import { LOADER_STATE } from '../../store/actions/loader';
 
 import { Blockchain, Block, State } from "../../types";
 import {
@@ -88,14 +89,14 @@ const LineCharts = (): React.ReactElement => {
 
     const setLoaderFalse = (): void => {
         dispatch({
-            type: "LOADER_STATE",
+            type: LOADER_STATE,
             show: false
         });
     };
 
     const setLoaderTrue = (): void => {
         dispatch({
-            type: "LOADER_STATE",
+            type: LOADER_STATE,
             show: true
         });
     };
