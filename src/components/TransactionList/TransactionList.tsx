@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import TableSortLabel from "@material-ui/core/TableSortLabel/TableSortLabel";
 import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core/TablePagination';
 
 import TransactionListPagination from './components/TransactionListPagination';
 import TransactionListFilter from './components/TransactionListFilter';
@@ -62,6 +63,32 @@ const TransactionList = (): React.ReactElement => {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(100);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, blokchain.length - page * rowsPerPage);
+
+    let filteredTable: any = null;
+
+    const handleChangePage = (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+        newPage: number,
+    ) => {
+        setPage(newPage);
+    }
+
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    }
+
+    const handleRequestSort = (event: any, property: any) => {
+        if (orderBy === property && order === "desc") {
+            setOrder("asc");
+        } else if (orderBy === property && order === "asc") {
+            setOrder("desc");
+        }
+        setOrderBy(property);
+    };
 
     const tablePaginationProps = {
         rowsPerPageOptions: [15, 25, 50, 100, 250],
@@ -77,31 +104,6 @@ const TransactionList = (): React.ReactElement => {
         onChangeRowsPerPage: handleChangeRowsPerPage,
         ActionsComponent: TransactionListPagination
     }
-
-    let filteredTable: any = null;
-
-    function handleChangePage(
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-        newPage: number,
-    ) {
-        setPage(newPage);
-    }
-
-    function handleChangeRowsPerPage(
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    }
-
-    const handleRequestSort = (event: any, property: any) => {
-        if (orderBy === property && order === "desc") {
-            setOrder("asc");
-        } else if (orderBy === property && order === "asc") {
-            setOrder("desc");
-        }
-        setOrderBy(property);
-    };
 
     const createSortHandler = (property: any) => (event: any) => handleRequestSort(event, property);
 
@@ -152,7 +154,6 @@ const TransactionList = (): React.ReactElement => {
             </TableCell>
         )))
 
-
     const transactionListRowsGenerate = (blokchain: any) =>
         (stableSort(
             blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
@@ -171,7 +172,7 @@ const TransactionList = (): React.ReactElement => {
 
     const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
         filtersName.map((row: HeaderColsInterface) => (
-            <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id}/>
+            <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
         ))
 
     const filteredValue = (filtersOptions: { [key: string]: string }) => {
@@ -243,11 +244,20 @@ const TransactionList = (): React.ReactElement => {
                     </TableHead>
                     <TableBody>
                         {transactionListRowsGenerate(blokchain)}
+                        {emptyRows > 0 && (
+                            <TableRow style={{ height: 48 * emptyRows }}>
+                                <TableCell colSpan={6} />
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
-                <TransactionListPagination
-                    {...tablePaginationProps}
-                />
+                <TableFooter>
+                    <TableRow>
+                        <TablePagination
+                            {...tablePaginationProps}
+                        />
+                    </TableRow>
+                </TableFooter>
             </Grid>
             <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
         </Grid>

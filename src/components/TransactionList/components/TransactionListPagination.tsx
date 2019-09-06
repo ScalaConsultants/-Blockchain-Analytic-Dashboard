@@ -30,21 +30,17 @@ const TransactionListPagination = (props: TablePaginationActionsProps) => {
     const theme = useTheme();
     const { count, page, rowsPerPage, onChangePage } = props;
 
-    function handleFirstPageButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => 
         onChangePage(event, 0);
-    }
 
-    function handleBackButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => 
         onChangePage(event, page - 1);
-    }
 
-    function handleNextButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
         onChangePage(event, page + 1);
-    }
 
-    function handleLastPageButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => 
         onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    }
 
     return (
         <div className={classes.root}>
