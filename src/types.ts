@@ -53,7 +53,7 @@ export interface ActionType {
 }
 
 export interface FetchTransactionsAction extends ActionType {
-  transactions: any[];
+  transactions: Block[];
 }
 
 export interface DataSourceActionType extends ActionType {
