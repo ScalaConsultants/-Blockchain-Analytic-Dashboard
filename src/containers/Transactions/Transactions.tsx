@@ -10,6 +10,7 @@ import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import TableSortLabel from "@material-ui/core/TableSortLabel/TableSortLabel";
 
 import { stableSort, getSorting } from "../../helpers/helpers";
+import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
 
 const headerCols = [
   { id: "timestamp", numeric: false, disablePadding: true, label: "Timestamp" },
@@ -26,7 +27,7 @@ type Order = "asc" | "desc";
 type OrderBy = string;
 
 const mapState = (state: any) => ({
-  blokchain: state.tezos.blocks
+  blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
 const Transactions = (): React.ReactElement => {

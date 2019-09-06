@@ -1,8 +1,8 @@
 import React from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 
 const mapState = (state: any): any => ({
@@ -10,11 +10,12 @@ const mapState = (state: any): any => ({
 });
 
 const BlockchainSwitch = (props: any): React.ReactElement => {
-  const { dataSource } = useMappedState(mapState)
-  const [blockchainName] = React.useState(dataSource);
+  const { dataSource } = useMappedState(mapState);
   const dispatch = useDispatch();
 
-  const handleBlockchainChange = (event: any) => {
+  const handleBlockchainChange = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ): void => {
     dispatch({
       type: "SET_DATA_SOURCE",
       source: event.target.value
@@ -27,11 +28,7 @@ const BlockchainSwitch = (props: any): React.ReactElement => {
       <Select
         style={{ color: "#ffffff" }}
         value={dataSource}
-        onChange={(e: any) => {
-          e.persist();
-          setTimeout(() => handleBlockchainChange(e), 100);
-        }}
-        defaultValue={blockchainName}
+        onChange={handleBlockchainChange}
       >
         <MenuItem value="tezos">Tezos</MenuItem>
         <MenuItem value="ethereum">Ethereum</MenuItem>
