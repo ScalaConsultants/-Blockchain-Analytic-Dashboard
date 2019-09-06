@@ -26,9 +26,6 @@ const LineCharts = (): React.ReactElement => {
     const [dateFrom, setDateFrom] = useState(getSelectedDate(7));
     const [label, setLabel] = useState([
         "19-04-2019",
-        "20-04-2019",
-        "21-04-2019",
-        "22-04-2019"
     ]);
     const [data, setData] = useState([10, 20, 30, 40]);
     const [config, setConfig] = useState({
@@ -150,7 +147,7 @@ const LineCharts = (): React.ReactElement => {
                             e.persist();
                             setTimeout(() => triggerSetDateFrom(e), 100);
                         }}
-                        defaultValue={getSelectedDate(7)}
+                        defaultValue={getSelectedDate(0)}
                         style={{ width: "30%" }}
                     />
                     <FormControl style={{ width: "30%" }}>
