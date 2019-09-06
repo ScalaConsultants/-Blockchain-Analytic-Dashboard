@@ -3,11 +3,11 @@ import { useMappedState, useDispatch } from "redux-react-hook";
 
 import LineChart from "../../components/charts/Line/Line";
 import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import Button from '@material-ui/core/Button';
+
+import FormControlField from '../../components/FormControl/FormControl';
+
 import { LOADER_STATE } from '../../store/actions/loader';
 
 import { Blockchain, Block, State } from "../../types";
@@ -134,6 +134,40 @@ const LineCharts = (): React.ReactElement => {
     const sellers: Array<string> = [];
     const buyers: Array<string> = [];
 
+    const renderSellers = () => {
+        return (
+            blokchain.slice(0, 50).map(item => {
+                if (!sellers.includes(item.source)) {
+                    sellers.push(item.source)
+                    return (
+                        <MenuItem key={item.source} value={item.source}>{item.source}</MenuItem>
+                    );
+                }
+                return;
+            })
+        );
+    }
+
+    const renderBuyers = () => {
+        return (
+            blokchain.slice(0, 50).map(item => {
+                if (!buyers.includes(item.destination)) {
+                    buyers.push(item.destination)
+                    return (
+                        <MenuItem key={item.destination} value={item.destination}>{item.destination}</MenuItem>
+                    );
+                }
+                return;
+            })
+        );
+    }
+
+    const renderSelectChart = () => {
+        return (
+            <MenuItem value="selers">Sellers</MenuItem>
+        );
+    }
+
     return (
         <>
             <div>
@@ -150,65 +184,41 @@ const LineCharts = (): React.ReactElement => {
                         defaultValue={getSelectedDate(0)}
                         style={{ width: "30%" }}
                     />
-                    <FormControl style={{ width: "30%" }}>
-                        <InputLabel>Select chart</InputLabel>
-                        <Select
-                            value={select}
-                            onChange={(e: any) => {
-                                e.persist();
-                                setTimeout(() => handleChartChange(e), 100);
-                            }}
-                        >
-                            <MenuItem value="buyers">Buyers</MenuItem>
-                            <MenuItem value="selers">Sellers</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <FormControlField
+                        value={select}
+                        onChange={(e: any) => {
+                            e.persist();
+                            setTimeout(() => handleChartChange(e), 100);
+                        }}
+                        items={renderSelectChart}
+                        firstItemValue={'buyers'}
+                        firstItemName={'Buyers'}
+                        inputLabel={'Select buyers'}
+
+                    />
                     {config.chartType == 'buyers' ?
+                        <FormControlField
+                            value={buyer}
+                            onChange={(e: any) => {
+                                handleBuyerChange(e);
+                            }}
+                            items={renderBuyers}
+                            firstItemValue={'buyer'}
+                            firstItemName={'Buyers'}
+                            inputLabel={'Select buyers'}
 
-                        <FormControl style={{ width: "30%" }}>
-                            <InputLabel>Select buyer</InputLabel>
-                            <Select
-                                value={buyer}
-                                onChange={(e: any) => {
-                                    handleBuyerChange(e);
-                                }}
-                            >
-                                <MenuItem value='buyer'>Select buyer</MenuItem>
-
-                                {blokchain.slice(0, 50).map(item => {
-                                    if (!buyers.includes(item.destination)) {
-                                        buyers.push(item.destination)
-                                        return (
-                                            <MenuItem value={item.destination}>{item.destination}</MenuItem>
-                                        );
-                                    }
-                                    return;
-                                })}
-                            </Select>
-                        </FormControl>
+                        />
                         :
-
-                        <FormControl style={{ width: "30%" }}>
-                            <InputLabel>Select seller</InputLabel>
-                            <Select
-                                value={seller}
-                                onChange={(e: any) => {
-                                    handleSellerChange(e);
-                                }}
-                            >
-                                <MenuItem value='seler'>Select seller</MenuItem>
-
-                                {blokchain.slice(0, 50).map(item => {
-                                    if (!sellers.includes(item.source)) {
-                                        sellers.push(item.source)
-                                        return (
-                                            <MenuItem value={item.source}>{item.source}</MenuItem>
-                                        );
-                                    }
-                                    return;
-                                })}
-                            </Select>
-                        </FormControl>
+                        <FormControlField
+                            value={seller}
+                            onChange={(e: any) => {
+                                handleSellerChange(e);
+                            }}
+                            items={renderSellers}
+                            firstItemValue={'seler'}
+                            firstItemName={'Sellers'}
+                            inputLabel={'Select sellers'}
+                        />
                     }
                     <Button variant="contained" color="secondary" onClick={(): void => {
                         setTimeout(() => submitChart(), 100);
