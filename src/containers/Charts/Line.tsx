@@ -56,21 +56,7 @@ const LineCharts = (): React.ReactElement => {
             const timeStampConverted: string = convertTimeStamp(item.timestamp);
 
             if (timeStampConverted === dateFrom) {
-                switch (chartType) {
-                    case "selers":
-                        if (item.source === seller) {
-                            elements.push(item.amount);
-                        }
-
-                        break;
-                    case "buyers":
-                        if (item.destination === buyer) {
-                            elements.push(item.amount);
-                        }
-
-                        break;
-                    default:
-                }
+                chartType === 'selers' ? (item.source === seller && elements.push(item.amount)) : (item.destination === buyer && elements.push(item.amount));
             }
         });
         elements.forEach(() => {
