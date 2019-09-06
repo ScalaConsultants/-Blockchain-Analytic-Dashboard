@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import blocks from "./blocks";
+import blocks from "./transactions";
+import page from "./page";
 
 export default combineReducers({
-  blocks
+  blocks,
+  page
 });
