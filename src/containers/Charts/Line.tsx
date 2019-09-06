@@ -168,74 +168,72 @@ const LineCharts = (): React.ReactElement => {
     }
 
     return (
-        <>
-            <div>
-                <div style={{ marginBottom: "30px", marginTop: "30px" }}>
-                    <TextField
-                        id="date"
-                        label="Select date"
-                        type="date"
-                        name="dateFrom"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                            e.persist();
-                            setTimeout(() => triggerSetDateFrom(e), 100);
-                        }}
-                        defaultValue={getSelectedDate(0)}
-                        style={{ width: "30%" }}
-                    />
+        <div>
+            <div style={{ marginBottom: "30px", marginTop: "30px" }}>
+                <TextField
+                    id="date"
+                    label="Select date"
+                    type="date"
+                    name="dateFrom"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                        e.persist();
+                        setTimeout(() => triggerSetDateFrom(e), 100);
+                    }}
+                    defaultValue={getSelectedDate(0)}
+                    style={{ width: "30%" }}
+                />
+                <FormControlField
+                    value={select}
+                    onChange={(e: any) => {
+                        e.persist();
+                        setTimeout(() => handleChartChange(e), 100);
+                    }}
+                    items={renderSelectChart}
+                    firstItemValue={'buyers'}
+                    firstItemName={'Buyers'}
+                    inputLabel={'Select buyers'}
+
+                />
+                {config.chartType == 'buyers' ?
                     <FormControlField
-                        value={select}
+                        value={buyer}
                         onChange={(e: any) => {
-                            e.persist();
-                            setTimeout(() => handleChartChange(e), 100);
+                            handleBuyerChange(e);
                         }}
-                        items={renderSelectChart}
-                        firstItemValue={'buyers'}
+                        items={renderBuyers}
+                        firstItemValue={'buyer'}
                         firstItemName={'Buyers'}
                         inputLabel={'Select buyers'}
 
                     />
-                    {config.chartType == 'buyers' ?
-                        <FormControlField
-                            value={buyer}
-                            onChange={(e: any) => {
-                                handleBuyerChange(e);
-                            }}
-                            items={renderBuyers}
-                            firstItemValue={'buyer'}
-                            firstItemName={'Buyers'}
-                            inputLabel={'Select buyers'}
-
-                        />
-                        :
-                        <FormControlField
-                            value={seller}
-                            onChange={(e: any) => {
-                                handleSellerChange(e);
-                            }}
-                            items={renderSellers}
-                            firstItemValue={'seler'}
-                            firstItemName={'Sellers'}
-                            inputLabel={'Select sellers'}
-                        />
-                    }
-                    <Button variant="contained" color="secondary" onClick={(): void => {
-                        setTimeout(() => submitChart(), 100);
-                    }} style={{ marginLeft: 20, marginTop: 10 }}>
-                        Submit
+                    :
+                    <FormControlField
+                        value={seller}
+                        onChange={(e: any) => {
+                            handleSellerChange(e);
+                        }}
+                        items={renderSellers}
+                        firstItemValue={'seler'}
+                        firstItemName={'Sellers'}
+                        inputLabel={'Select sellers'}
+                    />
+                }
+                <Button variant="contained" color="secondary" onClick={(): void => {
+                    setTimeout(() => submitChart(), 100);
+                }} style={{ marginLeft: 20, marginTop: 10 }}>
+                    Submit
                     </Button>
-                </div>
-                <h1 style={{ textAlign: "center" }}>{config.title}</h1>
-                <LineChart
-                    data={chartLineData}
-                    width={100}
-                    height={100}
-                    options={{
-                        maintainAspectRatio: false
-                    }}
-                />
             </div>
-        </>
+            <h1 style={{ textAlign: "center" }}>{config.title}</h1>
+            <LineChart
+                data={chartLineData}
+                width={100}
+                height={100}
+                options={{
+                    maintainAspectRatio: false
+                }}
+            />
+        </div>
     );
 };
 
