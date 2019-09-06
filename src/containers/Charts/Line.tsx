@@ -13,7 +13,8 @@ import { LOADER_STATE } from '../../store/actions/loader';
 import { Blockchain, Block, State } from "../../types";
 import {
     convertTimeStamp,
-    getSelectedDate
+    getSelectedDate,
+    convertTimeStampToHours
 } from "./helpers";
 
 const mapState = (state: State): Blockchain => ({
@@ -54,10 +55,8 @@ const LineCharts = (): React.ReactElement => {
 
             if (timeStampConverted === dateFrom) {
                 chartType === 'selers' ? (item.source === seller && elements.push(item.amount)) : (item.destination === buyer && elements.push(item.amount));
+                labels.push(convertTimeStampToHours(item.timestamp));
             }
-        });
-        elements.forEach(() => {
-            labels.push(dateFrom);
         });
 
         setLabel(labels.slice(0, 100));
