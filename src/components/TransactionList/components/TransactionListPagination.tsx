@@ -73,6 +73,7 @@ const TransactionListPagination = (props: TablePaginationActionsProps) => {
                 {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
             </IconButton>
         </div>
+
     );
 }
 

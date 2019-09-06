@@ -12,6 +12,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 
 import TransactionListPagination from './components/TransactionListPagination';
 import TransactionListFilter from './components/TransactionListFilter';
+import DetailsModal from "./components/DetailsModal";
 import { stableSort, getSorting } from "../../helpers/helpers";
 import * as BlokchainActions from "../../store/actions/tezos/blokchain";
 
@@ -30,7 +31,6 @@ const headerCols: Array<HeaderColsInterface> = [
     { id: "counter", numeric: false, disablePadding: false, label: "Counter" },
     { id: "fee", numeric: false, disablePadding: false, label: "Fee" },
     { id: "block_level", numeric: false, disablePadding: false, label: "Block level" }
-
 ];
 
 const filtersName: Array<HeaderColsInterface> = [
@@ -48,12 +48,13 @@ const mapState = (state: any) => ({
 });
 
 let initState: any[] = [];
-let filtersOptions: {[key: string]: string} = {};
+let filtersOptions: { [key: string]: string } = {};
 
 const TransactionList = (): React.ReactElement => {
+    const dispatch = useDispatch();
     const { blokchain } = useMappedState(mapState);
     if (initState.length === 0) {
-        initState = [ ...blokchain ];
+        initState = [...blokchain];
     }
 
     const [order, setOrder] = useState<Order>("asc");
@@ -77,10 +78,7 @@ const TransactionList = (): React.ReactElement => {
         ActionsComponent: TransactionListPagination
     }
 
-    let filteredTable:any = null;
-
-    const dispatch = useDispatch();
-
+    let filteredTable: any = null;
 
     function handleChangePage(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
@@ -105,9 +103,7 @@ const TransactionList = (): React.ReactElement => {
         setOrderBy(property);
     };
 
-    const createSortHandler = (property: any) => (event: any) => {
-        handleRequestSort(event, property);
-    };
+    const createSortHandler = (property: any) => (event: any) => handleRequestSort(event, property);
 
     const timestampToDate = (timestamp: number) => {
         const newDate = new Date(timestamp);
@@ -162,10 +158,8 @@ const TransactionList = (): React.ReactElement => {
             blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
             getSorting(order, orderBy)
         ).map((row: any, index: number) => (
-            <TableRow hover key={index}>
-                <TableCell component="th" scope="row">
-                    {timestampToDate(row.timestamp)}
-                </TableCell>
+            <TableRow onClick={() => handleClickOpen(row)} hover key={'Transaction' + index}>
+                <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
                 <TableCell>{row.source}</TableCell>
                 <TableCell>{row.destination}</TableCell>
                 <TableCell>{row.amount}</TableCell>
@@ -177,19 +171,17 @@ const TransactionList = (): React.ReactElement => {
 
     const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
         filtersName.map((row: HeaderColsInterface) => (
-            <TableCell>
-                <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id}/>
-            </TableCell>
+            <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id}/>
         ))
 
-    const filteredValue = (filtersOptions: {[key: string]: string}) => {
+    const filteredValue = (filtersOptions: { [key: string]: string }) => {
         let filteredBlokchain = [...initState];
 
         for (let key in filtersOptions) {
 
             if (key === 'amountMin') {
                 filteredBlokchain = filteredBlokchain
-                    .filter((block: any) =>  filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
+                    .filter((block: any) => filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
             }
 
             if (key === 'amountMax') {
@@ -214,19 +206,29 @@ const TransactionList = (): React.ReactElement => {
     const filterHandler = (query: string, inputName: string) => {
         filtersOptions[inputName] = query;
         filteredTable = filteredValue(filtersOptions);
-       return updateFilteredTransactions(filteredTable);
+        return updateFilteredTransactions(filteredTable);
     }
 
-    const updateFilteredTransactions = (filteredTable:any): void => {
+    const updateFilteredTransactions = (filteredTable: any): void => {
         dispatch({
             type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
             blokchain: filteredTable
         });
-      };
+    };
 
     const filteredUpdateMessage = () => {
         return <p>Find <strong>{blokchain.length}</strong> results</p>
     }
+
+    const [open, setOpen] = React.useState(false);
+    const [selectedRow, setSelectedRow] = React.useState({});
+
+    const handleClickOpen = (data: Object) => {
+        setSelectedRow(data);
+        setOpen(true);
+    }
+
+    const handleClose = () => setOpen(false);
 
     return (
         <Grid container spacing={9} className="Container">
@@ -237,22 +239,17 @@ const TransactionList = (): React.ReactElement => {
                     <TableHead>
                         <TableRow>
                             {transactionListHeaderGenerate(headerCols)}
-                            <TableCell />
-                            <TableCell />
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {transactionListRowsGenerate(blokchain)}
                     </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TransactionListPagination
-                                {...tablePaginationProps}
-                            />
-                        </TableRow>
-                    </TableFooter>
                 </Table>
+                <TransactionListPagination
+                    {...tablePaginationProps}
+                />
             </Grid>
+            <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
         </Grid>
     );
 };
