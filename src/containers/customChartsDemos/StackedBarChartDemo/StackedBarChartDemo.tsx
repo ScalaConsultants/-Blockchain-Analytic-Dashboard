@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMappedState } from 'redux-react-hook';
 import StackedBarChart from '../../../components/customCharts/StackedBarChart';
+import SimpleHorizontalBarChart from '../../../components/customCharts/SimpleHorizontalBarChart';
 
 const mapState = (state: any): any => ({
   blokchain: state.tezos.blocks
@@ -40,6 +41,15 @@ function SimpleBarChartDemo(): React.ReactElement {
         data={totalWalletsAmounts('destination').sort((a: any, b: any) => b.value - a.value)}
       />
       <p>(grey area are values that are less then 0.1% of total)</p>
+
+      <h2>Total transactions values</h2>
+      <SimpleHorizontalBarChart
+        data={[
+          {name: 'Buying', value: totalWalletsAmounts('source').reduce((acc: any, next: any) => acc + next.value, 0)},
+          {name: 'Selling', value: totalWalletsAmounts('destination').reduce((acc: any, next: any) => acc + next.value, 0)},
+        ]}
+      />
+      <p>Value in USD divided by 1000000000</p>
     </>
   );
 }
