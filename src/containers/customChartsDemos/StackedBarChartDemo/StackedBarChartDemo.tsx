@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMappedState } from "redux-react-hook";
+import React from 'react';
+import { useMappedState } from 'redux-react-hook';
 import StackedBarChart from '../../../components/customCharts/StackedBarChart';
 
 const mapState = (state: any): any => ({
@@ -8,8 +8,6 @@ const mapState = (state: any): any => ({
 
 function SimpleBarChartDemo(): React.ReactElement {
   const { blokchain } = useMappedState(mapState);
-
-  // const [groupingKey, setGroupingKey] = useState('source');
 
   if (!blokchain.length) return <div />;
   const totalWalletsAmounts = (groupingKey: string) => blokchain.reduce((acc: any, next: any): any => {
@@ -29,17 +27,15 @@ function SimpleBarChartDemo(): React.ReactElement {
   return (
     <>
       <h1 style={{ marginBottom: 60 }}>Stacked bar chart demo</h1>
-      {/*<p>group by</p>*/}
-      {/*<button onClick={() => setGroupingKey(groupingKey === 'source' ? 'destination' : 'source')}>*/}
-      {/*  {groupingKey}*/}
-      {/*</button>*/}
-      <h2>Wallets by total transactions values</h2>
 
-      <h4>Buying transactions</h4>
+      <h2>Top buyers and sellers</h2>
+      <h3>Wallets by total transactions values and its relation to the entire downloaded range</h3>
+
+      <h4 style={{ marginBottom: 12 }}>Buying transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('source').sort((a: any, b: any) => b.value - a.value)}
       />
-      <h4>Selling transactions</h4>
+      <h4 style={{ marginBottom: 12 }}>Selling transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('destination').sort((a: any, b: any) => b.value - a.value)}
       />

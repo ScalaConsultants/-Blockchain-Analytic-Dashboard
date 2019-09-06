@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
-  getClickPosition,
-  drawLine,
   setFontStyle,
 } from './helpers';
 
@@ -20,7 +18,7 @@ const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 const SimpleBarChart = ({
   data,
   width = 1200,
-  height = 60,
+  height = 80,
   barHeight = 60,
 }: Props) => {
   const canvasRef = useRef(null);
@@ -31,20 +29,25 @@ const SimpleBarChart = ({
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = 'rgb(237,237,237)';
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 20, width, height);
       setFontStyle(ctx, 12, CHART_DETAILS_COLOR, 'Arial');
-
+      ctx.fillText('0%', 0, 10);
+      ctx.fillText('100%', width - 30, 10);
       const objects = data.map((item, index) => ({
         width: width * (item.value * 100 / totalDataValues) / 100,
-        // color: `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`
-        color: index % 2 === 0 ? 'rgb(83,131,185)' : 'rgb(134,180,233)',
+        value: item.value * 100 / totalDataValues,
+        color: index % 2 === 0 ? 'rgb(79,125,176)' : 'rgb(130,175,226)',
         isOthers: (item.value * 100 / totalDataValues) < 0.1
       }));
 
       objects.reduce((acc, object) => {
         ctx.fillStyle = object.color;
         if (!object.isOthers) {
-          ctx.fillRect(acc, 0, object.width, barHeight);
+          ctx.fillRect(acc, 20, object.width, barHeight);
+          if (object.width > 30) {
+            setFontStyle(ctx, 16, 'rgb(255,255,255)', 'Arial');
+            ctx.fillText(`${Math.floor(object.value)}%`, acc - 10 + object.width / 2, 55);
+          }
         }
         return acc + object.width;
       }, 0);
@@ -65,7 +68,6 @@ const SimpleBarChart = ({
         style={{
           width: width,
           height: height,
-          border: '1px solid black',
         }}
         ref={canvasRef}
       >
