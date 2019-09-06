@@ -105,8 +105,6 @@ const TransactionList = (): React.ReactElement => {
         ActionsComponent: TransactionListPagination
     }
 
-    const createSortHandler = (property: any) => (event: any) => handleRequestSort(event, property);
-
     const timestampToDate = (timestamp: number) => {
         const newDate = new Date(timestamp);
         const formattedDate =
@@ -146,7 +144,7 @@ const TransactionList = (): React.ReactElement => {
                     <TableSortLabel
                         active={orderBy === row.id}
                         direction={order}
-                        onClick={createSortHandler(row.id)}
+                        onClick={e => handleRequestSort(e, row.id)}
                     >
                         {row.label}
                     </TableSortLabel>
