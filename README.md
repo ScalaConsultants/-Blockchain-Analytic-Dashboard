@@ -20,4 +20,20 @@ Launches the test runner in the interactive watch mode.<br>
 
 Builds the app for production to the `build` folder.<br>
 
+## E2E Testing
+
+In the project folder e2e, you can run:
+
+### `yarn open`
+
+Opens the Cypress Test Runner in interactive mode.
+
+### `yarn test`
+
+Runs Cypress tests to completion. By default will run all tests headlessly in the Electron browser.
+
+### `yarn update`
+
+Update packages to the latest version.
+
 

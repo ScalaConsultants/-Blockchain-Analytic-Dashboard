@@ -1,0 +1,17 @@
+{
+  "name": "gv-e2e-cypress-ts",
+  "version": "0.0.1",
+  "description": "cypress + typescript",
+  "license": "MIT",
+  "scripts": {
+    "open": "cypress open",
+    "test": "cypress run",
+    "update": "yarn add cypress@latest typescript@latest webpack@latest @bahmutov/add-typescript-to-cypress@latest -D -E"
+  },
+  "devDependencies": {
+    "@bahmutov/add-typescript-to-cypress": "2.1.2",
+    "cypress": "3.4.1",
+    "typescript": "3.6.2",
+    "webpack": "4.39.3"
+  }
+}
