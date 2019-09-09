@@ -53,7 +53,7 @@ const Charts = (): React.ReactElement => {
 
     dateArray.forEach((dateStamp: string): void => {
       let elements = 0;
-      let tempArray: number[] = [];
+      const tempArray: number[] = [];
       let previousEl = 0;
       blokchain.forEach((item: Block): void => {
         const timeStampConverted: string = convertTimeStamp(item.timestamp);

@@ -10,7 +10,7 @@ import CustomChartDemo from '../containers/CustomChartDemo/CustomChartDemo';
 import {Container} from '@material-ui/core';
 
 export default (): React.ReactElement => {
-  let routes = (
+  const routes = (
     <Container>
       <Route exact path="/" component={Home} />
       <Route exact path="/transactions" component={Transactions} />

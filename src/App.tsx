@@ -21,7 +21,7 @@ const App = (): React.ReactElement => {
   const {blokchain, loader} = useMappedState(mapState);
 
   const dispatch = useDispatch();
-  let dep = 0;
+  const dep = 0;
   useEffect((): void => {
     // Fetch initial blockchain e.g. 50k
     if (blokchain.length) return;

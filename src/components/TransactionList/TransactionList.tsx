@@ -48,7 +48,7 @@ const mapState = (state: any) => ({
 });
 
 let initState: any[] = [];
-let filtersOptions: { [key: string]: string } = {};
+const filtersOptions: { [key: string]: string } = {};
 
 const TransactionList = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -158,7 +158,7 @@ const TransactionList = (): React.ReactElement => {
   const filteredValue = (filtersOptions: { [key: string]: string }) => {
     let filteredBlokchain = [...initState];
 
-    for (let key in filtersOptions) {
+    for (const key in filtersOptions) {
 
       if (key === 'amountMin') {
         filteredBlokchain = filteredBlokchain

@@ -15,8 +15,8 @@ export const getSorting = (order: any, orderBy: any) => {
 export const desc = (a: any, b: any, orderBy: any) => {
   if(!b[orderBy] || !a[orderBy]) return 0;
 
-  let aVal = typeof(a[orderBy]) === 'string' ? a[orderBy].toLowerCase() : a[orderBy];
-  let bVal = typeof(b[orderBy]) === 'string' ? b[orderBy].toLowerCase() : b[orderBy];
+  const aVal = typeof(a[orderBy]) === 'string' ? a[orderBy].toLowerCase() : a[orderBy];
+  const bVal = typeof(b[orderBy]) === 'string' ? b[orderBy].toLowerCase() : b[orderBy];
 
   if ( bVal < aVal) {
     return -1;

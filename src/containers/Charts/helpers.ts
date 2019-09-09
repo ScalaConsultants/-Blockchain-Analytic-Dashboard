@@ -85,10 +85,10 @@ export const convertDateArray = (
   dateFrom: string,
   dateTo: string
 ): string[] => {
-  let listDate = [];
-  let startDate = dateFrom.toString();
-  let endDate = dateTo.toString();
-  let dateMove = new Date(startDate);
+  const listDate = [];
+  const startDate = dateFrom.toString();
+  const endDate = dateTo.toString();
+  const dateMove = new Date(startDate);
   let strDate = startDate;
 
   while (strDate < endDate) {
