@@ -1,4 +1,4 @@
-import { getClickPosition } from "./helpers";
+import getClickPosition from "./helpers";
 
 describe("CustomColumnChart helpers", () => {
 

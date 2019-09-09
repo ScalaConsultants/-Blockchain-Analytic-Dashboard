@@ -2,7 +2,7 @@ import {Block} from '../../../types';
 
 // Loops through an entire array of transactions and sums them up
 // by owner
-export function sumTransactions(blocks: Block[]): any[] {
+function sumTransactions(blocks: Block[]): any[] {
   const blocksArr = blocks.reduce((acc: any, next: any): any => {
     const foundIndex = acc.findIndex((a: any): any => a.source === next.source);
     if (foundIndex !== -1) {
@@ -19,3 +19,5 @@ export function sumTransactions(blocks: Block[]): any[] {
     (a: any, b: any): number => b.transactions - a.transactions
   );
 }
+
+export default sumTransactions;

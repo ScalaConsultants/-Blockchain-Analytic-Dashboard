@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import {getClickPosition} from './helpers';
+import getClickPosition from './helpers';
 
 interface Props {
   chartData: any[];

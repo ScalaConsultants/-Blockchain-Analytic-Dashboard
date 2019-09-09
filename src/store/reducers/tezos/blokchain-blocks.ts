@@ -8,7 +8,7 @@ import {Block} from '../../../types';
 
 const initState: Block[] = [];
 
-export const blocks = (state = initState, action: any): Block[] => {
+const blocks = (state = initState, action: any): Block[] => {
     switch (action.type) {
         case BLOKCHAIN_FLUSH_TRANSACTIONS:
             return initState;
@@ -22,3 +22,5 @@ export const blocks = (state = initState, action: any): Block[] => {
             return state;
     }
 };
+
+export default blocks;
