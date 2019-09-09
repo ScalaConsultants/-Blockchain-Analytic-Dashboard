@@ -21,6 +21,8 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     { name: 'Top buyer', route: '/top-buyer' },
     { name: 'Treemap', route: '/treemap' },
     { name: 'Custom chart', route: '/top-buyer-with-custom' },
+    { name: 'Line chart', route: '/line-chart' },
+
   ];
 
   const goTo = (route: string): void => {
