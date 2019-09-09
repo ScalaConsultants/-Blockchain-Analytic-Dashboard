@@ -27,8 +27,8 @@ describe('MenuAppBar', () => {
   it('should render with one ButtonAppBar element', () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={[ {pathname: '/', key: 'testKey'} ]}>
-      <ButtonAppBar {...props}/>
-    </MemoryRouter>
+        <ButtonAppBar {...props}/>
+      </MemoryRouter>
     );
     expect(wrapper.find(ButtonAppBar)).toHaveLength(1);
   });
