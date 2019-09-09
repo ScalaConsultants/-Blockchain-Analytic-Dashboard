@@ -18,9 +18,10 @@ import {
   convertDateArray,
   getSelectedDate
 } from "./helpers";
+import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
 
 const mapState = (state: State): Blockchain => ({
-  blokchain: state.tezos.blocks
+  blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
 const Charts = (): React.ReactElement => {

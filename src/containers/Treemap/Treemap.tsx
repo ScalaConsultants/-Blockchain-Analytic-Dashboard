@@ -2,18 +2,27 @@
 /* eslint-disable react/react-in-jsx-scope */
 // @ts-ignore
 import { ResponsiveTreeMap } from "@nivo/treemap";
-import React, { Component } from "react";
-import * as BlokchainActions from "../../store/actions/tezos/blokchain";
+import React from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
+import {
+  getSummedBlockchainByDatasource,
+  getBlockchainByDatasource
+} from "../../store/reducers/dataSource";
+import { sumTransactionsByDatasource } from "../../store/actions/dataSource";
+import { showLoader } from "../../store/actions/loader";
 
-const mapState = (state: any) => ({
-  summedBlocks: state.tezos.summedBlocks,
-  blocks: state.tezos.blocks
+const mapState = (state: any): any => ({
+  summedBlocks: getSummedBlockchainByDatasource(state, state.dataSource),
+  blocks: getBlockchainByDatasource(state, state.dataSource),
+  source: state.dataSource,
+  isLoading: state.loader > 0
 });
 
-const Treemap = () => {
-  const { summedBlocks, blocks } = useMappedState(mapState);
+const Treemap = (): React.ReactElement => {
+  const { summedBlocks, blocks, source, isLoading } = useMappedState(mapState);
   const dispatch = useDispatch();
+
+  if (isLoading) return <div />;
 
   const test = summedBlocks.slice(0, 80).map((item: any) => ({
     name: item.source.substring(0, 8),
@@ -24,13 +33,8 @@ const Treemap = () => {
     children: [...test]
   };
 
-  const sumBlocksByOwner = () => {
-    dispatch({
-      type: BlokchainActions.BLOKCHAIN_SUM_TRANSACTIONS,
-      payload: {
-        blocks
-      }
-    });
+  const sumBlocksByOwner = (): void => {
+    dispatch(sumTransactionsByDatasource(blocks, source));
   };
 
   if (!blocks.length) {

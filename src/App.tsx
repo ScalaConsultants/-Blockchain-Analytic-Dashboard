@@ -7,11 +7,13 @@ import * as EthereumActions from "./store/actions/ethereum/transactions";
 import { useDispatch, useMappedState } from "redux-react-hook";
 import "./App.css";
 import Loader from "./components/loader/Loader";
+import { getBlockchainByDatasource } from "./store/reducers/dataSource";
+import { State } from "./types";
 
 const fetchMoreIntervalSeconds = 10;
 
-const mapState = (state: any) => ({
-  blokchain: state.tezos.blocks,
+const mapState = (state: State) => ({
+  blokchain: getBlockchainByDatasource(state, state.dataSource),
   loader: state.loader > 0
 });
 

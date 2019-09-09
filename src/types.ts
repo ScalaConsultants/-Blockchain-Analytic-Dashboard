@@ -25,7 +25,15 @@ export interface Blockchain {
 export interface State {
   tezos: {
     blocks: Block[];
+    summedBlocks: any[];
   };
+  ethereum: {
+    blocks: Block[];
+    summedBlocks: any[];
+    page: number;
+  };
+  loader: number;
+  dataSource: string;
 }
 
 export interface EventTarget {
@@ -46,4 +54,9 @@ export interface ActionType {
 
 export interface FetchTransactionsAction extends ActionType {
   transactions: Block[];
+}
+
+export interface DataSourceActionType extends ActionType {
+  type: string;
+  source: string;
 }
