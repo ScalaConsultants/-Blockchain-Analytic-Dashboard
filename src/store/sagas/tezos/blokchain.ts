@@ -10,7 +10,7 @@ import apiConfig from "./api-config";
 import * as blokchainActions from "../../actions/tezos/blokchain";
 import * as loaderActions from "../../actions/loader";
 
-const initialFetchAmount = 100000;
+const initialFetchAmount = 40000;
 
 const fetchTransactionsRequest = async (): Promise<any> => {
   console.log("fetching from Conseil API");
