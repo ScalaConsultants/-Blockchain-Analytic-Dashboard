@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
-import {useMappedState, useDispatch} from 'redux-react-hook';
-import Box from '@material-ui/core/Box';
-import LiveChartBubble from '../../components/LiveChart/LiveChartBubble';
-import DatePicker from '../../components/DatePicker/DatePicker';
-import * as BlokchainActions from '../../store/actions/tezos/blokchain';
-import {colors} from '../../helpers/colors';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useEffect } from "react";
+import { useMappedState, useDispatch } from "redux-react-hook";
+import Box from "@material-ui/core/Box";
+import LiveChartBubble from "../../components/LiveChart/LiveChartBubble";
+import DatePicker from "../../components/DatePicker/DatePicker";
+import { colors } from "../../helpers/colors";
+import "react-datepicker/dist/react-datepicker.css";
+import {
+  getBlockchainByDatasource,
+  getSummedBlockchainByDatasource
+} from "../../store/reducers/dataSource";
+import { sumTransactionsByDatasource } from "../../store/actions/dataSource";
 
 const MIN_SIZE = 70; //px;
 const MAX_SIZE = 300; //px;
@@ -18,43 +22,24 @@ function calculateSize(max: number, transactions: number): number {
 }
 
 const mapState = (state: any): any => ({
-  summedBlocks: state.tezos.summedBlocks,
-  blocks: state.tezos.blocks
+  summedBlocks: getSummedBlockchainByDatasource(state, state.dataSource),
+  blocks: getBlockchainByDatasource(state, state.dataSource),
+  dataSource: state.dataSource
 });
 
 function LiveChart(): React.ReactElement {
-  const {summedBlocks, blocks} = useMappedState(mapState);
+  const { summedBlocks, blocks, dataSource } = useMappedState(mapState);
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date()
   );
-  const [showLoader, setShowLoader] = React.useState(true);
   const dispatch = useDispatch();
-
-  const setLoaderFalse = (): void => {
-    dispatch({
-      type: 'LOADER_STATE',
-      show: false
-    });
-  };
-
-  const setLoaderTrue = (): void => {
-    dispatch({
-      type: 'LOADER_STATE',
-      show: true
-    });
-  };
 
   const handleDateChange = (date: Date | null): void => {
     setSelectedDate(date);
   };
 
   const sumBlocksByOwner = (): void => {
-    dispatch({
-      type: BlokchainActions.BLOKCHAIN_SUM_TRANSACTIONS,
-      payload: {
-        blocks
-      }
-    });
+    dispatch(sumTransactionsByDatasource(blocks, dataSource));
   };
 
   if (!blocks.length) {
