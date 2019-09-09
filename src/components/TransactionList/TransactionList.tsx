@@ -93,8 +93,8 @@ const TransactionList = (): React.ReactElement => {
     rowsPerPageOptions: [15, 25, 50, 100, 250],
     colSpan: 3,
     count: blokchain.length,
-    rowsPerPage: rowsPerPage,
-    page: page,
+    rowsPerPage,
+    page,
     SelectProps: {
       inputProps: {'aria-label': 'rows per page'},
       native: true

@@ -107,8 +107,8 @@ const CustomColumnChart = ({
         width={width}
         height={height}
         style={{
-          width: width,
-          height: height,
+          width,
+          height,
           marginBottom: 10
         }}
         ref={canvasRef}
