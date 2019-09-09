@@ -198,8 +198,13 @@ const TransactionList = (): React.ReactElement => {
   };
 
   const filteredUpdateMessage = () => {
-    return <p>Find <strong>{blokchain.length}</strong> results</p>;
-  };
+    return (
+      <p>
+      Find
+        <strong>{blokchain.length}</strong>
+      results
+      </p>
+    )};
 
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState({});

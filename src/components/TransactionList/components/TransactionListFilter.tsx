@@ -13,7 +13,8 @@ const TransactionListFilter = (props: any) => {
   };
 
   return (
-    <label style={styleLabel} htmlFor={props.name}>{props.name}
+    <label style={styleLabel} htmlFor={props.name}>
+      {props.name}
       <input
         style={styleInput}
         type="text"
