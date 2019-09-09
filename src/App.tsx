@@ -3,15 +3,18 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./router/routes";
 import MenuAppBar from "./components/menuAppBar/MenuAppBar";
 import * as BlokchainActions from "./store/actions/tezos/blokchain";
+import * as EthereumActions from "./store/actions/ethereum/transactions";
 import { useDispatch, useMappedState } from "redux-react-hook";
 import "./App.css";
 import Loader from "./components/loader/Loader";
+import { getBlockchainByDatasource } from "./store/reducers/dataSource";
+import { State } from "./types";
 
 const fetchMoreIntervalSeconds = 10;
 
-const mapState = (state: any) => ({
-  blokchain: state.tezos.blocks,
-  loader: state.loader
+const mapState = (state: State) => ({
+  blokchain: getBlockchainByDatasource(state, state.dataSource),
+  loader: state.loader > 0
 });
 
 const App = (): React.ReactElement => {
@@ -36,7 +39,14 @@ const App = (): React.ReactElement => {
       });
     };
 
+    const fetchEthereumTransactions = (): void => {
+      dispatch({
+        type: EthereumActions.ETHEREUM_FETCH_TRANSACTIONS
+      });
+    };
+
     fetchTransactions();
+    fetchEthereumTransactions();
     // setInterval(fetchMoreTransactions, 1000 * fetchMoreIntervalSeconds);
   }, [dep]);
 

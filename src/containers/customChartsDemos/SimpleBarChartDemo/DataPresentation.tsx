@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import React, { useState } from 'react';
-import CustomColumnChart from '../../components/customCharts/CustomColumnChart';
+import SimpleBarChart from '../../../components/customCharts/SimpleBarChart';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +23,7 @@ const DataPresentation = ({
 
   return (
     <>
-      <CustomColumnChart
+      <SimpleBarChart
         chartData={dataForChart}
         recordSelectCallback={setSelectedRecordKey}
         selectedRecordKey={selectedRecordKey}
@@ -47,11 +47,6 @@ const DataPresentation = ({
                 <ListItem>
                   <h4 style={{ marginRight: 10 }}>source</h4>
                   {selectedRecord.source}
-                </ListItem>
-                <Divider light />
-                <ListItem>
-                  <h4 style={{ marginRight: 10 }}>transactions</h4>
-                  {selectedRecord.transactions}
                 </ListItem>
                 <Divider light />
                 <ListItem>

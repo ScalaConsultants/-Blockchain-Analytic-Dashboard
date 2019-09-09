@@ -10,7 +10,7 @@ import apiConfig from "./api-config";
 import * as blokchainActions from "../../actions/tezos/blokchain";
 import * as loaderActions from "../../actions/loader";
 
-const initialFetchAmount = 100000;
+const initialFetchAmount = 40000;
 
 const fetchTransactionsRequest = async (): Promise<any> => {
   console.log("fetching from Conseil API");
@@ -65,9 +65,9 @@ const fetchTransactionsRequest = async (): Promise<any> => {
 };
 
 export function* doFetchTransactions(): any {
-  yield put(loaderActions.LoaderState(true));
+  yield put(loaderActions.showLoader());
   const response = yield call(fetchTransactionsRequest);
-  yield put(loaderActions.LoaderState(false));
+  yield put(loaderActions.hideLoader());
   if (response) yield put(blokchainActions.BlokchainSetTransactions(response));
   else {
     yield put(blokchainActions.BlokchainSetTransactions([]));

@@ -6,6 +6,15 @@ export const convertTimeStampToHour = (date: number): number => {
   return formattedDate;
 };
 
+export const convertTimeStampToHours = (date: number): string => {
+  const newDate = new Date(date);
+  const hours = newDate.getHours();
+  const minutes = newDate.getMinutes();
+  const formattedDate = hours + ':' + minutes;
+
+  return formattedDate;
+};
+
 export const convertTimeStamp = (date: number): string => {
   const newDate = new Date(date);
   const formattedDate =

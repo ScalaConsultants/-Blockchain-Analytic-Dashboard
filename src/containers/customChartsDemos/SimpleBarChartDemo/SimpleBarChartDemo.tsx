@@ -2,12 +2,14 @@ import React from "react";
 import { useMappedState } from "redux-react-hook";
 import "react-datepicker/dist/react-datepicker.css";
 import DataPresentation from "./DataPresentation";
+import { State } from "../../../types";
+import { getBlockchainByDatasource } from "../../../store/reducers/dataSource";
 
-const mapState = (state: any): any => ({
-  blokchain: state.tezos.blocks
+const mapState = (state: State): any => ({
+  blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
-function CustomChartDemo(): React.ReactElement {
+function SimpleBarChartDemo(): React.ReactElement {
   const { blokchain } = useMappedState(mapState);
 
   if (!blokchain.length) return <div />;
@@ -44,4 +46,4 @@ function CustomChartDemo(): React.ReactElement {
   );
 }
 
-export default CustomChartDemo;
+export default SimpleBarChartDemo;

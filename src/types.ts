@@ -5,12 +5,12 @@ export interface Config {
 }
 
 export interface Block {
-  source: number;
+  source: string;
   timestamp: number;
   block_leve: number;
   amount: number;
   counter: number;
-  destination: number;
+  destination: string;
   fee: number;
 }
 
@@ -25,7 +25,15 @@ export interface Blockchain {
 export interface State {
   tezos: {
     blocks: Block[];
+    summedBlocks: any[];
   };
+  ethereum: {
+    blocks: Block[];
+    summedBlocks: any[];
+    page: number;
+  };
+  loader: number;
+  dataSource: string;
 }
 
 export interface EventTarget {
@@ -45,10 +53,10 @@ export interface ActionType {
 }
 
 export interface FetchTransactionsAction extends ActionType {
-  transactions: any[];
+  transactions: Block[];
 }
 
-export interface LoaderActionType extends ActionType {
+export interface DataSourceActionType extends ActionType {
   type: string;
-  show: boolean;
+  source: string;
 }
