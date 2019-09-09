@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useMappedState, useDispatch } from "redux-react-hook";
-import Box from "@material-ui/core/Box";
-import LiveChartBubble from "../../components/LiveChart/LiveChartBubble";
-import DatePicker from "../../components/DatePicker/DatePicker";
-import * as BlokchainActions from "../../store/actions/tezos/blokchain";
-import { colors } from "../../helpers/colors";
-import "react-datepicker/dist/react-datepicker.css";
+import React, {useEffect} from 'react';
+import {useMappedState, useDispatch} from 'redux-react-hook';
+import Box from '@material-ui/core/Box';
+import LiveChartBubble from '../../components/LiveChart/LiveChartBubble';
+import DatePicker from '../../components/DatePicker/DatePicker';
+import * as BlokchainActions from '../../store/actions/tezos/blokchain';
+import {colors} from '../../helpers/colors';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const MIN_SIZE = 70; //px;
 const MAX_SIZE = 300; //px;
@@ -23,7 +23,7 @@ const mapState = (state: any): any => ({
 });
 
 function LiveChart(): React.ReactElement {
-  const { summedBlocks, blocks } = useMappedState(mapState);
+  const {summedBlocks, blocks} = useMappedState(mapState);
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date()
   );
@@ -32,14 +32,14 @@ function LiveChart(): React.ReactElement {
 
   const setLoaderFalse = (): void => {
     dispatch({
-      type: "LOADER_STATE",
+      type: 'LOADER_STATE',
       show: false
     });
   };
 
   const setLoaderTrue = (): void => {
     dispatch({
-      type: "LOADER_STATE",
+      type: 'LOADER_STATE',
       show: true
     });
   };

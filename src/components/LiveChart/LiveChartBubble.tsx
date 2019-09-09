@@ -1,7 +1,7 @@
-import React from "react";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
+import React from 'react';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const LiveChartBubble = (props: any): React.ReactElement => {
   return (
@@ -13,7 +13,7 @@ const LiveChartBubble = (props: any): React.ReactElement => {
       alignItems="center"
       bgcolor="grey.300"
       style={{
-        borderRadius: "50%",
+        borderRadius: '50%',
         width: `${props.size}px`,
         height: `${props.size}px`,
         maxWidth: 300,

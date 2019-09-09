@@ -1,14 +1,14 @@
-import React from "react";
-import { useMappedState } from "redux-react-hook";
-import "react-datepicker/dist/react-datepicker.css";
-import DataPresentation from "./DataPresentation";
+import React from 'react';
+import {useMappedState} from 'redux-react-hook';
+import 'react-datepicker/dist/react-datepicker.css';
+import DataPresentation from './DataPresentation';
 
 const mapState = (state: any): any => ({
   blokchain: state.tezos.blocks
 });
 
 function CustomChartDemo(): React.ReactElement {
-  const { blokchain } = useMappedState(mapState);
+  const {blokchain} = useMappedState(mapState);
 
   if (!blokchain.length) return <div />;
 

@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
 // @ts-ignore
-import { ResponsiveTreeMap } from "@nivo/treemap";
-import React, { Component } from "react";
-import * as BlokchainActions from "../../store/actions/tezos/blokchain";
-import { useMappedState, useDispatch } from "redux-react-hook";
+import {ResponsiveTreeMap} from '@nivo/treemap';
+import React, {Component} from 'react';
+import * as BlokchainActions from '../../store/actions/tezos/blokchain';
+import {useMappedState, useDispatch} from 'redux-react-hook';
 
 const mapState = (state: any) => ({
   summedBlocks: state.tezos.summedBlocks,
@@ -12,7 +12,7 @@ const mapState = (state: any) => ({
 });
 
 const Treemap = () => {
-  const { summedBlocks, blocks } = useMappedState(mapState);
+  const {summedBlocks, blocks} = useMappedState(mapState);
   const dispatch = useDispatch();
 
   const test = summedBlocks.slice(0, 80).map((item: any) => ({
@@ -20,7 +20,7 @@ const Treemap = () => {
     loc: item.counter
   }));
   const root = {
-    name: "nivo",
+    name: 'nivo',
     children: [...test]
   };
 
@@ -44,7 +44,7 @@ const Treemap = () => {
 
   // console.log(summedBlocks);
   return (
-    <div style={{ height: "700px" }}>
+    <div style={{height: '700px'}}>
       <ResponsiveTreeMap
         root={root}
         identity="name"
@@ -52,11 +52,11 @@ const Treemap = () => {
         tile="binary"
         innerPadding={3}
         outerPadding={1}
-        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+        margin={{top: 10, right: 10, bottom: 10, left: 10}}
         label="name"
-        colors={{ scheme: "purple_red" }}
+        colors={{scheme: 'purple_red'}}
         borderWidth={3}
-        borderColor={{ from: "color", modifiers: [["brighter", "1.1"]] }}
+        borderColor={{from: 'color', modifiers: [['brighter', '1.1']]}}
         labelTextColor="#000000"
         labelSkipSize={25}
         animate={true}

@@ -1,34 +1,34 @@
-import React from "react";
+import React from 'react';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
-import Grid from "@material-ui/core/Grid/Grid";
+import Grid from '@material-ui/core/Grid/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 
-import { TransitionProps } from '@material-ui/core/transitions';
-import { makeStyles } from "@material-ui/core/styles";
+import {TransitionProps} from '@material-ui/core/transitions';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     dialogTitle: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         '& h2': {
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
         }
     },
     dialogAction: {
@@ -58,7 +58,7 @@ type Props = {
     data: any
 };
 
-const DetailsModal = ({ open, handleClose, data }: Props): React.ReactElement => {
+const DetailsModal = ({open, handleClose, data}: Props): React.ReactElement => {
     const classes = useStyles();
     return (
         <Dialog
@@ -70,7 +70,7 @@ const DetailsModal = ({ open, handleClose, data }: Props): React.ReactElement =>
             aria-describedby="alert-dialog-slide-description"
         >
             <DialogTitle className={classes.dialogTitle} onClick={handleClose}>
-                {"Transaction Details"}
+                {'Transaction Details'}
                 <IconButton onClick={handleClose} color="primary">
                     <CloseIcon />
                 </IconButton>

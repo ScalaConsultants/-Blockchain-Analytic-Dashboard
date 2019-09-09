@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
-import { Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState, useEffect, useRef, memo} from 'react';
+import {Paper} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import { getClickPosition } from './helpers';
+import {getClickPosition} from './helpers';
 
 interface Props {
   chartData: any[];
@@ -21,8 +21,8 @@ interface Props {
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1),
-    margin: theme.spacing(2, 0),
-  },
+    margin: theme.spacing(2, 0)
+  }
 }));
 
 const CHART_PADDING = 10;
@@ -49,7 +49,7 @@ const CustomColumnChart = ({
   barWidth = 30,
   spaceBetweenBars = 1,
   barColor = 'rgb(98,156,200)',
-  selectedBarColor = 'rgb(44,123,200)',
+  selectedBarColor = 'rgb(44,123,200)'
 }: Props) => {
   const canvasRef = useRef(null);
   const [scale, setScale] = useState(0.1);
@@ -83,7 +83,7 @@ const CustomColumnChart = ({
           width: barWidth,
           height: e.value * scale,
           value: e.value,
-          key: e.key,
+          key: e.key
         };
         if (element.x < width - CHART_PADDING) {
           ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
@@ -109,7 +109,7 @@ const CustomColumnChart = ({
         style={{
           width: width,
           height: height,
-          marginBottom: 10,
+          marginBottom: 10
         }}
         ref={canvasRef}
         onClick={(e) => handleElementClick(recordSelectCallback, canvasObjects, getClickPosition(e, canvasRef.current))}

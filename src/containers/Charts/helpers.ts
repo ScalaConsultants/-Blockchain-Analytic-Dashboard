@@ -1,4 +1,4 @@
-import { Config, Block } from "../../types";
+import {Config, Block} from '../../types';
 
 export const convertTimeStampToHour = (date: number): number => {
   const newDate = new Date(date);
@@ -9,33 +9,33 @@ export const convertTimeStampToHour = (date: number): number => {
 export const convertTimeStamp = (date: number): string => {
   const newDate = new Date(date);
   const formattedDate =
-    ("0" + newDate.getDate()).slice(-2) +
-    "-" +
-    ("0" + (newDate.getMonth() + 1)).slice(-2) +
-    "-" +
+    ('0' + newDate.getDate()).slice(-2) +
+    '-' +
+    ('0' + (newDate.getMonth() + 1)).slice(-2) +
+    '-' +
     newDate.getFullYear();
 
   return formattedDate
-    .split("-")
+    .split('-')
     .reverse()
-    .join("-");
+    .join('-');
 };
 
 export const getDayTime = (hour: number): string => {
   if (hour >= 6 && hour <= 12) {
-    return "morning";
+    return 'morning';
   }
   if (hour > 12 && hour <= 18) {
-    return "afternoon";
+    return 'afternoon';
   }
   if (hour > 18 && hour <= 23) {
-    return "evening";
+    return 'evening';
   }
   if (hour >= 0 && hour < 6) {
-    return "night";
+    return 'night';
   }
 
-  return "";
+  return '';
 };
 
 export const selectWhichDayTime = (
@@ -45,30 +45,30 @@ export const selectWhichDayTime = (
   config: Config
 ): number[] => {
   switch (dayTime) {
-    case "morning":
-      if (config.chartType === "currency") {
+    case 'morning':
+      if (config.chartType === 'currency') {
         array[0] += item.amount;
       } else {
         array[0]++;
       }
       break;
-    case "night":
-      if (config.chartType === "currency") {
+    case 'night':
+      if (config.chartType === 'currency') {
         array[1] += item.amount;
       } else {
         array[1]++;
       }
       break;
-    case "evening":
-      if (config.chartType === "currency") {
+    case 'evening':
+      if (config.chartType === 'currency') {
         array[2] += item.amount;
       } else {
         array[2]++;
       }
 
       break;
-    case "afternoon":
-      if (config.chartType === "currency") {
+    case 'afternoon':
+      if (config.chartType === 'currency') {
         array[3] += item.amount;
       } else {
         array[3]++;

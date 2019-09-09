@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const Home = (): React.ReactElement => {
   return (
     <div
       style={{
-        textAlign: "center"
+        textAlign: 'center'
       }}
     >
       <h1>Blockchain Analytic Dashboard</h1>
