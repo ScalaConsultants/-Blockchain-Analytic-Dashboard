@@ -8,22 +8,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
+import { menuItems } from "../../constant";
 
 import "./style.css";
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const menuItems = [
-    { name: 'Home', route: '/' },
-    { name: 'Transactions', route: '/transactions' },
-    { name: 'Charts', route: '/charts' },
-    { name: 'Top seller', route: '/top-seller' },
-    { name: 'Top buyer', route: '/top-buyer' },
-    { name: 'Treemap', route: '/treemap' },
-    { name: 'Line chart', route: '/line-chart' },
-    { name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo' },
-    { name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo' },
-  ];
+  const menuList: any = menuItems;
 
   const goTo = (route: string): void => {
     handleClose();
@@ -62,7 +53,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {menuItems.map((item, key) => {
+          {menuList.map((item: any, key: string) => {
             return (
               <MenuItem onClick={() => goTo(item.route)} key={key}>
                 {item.name}
