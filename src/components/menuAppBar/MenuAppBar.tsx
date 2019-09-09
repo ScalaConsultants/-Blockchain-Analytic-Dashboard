@@ -7,11 +7,12 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
+
 import "./style.css";
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState(null);
-
   const menuItems = [
     { name: 'Home', route: '/' },
     { name: 'Transactions', route: '/transactions' },
@@ -19,6 +20,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     { name: 'Top seller', route: '/top-seller' },
     { name: 'Top buyer', route: '/top-buyer' },
     { name: 'Treemap', route: '/treemap' },
+    { name: 'Line chart', route: '/line-chart' },
     { name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo' },
     { name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo' },
   ];
@@ -51,6 +53,9 @@ const ButtonAppBar = (props: any): React.ReactElement => {
         <Button color="inherit" onClick={() => goTo("/")}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
+        <div style={{marginLeft: "1rem"}}>
+          <BlockchainSwitch />
+        </div>
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}

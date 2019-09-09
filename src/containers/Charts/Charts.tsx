@@ -18,9 +18,10 @@ import {
   convertDateArray,
   getSelectedDate
 } from "./helpers";
+import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
 
 const mapState = (state: State): Blockchain => ({
-  blokchain: state.tezos.blocks
+  blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
 const Charts = (): React.ReactElement => {
@@ -52,8 +53,8 @@ const Charts = (): React.ReactElement => {
 
     dateArray.forEach((dateStamp: string): void => {
       let elements = 0;
-      let tempArray: number[] = [];
-      let previousEl = 0;
+      let tempArray: string[] = [];
+      let previousEl:string;
       blokchain.forEach((item: Block): void => {
         const timeStampConverted: string = convertTimeStamp(item.timestamp);
         const timeStampHours: number = convertTimeStampToHour(item.timestamp);
