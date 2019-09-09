@@ -9,7 +9,6 @@ import AddIcon from '@material-ui/icons/Add';
 describe('CustomColumnChart', () => {
   const props = {
     chartData: {},
-    recordSelectCallback: () => {},
     selectedRecordKey: 'test',
     width: 1200,
     height: 400,

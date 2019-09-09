@@ -9,7 +9,6 @@ import {
   getBlockchainByDatasource
 } from '../../store/reducers/dataSource';
 import {sumTransactionsByDatasource} from '../../store/actions/dataSource';
-import {showLoader} from '../../store/actions/loader';
 
 const mapState = (state: any): any => ({
   summedBlocks: getSummedBlockchainByDatasource(state, state.dataSource),

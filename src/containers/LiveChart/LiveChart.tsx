@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useMappedState, useDispatch} from 'redux-react-hook';
 import Box from '@material-ui/core/Box';
 import LiveChartBubble from '../../components/LiveChart/LiveChartBubble';
