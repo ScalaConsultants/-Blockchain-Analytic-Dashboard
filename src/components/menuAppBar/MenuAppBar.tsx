@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
+import React, {useState} from 'react';
+import {withRouter} from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import BlockchainSwitch from '../BlockchainSwitch/BlockchainSwitch';
 
-import "./style.css";
+import './style.css';
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState(null);
   const menuItems = [
-    { name: 'Home', route: '/' },
-    { name: 'Transactions', route: '/transactions' },
-    { name: 'Charts', route: '/charts' },
-    { name: 'Top seller', route: '/top-seller' },
-    { name: 'Top buyer', route: '/top-buyer' },
-    { name: 'Treemap', route: '/treemap' },
-    { name: 'Custom chart', route: '/top-buyer-with-custom' },
+    {name: 'Home', route: '/'},
+    {name: 'Transactions', route: '/transactions'},
+    {name: 'Charts', route: '/charts'},
+    {name: 'Top seller', route: '/top-seller'},
+    {name: 'Top buyer', route: '/top-buyer'},
+    {name: 'Treemap', route: '/treemap'},
+    {name: 'Custom chart', route: '/top-buyer-with-custom'}
   ];
 
   const goTo = (route: string): void => {
@@ -40,7 +40,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     <AppBar position="static" className="MenuAppBar">
       <Toolbar>
         <IconButton
-          aria-owns={anchorEl ? "simple-menu" : undefined}
+          aria-owns={anchorEl ? 'simple-menu' : undefined}
           aria-haspopup="true"
           color="inherit"
           onClick={handleClick}
@@ -48,10 +48,10 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           <MenuIcon />
         </IconButton>
         <div className="MenuSpace"></div>
-        <Button color="inherit" onClick={() => goTo("/")}>
+        <Button color="inherit" onClick={() => goTo('/')}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
-        <div style={{marginLeft: "1rem"}}>
+        <div style={{marginLeft: '1rem'}}>
           <BlockchainSwitch />
         </div>
         <Menu
