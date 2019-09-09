@@ -51,16 +51,16 @@ function SimpleBarChartDemo(): React.ReactElement {
         data={[
           {
             name: 'Buying',
-            value: totalWalletsAmounts('source').reduce((acc: any, next: any) => acc + next.value, 0) / 10000
+            value: totalWalletsAmounts('source').reduce((acc: any, next: any) => acc + next.value, 0) / 1000000 * 1.05
           },
           {
             name: 'Selling',
-            value: totalWalletsAmounts('destination').reduce((acc: any, next: any) => acc + next.value, 0) / 10000
+            value: totalWalletsAmounts('destination').reduce((acc: any, next: any) => acc + next.value, 0) / 1000000 * 1.05
           },
 
         ]}
       />
-      <p>Value in USD divided by 10000</p>
+      <p>Value in USD (counted for 1 XTZ = 1.05$)</p>
     </>
   );
 }
