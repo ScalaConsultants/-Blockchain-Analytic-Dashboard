@@ -1,27 +1,41 @@
 import React from "react";
 import DashboardBox from "./../../components/dashboardBox/DashboardBox";
 import Grid from '@material-ui/core/Grid';
-
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import EqualizerIcon from '@material-ui/icons/Equalizer';
+import { makeStyles } from "@material-ui/core/styles";
 
 import { menuItems } from "./../../constant";
 
-const icons2 = <EqualizerIcon/>;
-const icons = <ExitToAppIcon/>;
+const useStyles = makeStyles(theme => ({
+  dashboardCard: {
+    '& > div:first-child ': {
+      height: "100%",
+      '& > div:first-child':{
+        height: "100%"
+      }
+    }
+
+  }
+}));
 
 const Home = (): React.ReactElement => {
   const MenuItems = menuItems;
-  const dashboardBoxGenerator = (boxes:any) => {
-    return boxes.map((item: { icons: any; name: string; route: string; }) => {
-      return <Grid item xs={12} sm={4}><DashboardBox icon={item.icons} name={item.name} route={item.route}/></Grid>
+  const classes = useStyles();
+
+  const dashboardBoxGenerator = (boxes: any) => {
+    return boxes.map((item: { icon: any; name: string; route: string; description: string }) => {
+      if (item.name !== 'Home') {
+        return <Grid key={item.name} className={classes.dashboardCard} item xs={12} sm={6} md={4} >
+          <DashboardBox icon={item.icon} name={item.name} route={item.route} description={item.description} />
+        </Grid>
+      }
     });
   };
+
   return (
     <div
       style={{
         textAlign: "center",
-        margin:"1rem"
+        margin: "1rem"
       }}
     >
       <h1>Blockchain Analytic Dashboard</h1>
