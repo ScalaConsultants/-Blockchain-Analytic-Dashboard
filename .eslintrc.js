@@ -15,33 +15,28 @@ module.exports = {
     sourceType: "module" // Allows for the use of imports
   },
   rules: {
-    "no-console": 2,
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "prettier/prettier": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "arrow-parens": "off",
     "comma-dangle": ["error", "never"],
-    "react-hooks/exhaustive-deps": 0, // temporary
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-unresolved": [ 0, { caseSensitive: false } ],
+    "no-console": 2,
+    "no-plusplus": "off",
+    "object-curly-spacing": ["error", "never"],
+    "prettier/prettier": "error",
+    "quotes": ["error", "single"],
     "react/jsx-curly-spacing": ["error", {
       "attributes": { "when": "never" },
       "children": { "when": "never" },
       "allowMultiline": true
     }],
+    "react/destructuring-assignment":"off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "quotes": ["error", "single"],
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "import/no-unresolved": [ 0, { caseSensitive: false } ],
-    "no-plusplus": "off",
-    "no-param-reassign": "off", // temporary
-    "react/no-array-index-key": 1, //temporary
-    "arrow-parens": "off",
-    "object-curly-spacing": ["error", "never"],
-    "@typescript-eslint/no-explicit-any": "off", //temporary off
-
-    "react/jsx-props-no-spreading": "off",
-    "react/destructuring-assignment":"off"
+    "react/jsx-props-no-spreading": "off"
   },
   env: {
     "browser": true,
-    "node": true,
-    "jest": true
+    "jest": true,
+    "node": true
   }
 };
