@@ -21,7 +21,7 @@ interface HeaderColsInterface {id: string,
   numeric: boolean,
   disablePadding: boolean,
   label: string
-}
+};
 
 const headerCols: Array<HeaderColsInterface> = [
   {id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp'},
@@ -198,7 +198,7 @@ const TransactionList = (): React.ReactElement => {
   };
 
   const filteredUpdateMessage = () => {
-    return <p>Find <strong>{blokchain.length}</strong> results</p>
+    return <p>Find <strong>{blokchain.length}</strong> results</p>;
   };
 
   const [open, setOpen] = React.useState(false);

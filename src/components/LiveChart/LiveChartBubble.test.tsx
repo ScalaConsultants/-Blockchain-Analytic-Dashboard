@@ -12,7 +12,7 @@ describe('LiveChartBubble', () => {
   };
 
   it('should render', () => {
-    const wrapper = shallow(<LiveChartBubble {...props}/>);
+    const wrapper = shallow(<LiveChartBubble {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
