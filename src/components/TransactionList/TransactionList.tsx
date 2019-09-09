@@ -16,6 +16,7 @@ import TransactionListFilter from './components/TransactionListFilter';
 import DetailsModal from "./components/DetailsModal";
 import { stableSort, getSorting } from "../../helpers/helpers";
 import * as BlokchainActions from "../../store/actions/tezos/blokchain";
+import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
 
 interface HeaderColsInterface {
     id: string,
@@ -44,8 +45,8 @@ const filtersName: Array<HeaderColsInterface> = [
 type Order = "asc" | "desc";
 type OrderBy = string;
 
-const mapState = (state: any) => ({
-    blokchain: state.tezos.blocks
+const mapState = (state: any): any => ({
+    blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
 let initState: any[] = [];
@@ -231,14 +232,14 @@ const TransactionList = (): React.ReactElement => {
                             </TableRow>
                         )}
                     </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                {...tablePaginationProps}
+                            />
+                        </TableRow>
+                    </TableFooter>
                 </Table>
-                <TableFooter>
-                    <TableRow>
-                        <TablePagination
-                            {...tablePaginationProps}
-                        />
-                    </TableRow>
-                </TableFooter>
             </Grid>
             <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
         </Grid>
