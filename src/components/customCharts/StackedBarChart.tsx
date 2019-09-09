@@ -3,8 +3,13 @@ import {
   setFontStyle,
 } from './helpers';
 
+interface ChartData {
+  name: string;
+  value: number;
+}
+
 interface Props {
-  data: any[];
+  data: ChartData[];
   width?: number;
   height?: number;
   spaceBetweenBars?: number;

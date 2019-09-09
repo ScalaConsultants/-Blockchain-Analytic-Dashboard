@@ -2,8 +2,8 @@ import React from "react";
 import { useMappedState } from "redux-react-hook";
 import "react-datepicker/dist/react-datepicker.css";
 import DataPresentation from "./DataPresentation";
-import { State } from "../../types";
-import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
+import { State } from "../../../types";
+import { getBlockchainByDatasource } from "../../../store/reducers/dataSource";
 
 const mapState = (state: State): any => ({
   blokchain: getBlockchainByDatasource(state, state.dataSource)

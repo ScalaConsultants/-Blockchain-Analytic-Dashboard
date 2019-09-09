@@ -10,8 +10,14 @@ import {
   setFontStyle,
 } from './helpers';
 
+interface ChartData {
+  name: string;
+  key: string;
+  value: number;
+}
+
 interface Props {
-  chartData: any[];
+  chartData: ChartData[];
   recordSelectCallback: (arg: any) => any;
   selectedRecordKey: string;
   width?: number;
@@ -33,7 +39,7 @@ const CHART_PADDING = 10;
 const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
 const handleElementClick = (
-  setClickedCallback: any,
+  setClickedCallback: (arg: number) => void,
   objects: any,
   clickPositions: any
 ) => {
