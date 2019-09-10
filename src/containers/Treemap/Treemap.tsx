@@ -62,7 +62,7 @@ const Treemap = (): React.ReactElement => {
         borderColor={{from: 'color', modifiers: [['brighter', '1.1']]}}
         labelTextColor="#000000"
         labelSkipSize={25}
-        animate={true}
+        animate
         motionStiffness={90}
         motionDamping={11}
       />
