@@ -42,7 +42,20 @@ module.exports = {
     }],
     "react/jsx-tag-spacing": "off",
     "@typescript-eslint/no-explicit-any": "off", // temporary,
-    "implicit-arrow-linebreak": "off"
+    "implicit-arrow-linebreak": "off",
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          // ["+", "-", "*", "/", "%", "**"],
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": true
+      }
+    ]
   },
   env: {
     "browser": true,

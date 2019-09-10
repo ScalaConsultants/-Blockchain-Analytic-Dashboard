@@ -92,7 +92,7 @@ const SimpleBarChart = ({
           width: barWidth,
           height: e.value * scale,
           value: e.value,
-          key: e.key,
+          key: e.key
         };
         if (element.x < width - CHART_PADDING) {
           ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
@@ -104,17 +104,20 @@ const SimpleBarChart = ({
             ctx.bezierCurveTo(
               element.x + (element.width / 3), CHART_PADDING,
               element.x + (element.width / 3 * 2), CHART_PADDING + 12,
-              element.x + element.width, CHART_PADDING + 8);
+              element.x + element.width, CHART_PADDING + 8
+            );
             ctx.lineTo(element.x + element.width, CHART_PADDING + 13);
             ctx.bezierCurveTo(
               element.x + (element.width / 3 * 2), CHART_PADDING + 17,
               element.x + (element.width / 3), CHART_PADDING + 5,
-              element.x, CHART_PADDING + 10);
+              element.x, CHART_PADDING + 10
+            );
             ctx.lineTo(element.x, CHART_PADDING + 5);
             ctx.fill();
           }
         }
-        return element
+
+        return element;
       });
       // @ts-ignore
       setCanvasObjects(objects);
@@ -145,7 +148,9 @@ const SimpleBarChart = ({
       <Paper
         className={classes.root}
       >
-        <span>Zoom {Math.floor(scale * 10)}</span>
+        <span>
+          Zoom {Math.floor(scale * 10)}
+        </span>
         <IconButton
           size="small"
           color="secondary"
