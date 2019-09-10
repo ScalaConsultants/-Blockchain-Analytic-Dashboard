@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+/* eslint-disable function-paren-newline */
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) =>
   <Slide direction="up" ref={ref} {...props} />
 );
