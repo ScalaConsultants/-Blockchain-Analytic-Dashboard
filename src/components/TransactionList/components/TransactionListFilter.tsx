@@ -22,7 +22,8 @@ const TransactionListFilter = (props: any) => {
         onChange={e => props.onInputChange(e.target.value, e.target.name)}
       />
     </label>
-  )};
+  );
+};
 
 
 

@@ -21,7 +21,7 @@ interface HeaderColsInterface {id: string,
   numeric: boolean,
   disablePadding: boolean,
   label: string
-};
+}
 
 const headerCols: Array<HeaderColsInterface> = [
   {id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp'},
@@ -204,7 +204,8 @@ const TransactionList = (): React.ReactElement => {
         <strong>{blokchain.length}</strong>
       results
       </p>
-    )};
+    );
+  };
 
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState({});

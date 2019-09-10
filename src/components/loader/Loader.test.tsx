@@ -10,11 +10,11 @@ describe('Loader', () => {
 
   it('should render only once', () => {
     const wrapper = shallow(<Loader/>);
-    expect(wrapper).toHaveLength(1)
+    expect(wrapper).toHaveLength(1);
   });
 
   it('should render with proper class name', () => {
     const wrapper = shallow(<Loader/>);
-    expect(wrapper.hasClass('loader-wrapper')).toEqual(true)
+    expect(wrapper.hasClass('loader-wrapper')).toEqual(true);
   });
 });

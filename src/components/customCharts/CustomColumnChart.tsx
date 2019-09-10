@@ -35,7 +35,7 @@ const handleElementClick = (setClickedCallback: any, objects: any, clickPosition
       clickPositions.x >= element.x &&
       clickPositions.x <= element.x + element.width
     ) {
-      setClickedCallback(element.key)
+      setClickedCallback(element.key);
     }
   });
 };
@@ -89,10 +89,10 @@ const CustomColumnChart = ({
           ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
           ctx.fillRect(element.x, element.y, element.width, element.height);
         }
-        return element
+        return element;
       });
       // @ts-ignore
-      setCanvasObjects(objects)
+      setCanvasObjects(objects);
     }
   }, [scale, chartData, selectedRecordKey]);
 
