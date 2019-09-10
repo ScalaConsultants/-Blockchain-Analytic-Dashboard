@@ -102,7 +102,8 @@ const CustomColumnChart = ({
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'column'
-    }}>
+    }}
+    >
       <canvas
         width={width}
         height={height}
@@ -126,7 +127,7 @@ const CustomColumnChart = ({
           aria-label="minus"
           onClick={() => scale >= 0.2 ? setScale(scale - 0.1) : null}
         >
-          <RemoveIcon  />
+          <RemoveIcon />
         </IconButton>
         <IconButton
           size="small"
