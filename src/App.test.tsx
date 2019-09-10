@@ -10,8 +10,10 @@ it('renders without crashing', () => {
 
   ReactDOM.render(
     <StoreContext.Provider
-      value={store}>
+      value={store}
+    >
       <App />
-    </StoreContext.Provider>, div);
+    </StoreContext.Provider>, div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });
