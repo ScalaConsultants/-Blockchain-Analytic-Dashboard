@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  setFontStyle,
-} from './helpers';
+import React, {useEffect, useRef} from 'react';
+import {setFontStyle} from './helpers';
 
 interface ChartData {
   name: string;
@@ -24,7 +22,7 @@ const SimpleBarChart = ({
   data,
   width = 1200,
   height = 80,
-  barHeight = 60,
+  barHeight = 60
 }: Props) => {
   const canvasRef = useRef(null);
   const totalDataValues = data.reduce((acc, next) => acc + next.value, 0);
@@ -65,14 +63,15 @@ const SimpleBarChart = ({
       style={{
         display: 'flex',
         justifyContent: 'center',
-        flexDirection: 'column',
-      }}>
+        flexDirection: 'column'
+      }}
+    >
       <canvas
         width={width}
         height={height}
         style={{
           width: width,
-          height: height,
+          height: height
         }}
         ref={canvasRef}
       >
