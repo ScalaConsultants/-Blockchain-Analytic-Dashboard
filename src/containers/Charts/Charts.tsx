@@ -44,6 +44,20 @@ const Charts = (): React.ReactElement => {
   const [select, setSelect] = useState('transactions');
   const [donutData, setDonutData] = useState([10, 40, 80, 200]);
 
+  const setLoaderFalse = (): void => {
+    dispatch({
+      type: 'LOADER_STATE',
+      show: false
+    });
+  };
+
+  const setLoaderTrue = (): void => {
+    dispatch({
+      type: 'LOADER_STATE',
+      show: true
+    });
+  };
+
   const filterChart = (blokchain: Block[], chartType: string): void => {
     const dateArray = convertDateArray(dateFrom, dateTo);
     setLabel(dateArray);
@@ -128,20 +142,6 @@ const Charts = (): React.ReactElement => {
   const triggerSetDateTo = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setLoaderTrue();
     setDateTo(e.target.value);
-  };
-
-  const setLoaderFalse = (): void => {
-    dispatch({
-      type: 'LOADER_STATE',
-      show: false
-    });
-  };
-
-  const setLoaderTrue = (): void => {
-    dispatch({
-      type: 'LOADER_STATE',
-      show: true
-    });
   };
 
   const handleChartChange = (e: any): void => {

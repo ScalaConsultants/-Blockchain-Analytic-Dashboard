@@ -8,10 +8,6 @@ export const stableSort = (array: any, cmp: any): any => {
   return stabilizedThis.map((el: any) => el[0]);
 };
 
-export const getSorting = (order: any, orderBy: any) => {
-  return order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy);
-};
-
 export const desc = (a: any, b: any, orderBy: any) => {
   if(!b[orderBy] || !a[orderBy]) return 0;
 
@@ -25,4 +21,8 @@ export const desc = (a: any, b: any, orderBy: any) => {
     return 1;
   }
   else return 0;
+};
+
+export const getSorting = (order: any, orderBy: any) => {
+  return order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy);
 };

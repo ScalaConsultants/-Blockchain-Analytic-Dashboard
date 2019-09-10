@@ -23,6 +23,10 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     {name: 'Custom chart', route: '/top-buyer-with-custom'}
   ];
 
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
+
   const goTo = (route: string): void => {
     handleClose();
     props.history.push(route);
@@ -30,10 +34,6 @@ const ButtonAppBar = (props: any): React.ReactElement => {
 
   const handleClick = (event: any): void => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (): void => {
-    setAnchorEl(null);
   };
 
   return (

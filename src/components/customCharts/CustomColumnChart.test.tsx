@@ -8,14 +8,14 @@ import AddIcon from '@material-ui/icons/Add';
 
 describe('CustomColumnChart', () => {
   const props = {
-    chartData: {},
-    selectedRecordKey: 'test',
-    width: 1200,
-    height: 400,
-    barWidth: 30,
-    spaceBetweenBars: 1,
     barColor: 'rgb(98,156,200)',
-    selectedBarColor: 'rgb(44,123,200)'
+    barWidth: 30,
+    chartData: {},
+    height: 400,
+    selectedBarColor: 'rgb(44,123,200)',
+    selectedRecordKey: 'test',
+    spaceBetweenBars: 1,
+    width: 1200
   };
 
   it('should render', () => {

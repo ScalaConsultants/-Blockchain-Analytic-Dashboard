@@ -66,6 +66,15 @@ const TransactionList = (): React.ReactElement => {
 
   let filteredTable: any = null;
 
+  const handleRequestSort = (event: any, property: any) => {
+    if (orderBy === property && order === 'desc') {
+      setOrder('asc');
+    } else if (orderBy === property && order === 'asc') {
+      setOrder('desc');
+    }
+    setOrderBy(property);
+  };
+
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
     newPage: number,
@@ -80,13 +89,17 @@ const TransactionList = (): React.ReactElement => {
     setPage(0);
   };
 
-  const handleRequestSort = (event: any, property: any) => {
-    if (orderBy === property && order === 'desc') {
-      setOrder('asc');
-    } else if (orderBy === property && order === 'asc') {
-      setOrder('desc');
-    }
-    setOrderBy(property);
+  const updateFilteredTransactions = (filteredTable: any): void => {
+    dispatch({
+      type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
+      blokchain: filteredTable
+    });
+  };
+
+  const filterHandler = (query: string, inputName: string) => {
+    filtersOptions[inputName] = query;
+    filteredTable = filteredValue(filtersOptions);
+    return updateFilteredTransactions(filteredTable);
   };
 
   const tablePaginationProps = {
@@ -182,19 +195,6 @@ const TransactionList = (): React.ReactElement => {
     }
 
     return filteredBlokchain;
-  };
-
-  const filterHandler = (query: string, inputName: string) => {
-    filtersOptions[inputName] = query;
-    filteredTable = filteredValue(filtersOptions);
-    return updateFilteredTransactions(filteredTable);
-  };
-
-  const updateFilteredTransactions = (filteredTable: any): void => {
-    dispatch({
-      type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
-      blokchain: filteredTable
-    });
   };
 
   const filteredUpdateMessage = () => {
