@@ -15,7 +15,7 @@ async function fetchTransactions(page: number): Promise<any> {
 
 function* doFetchTransactions(): any {
   const page = yield select(getPage);
-  const showLoader = page === 1 ? true : false;
+  const showLoader = page === 1;
 
   // Show loader on initial fetch
   if (showLoader) {
