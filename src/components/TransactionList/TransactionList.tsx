@@ -172,7 +172,6 @@ const TransactionList = (): React.ReactElement => {
     let filteredBlokchain = [...initState];
 
     for (const key in filtersOptions) {
-
       if (key === 'amountMin') {
         filteredBlokchain = filteredBlokchain
           .filter((block: any) => filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
