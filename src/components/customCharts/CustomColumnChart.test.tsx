@@ -1,10 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import CustomColumnChart from './CustomColumnChart';
 import {Paper} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
+import CustomColumnChart from './CustomColumnChart';
 
 describe('CustomColumnChart', () => {
   const props = {

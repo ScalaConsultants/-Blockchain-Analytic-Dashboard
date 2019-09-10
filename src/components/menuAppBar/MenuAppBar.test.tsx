@@ -1,6 +1,5 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
-import ButtonAppBar from './MenuAppBar';
 import {MemoryRouter} from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -8,6 +7,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
+import ButtonAppBar from './MenuAppBar';
 
 describe('MenuAppBar', () => {
   const props = {

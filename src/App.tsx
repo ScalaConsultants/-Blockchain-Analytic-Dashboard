@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
+import {useDispatch, useMappedState} from 'redux-react-hook';
 import Routes from './router/routes';
 import MenuAppBar from './components/menuAppBar/MenuAppBar';
 import * as BlokchainActions from './store/actions/tezos/blokchain';
 import * as EthereumActions from './store/actions/ethereum/transactions';
-import {useDispatch, useMappedState} from 'redux-react-hook';
 import './App.css';
 import Loader from './components/loader/Loader';
 import {getBlockchainByDatasource} from './store/reducers/dataSource';

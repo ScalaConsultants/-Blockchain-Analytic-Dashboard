@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router';
+import {Container} from '@material-ui/core';
 import Transactions from '../containers/Transactions/Transactions';
 import Charts from '../containers/Charts/Charts';
 import Home from '../containers/Home/Home';
@@ -7,7 +8,6 @@ import LiveChart from '../containers/LiveChart/LiveChart';
 import LiveChart2 from '../containers/LiveChart2/LiveChart2';
 import Treemap from '../containers/Treemap/Treemap';
 import CustomChartDemo from '../containers/CustomChartDemo/CustomChartDemo';
-import {Container} from '@material-ui/core';
 
 export default (): React.ReactElement => {
   const routes = (

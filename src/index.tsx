@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {StoreContext} from 'redux-react-hook';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {StoreContext} from 'redux-react-hook';
 import configureStore from './store/index';
 import rootSaga from './store/sagas/root';
 

@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useMappedState, useDispatch} from 'redux-react-hook';
-
-import BarChart from '../../components/charts/Bar/Bar';
-import DoughnutChart from '../../components/charts/Doughnut/Doughnut';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import BarChart from '../../components/charts/Bar/Bar';
+import DoughnutChart from '../../components/charts/Doughnut/Doughnut';
 import {Blockchain, Block, State} from '../../types';
 import {
   convertTimeStampToHour,
