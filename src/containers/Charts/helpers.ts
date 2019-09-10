@@ -8,12 +8,11 @@ export const convertTimeStampToHour = (date: number): number => {
 
 export const convertTimeStamp = (date: number): string => {
   const newDate = new Date(date);
-  const formattedDate =
-    ('0' + newDate.getDate()).slice(-2) +
-    '-' +
-    ('0' + (newDate.getMonth() + 1)).slice(-2) +
-    '-' +
-    newDate.getFullYear();
+  const formattedDate = ('0' + newDate.getDate()).slice(-2)
+    + '-'
+    + ('0' + (newDate.getMonth() + 1)).slice(-2)
+    + '-'
+    + newDate.getFullYear();
 
   return formattedDate
     .split('-')

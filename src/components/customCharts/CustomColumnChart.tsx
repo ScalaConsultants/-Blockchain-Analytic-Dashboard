@@ -30,10 +30,10 @@ const CHART_PADDING = 10;
 const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
   objects.forEach((element: any) => {
     if (
-      clickPositions.y >= element.y &&
-      clickPositions.y <= element.y + element.height &&
-      clickPositions.x >= element.x &&
-      clickPositions.x <= element.x + element.width
+      clickPositions.y >= element.y
+      && clickPositions.y <= element.y + element.height
+      && clickPositions.x >= element.x
+      && clickPositions.x <= element.x + element.width
     ) {
       setClickedCallback(element.key);
     }
