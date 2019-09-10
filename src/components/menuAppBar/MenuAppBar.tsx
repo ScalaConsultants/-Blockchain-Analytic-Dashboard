@@ -20,7 +20,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     {name: 'Top seller', route: '/top-seller'},
     {name: 'Top buyer', route: '/top-buyer'},
     {name: 'Treemap', route: '/treemap'},
-    {name: 'Line chart', route: '/line-chart' },
+    {name: 'Line chart', route: '/line-chart'},
     {name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo'},
     {name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo'}
   ];
@@ -66,8 +66,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
             <MenuItem onClick={() => goTo(item.route)} key={key}>
               {item.name}
             </MenuItem>
-            )
-          )}
+          ))}
         </Menu>
       </Toolbar>
     </AppBar>
