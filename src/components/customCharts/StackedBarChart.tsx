@@ -70,8 +70,8 @@ const SimpleBarChart = ({
         width={width}
         height={height}
         style={{
-          width: width,
-          height: height
+          width,
+          height
         }}
         ref={canvasRef}
       >
