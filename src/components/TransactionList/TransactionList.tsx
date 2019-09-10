@@ -23,7 +23,7 @@ interface HeaderColsInterface {id: string,
   label: string
 }
 
-const headerCols: Array<HeaderColsInterface> = [
+const headerCols: HeaderColsInterface[] = [
   {id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp'},
   {id: 'source', numeric: false, disablePadding: false, label: 'Source'},
   {id: 'destination', numeric: false, disablePadding: false, label: 'Destination'},
@@ -33,7 +33,7 @@ const headerCols: Array<HeaderColsInterface> = [
   {id: 'block_level', numeric: false, disablePadding: false, label: 'Block level'}
 ];
 
-const filtersName: Array<HeaderColsInterface> = [
+const filtersName: HeaderColsInterface[] = [
   {id: 'source', numeric: false, disablePadding: false, label: 'Source'},
   {id: 'destination', numeric: false, disablePadding: false, label: 'Destination'},
   {id: 'amountMin', numeric: false, disablePadding: false, label: 'Amount min'},
@@ -123,7 +123,7 @@ const TransactionList = (): React.ReactElement => {
       .substr(0, 19)
       .replace('T', ' ');
 
-  const transactionListHeaderGenerate = (headerCols: Array<HeaderColsInterface>) =>
+  const transactionListHeaderGenerate = (headerCols: HeaderColsInterface[]) =>
     (headerCols.map((row: HeaderColsInterface) => (
       <TableCell
         key={row.id}
@@ -163,7 +163,7 @@ const TransactionList = (): React.ReactElement => {
       </TableRow>
     )));
 
-  const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
+  const transactionListFilterGenerate = (headerCols: HeaderColsInterface[]) =>
     filtersName.map((row: HeaderColsInterface) => (
       <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
     ));
@@ -196,15 +196,13 @@ const TransactionList = (): React.ReactElement => {
     return filteredBlokchain;
   };
 
-  const filteredUpdateMessage = () => {
-    return (
-      <p>
+  const filteredUpdateMessage = () => (
+    <p>
       Find
-        <strong>{blokchain.length}</strong>
+      <strong>{blokchain.length}</strong>
       results
-      </p>
-    );
-  };
+    </p>
+  );
 
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState({});
