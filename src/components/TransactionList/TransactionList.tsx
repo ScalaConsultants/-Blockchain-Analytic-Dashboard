@@ -16,7 +16,7 @@ import TransactionListFilter from './components/TransactionListFilter';
 import DetailsModal from './components/DetailsModal';
 import {stableSort, getSorting} from '../../helpers/helpers';
 import * as BlokchainActions from '../../store/actions/tezos/blokchain';
-import {getBlockchainByDatasource} from "../../store/reducers/dataSource";
+import {getBlockchainByDatasource} from '../../store/reducers/dataSource';
 
 interface HeaderColsInterface {
   id: string,
@@ -62,6 +62,9 @@ const TransactionList = (): React.ReactElement => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
 
+  const [open, setOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState({});
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(100);
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, blokchain.length - page * rowsPerPage);
@@ -96,6 +99,39 @@ const TransactionList = (): React.ReactElement => {
       type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
       blokchain: filteredTable
     });
+  };
+
+  const filteredValue = (filtersOptions: { [key: string]: string }) => {
+    let filteredBlokchain = [...initState];
+
+    for (const key in filtersOptions) {
+      if (key === 'amountMin') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
+      }
+
+      if (key === 'amountMax') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true);
+      }
+
+      if (key === 'destination') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true);
+      }
+
+      if (key === 'source') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true);
+      }
+    }
+
+    return filteredBlokchain;
+  };
+
+  const handleClickOpen = (data: Record<string, any>) => {
+    setSelectedRow(data);
+    setOpen(true);
   };
 
   const filterHandler = (query: string, inputName: string) => {
@@ -154,7 +190,7 @@ const TransactionList = (): React.ReactElement => {
       blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
       getSorting(order, orderBy)
     ).map((row: any, index: number) => (
-      <TableRow onClick={() => handleClickOpen(row)} hover key={'Transaction' + index}>
+      <TableRow onClick={() => handleClickOpen(row)} hover key={`Transaction${index}`}>
         <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
         <TableCell>{row.source}</TableCell>
         <TableCell>{row.destination}</TableCell>
@@ -170,34 +206,6 @@ const TransactionList = (): React.ReactElement => {
       <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
     ));
 
-  const filteredValue = (filtersOptions: { [key: string]: string }) => {
-    let filteredBlokchain = [...initState];
-
-    for (const key in filtersOptions) {
-      if (key === 'amountMin') {
-        filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
-      }
-
-      if (key === 'amountMax') {
-        filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true);
-      }
-
-      if (key === 'destination') {
-        filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true);
-      }
-
-      if (key === 'source') {
-        filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true);
-      }
-    }
-
-    return filteredBlokchain;
-  };
-
   const filteredUpdateMessage = () => (
     <p>
       Find
@@ -205,14 +213,6 @@ const TransactionList = (): React.ReactElement => {
       results
     </p>
   );
-
-  const [open, setOpen] = React.useState(false);
-  const [selectedRow, setSelectedRow] = React.useState({});
-
-  const handleClickOpen = (data: Object) => {
-    setSelectedRow(data);
-    setOpen(true);
-  };
 
   const handleClose = () => setOpen(false);
 
@@ -230,7 +230,7 @@ const TransactionList = (): React.ReactElement => {
           <TableBody>
             {transactionListRowsGenerate(blokchain)}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 48 * emptyRows }}>
+              <TableRow style={{height: 48 * emptyRows}}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}
