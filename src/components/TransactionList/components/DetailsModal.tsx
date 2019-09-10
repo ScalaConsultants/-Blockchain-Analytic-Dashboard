@@ -39,9 +39,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) =>
+  <Slide direction="up" ref={ref} {...props} />
+);
 
 const tableRowGenerator = (data: any) => (
   Object.keys(data).map(item => (
@@ -52,11 +52,11 @@ const tableRowGenerator = (data: any) => (
   ))
 );
 
-type Props = {
+interface Props {
   open: boolean,
   handleClose: any,
   data: any
-};
+}
 
 const DetailsModal = ({open, handleClose, data}: Props): React.ReactElement => {
   const classes = useStyles();
