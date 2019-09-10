@@ -8,4 +8,3 @@ const LineChart = (data:any) => (
 );
 
 export default LineChart;
- 
