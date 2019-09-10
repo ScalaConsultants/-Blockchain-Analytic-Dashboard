@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   drawLine,
-  setFontStyle,
+  setFontStyle
 } from './helpers';
 
 interface ChartData {
@@ -25,7 +25,7 @@ const SimpleHorizontalBarChart = ({
   data,
   width = 1200,
   height = 160,
-  barHeight = 60,
+  barHeight = 60
 }: Props) => {
   const canvasRef = useRef(null);
   useEffect(() => {
@@ -37,7 +37,7 @@ const SimpleHorizontalBarChart = ({
         xStart: 60,
         yStart: 30,
         xEnd: width - 10,
-        yEnd: height - 10,
+        yEnd: height - 10
       };
       setFontStyle(ctx, 12, CHART_DETAILS_COLOR, 'Arial');
       drawLine(ctx, CHART_BOX_SIZE.xStart, 20, CHART_BOX_SIZE.xEnd, 20, CHART_DETAILS_COLOR);
@@ -51,7 +51,7 @@ const SimpleHorizontalBarChart = ({
         width: (CHART_BOX_SIZE.xEnd - CHART_BOX_SIZE.xStart) * item.value / highestValue,
         value: item.value,
         name: item.name,
-        color: `rgb(130,175,226)`,
+        color: `rgb(130,175,226)`
       }));
 
       objects.forEach((object, index) => {
@@ -80,14 +80,15 @@ const SimpleHorizontalBarChart = ({
       style={{
         display: 'flex',
         justifyContent: 'center',
-        flexDirection: 'column',
-      }}>
+        flexDirection: 'column'
+      }}
+    >
       <canvas
         width={width}
         height={height}
         style={{
-          width: width,
-          height: height,
+          width,
+          height
         }}
         ref={canvasRef}
       >
