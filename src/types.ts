@@ -4,6 +4,7 @@ export interface Config {
   title: string;
 }
 
+/* eslint-disable camelcase */
 export interface Block {
   source: number;
   timestamp: number;
