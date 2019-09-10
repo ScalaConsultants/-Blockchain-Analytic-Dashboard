@@ -6,15 +6,13 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import {makeStyles, useTheme, Theme, createStyles} from '@material-ui/core/styles';
 
-const useStyles1 = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexShrink: 0,
-      color: theme.palette.text.secondary,
-      marginLeft: theme.spacing(2.5)
-    }
-  }),
-);
+const useStyles1 = makeStyles((theme: Theme) => createStyles({
+  root: {
+    flexShrink: 0,
+    color: theme.palette.text.secondary,
+    marginLeft: theme.spacing(2.5)
+  }
+}));
 
 interface TablePaginationActionsProps {
   count: number;

@@ -25,8 +25,4 @@ const TransactionListFilter = (props: any) => {
   );
 };
 
-
-
-
-
 export default TransactionListFilter;
