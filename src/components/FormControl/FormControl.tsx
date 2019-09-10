@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import React from 'react';
 
 const FormControlField = (props: any) => (
-  <FormControl style={{ width: "30%" }}>
+  <FormControl style={{width: '30%'}}>
     <InputLabel>
       {props.inputLabel}
     </InputLabel>
