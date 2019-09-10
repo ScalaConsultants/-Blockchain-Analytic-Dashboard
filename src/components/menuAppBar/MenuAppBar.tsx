@@ -47,7 +47,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
         >
           <MenuIcon />
         </IconButton>
-        <div className="MenuSpace"></div>
+        <div className="MenuSpace" />
         <Button color="inherit" onClick={() => goTo('/')}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
@@ -60,13 +60,12 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {menuItems.map((item, key) => {
-            return (
-              <MenuItem onClick={() => goTo(item.route)} key={key}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
+          {menuItems.map((item, key) => (
+            <MenuItem onClick={() => goTo(item.route)} key={key}>
+              {item.name}
+            </MenuItem>
+            )
+          )}
         </Menu>
       </Toolbar>
     </AppBar>
