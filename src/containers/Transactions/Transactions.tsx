@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import TransactionList from './../../components/TransactionList/TransactionList';
+import TransactionList from '../../components/TransactionList/TransactionList';
 
 const Transactions = (): React.ReactElement => {
   return (
