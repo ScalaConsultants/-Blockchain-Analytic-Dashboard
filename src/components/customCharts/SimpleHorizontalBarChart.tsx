@@ -63,13 +63,23 @@ const SimpleHorizontalBarChart = ({
         );
         ctx.fillStyle = object.color;
         ctx.fillRect(CHART_BOX_SIZE.xStart, index * (barHeight + 10) + 30, object.width, barHeight);
-        setFontStyle(ctx, 16, 'rgb(255,255,255)', 'Arial');
         const valueToShow = `${Math.floor(object.value)}`;
-        ctx.fillText(
-          valueToShow,
-          object.width / 2 + CHART_BOX_SIZE.xStart - valueToShow.length * 4,
-          index * (barHeight + 10) + 65,
-        );
+
+        if (valueToShow.length * 4 > object.width) {
+          setFontStyle(ctx, 16, 'rgb(0,0,0)', 'Arial');
+          ctx.fillText(
+            valueToShow,
+            object.width + CHART_BOX_SIZE.xStart + 20,
+            index * (barHeight + 10) + 65,
+          );
+        } else {
+          setFontStyle(ctx, 16, 'rgb(255,255,255)', 'Arial');
+          ctx.fillText(
+            valueToShow,
+            object.width / 2 + CHART_BOX_SIZE.xStart - valueToShow.length * 4,
+            index * (barHeight + 10) + 65,
+          );
+        }
       });
     }
   }, [data]);
