@@ -65,8 +65,8 @@ const Charts = (): React.ReactElement => {
 
     dateArray.forEach((dateStamp: string): void => {
       let elements = 0;
-      const tempArray: number[] = [];
-      let previousEl = 0;
+      const tempArray: string[] = [];
+      let previousEl:string;
       blokchain.forEach((item: Block): void => {
         const timeStampConverted: string = convertTimeStamp(item.timestamp);
         const timeStampHours: number = convertTimeStampToHour(item.timestamp);

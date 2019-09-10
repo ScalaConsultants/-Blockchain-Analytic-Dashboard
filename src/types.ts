@@ -6,12 +6,12 @@ export interface Config {
 
 /* eslint-disable camelcase */
 export interface Block {
-  source: number;
+  source: string;
   timestamp: number;
   block_leve: number;
   amount: number;
   counter: number;
-  destination: number;
+  destination: string;
   fee: number;
 }
 

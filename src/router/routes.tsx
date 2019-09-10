@@ -6,8 +6,10 @@ import Charts from '../containers/Charts/Charts';
 import Home from '../containers/Home/Home';
 import LiveChart from '../containers/LiveChart/LiveChart';
 import LiveChart2 from '../containers/LiveChart2/LiveChart2';
+import LineCharts from '../containers/Charts/Line';
 import Treemap from '../containers/Treemap/Treemap';
-import CustomChartDemo from '../containers/CustomChartDemo/CustomChartDemo';
+import SimpleBarChartDemo from '../containers/customChartsDemos/SimpleBarChartDemo/SimpleBarChartDemo';
+import StackedBarChartDemo from '../containers/customChartsDemos/StackedBarChartDemo/StackedBarChartDemo';
 
 export default (): React.ReactElement => {
   const routes = (
@@ -16,10 +18,11 @@ export default (): React.ReactElement => {
       <Route exact path="/transactions" component={Transactions} />
       <Route exact path="/charts" component={Charts} />
       <Route exact path="/treemap" component={Treemap} />
-
       <Route exact path="/top-seller" component={LiveChart} />
       <Route exact path="/top-buyer" component={LiveChart2} />
-      <Route exact path="/top-buyer-with-custom" component={CustomChartDemo} />
+      <Route exact path="/line-chart" component={LineCharts} />
+      <Route exact path="/simple-bar-chart-demo" component={SimpleBarChartDemo} />
+      <Route exact path="/stacked-bar-chart-demo" component={StackedBarChartDemo} />
     </Container>
   );
 

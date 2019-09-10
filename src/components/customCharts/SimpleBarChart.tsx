@@ -4,18 +4,28 @@ import {makeStyles} from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import getClickPosition from './helpers';
+import {
+  drawLine,
+  getClickPosition,
+  setFontStyle
+} from './helpers';
+
+interface ChartData {
+  name: string;
+  key: string;
+  value: number;
+}
 
 interface Props {
-  chartData: any[];
+  chartData: ChartData[];
   recordSelectCallback: (arg: any) => any;
   selectedRecordKey: string;
-  width?: number,
-  height?: number,
-  spaceBetweenBars?: number,
-  barWidth?: number,
-  barColor?: string,
-  selectedBarColor?: string,
+  width?: number;
+  height?: number;
+  spaceBetweenBars?: number;
+  barWidth?: number;
+  barColor?: string;
+  selectedBarColor?: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -26,8 +36,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CHART_PADDING = 10;
+const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
-const handleElementClick = (setClickedCallback: any, objects: any, clickPositions: any) => {
+const handleElementClick = (
+  setClickedCallback: (arg: number) => void,
+  objects: any,
+  clickPositions: any
+) => {
   objects.forEach((element: any) => {
     if (
       clickPositions.y >= element.y
@@ -40,7 +55,7 @@ const handleElementClick = (setClickedCallback: any, objects: any, clickPosition
   });
 };
 
-const CustomColumnChart = ({
+const SimpleBarChart = ({
   chartData,
   recordSelectCallback,
   selectedRecordKey,
@@ -61,20 +76,14 @@ const CustomColumnChart = ({
       // @ts-ignore
       const ctx = canvasRef.current.getContext('2d');
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'black';
-      ctx.font = '12px Arial';
+      setFontStyle(ctx, 12, CHART_DETAILS_COLOR, 'Arial');
       ctx.fillText('0', 4, height - 8);
       const valueOnChartTop = Math.round((height - (2 * CHART_PADDING)) / scale);
       ctx.fillText(valueOnChartTop.toString(), 4, 14);
 
-      ctx.beginPath();
-      ctx.moveTo(35, 10);
-      ctx.lineTo(45, 10);
-      ctx.moveTo(40, 10);
-      ctx.lineTo(40, height - CHART_PADDING);
-      ctx.moveTo(35, height - CHART_PADDING);
-      ctx.lineTo(45, height - CHART_PADDING);
-      ctx.stroke();
+      drawLine(ctx, 35, 10, 45, 10, CHART_DETAILS_COLOR);
+      drawLine(ctx, 40, 10, 40, height - CHART_PADDING, CHART_DETAILS_COLOR);
+      drawLine(ctx, 35, height - CHART_PADDING, 45, height - CHART_PADDING, CHART_DETAILS_COLOR);
 
       const objects = chartData.map((e, index) => {
         const element = {
@@ -83,13 +92,29 @@ const CustomColumnChart = ({
           width: barWidth,
           height: e.value * scale,
           value: e.value,
-          key: e.key
+          key: e.key,
         };
         if (element.x < width - CHART_PADDING) {
           ctx.fillStyle = selectedRecordKey === e.key ? selectedBarColor : barColor;
           ctx.fillRect(element.x, element.y, element.width, element.height);
+          if (element.height > height) {
+            ctx.fillStyle = 'rgb(255,255,255)';
+            ctx.beginPath();
+            ctx.moveTo(element.x, CHART_PADDING + 5);
+            ctx.bezierCurveTo(
+              element.x + (element.width / 3), CHART_PADDING,
+              element.x + (element.width / 3 * 2), CHART_PADDING + 12,
+              element.x + element.width, CHART_PADDING + 8);
+            ctx.lineTo(element.x + element.width, CHART_PADDING + 13);
+            ctx.bezierCurveTo(
+              element.x + (element.width / 3 * 2), CHART_PADDING + 17,
+              element.x + (element.width / 3), CHART_PADDING + 5,
+              element.x, CHART_PADDING + 10);
+            ctx.lineTo(element.x, CHART_PADDING + 5);
+            ctx.fill();
+          }
         }
-        return element;
+        return element
       });
       // @ts-ignore
       setCanvasObjects(objects);
@@ -142,4 +167,4 @@ const CustomColumnChart = ({
   );
 };
 
-export default CustomColumnChart;
+export default SimpleBarChart;
