@@ -8,4 +8,3 @@ const DoughnutChart = (data:any) => (
 );
 
 export default DoughnutChart;
- 

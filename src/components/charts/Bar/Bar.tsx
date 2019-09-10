@@ -8,4 +8,3 @@ const BarChart = (data:any) => (
 );
 
 export default BarChart;
- 
