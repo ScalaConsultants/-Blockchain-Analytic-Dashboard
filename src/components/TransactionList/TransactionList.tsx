@@ -230,19 +230,19 @@ const TransactionList = (): React.ReactElement => {
           <TableBody>
             {transactionListRowsGenerate(blokchain)}
             {emptyRows > 0 && (
-              <TableRow style={{height: 48 * emptyRows}}>
+              <TableRow style={{ height: 48 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                {...tablePaginationProps}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              {...tablePaginationProps}
-            />
-          </TableRow>
-        </TableFooter>
       </Grid>
       <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
     </Grid>
