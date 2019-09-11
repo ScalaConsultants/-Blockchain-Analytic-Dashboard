@@ -107,22 +107,23 @@ const TransactionList = (): React.ReactElement => {
     for (const key in filtersOptions) {
       if (key === 'amountMin') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
+          .filter((block: any) => (filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true));
       }
 
       if (key === 'amountMax') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true);
+          .filter((block: any) => (filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true));
       }
 
       if (key === 'destination') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true);
+          .filter((block: any) =>
+            (filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true));
       }
 
       if (key === 'source') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true);
+          .filter((block: any) => (filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true));
       }
     }
 
