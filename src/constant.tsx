@@ -1,6 +1,5 @@
 import React from "react";
 
-
 // Icons
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import ListIcon from "@material-ui/icons/List";

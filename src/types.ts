@@ -1,6 +1,5 @@
 import { SvgIconProps } from "@material-ui/core/SvgIcon";
 
-
 export interface Config {
   chartType: string;
   label: string;

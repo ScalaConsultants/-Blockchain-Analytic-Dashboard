@@ -22,14 +22,14 @@ const Home = (): React.ReactElement => {
   const MenuItems = menuItems;
   const classes = useStyles();
 
-  const dashboardBoxGenerator = (boxes: MenuItemsType []) => {
-    return boxes.map((item: MenuItemsType) => {
-      if (item.name !== 'Home') {
-        return <Grid key={item.name} className={classes.dashboardCard} item xs={12} sm={6} md={4} >
+  const dashboardBoxGenerator = (boxes: MenuItemsType []): (void | JSX.Element)[] => {
+    return boxes.map((item: MenuItemsType) : void | JSX.Element =>
+      item.name !== 'Home'
+        ?  <Grid key={item.name} className={classes.dashboardCard} item xs={12} sm={6} md={4} >
           <DashboardBox icon={item.icon} name={item.name} route={item.route} description={item.description} />
         </Grid>
-      }
-    });
+        : <div key='Home'/>
+    );
   };
 
   return (

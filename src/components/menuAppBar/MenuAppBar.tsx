@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, MouseEvent } from "react";
+
 import { withRouter } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,7 +16,7 @@ import { menuItems } from "../../constant";
 import "./style.css";
 
 const ButtonAppBar = (props: any): React.ReactElement => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuList: MenuItemsType[] = menuItems;
 
   const goTo = (route: string): void => {
@@ -23,16 +24,9 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     props.history.push(route);
   };
 
-  // const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
-  //   console.log(event)
-  //   // setAnchorEl(event.currentTarget);
-  // };
-  const handleClick = (event: any): void => {
-    console.log(event.currentTarget)
+  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
   };
-
-
 
   const handleClose = (): void => {
     setAnchorEl(null);
