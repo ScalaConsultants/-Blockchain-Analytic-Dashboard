@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
 // @ts-ignore
-import { ResponsiveTreeMap } from "@nivo/treemap";
-import React from "react";
-import { useMappedState, useDispatch } from "redux-react-hook";
+import { ResponsiveTreeMap } from '@nivo/treemap';
+import React from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 import {
   getSummedBlockchainByDatasource,
   getBlockchainByDatasource
-} from "../../store/reducers/dataSource";
-import { sumTransactionsByDatasource } from "../../store/actions/dataSource";
-import { showLoader } from "../../store/actions/loader";
+} from '../../store/reducers/dataSource';
+import { sumTransactionsByDatasource } from '../../store/actions/dataSource';
 
 const mapState = (state: any): any => ({
   summedBlocks: getSummedBlockchainByDatasource(state, state.dataSource),
@@ -29,7 +28,7 @@ const Treemap = (): React.ReactElement => {
     loc: item.counter
   }));
   const root = {
-    name: "nivo",
+    name: 'nivo',
     children: [...test]
   };
 
@@ -48,7 +47,7 @@ const Treemap = (): React.ReactElement => {
 
   // console.log(summedBlocks);
   return (
-    <div style={{ height: "700px" }}>
+    <div style={{ height: '700px' }}>
       <ResponsiveTreeMap
         root={root}
         identity="name"
@@ -58,12 +57,12 @@ const Treemap = (): React.ReactElement => {
         outerPadding={1}
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
         label="name"
-        colors={{ scheme: "purple_red" }}
+        colors={{ scheme: 'purple_red' }}
         borderWidth={3}
-        borderColor={{ from: "color", modifiers: [["brighter", "1.1"]] }}
+        borderColor={{ from: 'color', modifiers: [['brighter', '1.1']] }}
         labelTextColor="#000000"
         labelSkipSize={25}
-        animate={true}
+        animate
         motionStiffness={90}
         motionDamping={11}
       />

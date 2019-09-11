@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { useMappedState, useDispatch } from "redux-react-hook";
-import Box from "@material-ui/core/Box";
-import LiveChartBubble from "../../components/LiveChart/LiveChartBubble";
-import DatePicker from "../../components/DatePicker/DatePicker";
-import { colors } from "../../helpers/colors";
-import "react-datepicker/dist/react-datepicker.css";
+import React from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
+import Box from '@material-ui/core/Box';
+import LiveChartBubble from '../../components/LiveChart/LiveChartBubble';
+import DatePicker from '../../components/DatePicker/DatePicker';
+import colors from '../../helpers/colors';
+import 'react-datepicker/dist/react-datepicker.css';
 import {
   getBlockchainByDatasource,
   getSummedBlockchainByDatasource
-} from "../../store/reducers/dataSource";
-import { sumTransactionsByDatasource } from "../../store/actions/dataSource";
+} from '../../store/reducers/dataSource';
+import { sumTransactionsByDatasource } from '../../store/actions/dataSource';
 
-const MIN_SIZE = 70; //px;
-const MAX_SIZE = 300; //px;
+const MIN_SIZE = 70; // px;
+const MAX_SIZE = 300; // px;
 function calculateSize(max: number, transactions: number): number {
   // max is the biggest amount of transactions and it's always used as a base size;
   const percentage = (transactions / max) * 100;

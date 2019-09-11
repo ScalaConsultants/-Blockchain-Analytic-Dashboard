@@ -1,5 +1,5 @@
 import { Block, SummedBlock } from "../../../types";
-import { sumTransactions } from "../blockchain/helpers";
+import sumTransactions from "../blockchain/helpers";
 import { ETHEREUM_SUM_TRANSACTIONS } from "../../actions/ethereum/transactions";
 
 const initState: SummedBlock[] = [];

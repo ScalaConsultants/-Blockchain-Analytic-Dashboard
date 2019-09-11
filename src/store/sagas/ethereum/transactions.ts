@@ -1,8 +1,8 @@
-import { put, takeEvery, select } from "redux-saga/effects";
+import { put, takeEvery, select } from 'redux-saga/effects';
 
-import * as ethereumActions from "../../actions/ethereum/transactions";
-import * as ethereumPageActions from "../../actions/ethereum/page";
-import * as loaderActions from "../../actions/loader";
+import * as ethereumActions from '../../actions/ethereum/transactions';
+import * as ethereumPageActions from '../../actions/ethereum/page';
+import * as loaderActions from '../../actions/loader';
 
 export const getPage = (state: any): number => state.ethereum.page;
 
@@ -15,7 +15,7 @@ async function fetchTransactions(page: number): Promise<any> {
 
 function* doFetchTransactions(): any {
   const page = yield select(getPage);
-  const showLoader = page === 1 ? true : false;
+  const showLoader = page === 1;
 
   // Show loader on initial fetch
   if (showLoader) {

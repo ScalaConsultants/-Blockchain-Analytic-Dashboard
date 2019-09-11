@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import BlockchainSwitch from '../BlockchainSwitch/BlockchainSwitch';
 
-import "./style.css";
+import './style.css';
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,8 +22,12 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     { name: 'Treemap', route: '/treemap' },
     { name: 'Line chart', route: '/line-chart' },
     { name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo' },
-    { name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo' },
+    { name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo' }
   ];
+
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
 
   const goTo = (route: string): void => {
     handleClose();
@@ -34,26 +38,22 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (): void => {
-    setAnchorEl(null);
-  };
-
   return (
     <AppBar position="static" className="MenuAppBar">
       <Toolbar>
         <IconButton
-          aria-owns={anchorEl ? "simple-menu" : undefined}
+          aria-owns={anchorEl ? 'simple-menu' : undefined}
           aria-haspopup="true"
           color="inherit"
           onClick={handleClick}
         >
           <MenuIcon />
         </IconButton>
-        <div className="MenuSpace"></div>
-        <Button color="inherit" onClick={() => goTo("/")}>
+        <div className="MenuSpace" />
+        <Button color="inherit" onClick={() => goTo('/')}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
-        <div style={{marginLeft: "1rem"}}>
+        <div style={{ marginLeft: '1rem' }}>
           <BlockchainSwitch />
         </div>
         <Menu
@@ -62,13 +62,11 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {menuItems.map((item, key) => {
-            return (
-              <MenuItem onClick={() => goTo(item.route)} key={key}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
+          {menuItems.map((item, key) => (
+            <MenuItem onClick={() => goTo(item.route)} key={key}>
+              {item.name}
+            </MenuItem>
+          ))}
         </Menu>
       </Toolbar>
     </AppBar>

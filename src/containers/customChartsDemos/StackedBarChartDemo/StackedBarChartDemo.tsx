@@ -6,7 +6,7 @@ import { State } from "../../../types";
 
 const mapState = (state: State): any => ({
   tezos: state.tezos.blocks,
-  ethereum: state.ethereum.blocks,
+  ethereum: state.ethereum.blocks
 });
 
 const totalWalletsAmounts = (groupingKey: string, blockchain: any) =>
@@ -20,7 +20,7 @@ const totalWalletsAmounts = (groupingKey: string, blockchain: any) =>
     }
     const newItem = {
       key: next[groupingKey],
-      value: next.amount,
+      value: next.amount
     };
 
     return [...acc, newItem];
@@ -67,12 +67,14 @@ function SimpleBarChartDemo(): React.ReactElement {
         data={[
           {
             name: 'Tezos',
-            value: totalWalletsAmounts('source', tezos).reduce((acc: any, next: any) => acc + next.value, 0) / 1000000 * TEZOS_EXCHANGE_RATE
+            value: totalWalletsAmounts('source', tezos).reduce((acc: any, next: any) =>
+              acc + next.value, 0) / 1000000 * TEZOS_EXCHANGE_RATE
           },
           {
             name: 'Ethereum',
-            value: totalWalletsAmounts('source', ethereum).reduce((acc: any, next: any) => acc + next.value, 0) * ETHEREUM_EXCHANGE_RATE
-          },
+            value: totalWalletsAmounts('source', ethereum).reduce((acc: any, next: any) =>
+              acc + next.value, 0) * ETHEREUM_EXCHANGE_RATE
+          }
         ]}
       />
       <p>Value in USD (counted for 1 XTZ = {TEZOS_EXCHANGE_RATE}$, 1 ETH = {ETHEREUM_EXCHANGE_RATE}$)</p>
