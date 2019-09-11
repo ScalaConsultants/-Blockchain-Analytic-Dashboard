@@ -1,3 +1,6 @@
+import { SvgIconProps } from "@material-ui/core/SvgIcon";
+
+
 export interface Config {
   chartType: string;
   label: string;
@@ -59,4 +62,11 @@ export interface FetchTransactionsAction extends ActionType {
 export interface DataSourceActionType extends ActionType {
   type: string;
   source: string;
+}
+
+export interface MenuItemsType {
+  name: string,
+  route: string,
+  icon?: React.ReactElement<SvgIconProps>,
+  description?: string | undefined
 }

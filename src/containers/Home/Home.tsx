@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { menuItems } from "./../../constant";
+import { MenuItemsType } from "../../types";
 
 const useStyles = makeStyles(theme => ({
   dashboardCard: {
@@ -21,8 +22,8 @@ const Home = (): React.ReactElement => {
   const MenuItems = menuItems;
   const classes = useStyles();
 
-  const dashboardBoxGenerator = (boxes: any) => {
-    return boxes.map((item: { icon: any; name: string; route: string; description: string }) => {
+  const dashboardBoxGenerator = (boxes: MenuItemsType []) => {
+    return boxes.map((item: MenuItemsType) => {
       if (item.name !== 'Home') {
         return <Grid key={item.name} className={classes.dashboardCard} item xs={12} sm={6} md={4} >
           <DashboardBox icon={item.icon} name={item.name} route={item.route} description={item.description} />

@@ -1,5 +1,6 @@
 import React from "react";
 
+
 // Icons
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import ListIcon from "@material-ui/icons/List";
@@ -9,8 +10,9 @@ import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutline
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import AddToPhotosOutlinedIcon from '@material-ui/icons/AddToPhotosOutlined';
 import TimelineIcon from '@material-ui/icons/Timeline';
+import { MenuItemsType } from "./types";
 
-export const menuItems = [
+export const menuItems: MenuItemsType[] = [
     { name: "Home", route: "/", icon: <Home />, description: "Home Page" },
     { name: "Transactions", route: "/transactions", icon: <ListIcon />, description: "List of the last 100 000 transaction" },
     { name: "Charts", route: "/charts", icon: <EqualizerIcon />, description: "Graphic representaion of the data" },
