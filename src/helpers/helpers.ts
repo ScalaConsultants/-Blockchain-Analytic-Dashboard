@@ -8,21 +8,21 @@ export const stableSort = (array: any, cmp: any): any => {
   return stabilizedThis.map((el: any) => el[0]);
 };
 
-export const getSorting = (order: any, orderBy: any) => {
-  return order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy);
-};
-
 export const desc = (a: any, b: any, orderBy: any) => {
-  if(!b[orderBy] || !a[orderBy]) return 0;
+  if (!b[orderBy] || !a[orderBy]) return 0;
 
-  let aVal = typeof(a[orderBy]) === "string" ? a[orderBy].toLowerCase() : a[orderBy];
-  let bVal = typeof(b[orderBy]) === "string" ? b[orderBy].toLowerCase() : b[orderBy];
+  const aVal = typeof (a[orderBy]) === 'string' ? a[orderBy].toLowerCase() : a[orderBy];
+  const bVal = typeof (b[orderBy]) === 'string' ? b[orderBy].toLowerCase() : b[orderBy];
 
-  if ( bVal < aVal) {
+  if (bVal < aVal) {
     return -1;
   }
-  else if (bVal > aVal) {
+  if (bVal > aVal) {
     return 1;
   }
-  else return 0;
+  return 0;
 };
+
+export const getSorting = (order: any, orderBy: any) => (
+  order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy)
+);

@@ -13,11 +13,15 @@ import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
 import { MenuItemsType } from "../../types";
 import { menuItems } from "../../constant";
 
-import "./style.css";
+import './style.css';
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuList: MenuItemsType[] = menuItems;
+
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
 
   const goTo = (route: string): void => {
     handleClose();
@@ -28,26 +32,22 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (): void => {
-    setAnchorEl(null);
-  };
-
   return (
     <AppBar position="static" className="MenuAppBar">
       <Toolbar>
         <IconButton
-          aria-owns={anchorEl ? "simple-menu" : undefined}
+          aria-owns={anchorEl ? 'simple-menu' : undefined}
           aria-haspopup="true"
           color="inherit"
           onClick={handleClick}
         >
           <MenuIcon />
         </IconButton>
-        <div className="MenuSpace"></div>
-        <Button color="inherit" onClick={() => goTo("/")}>
+        <div className="MenuSpace" />
+        <Button color="inherit" onClick={() => goTo('/')}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
-        <div style={{marginLeft: "1rem"}}>
+        <div style={{ marginLeft: '1rem' }}>
           <BlockchainSwitch />
         </div>
         <Menu

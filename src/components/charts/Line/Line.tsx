@@ -1,5 +1,5 @@
 import React from 'react';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const LineChart = (data:any) => (
   <Line
@@ -8,4 +8,3 @@ const LineChart = (data:any) => (
 );
 
 export default LineChart;
- 

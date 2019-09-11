@@ -1,5 +1,5 @@
 import React from 'react';
-import {Doughnut} from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 const DoughnutChart = (data:any) => (
   <Doughnut
@@ -8,4 +8,3 @@ const DoughnutChart = (data:any) => (
 );
 
 export default DoughnutChart;
- 

@@ -1,13 +1,13 @@
-import React from "react";
-import { useMappedState } from "redux-react-hook";
-import Box from "@material-ui/core/Box";
-import LiveChartBubble from "../../components/LiveChart/LiveChartBubble";
-import { colors } from "../../helpers/colors";
-import "react-datepicker/dist/react-datepicker.css";
-import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
+import React from 'react';
+import { useMappedState } from 'redux-react-hook';
+import Box from '@material-ui/core/Box';
+import LiveChartBubble from '../../components/LiveChart/LiveChartBubble';
+import colors from '../../helpers/colors';
+import 'react-datepicker/dist/react-datepicker.css';
+import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
 
-const MIN_SIZE = 70; //px;
-const MAX_SIZE = 300; //px;
+const MIN_SIZE = 70; // px;
+const MAX_SIZE = 300; // px;
 function calculateSize(max: number, transactions: number): number {
   // max is the biggest amount of transactions and it's always used as a base size;
   const percentage = (transactions / max) * 100;
@@ -46,7 +46,7 @@ function LiveChart2(): React.ReactElement {
 
   return (
     <React.Fragment>
-      {/*<DatePicker selected={startDate} onChange={handleChange} />*/}
+      {/* <DatePicker selected={startDate} onChange={handleChange} /> */}
       <h1>Top buyer (amount of transactions)</h1>
       <Box
         display="flex"

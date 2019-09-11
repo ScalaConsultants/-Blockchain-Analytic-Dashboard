@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Routes from "./router/routes";
-import MenuAppBar from "./components/menuAppBar/MenuAppBar";
-import * as BlokchainActions from "./store/actions/tezos/blokchain";
-import * as EthereumActions from "./store/actions/ethereum/transactions";
-import { useDispatch, useMappedState } from "redux-react-hook";
-import "./App.css";
-import Loader from "./components/loader/Loader";
-import { getBlockchainByDatasource } from "./store/reducers/dataSource";
-import { State } from "./types";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useDispatch, useMappedState } from 'redux-react-hook';
+import Routes from './router/routes';
+import MenuAppBar from './components/menuAppBar/MenuAppBar';
+import * as BlokchainActions from './store/actions/tezos/blokchain';
+import * as EthereumActions from './store/actions/ethereum/transactions';
+import './App.css';
+import Loader from './components/loader/Loader';
+import { getBlockchainByDatasource } from './store/reducers/dataSource';
+import { State } from './types';
 
 const fetchMoreIntervalSeconds = 10;
 
@@ -21,7 +21,7 @@ const App = (): React.ReactElement => {
   const { blokchain, loader } = useMappedState(mapState);
 
   const dispatch = useDispatch();
-  let dep = 0;
+  const dep = 0;
   useEffect((): void => {
     // Fetch initial blockchain e.g. 50k
     if (blokchain.length) return;

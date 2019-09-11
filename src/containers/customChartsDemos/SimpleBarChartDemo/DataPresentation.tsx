@@ -9,13 +9,13 @@ import SimpleBarChart from '../../../components/customCharts/SimpleBarChart';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1),
-    margin: theme.spacing(2, 0),
-  },
+    margin: theme.spacing(2, 0)
+  }
 }));
 
 const DataPresentation = ({
   dataForChart,
-  fullData,
+  fullData
 }: any) => {
   const [selectedRecordKey, setSelectedRecordKey] = useState('');
   const selectedRecord = fullData.find((element: any) => element.destination === selectedRecordKey) || {};
@@ -50,6 +50,11 @@ const DataPresentation = ({
                 </ListItem>
                 <Divider light />
                 <ListItem>
+                  <h4 style={{ marginRight: 10 }}>transactions</h4>
+                  {selectedRecord.transactions}
+                </ListItem>
+                <Divider light />
+                <ListItem>
                   <h4 style={{ marginRight: 10 }}>amount</h4>
                   {selectedRecord.amount}
                 </ListItem>
@@ -81,7 +86,7 @@ const DataPresentation = ({
           </Grid>
         </Paper>
       )}
-      </>
+    </>
   );
 };
 

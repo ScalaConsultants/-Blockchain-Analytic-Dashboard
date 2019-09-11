@@ -1,249 +1,253 @@
-import React, { useState } from "react";
-import { useMappedState, useDispatch } from "redux-react-hook";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Grid from "@material-ui/core/Grid/Grid";
-import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import TableSortLabel from "@material-ui/core/TableSortLabel/TableSortLabel";
+import React, { useState } from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Grid from '@material-ui/core/Grid/Grid';
+import Tooltip from '@material-ui/core/Tooltip/Tooltip';
+import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 
 import TransactionListPagination from './components/TransactionListPagination';
 import TransactionListFilter from './components/TransactionListFilter';
-import DetailsModal from "./components/DetailsModal";
-import { stableSort, getSorting } from "../../helpers/helpers";
-import * as BlokchainActions from "../../store/actions/tezos/blokchain";
-import { getBlockchainByDatasource } from "../../store/reducers/dataSource";
+import DetailsModal from './components/DetailsModal';
+import { stableSort, getSorting } from '../../helpers/helpers';
+import * as BlokchainActions from '../../store/actions/tezos/blokchain';
+import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
 
 interface HeaderColsInterface {
-    id: string,
-    numeric: boolean,
-    disablePadding: boolean,
-    label: string
+  id: string,
+  numeric: boolean,
+  disablePadding: boolean,
+  label: string
 }
 
-const headerCols: Array<HeaderColsInterface> = [
-    { id: "timestamp", numeric: false, disablePadding: true, label: "Timestamp" },
-    { id: "source", numeric: false, disablePadding: false, label: "Source" },
-    { id: "destination", numeric: false, disablePadding: false, label: "Destination" },
-    { id: "amount", numeric: false, disablePadding: false, label: "Amount" },
-    { id: "counter", numeric: false, disablePadding: false, label: "Counter" },
-    { id: "fee", numeric: false, disablePadding: false, label: "Fee" },
-    { id: "block_level", numeric: false, disablePadding: false, label: "Block level" }
+const headerCols: HeaderColsInterface[] = [
+  { id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp' },
+  { id: 'source', numeric: false, disablePadding: false, label: 'Source' },
+  { id: 'destination', numeric: false, disablePadding: false, label: 'Destination' },
+  { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
+  { id: 'counter', numeric: false, disablePadding: false, label: 'Counter' },
+  { id: 'fee', numeric: false, disablePadding: false, label: 'Fee' },
+  { id: 'block_level', numeric: false, disablePadding: false, label: 'Block level' }
 ];
 
-const filtersName: Array<HeaderColsInterface> = [
-    { id: "source", numeric: false, disablePadding: false, label: "Source" },
-    { id: "destination", numeric: false, disablePadding: false, label: "Destination" },
-    { id: "amountMin", numeric: false, disablePadding: false, label: "Amount min" },
-    { id: "amountMax", numeric: false, disablePadding: false, label: "Amount max" }
+const filtersName: HeaderColsInterface[] = [
+  { id: 'source', numeric: false, disablePadding: false, label: 'Source' },
+  { id: 'destination', numeric: false, disablePadding: false, label: 'Destination' },
+  { id: 'amountMin', numeric: false, disablePadding: false, label: 'Amount min' },
+  { id: 'amountMax', numeric: false, disablePadding: false, label: 'Amount max' }
 ];
 
-type Order = "asc" | "desc";
+type Order = 'asc' | 'desc';
 type OrderBy = string;
 
 const mapState = (state: any): any => ({
-    blokchain: getBlockchainByDatasource(state, state.dataSource)
+  blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
 let initState: any[] = [];
-let filtersOptions: { [key: string]: string } = {};
+const filtersOptions: {[key: string]: string} = {};
 
 const TransactionList = (): React.ReactElement => {
-    const dispatch = useDispatch();
-    const { blokchain } = useMappedState(mapState);
-    if (initState.length === 0) {
-        initState = [...blokchain];
+  const dispatch = useDispatch();
+  const { blokchain } = useMappedState(mapState);
+  if (initState.length === 0) {
+    initState = [...blokchain];
+  }
+
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<OrderBy>('name');
+
+  const [open, setOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState({});
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, blokchain.length - page * rowsPerPage);
+
+  let filteredTable: any = null;
+
+  const handleRequestSort = (event: any, property: any) => {
+    if (orderBy === property && order === 'desc') {
+      setOrder('asc');
+    } else if (orderBy === property && order === 'asc') {
+      setOrder('desc');
+    }
+    setOrderBy(property);
+  };
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const updateFilteredTransactions = (filteredTable: any): void => {
+    dispatch({
+      type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
+      blokchain: filteredTable
+    });
+  };
+
+  const filteredValue = (filtersOptions: { [key: string]: string }) => {
+    let filteredBlokchain = [...initState];
+
+    for (const key in filtersOptions) {
+      if (key === 'amountMin') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => (filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true));
+      }
+
+      if (key === 'amountMax') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => (filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true));
+      }
+
+      if (key === 'destination') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) =>
+            (filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true));
+      }
+
+      if (key === 'source') {
+        filteredBlokchain = filteredBlokchain
+          .filter((block: any) => (filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true));
+      }
     }
 
-    const [order, setOrder] = useState<Order>("asc");
-    const [orderBy, setOrderBy] = useState<OrderBy>("name");
+    return filteredBlokchain;
+  };
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(100);
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, blokchain.length - page * rowsPerPage);
+  const handleClickOpen = (data: Record<string, any>) => {
+    setSelectedRow(data);
+    setOpen(true);
+  };
 
-    let filteredTable: any = null;
+  const filterHandler = (query: string, inputName: string) => {
+    filtersOptions[inputName] = query;
+    filteredTable = filteredValue(filtersOptions);
+    return updateFilteredTransactions(filteredTable);
+  };
 
-    const handleChangePage = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-        newPage: number,
-    ) => {
-        setPage(newPage);
-    }
+  const tablePaginationProps = {
+    rowsPerPageOptions: [15, 25, 50, 100, 250],
+    colSpan: 3,
+    count: blokchain.length,
+    rowsPerPage,
+    page,
+    SelectProps: {
+      inputProps: { 'aria-label': 'rows per page' },
+      native: true
+    },
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage,
+    ActionsComponent: TransactionListPagination
+  };
 
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    }
+  const timestampToDate = (timestamp: number) =>
+    new Date(timestamp)
+      .toISOString()
+      .substr(0, 19)
+      .replace('T', ' ');
 
-    const handleRequestSort = (event: any, property: any) => {
-        if (orderBy === property && order === "desc") {
-            setOrder("asc");
-        } else if (orderBy === property && order === "asc") {
-            setOrder("desc");
-        }
-        setOrderBy(property);
-    };
+  const transactionListHeaderGenerate = (headerCols: HeaderColsInterface[]) =>
+    (headerCols.map((row: HeaderColsInterface) => (
+      <TableCell
+        key={row.id}
+        align={row.numeric ? 'right' : 'left'}
+        padding={row.disablePadding ? 'none' : 'default'}
+        sortDirection={orderBy === row.id ? order : false}
+      >
+        <Tooltip
+          title="Sort"
+          placement={row.numeric ? 'bottom-end' : 'bottom-start'}
+          enterDelay={300}
+        >
+          <TableSortLabel
+            active={orderBy === row.id}
+            direction={order}
+            onClick={e => handleRequestSort(e, row.id)}
+          >
+            {row.label}
+          </TableSortLabel>
+        </Tooltip>
+      </TableCell>
+    )));
 
-    const tablePaginationProps = {
-        rowsPerPageOptions: [15, 25, 50, 100, 250],
-        colSpan: 3,
-        count: blokchain.length,
-        rowsPerPage: rowsPerPage,
-        page: page,
-        SelectProps: {
-            inputProps: { 'aria-label': 'rows per page' },
-            native: true,
-        },
-        onChangePage: handleChangePage,
-        onChangeRowsPerPage: handleChangeRowsPerPage,
-        ActionsComponent: TransactionListPagination
-    }
+  const transactionListRowsGenerate = (blokchain: any) =>
+    (stableSort(
+      blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+      getSorting(order, orderBy)
+    ).map((row: any, index: number) => (
+      <TableRow onClick={() => handleClickOpen(row)} hover key={`Transaction${index}`}>
+        <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
+        <TableCell>{row.source}</TableCell>
+        <TableCell>{row.destination}</TableCell>
+        <TableCell>{row.amount}</TableCell>
+        <TableCell>{row.counter}</TableCell>
+        <TableCell>{row.fee}</TableCell>
+        <TableCell>{row.block_level}</TableCell>
+      </TableRow>
+    )));
 
-    const timestampToDate = (timestamp: number) =>
-        new Date(timestamp)
-            .toISOString()
-            .substr(0, 19)
-            .replace('T', ' ');
+  const transactionListFilterGenerate = (headerCols: HeaderColsInterface[]) =>
+    filtersName.map((row: HeaderColsInterface) => (
+      <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
+    ));
 
-    const transactionListHeaderGenerate = (headerCols: Array<HeaderColsInterface>) =>
-        (headerCols.map((row: HeaderColsInterface) => (
-            <TableCell
-                key={row.id}
-                align={row.numeric ? "right" : "left"}
-                padding={row.disablePadding ? "none" : "default"}
-                sortDirection={orderBy === row.id ? order : false}
-            >
-                <Tooltip
-                    title="Sort"
-                    placement={row.numeric ? "bottom-end" : "bottom-start"}
-                    enterDelay={300}
-                >
-                    <TableSortLabel
-                        active={orderBy === row.id}
-                        direction={order}
-                        onClick={e => handleRequestSort(e, row.id)}
-                    >
-                        {row.label}
-                    </TableSortLabel>
-                </Tooltip>
-            </TableCell>
-        )))
+  const filteredUpdateMessage = () => (
+    <p>
+      Find
+      <strong>{blokchain.length}</strong>
+      results
+    </p>
+  );
 
-    const transactionListRowsGenerate = (blokchain: any) =>
-        (stableSort(
-            blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-            getSorting(order, orderBy)
-        ).map((row: any, index: number) => (
-            <TableRow onClick={() => handleClickOpen(row)} hover key={'Transaction' + index}>
-                <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
-                <TableCell>{row.source}</TableCell>
-                <TableCell>{row.destination}</TableCell>
-                <TableCell>{row.amount}</TableCell>
-                <TableCell>{row.counter}</TableCell>
-                <TableCell>{row.fee}</TableCell>
-                <TableCell>{row.block_level}</TableCell>
+  const handleClose = () => setOpen(false);
+
+  return (
+    <Grid container spacing={9} className="Container">
+      <Grid item xs={12} lg={12}>
+        {transactionListFilterGenerate(headerCols)}
+        {filteredUpdateMessage()}
+        <Table>
+          <TableHead>
+            <TableRow>
+              {transactionListHeaderGenerate(headerCols)}
             </TableRow>
-        )))
-
-    const transactionListFilterGenerate = (headerCols: Array<HeaderColsInterface>) =>
-        filtersName.map((row: HeaderColsInterface) => (
-            <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
-        ))
-
-    const filteredValue = (filtersOptions: { [key: string]: string }) => {
-        let filteredBlokchain = [...initState];
-
-        for (let key in filtersOptions) {
-
-            if (key === 'amountMin') {
-                filteredBlokchain = filteredBlokchain
-                    .filter((block: any) => filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true);
-            }
-
-            if (key === 'amountMax') {
-                filteredBlokchain = filteredBlokchain
-                    .filter((block: any) => filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true);
-            }
-
-            if (key === 'destination') {
-                filteredBlokchain = filteredBlokchain
-                    .filter((block: any) => filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true);
-            }
-
-            if (key === 'source') {
-                filteredBlokchain = filteredBlokchain
-                    .filter((block: any) => filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true);
-            }
-        }
-
-        return filteredBlokchain;
-    }
-
-    const filterHandler = (query: string, inputName: string) => {
-        filtersOptions[inputName] = query;
-        filteredTable = filteredValue(filtersOptions);
-        return updateFilteredTransactions(filteredTable);
-    }
-
-    const updateFilteredTransactions = (filteredTable: any): void => {
-        dispatch({
-            type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
-            blokchain: filteredTable
-        });
-    };
-
-    const filteredUpdateMessage = () => {
-        return <p>Find <strong>{blokchain.length}</strong> results</p>
-    }
-
-    const [open, setOpen] = React.useState(false);
-    const [selectedRow, setSelectedRow] = React.useState({});
-
-    const handleClickOpen = (data: Object) => {
-        setSelectedRow(data);
-        setOpen(true);
-    }
-
-    const handleClose = () => setOpen(false);
-
-    return (
-        <Grid container spacing={9} className="Container">
-            <Grid item xs={12} lg={12}>
-                {transactionListFilterGenerate(headerCols)}
-                {filteredUpdateMessage()}
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {transactionListHeaderGenerate(headerCols)}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {transactionListRowsGenerate(blokchain)}
-                        {emptyRows > 0 && (
-                            <TableRow style={{ height: 48 * emptyRows }}>
-                                <TableCell colSpan={6} />
-                            </TableRow>
-                        )}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                {...tablePaginationProps}
-                            />
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </Grid>
-            <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
-        </Grid>
-    );
+          </TableHead>
+          <TableBody>
+            {transactionListRowsGenerate(blokchain)}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 48 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                {...tablePaginationProps}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </Grid>
+      <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
+    </Grid>
+  );
 };
 
 export default TransactionList;

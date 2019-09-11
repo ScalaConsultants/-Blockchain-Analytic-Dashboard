@@ -3,7 +3,7 @@ import {
   BLOKCHAIN_SET_MORE_TRANSACTIONS
 } from "../../actions/tezos/blokchain";
 import { Block, SummedBlock } from "../../../types";
-import { sumTransactions } from "../blockchain/helpers";
+import sumTransactions from "../blockchain/helpers";
 
 const initState: SummedBlock[] = [];
 
