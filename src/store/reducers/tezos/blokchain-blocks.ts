@@ -4,7 +4,7 @@ import {
   BLOKCHAIN_SET_MORE_TRANSACTIONS,
   BLOKCHAIN_FILTER_TRANSACTIONS
 } from '../../actions/tezos/blokchain';
-import {Block} from '../../../types';
+import { Block } from '../../../types';
 
 const initState: Block[] = [];
 

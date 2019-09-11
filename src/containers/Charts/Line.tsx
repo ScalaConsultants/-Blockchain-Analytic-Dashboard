@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useMappedState, useDispatch} from 'redux-react-hook';
+import React, { useEffect, useState } from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -8,9 +8,9 @@ import LineChart from '../../components/charts/Line/Line';
 
 import FormControlField from '../../components/FormControl/FormControl';
 
-import {LOADER_STATE} from '../../store/actions/loader';
+import { LOADER_STATE } from '../../store/actions/loader';
 
-import {Blockchain, Block, State} from '../../types';
+import { Blockchain, Block, State } from '../../types';
 import {
   convertTimeStamp,
   convertTimeStampToHours,
@@ -23,7 +23,7 @@ const mapState = (state: State): Blockchain => ({
 
 const LineCharts = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const {blokchain} = useMappedState(mapState);
+  const { blokchain } = useMappedState(mapState);
   const [dateFrom, setDateFrom] = useState(getSelectedDate(7));
   const [label, setLabel] = useState([
     '19-04-2019'
@@ -164,7 +164,7 @@ const LineCharts = (): React.ReactElement => {
 
   return (
     <div>
-      <div style={{marginBottom: '30px', marginTop: '30px'}}>
+      <div style={{ marginBottom: '30px', marginTop: '30px' }}>
         <TextField
           id="date"
           label="Select date"
@@ -175,7 +175,7 @@ const LineCharts = (): React.ReactElement => {
             setTimeout(() => triggerSetDateFrom(e), 100);
           }}
           defaultValue={getSelectedDate(0)}
-          style={{width: '30%'}}
+          style={{ width: '30%' }}
         />
         <FormControlField
           value={select}
@@ -219,12 +219,12 @@ const LineCharts = (): React.ReactElement => {
           onClick={(): void => {
             setTimeout(() => submitChart(), 100);
           }}
-          style={{marginLeft: 20, marginTop: 10}}
+          style={{ marginLeft: 20, marginTop: 10 }}
         >
           Submit
         </Button>
       </div>
-      <h1 style={{textAlign: 'center'}}>{config.title}</h1>
+      <h1 style={{ textAlign: 'center' }}>{config.title}</h1>
       <LineChart
         data={chartLineData}
         width={100}

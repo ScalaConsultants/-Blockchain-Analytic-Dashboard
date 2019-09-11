@@ -1,5 +1,5 @@
-import {ETHEREUM_SET_TRANSACTIONS} from '../../actions/ethereum/transactions';
-import {Block} from '../../../types';
+import { ETHEREUM_SET_TRANSACTIONS } from '../../actions/ethereum/transactions';
+import { Block } from '../../../types';
 
 const initState: Block[] = [];
 

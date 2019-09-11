@@ -1,8 +1,8 @@
 import React from 'react';
-import {useMappedState} from 'redux-react-hook';
+import { useMappedState } from 'redux-react-hook';
 import StackedBarChart from '../../../components/customCharts/StackedBarChart';
 import SimpleHorizontalBarChart from '../../../components/customCharts/SimpleHorizontalBarChart';
-import {State} from "../../../types";
+import { State } from "../../../types";
 
 const mapState = (state: State): any => ({
   tezos: state.tezos.blocks,
@@ -30,33 +30,33 @@ const TEZOS_EXCHANGE_RATE = 1.05;
 const ETHEREUM_EXCHANGE_RATE = 183.48;
 
 function SimpleBarChartDemo(): React.ReactElement {
-  const {tezos, ethereum} = useMappedState(mapState);
+  const { tezos, ethereum } = useMappedState(mapState);
 
   return (
     <>
-      <h1 style={{marginBottom: 60}}>Stacked bar chart demo</h1>
+      <h1 style={{ marginBottom: 60 }}>Stacked bar chart demo</h1>
 
       <h2>Top buyers and sellers</h2>
       <h3>
         Wallets by total transactions values and its relation to the entire downloaded range
       </h3>
       <h3>Tezos</h3>
-      <h4 style={{marginBottom: 12}}>Buying transactions</h4>
+      <h4 style={{ marginBottom: 12 }}>Buying transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('source', tezos).sort((a: any, b: any) => b.value - a.value)}
       />
-      <h4 style={{marginBottom: 12}}>Selling transactions</h4>
+      <h4 style={{ marginBottom: 12 }}>Selling transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('destination', tezos).sort((a: any, b: any) => b.value - a.value)}
       />
       <p>(grey area are values that are less then 0.1% of total)</p>
 
       <h3>Ethereum</h3>
-      <h4 style={{marginBottom: 12}}>Buying transactions</h4>
+      <h4 style={{ marginBottom: 12 }}>Buying transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('source', ethereum).sort((a: any, b: any) => b.value - a.value)}
       />
-      <h4 style={{marginBottom: 12}}>Selling transactions</h4>
+      <h4 style={{ marginBottom: 12 }}>Selling transactions</h4>
       <StackedBarChart
         data={totalWalletsAmounts('destination', ethereum).sort((a: any, b: any) => b.value - a.value)}
       />

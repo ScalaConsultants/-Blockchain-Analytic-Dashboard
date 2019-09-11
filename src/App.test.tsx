@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {StoreContext} from 'redux-react-hook';
+import { StoreContext } from 'redux-react-hook';
 import configureStore from './store';
 import App from './App';
 

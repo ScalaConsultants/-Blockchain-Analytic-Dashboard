@@ -16,8 +16,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 
-import {TransitionProps} from '@material-ui/core/transitions';
-import {makeStyles} from '@material-ui/core/styles';
+import { TransitionProps } from '@material-ui/core/transitions';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   dialogTitle: {
@@ -59,7 +59,7 @@ interface Props {
   data: any
 }
 
-const DetailsModal = ({open, handleClose, data}: Props): React.ReactElement => {
+const DetailsModal = ({ open, handleClose, data }: Props): React.ReactElement => {
   const classes = useStyles();
   return (
     <Dialog

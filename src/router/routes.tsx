@@ -1,6 +1,6 @@
 import React from 'react';
-import {Route} from 'react-router';
-import {Container} from '@material-ui/core';
+import { Route } from 'react-router';
+import { Container } from '@material-ui/core';
 import Transactions from '../containers/Transactions/Transactions';
 import Charts from '../containers/Charts/Charts';
 import Home from '../containers/Home/Home';

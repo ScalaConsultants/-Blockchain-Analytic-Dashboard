@@ -1,4 +1,4 @@
-import {Block} from '../../../types';
+import { Block } from '../../../types';
 
 // Loops through an entire array of transactions and sums them up
 // by owner

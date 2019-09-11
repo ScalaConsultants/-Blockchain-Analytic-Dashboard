@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {setFontStyle} from './helpers';
+import React, { useEffect, useRef } from 'react';
+import { setFontStyle } from './helpers';
 
 interface ChartData {
   name: string;

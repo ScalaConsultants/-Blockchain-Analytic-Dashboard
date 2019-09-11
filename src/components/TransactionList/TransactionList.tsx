@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useMappedState, useDispatch} from 'redux-react-hook';
+import React, { useState } from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,9 +14,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TransactionListPagination from './components/TransactionListPagination';
 import TransactionListFilter from './components/TransactionListFilter';
 import DetailsModal from './components/DetailsModal';
-import {stableSort, getSorting} from '../../helpers/helpers';
+import { stableSort, getSorting } from '../../helpers/helpers';
 import * as BlokchainActions from '../../store/actions/tezos/blokchain';
-import {getBlockchainByDatasource} from '../../store/reducers/dataSource';
+import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
 
 interface HeaderColsInterface {
   id: string,
@@ -26,20 +26,20 @@ interface HeaderColsInterface {
 }
 
 const headerCols: HeaderColsInterface[] = [
-  {id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp'},
-  {id: 'source', numeric: false, disablePadding: false, label: 'Source'},
-  {id: 'destination', numeric: false, disablePadding: false, label: 'Destination'},
-  {id: 'amount', numeric: false, disablePadding: false, label: 'Amount'},
-  {id: 'counter', numeric: false, disablePadding: false, label: 'Counter'},
-  {id: 'fee', numeric: false, disablePadding: false, label: 'Fee'},
-  {id: 'block_level', numeric: false, disablePadding: false, label: 'Block level'}
+  { id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp' },
+  { id: 'source', numeric: false, disablePadding: false, label: 'Source' },
+  { id: 'destination', numeric: false, disablePadding: false, label: 'Destination' },
+  { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
+  { id: 'counter', numeric: false, disablePadding: false, label: 'Counter' },
+  { id: 'fee', numeric: false, disablePadding: false, label: 'Fee' },
+  { id: 'block_level', numeric: false, disablePadding: false, label: 'Block level' }
 ];
 
 const filtersName: HeaderColsInterface[] = [
-  {id: 'source', numeric: false, disablePadding: false, label: 'Source'},
-  {id: 'destination', numeric: false, disablePadding: false, label: 'Destination'},
-  {id: 'amountMin', numeric: false, disablePadding: false, label: 'Amount min'},
-  {id: 'amountMax', numeric: false, disablePadding: false, label: 'Amount max'}
+  { id: 'source', numeric: false, disablePadding: false, label: 'Source' },
+  { id: 'destination', numeric: false, disablePadding: false, label: 'Destination' },
+  { id: 'amountMin', numeric: false, disablePadding: false, label: 'Amount min' },
+  { id: 'amountMax', numeric: false, disablePadding: false, label: 'Amount max' }
 ];
 
 type Order = 'asc' | 'desc';
@@ -54,7 +54,7 @@ const filtersOptions: {[key: string]: string} = {};
 
 const TransactionList = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const {blokchain} = useMappedState(mapState);
+  const { blokchain } = useMappedState(mapState);
   if (initState.length === 0) {
     initState = [...blokchain];
   }
@@ -148,7 +148,7 @@ const TransactionList = (): React.ReactElement => {
     rowsPerPage,
     page,
     SelectProps: {
-      inputProps: {'aria-label': 'rows per page'},
+      inputProps: { 'aria-label': 'rows per page' },
       native: true
     },
     onChangePage: handleChangePage,
@@ -231,7 +231,7 @@ const TransactionList = (): React.ReactElement => {
           <TableBody>
             {transactionListRowsGenerate(blokchain)}
             {emptyRows > 0 && (
-              <TableRow style={{height: 48 * emptyRows}}>
+              <TableRow style={{ height: 48 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}

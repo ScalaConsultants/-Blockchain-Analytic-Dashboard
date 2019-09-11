@@ -41,7 +41,6 @@ module.exports = {
       }
     ],
     "no-plusplus": "off",
-    "object-curly-spacing": ["error", "never"],
     "object-curly-newline": "off",
     "prettier/prettier": "warn",
     "quotes": ["error", "single"],

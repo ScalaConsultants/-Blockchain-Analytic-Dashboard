@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {withRouter} from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -14,15 +14,15 @@ import './style.css';
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState(null);
   const menuItems = [
-    {name: 'Home', route: '/'},
-    {name: 'Transactions', route: '/transactions'},
-    {name: 'Charts', route: '/charts'},
-    {name: 'Top seller', route: '/top-seller'},
-    {name: 'Top buyer', route: '/top-buyer'},
-    {name: 'Treemap', route: '/treemap'},
-    {name: 'Line chart', route: '/line-chart'},
-    {name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo'},
-    {name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo'}
+    { name: 'Home', route: '/' },
+    { name: 'Transactions', route: '/transactions' },
+    { name: 'Charts', route: '/charts' },
+    { name: 'Top seller', route: '/top-seller' },
+    { name: 'Top buyer', route: '/top-buyer' },
+    { name: 'Treemap', route: '/treemap' },
+    { name: 'Line chart', route: '/line-chart' },
+    { name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo' },
+    { name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo' }
   ];
 
   const handleClose = (): void => {
@@ -53,7 +53,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
         <Button color="inherit" onClick={() => goTo('/')}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
-        <div style={{marginLeft: '1rem'}}>
+        <div style={{ marginLeft: '1rem' }}>
           <BlockchainSwitch />
         </div>
         <Menu

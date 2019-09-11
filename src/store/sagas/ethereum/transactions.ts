@@ -1,4 +1,4 @@
-import {put, takeEvery, select} from 'redux-saga/effects';
+import { put, takeEvery, select } from 'redux-saga/effects';
 
 import * as ethereumActions from '../../actions/ethereum/transactions';
 import * as ethereumPageActions from '../../actions/ethereum/page';

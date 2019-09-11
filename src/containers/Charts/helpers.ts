@@ -1,4 +1,4 @@
-import {Config, Block} from '../../types';
+import { Config, Block } from '../../types';
 
 export const convertTimeStampToHour = (date: number): number => {
   const newDate = new Date(date);

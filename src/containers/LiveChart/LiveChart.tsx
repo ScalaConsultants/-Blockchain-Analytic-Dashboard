@@ -1,5 +1,5 @@
 import React from 'react';
-import {useMappedState, useDispatch} from 'redux-react-hook';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 import Box from '@material-ui/core/Box';
 import LiveChartBubble from '../../components/LiveChart/LiveChartBubble';
 import DatePicker from '../../components/DatePicker/DatePicker';
@@ -9,7 +9,7 @@ import {
   getBlockchainByDatasource,
   getSummedBlockchainByDatasource
 } from '../../store/reducers/dataSource';
-import {sumTransactionsByDatasource} from '../../store/actions/dataSource';
+import { sumTransactionsByDatasource } from '../../store/actions/dataSource';
 
 const MIN_SIZE = 70; // px;
 const MAX_SIZE = 300; // px;
@@ -28,7 +28,7 @@ const mapState = (state: any): any => ({
 });
 
 function LiveChart(): React.ReactElement {
-  const {summedBlocks, blocks, dataSource} = useMappedState(mapState);
+  const { summedBlocks, blocks, dataSource } = useMappedState(mapState);
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date()
   );

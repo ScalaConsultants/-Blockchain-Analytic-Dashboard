@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useMappedState, useDispatch} from 'redux-react-hook';
+import React, { useEffect, useState } from 'react';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import BarChart from '../../components/charts/Bar/Bar';
 import DoughnutChart from '../../components/charts/Doughnut/Doughnut';
-import {Blockchain, Block, State} from '../../types';
+import { Blockchain, Block, State } from '../../types';
 import {
   convertTimeStampToHour,
   convertTimeStamp,
@@ -16,7 +16,7 @@ import {
   convertDateArray,
   getSelectedDate
 } from './helpers';
-import {getBlockchainByDatasource} from '../../store/reducers/dataSource';
+import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
 
 const mapState = (state: State): Blockchain => ({
   blokchain: getBlockchainByDatasource(state, state.dataSource)
@@ -24,7 +24,7 @@ const mapState = (state: State): Blockchain => ({
 
 const Charts = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const {blokchain} = useMappedState(mapState);
+  const { blokchain } = useMappedState(mapState);
   const [dateFrom, setDateFrom] = useState(getSelectedDate(7));
   const [dateTo, setDateTo] = useState(getSelectedDate(0));
   const [label, setLabel] = useState([
@@ -213,7 +213,7 @@ const Charts = (): React.ReactElement => {
   return (
     <>
       <div>
-        <div style={{marginBottom: '30px', marginTop: '30px'}}>
+        <div style={{ marginBottom: '30px', marginTop: '30px' }}>
           <TextField
             id="date"
             label="Date From"
@@ -224,7 +224,7 @@ const Charts = (): React.ReactElement => {
               setTimeout(() => triggerSetDateFrom(e), 100);
             }}
             defaultValue={getSelectedDate(7)}
-            style={{width: '33%'}}
+            style={{ width: '33%' }}
           />
           <TextField
             id="date"
@@ -236,9 +236,9 @@ const Charts = (): React.ReactElement => {
               e.persist();
               setTimeout(() => triggerSetDateTo(e), 100);
             }}
-            style={{width: '33%'}}
+            style={{ width: '33%' }}
           />
-          <FormControl style={{width: '33%'}}>
+          <FormControl style={{ width: '33%' }}>
             <InputLabel>Select chart</InputLabel>
             <Select
               value={select}
@@ -254,7 +254,7 @@ const Charts = (): React.ReactElement => {
             </Select>
           </FormControl>
         </div>
-        <h1 style={{textAlign: 'center'}}>{config.title}</h1>
+        <h1 style={{ textAlign: 'center' }}>{config.title}</h1>
         <BarChart
           data={chartBarData}
           width={100}
@@ -263,7 +263,7 @@ const Charts = (): React.ReactElement => {
             maintainAspectRatio: true
           }}
         />
-        <h1 style={{textAlign: 'center'}}>Time of day</h1>
+        <h1 style={{ textAlign: 'center' }}>Time of day</h1>
         <DoughnutChart data={chartDoughnutData} />
       </div>
     </>

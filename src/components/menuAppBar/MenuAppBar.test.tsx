@@ -1,6 +1,6 @@
 import React from 'react';
-import {mount, shallow} from 'enzyme';
-import {MemoryRouter} from 'react-router-dom';
+import { mount, shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -26,7 +26,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one ButtonAppBar element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );
@@ -35,7 +35,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one AppBar element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );
@@ -45,7 +45,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one Toolbar element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );
@@ -55,7 +55,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one Button element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );
@@ -65,7 +65,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one IconButton element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );
@@ -75,7 +75,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one MenuIcon element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );
@@ -86,7 +86,7 @@ describe('MenuAppBar', () => {
 
   it('should render with one Menu element', () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={[{pathname: '/', key: 'testKey'}]}>
+      <MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}>
         <ButtonAppBar {...props}/>
       </MemoryRouter>
     );

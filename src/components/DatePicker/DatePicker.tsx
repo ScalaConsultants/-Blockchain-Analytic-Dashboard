@@ -5,7 +5,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from '@material-ui/pickers';
-import {DatePickerProps} from '../../types';
+import { DatePickerProps } from '../../types';
 
 /**
  * This component is used in `LiveChart` if you need for reference.

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useMappedState, useDispatch} from 'redux-react-hook';
+import { useMappedState, useDispatch } from 'redux-react-hook';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -10,7 +10,7 @@ const mapState = (state: any): any => ({
 });
 
 const BlockchainSwitch = (props: any): React.ReactElement => {
-  const {dataSource} = useMappedState(mapState);
+  const { dataSource } = useMappedState(mapState);
   const dispatch = useDispatch();
 
   const handleBlockchainChange = (
@@ -23,10 +23,10 @@ const BlockchainSwitch = (props: any): React.ReactElement => {
   };
 
   return (
-    <FormControl style={{minWidth: '100px'}}>
-      <InputLabel style={{color: '#ffffff'}}>Blockchain</InputLabel>
+    <FormControl style={{ minWidth: '100px' }}>
+      <InputLabel style={{ color: '#ffffff' }}>Blockchain</InputLabel>
       <Select
-        style={{color: '#ffffff'}}
+        style={{ color: '#ffffff' }}
         value={dataSource}
         onChange={handleBlockchainChange}
       >
