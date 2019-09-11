@@ -21,7 +21,7 @@ function SimpleBarChartDemo(): React.ReactElement {
       }
       const newItem = {
         key: next[groupingKey],
-        value: next.amount,
+        value: next.amount
       };
 
       return [...acc, newItem];
@@ -51,11 +51,13 @@ function SimpleBarChartDemo(): React.ReactElement {
         data={[
           {
             name: 'Buying',
-            value: totalWalletsAmounts('source').reduce((acc: any, next: any) => acc + next.value, 0) / 1000000 * 1.05
+            value: totalWalletsAmounts('source').reduce((acc: any, next: any) =>
+              acc + next.value, 0) / 1000000 * 1.05
           },
           {
             name: 'Selling',
-            value: totalWalletsAmounts('destination').reduce((acc: any, next: any) => acc + next.value, 0) / 1000000 * 1.05
+            value: totalWalletsAmounts('destination').reduce((acc: any, next: any) =>
+              acc + next.value, 0) / 1000000 * 1.05
           }
         ]}
       />
