@@ -188,31 +188,31 @@ const LineCharts = (): React.ReactElement => {
           firstItemName={'Buyers'}
           inputLabel={'Select buyers'}
         />
-          {config.chartType == 'buyers'
-            ? (
-              <FormControlField
-                value={buyer}
-                onChange={(e: any) => {
-                  handleBuyerChange(e);
-                }}
-                items={renderBuyers}
-                firstItemValue={'buyer'}
-                firstItemName={'Buyers'}
-                inputLabel={'Select buyers'}
-              />
-            )
-            : (
-              <FormControlField
-                value={seller}
-                onChange={(e: any) => {
-                  handleSellerChange(e);
-                }}
-                items={renderSellers}
-                firstItemValue={'seler'}
-                firstItemName={'Sellers'}
-                inputLabel={'Select sellers'}
-              />
-            )}
+        {config.chartType == 'buyers'
+          ? (
+            <FormControlField
+              value={buyer}
+              onChange={(e: any) => {
+                handleBuyerChange(e);
+              }}
+              items={renderBuyers}
+              firstItemValue={'buyer'}
+              firstItemName={'Buyers'}
+              inputLabel={'Select buyers'}
+            />
+          )
+          : (
+            <FormControlField
+              value={seller}
+              onChange={(e: any) => {
+                handleSellerChange(e);
+              }}
+              items={renderSellers}
+              firstItemValue={'seler'}
+              firstItemName={'Sellers'}
+              inputLabel={'Select sellers'}
+            />
+          )}
         <Button
           variant="contained"
           color="secondary"
