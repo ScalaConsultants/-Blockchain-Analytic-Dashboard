@@ -18,12 +18,32 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "arrow-parens": "off",
     "comma-dangle": ["error", "never"],
+    "implicit-arrow-linebreak": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/no-unresolved": [ 0, { caseSensitive: false } ],
+    "max-len": ["error", {
+      "code": 120,
+      "ignoreRegExpLiterals": true,
+      "ignoreUrls": true,
+      "tabWidth": 2,
+    }],
     "no-console": 2,
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": true
+      }
+    ],
     "no-plusplus": "off",
     "object-curly-spacing": ["error", "never"],
-    // "prettier/prettier": "warn",
+    "object-curly-newline": "off",
+    "prettier/prettier": "warn",
     "quotes": ["error", "single"],
     "react/jsx-curly-spacing": ["error", {
       "attributes": { "when": "never" },
@@ -33,29 +53,7 @@ module.exports = {
     "react/destructuring-assignment":"off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": "off",
-    "object-curly-newline": "off",
-    "max-len": ["error", {
-      "code": 120,
-      "ignoreRegExpLiterals": true,
-      "ignoreUrls": true,
-      "tabWidth": 2,
-    }],
-    "react/jsx-tag-spacing": "off",
-    "@typescript-eslint/no-explicit-any": "off", // temporary,
-    "implicit-arrow-linebreak": "off",
-    "no-mixed-operators": [
-      "error",
-      {
-        "groups": [
-          // ["+", "-", "*", "/", "%", "**"],
-          ["&", "|", "^", "~", "<<", ">>", ">>>"],
-          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
-          ["&&", "||"],
-          ["in", "instanceof"]
-        ],
-        "allowSamePrecedence": true
-      }
-    ]
+    "react/jsx-tag-spacing": "off"
   },
   env: {
     "browser": true,
