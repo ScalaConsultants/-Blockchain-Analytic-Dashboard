@@ -11,19 +11,13 @@ import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 
-import TransactionListPagination from './components/TransactionListPagination';
-import TransactionListFilter from './components/TransactionListFilter';
-import DetailsModal from './components/DetailsModal';
+import TransactionListPagination from './TransactionsListPagination-view';
+import TransactionsListFilter from './TransactionsListFilter-view';
+import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
 import * as BlokchainActions from '../../store/actions/tezos/blokchain';
 import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
-
-interface HeaderColsInterface {
-  id: string,
-  numeric: boolean,
-  disablePadding: boolean,
-  label: string
-}
+import { HeaderColsInterface, Order, OrderBy } from './types';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp' },
@@ -42,15 +36,12 @@ const filtersName: HeaderColsInterface[] = [
   { id: 'amountMax', numeric: false, disablePadding: false, label: 'Amount max' }
 ];
 
-type Order = 'asc' | 'desc';
-type OrderBy = string;
-
 const mapState = (state: any): any => ({
   blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
 let initState: any[] = [];
-const filtersOptions: {[key: string]: string} = {};
+const filtersOptions: { [key: string]: string } = {};
 
 const TransactionList = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -202,9 +193,9 @@ const TransactionList = (): React.ReactElement => {
       </TableRow>
     )));
 
-  const transactionListFilterGenerate = (headerCols: HeaderColsInterface[]) =>
+  const transactionsListFilterGenerate = (headerCols: HeaderColsInterface[]) =>
     filtersName.map((row: HeaderColsInterface) => (
-      <TransactionListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
+      <TransactionsListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
     ));
 
   const filteredUpdateMessage = () => (
@@ -215,38 +206,46 @@ const TransactionList = (): React.ReactElement => {
     </p>
   );
 
-  const handleClose = () => setOpen(false);
-
   return (
     <Grid container spacing={9} className="Container">
       <Grid item xs={12} lg={12}>
-        {transactionListFilterGenerate(headerCols)}
-        {filteredUpdateMessage()}
-        <Table>
-          <TableHead>
-            <TableRow>
-              {transactionListHeaderGenerate(headerCols)}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {transactionListRowsGenerate(blokchain)}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 48 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                {...tablePaginationProps}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
+        <h1 id="client-manager-title" className="Transactions__header">
+          Transactions list
+        </h1>
       </Grid>
-      <DetailsModal open={open} handleClose={handleClose} data={selectedRow} />
+      <Grid>
+        <Grid container spacing={9} className="Container">
+          <Grid item xs={12} lg={12}>
+            {transactionsListFilterGenerate(headerCols)}
+            {filteredUpdateMessage()}
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {transactionListHeaderGenerate(headerCols)}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {transactionListRowsGenerate(blokchain)}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 48 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    {...tablePaginationProps}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </Grid>
+          <DetailsModal open={open} handleClose={() => setOpen(false)} data={selectedRow} />
+        </Grid>
+      </Grid>
     </Grid>
+
   );
 };
 

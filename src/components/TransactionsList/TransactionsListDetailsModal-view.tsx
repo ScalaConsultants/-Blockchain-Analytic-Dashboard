@@ -17,27 +17,8 @@ import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 
 import { TransitionProps } from '@material-ui/core/transitions';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-  dialogTitle: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    '& h2': {
-      width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between'
-    }
-  },
-  dialogAction: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-    paddingRight: theme.spacing(3),
-    paddingLeft: theme.spacing(3)
-  }
-}));
+import { transactionsDetailsModalStyle } from './TransactionsList-styles';
+import { ModalDetailsProps } from './types';
 
 /* eslint-disable function-paren-newline */
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) =>
@@ -53,14 +34,9 @@ const tableRowGenerator = (data: any) => (
   ))
 );
 
-interface Props {
-  open: boolean,
-  handleClose: any,
-  data: any
-}
+const DetailsModal = ({ open, handleClose, data }: ModalDetailsProps): React.ReactElement => {
+  const classes = transactionsDetailsModalStyle();
 
-const DetailsModal = ({ open, handleClose, data }: Props): React.ReactElement => {
-  const classes = useStyles();
   return (
     <Dialog
       open={open}
