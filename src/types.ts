@@ -8,7 +8,7 @@ export interface Config {
 export interface Block {
   source: string;
   timestamp: number;
-  block_leve: number;
+  block_level: number;
   amount: number;
   counter: number;
   destination: string;

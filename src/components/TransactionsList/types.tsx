@@ -1,3 +1,5 @@
+import {Block} from "../../types";
+
 export interface TablePaginationActionsProps {
     count: number;
     page: number;
@@ -6,17 +8,17 @@ export interface TablePaginationActionsProps {
 }
 
 export interface HeaderColsInterface {
-    id: string,
-    numeric: boolean,
-    disablePadding: boolean,
-    label: string
+    id: string;
+    numeric: boolean;
+    disablePadding: boolean;
+    label: string;
 }
 
 export type Order = 'asc' | 'desc';
 export type OrderBy = string;
 
 export interface ModalDetailsProps {
-    open: boolean,
-    handleClose: any,
-    data: any,
-  }
+    open: boolean;
+    handleClose: () => void;
+    data: Block | {};
+}

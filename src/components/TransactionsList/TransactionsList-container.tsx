@@ -17,7 +17,8 @@ import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
 import * as BlokchainActions from '../../store/actions/tezos/blokchain';
 import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
-import { HeaderColsInterface, Order, OrderBy } from './types';
+import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy } from './types';
+import { Block } from "../../types";
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp' },
@@ -36,11 +37,11 @@ const filtersName: HeaderColsInterface[] = [
   { id: 'amountMax', numeric: false, disablePadding: false, label: 'Amount max' }
 ];
 
-const mapState = (state: any): any => ({
+const mapState = (state: any): { blokchain: Array<Block> } => ({
   blokchain: getBlockchainByDatasource(state, state.dataSource)
 });
 
-let initState: any[] = [];
+let initState: Array<Block> = [];
 const filtersOptions: { [key: string]: string } = {};
 
 const TransactionList = (): React.ReactElement => {
@@ -62,7 +63,7 @@ const TransactionList = (): React.ReactElement => {
 
   let filteredTable: any = null;
 
-  const handleRequestSort = (event: any, property: any) => {
+  const handleRequestSort = (property: string) => {
     if (orderBy === property && order === 'desc') {
       setOrder('asc');
     } else if (orderBy === property && order === 'asc') {
@@ -71,21 +72,16 @@ const TransactionList = (): React.ReactElement => {
     setOrderBy(property);
   };
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-    newPage: number,
-  ) => {
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const updateFilteredTransactions = (filteredTable: any): void => {
+  const updateFilteredTransactions = (filteredTable: Array<Block>): void => {
     dispatch({
       type: BlokchainActions.BLOKCHAIN_FILTER_TRANSACTIONS,
       blokchain: filteredTable
@@ -98,23 +94,23 @@ const TransactionList = (): React.ReactElement => {
     for (const key in filtersOptions) {
       if (key === 'amountMin') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => (filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true));
+          .filter((block: Block) => (filtersOptions[key].length ? block.amount > parseInt(filtersOptions[key]) : true));
       }
 
       if (key === 'amountMax') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => (filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true));
+          .filter((block: Block) => (filtersOptions[key].length ? block.amount < parseInt(filtersOptions[key]) : true));
       }
 
       if (key === 'destination') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) =>
+          .filter((block: Block) =>
             (filtersOptions[key].length ? block.destination.includes(filtersOptions[key]) : true));
       }
 
       if (key === 'source') {
         filteredBlokchain = filteredBlokchain
-          .filter((block: any) => (filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true));
+          .filter((block: Block) => (filtersOptions[key].length ? block.source.includes(filtersOptions[key]) : true));
       }
     }
 
@@ -169,7 +165,7 @@ const TransactionList = (): React.ReactElement => {
           <TableSortLabel
             active={orderBy === row.id}
             direction={order}
-            onClick={e => handleRequestSort(e, row.id)}
+            onClick={() => handleRequestSort(row.id)}
           >
             {row.label}
           </TableSortLabel>
@@ -177,11 +173,11 @@ const TransactionList = (): React.ReactElement => {
       </TableCell>
     )));
 
-  const transactionListRowsGenerate = (blokchain: any) =>
+  const transactionListRowsGenerate = (blokchain: Array<Block>) =>
     (stableSort(
       blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
       getSorting(order, orderBy)
-    ).map((row: any, index: number) => (
+    ).map((row: Block, index: number) => (
       <TableRow onClick={() => handleClickOpen(row)} hover key={`Transaction${index}`}>
         <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
         <TableCell>{row.source}</TableCell>
@@ -193,18 +189,20 @@ const TransactionList = (): React.ReactElement => {
       </TableRow>
     )));
 
-  const transactionsListFilterGenerate = (headerCols: HeaderColsInterface[]) =>
+  const transactionsListFilterGenerate = (filtersName: HeaderColsInterface[]) =>
     filtersName.map((row: HeaderColsInterface) => (
       <TransactionsListFilter name={row.label} onInputChange={filterHandler} id={row.id} key={row.id} />
     ));
 
   const filteredUpdateMessage = () => (
-    <p>
-      Find
-      <strong>{blokchain.length}</strong>
-      results
-    </p>
+    <p> Find <strong>{blokchain.length}</strong> results</p>
   );
+
+  const modalDetailsProps: ModalDetailsProps = {
+    open: open,
+    handleClose: () => setOpen(false),
+    data: selectedRow
+  };
 
   return (
     <Grid container spacing={9} className="Container">
@@ -241,7 +239,7 @@ const TransactionList = (): React.ReactElement => {
               </TableFooter>
             </Table>
           </Grid>
-          <DetailsModal open={open} handleClose={() => setOpen(false)} data={selectedRow} />
+          <DetailsModal {...modalDetailsProps} />
         </Grid>
       </Grid>
     </Grid>
