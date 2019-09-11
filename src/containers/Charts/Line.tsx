@@ -129,8 +129,8 @@ const LineCharts = (): React.ReactElement => {
       }
     ]
   };
-  const sellers: Array<string> = [];
-  const buyers: Array<string> = [];
+  const sellers: string[] = [];
+  const buyers: string[] = [];
 
   const renderSellers = () => (
     blokchain.slice(0, 50).map(item => {
@@ -152,8 +152,9 @@ const LineCharts = (): React.ReactElement => {
           <MenuItem key={item.destination} value={item.destination}>{item.destination}</MenuItem>
         );
       }
-    return;
-  })};
+      return;
+    });
+  };
 
   const renderSelectChart = () => {
     return (
@@ -187,8 +188,8 @@ const LineCharts = (): React.ReactElement => {
           firstItemName={'Buyers'}
           inputLabel={'Select buyers'}
         />
-          {
-            config.chartType == 'buyers' ?
+          {config.chartType == 'buyers'
+            ? (
               <FormControlField
                 value={buyer}
                 onChange={(e: any) => {
@@ -199,17 +200,19 @@ const LineCharts = (): React.ReactElement => {
                 firstItemName={'Buyers'}
                 inputLabel={'Select buyers'}
               />
-            : <FormControlField
-              value={seller}
-              onChange={(e: any) => {
-                handleSellerChange(e);
-              }}
-              items={renderSellers}
-              firstItemValue={'seler'}
-              firstItemName={'Sellers'}
-              inputLabel={'Select sellers'}
-            />
-          }
+            )
+            : (
+              <FormControlField
+                value={seller}
+                onChange={(e: any) => {
+                  handleSellerChange(e);
+                }}
+                items={renderSellers}
+                firstItemValue={'seler'}
+                firstItemName={'Sellers'}
+                inputLabel={'Select sellers'}
+              />
+            )}
         <Button
           variant="contained"
           color="secondary"
