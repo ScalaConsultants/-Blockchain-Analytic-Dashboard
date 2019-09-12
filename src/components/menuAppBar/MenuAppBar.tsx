@@ -17,7 +17,6 @@ import './style.css';
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const menuList: MenuItemType[] = menuItems;
 
   const handleClose = (): void => {
     setAnchorEl(null);
@@ -56,7 +55,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {menuList.map((item: MenuItemType, key: number | string) => {
+          {menuItems.map((item: MenuItemType, key: number | string) => {
             return (
               <MenuItem onClick={() => goTo(item.route)} key={key}>
                 {item.name}

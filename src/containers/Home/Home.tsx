@@ -23,7 +23,6 @@ const homeStyles = makeStyles(theme => ({
 }));
 
 const Home = (): React.ReactElement => {
-  const MenuItems = menuItems;
   const classes = homeStyles();
 
   const renderDashboardBox = (boxes: MenuItemType []):  JSX.Element [] => {
@@ -49,7 +48,7 @@ const Home = (): React.ReactElement => {
         </a>
       </h3>
       <Grid container spacing={3} justify="center">
-        {renderDashboardBox(MenuItems)}
+        {renderDashboardBox(menuItems)}
       </Grid>
     </div>
   );
