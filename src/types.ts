@@ -68,5 +68,5 @@ export interface MenuItemType {
   name: string,
   route: string,
   icon?: React.ReactElement<SvgIconProps>,
-  description?: string | undefined
+  description?: string
 }
