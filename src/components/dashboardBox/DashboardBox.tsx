@@ -6,7 +6,7 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuItemType } from "../../types";
 
-const useStyles = makeStyles(theme => ({
+const dashboardStyle = makeStyles(theme => ({
     dashboardIcon: {
         paddingBottom: "0px",
         '& svg': {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const DashboardBox = ({ icon, name, route, description }: MenuItemType): React.ReactElement => {
-    const classes = useStyles();
+    const classes = dashboardStyle();
     return (
         <Link underline='none' href={route}>
             <Card className={classes.card}>

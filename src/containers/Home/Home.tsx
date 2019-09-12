@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { menuItems } from "./../../constant";
 import { MenuItemType } from "../../types";
 
-const useStyles = makeStyles(theme => ({
+const homeStyles = makeStyles(theme => ({
   containerHome: {
     textAlign: "center",
     margin: "1rem"
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const Home = (): React.ReactElement => {
   const MenuItems = menuItems;
-  const classes = useStyles();
+  const classes = homeStyles();
 
   const renderDashboardBox = (boxes: MenuItemType []):  JSX.Element [] => {
     return boxes.map((item: MenuItemType): JSX.Element =>
