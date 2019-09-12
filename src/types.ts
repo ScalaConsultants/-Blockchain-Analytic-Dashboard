@@ -64,7 +64,7 @@ export interface DataSourceActionType extends ActionType {
   source: string;
 }
 
-export interface MenuItemsType {
+export interface MenuItemType {
   name: string,
   route: string,
   icon?: React.ReactElement<SvgIconProps>,

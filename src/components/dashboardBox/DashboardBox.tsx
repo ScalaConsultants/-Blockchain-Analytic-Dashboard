@@ -4,7 +4,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from "@material-ui/core/styles";
-import { MenuItemsType } from "../../types";
+import { MenuItemType } from "../../types";
 
 const useStyles = makeStyles(theme => ({
     dashboardIcon: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const DasshboardBox = ({ icon, name, route, description }: MenuItemsType): React.ReactElement => {
+const DashboardBox = ({ icon, name, route, description }: MenuItemType): React.ReactElement => {
     const classes = useStyles();
     return (
         <Link underline='none' href={route}>
@@ -35,4 +35,4 @@ const DasshboardBox = ({ icon, name, route, description }: MenuItemsType): React
     );
 };
 
-export default DasshboardBox;
+export default DashboardBox;

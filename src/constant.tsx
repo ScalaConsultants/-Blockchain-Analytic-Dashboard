@@ -9,9 +9,9 @@ import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutline
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import AddToPhotosOutlinedIcon from '@material-ui/icons/AddToPhotosOutlined';
 import TimelineIcon from '@material-ui/icons/Timeline';
-import { MenuItemsType } from "./types";
+import { MenuItemType } from "./types";
 
-export const menuItems: MenuItemsType[] = [
+export const menuItems: MenuItemType[] = [
     { name: "Home", route: "/", icon: <Home />, description: "Home Page" },
     { name: "Transactions", route: "/transactions", icon: <ListIcon />, description: "List of the last 100 000 transaction" },
     { name: "Charts", route: "/charts", icon: <EqualizerIcon />, description: "Graphic representaion of the data" },

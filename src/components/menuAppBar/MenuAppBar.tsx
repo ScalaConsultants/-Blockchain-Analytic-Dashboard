@@ -10,14 +10,14 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
-import { MenuItemsType } from "../../types";
+import { MenuItemType } from "../../types";
 import { menuItems } from "../../constant";
 
 import './style.css';
 
 const ButtonAppBar = (props: any): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const menuList: MenuItemsType[] = menuItems;
+  const menuList: MenuItemType[] = menuItems;
 
   const handleClose = (): void => {
     setAnchorEl(null);
@@ -56,7 +56,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {menuList.map((item: MenuItemsType, key: number | string) => {
+          {menuList.map((item: MenuItemType, key: number | string) => {
             return (
               <MenuItem onClick={() => goTo(item.route)} key={key}>
                 {item.name}

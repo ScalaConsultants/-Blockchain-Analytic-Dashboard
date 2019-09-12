@@ -4,9 +4,13 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { menuItems } from "./../../constant";
-import { MenuItemsType } from "../../types";
+import { MenuItemType } from "../../types";
 
 const useStyles = makeStyles(theme => ({
+  containerHome: {
+    textAlign: "center",
+    margin: "1rem"
+  },
   dashboardCard: {
     '& > div:first-child ': {
       height: "100%",
@@ -22,8 +26,8 @@ const Home = (): React.ReactElement => {
   const MenuItems = menuItems;
   const classes = useStyles();
 
-  const dashboardBoxGenerator = (boxes: MenuItemsType []): (void | JSX.Element)[] => {
-    return boxes.map((item: MenuItemsType) : void | JSX.Element =>
+  const renderDashboardBox = (boxes: MenuItemType []):  JSX.Element [] => {
+    return boxes.map((item: MenuItemType): JSX.Element =>
       item.name !== 'Home'
         ?  <Grid key={item.name} className={classes.dashboardCard} item xs={12} sm={6} md={4} >
           <DashboardBox icon={item.icon} name={item.name} route={item.route} description={item.description} />
@@ -33,12 +37,7 @@ const Home = (): React.ReactElement => {
   };
 
   return (
-    <div
-      style={{
-        textAlign: "center",
-        margin: "1rem"
-      }}
-    >
+    <div className="classes.containerHome">
       <h1>Blockchain Analytic Dashboard</h1>
       <h3>
         <a
@@ -50,7 +49,7 @@ const Home = (): React.ReactElement => {
         </a>
       </h3>
       <Grid container spacing={3} justify="center">
-        {dashboardBoxGenerator(MenuItems)}
+        {renderDashboardBox(MenuItems)}
       </Grid>
     </div>
   );
