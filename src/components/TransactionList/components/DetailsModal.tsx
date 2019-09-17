@@ -19,7 +19,7 @@ import Button from '@material-ui/core/Button';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const modalStyles = makeStyles(theme => ({
   dialogTitle: {
     display: 'flex',
     alignItems: 'center',
@@ -60,7 +60,7 @@ interface Props {
 }
 
 const DetailsModal = ({ open, handleClose, data }: Props): React.ReactElement => {
-  const classes = useStyles();
+  const classes = modalStyles();
   return (
     <Dialog
       open={open}

@@ -1,29 +1,22 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import BlockchainSwitch from '../BlockchainSwitch/BlockchainSwitch';
+import React, { useState, MouseEvent } from "react";
+
+import { withRouter } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
+import BlockchainSwitch from "../BlockchainSwitch/BlockchainSwitch";
+import { MenuItemType } from "../../types";
+import { menuItems } from "../../constant";
 
 import './style.css';
 
 const ButtonAppBar = (props: any): React.ReactElement => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const menuItems = [
-    { name: 'Home', route: '/' },
-    { name: 'Transactions', route: '/transactions' },
-    { name: 'Charts', route: '/charts' },
-    { name: 'Top seller', route: '/top-seller' },
-    { name: 'Top buyer', route: '/top-buyer' },
-    { name: 'Treemap', route: '/treemap' },
-    { name: 'Line chart', route: '/line-chart' },
-    { name: 'Simple Bar Chart Demo', route: '/simple-bar-chart-demo' },
-    { name: 'Stacked Bar Chart Demo', route: '/stacked-bar-chart-demo' }
-  ];
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClose = (): void => {
     setAnchorEl(null);
@@ -34,7 +27,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
     props.history.push(route);
   };
 
-  const handleClick = (event: any): void => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -62,11 +55,13 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {menuItems.map((item, key) => (
-            <MenuItem onClick={() => goTo(item.route)} key={key}>
-              {item.name}
-            </MenuItem>
-          ))}
+          {menuItems.map((item: MenuItemType, key: number | string) => {
+            return (
+              <MenuItem onClick={() => goTo(item.route)} key={key}>
+                {item.name}
+              </MenuItem>
+            );
+          })}
         </Menu>
       </Toolbar>
     </AppBar>
