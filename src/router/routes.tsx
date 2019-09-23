@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { Container } from '@material-ui/core';
-import Transactions from '../containers/Transactions/Transactions';
+import Transactions from '../components/TransactionsList';
 import Charts from '../containers/Charts/Charts';
 import Home from '../containers/Home/Home';
 import LiveChart from '../containers/LiveChart/LiveChart';
