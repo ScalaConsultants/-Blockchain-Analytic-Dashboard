@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useMappedState } from 'redux-react-hook';
+import { withTheme } from '@material-ui/styles';
 import Routes from './router/routes';
 import MenuAppBar from './components/menuAppBar/MenuAppBar';
 import * as BlokchainActions from './store/actions/tezos/blokchain';
@@ -17,9 +18,9 @@ const mapState = (state: State) => ({
   loader: state.loader > 0
 });
 
-const App = (): React.ReactElement => {
+const App = (props: object): React.ReactElement => {
   const { blokchain, loader } = useMappedState(mapState);
-
+  console.log('props', props)
   const dispatch = useDispatch();
   const dep = 0;
   useEffect((): void => {
@@ -61,4 +62,4 @@ const App = (): React.ReactElement => {
   );
 };
 
-export default App;
+export default withTheme(App);
