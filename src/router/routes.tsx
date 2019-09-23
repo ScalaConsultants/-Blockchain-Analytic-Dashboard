@@ -3,7 +3,6 @@ import { Route } from 'react-router';
 import { Container } from '@material-ui/core';
 import Transactions from '../containers/Transactions/Transactions';
 import LineCharts from '../containers/Charts/Line';
-import SimpleBarChartDemo from '../containers/customChartsDemos/SimpleBarChartDemo/SimpleBarChartDemo';
 import StackedBarChartDemo from '../containers/customChartsDemos/StackedBarChartDemo/StackedBarChartDemo';
 
 export default (): React.ReactElement => {
