@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useMappedState } from 'redux-react-hook';
-import { withTheme } from '@material-ui/styles';
 import Routes from './router/routes';
 import MenuAppBar from './components/menuAppBar/MenuAppBar';
 import * as BlokchainActions from './store/actions/tezos/blokchain';
@@ -61,4 +60,4 @@ const App = (props: object): React.ReactElement => {
   );
 };
 
-export default withTheme(App);
+export default App;
