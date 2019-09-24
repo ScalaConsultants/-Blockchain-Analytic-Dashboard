@@ -4,9 +4,9 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import LineChart from '../../components/charts/Line/Line';
+import LineChart from '../charts/Line/Line';
 
-import FormControlField from '../../components/FormControl/FormControl';
+import FormControlField from '../FormControl/FormControl';
 
 import { LOADER_STATE } from '../../store/actions/loader';
 
