@@ -1,4 +1,4 @@
-import MuiButton from './mui-button';
+import MuiButton from './button';
 
 const overrides = {
   MuiButton

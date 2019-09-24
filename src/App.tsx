@@ -20,7 +20,6 @@ const mapState = (state: State) => ({
 
 const App = (props: object): React.ReactElement => {
   const { blokchain, loader } = useMappedState(mapState);
-  console.log('props', props)
   const dispatch = useDispatch();
   const dep = 0;
   useEffect((): void => {
