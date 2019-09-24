@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { StoreContext } from 'redux-react-hook';
+import { ThemeProvider } from '@material-ui/styles';
+import theme from './theme';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -12,7 +14,9 @@ store.runSaga(rootSaga);
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </StoreContext.Provider>,
   document.getElementById('root')
 );
