@@ -1,13 +1,6 @@
 import React from 'react';
-import { useMappedState } from 'redux-react-hook';
 import StackedBarChart from './StackedBarChart';
 import SimpleHorizontalBarChart from './SimpleHorizontalBarChart';
-import { State } from "../../types";
-
-const mapState = (state: State): any => ({
-  tezos: state.tezos.blocks,
-  ethereum: state.ethereum.blocks
-});
 
 const totalWalletsAmounts = (groupingKey: string, blockchain: any) =>
   blockchain.reduce((acc: any, next: any): any => {
@@ -29,8 +22,8 @@ const totalWalletsAmounts = (groupingKey: string, blockchain: any) =>
 const TEZOS_EXCHANGE_RATE = 1.05;
 const ETHEREUM_EXCHANGE_RATE = 183.48;
 
-function Dashboard(): React.ReactElement {
-  const { tezos, ethereum } = useMappedState(mapState);
+function Dashboard(props:any): React.ReactElement {
+  const { tezos, ethereum } = props;
 
   return (
     <>
