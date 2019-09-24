@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { Container } from '@material-ui/core';
-import Transactions from '../containers/Transactions/Transactions';
+import Transactions from '../components/TransactionsList';
 import LineCharts from '../containers/Charts/Line';
 import StackedBarChartDemo from '../containers/customChartsDemos/StackedBarChartDemo/StackedBarChartDemo';
 

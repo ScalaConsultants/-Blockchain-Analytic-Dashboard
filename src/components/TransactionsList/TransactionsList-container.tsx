@@ -36,9 +36,6 @@ const TransactionList = (props:any): React.ReactElement => {
   const ASC = 'asc';
   const DESC = 'desc';
 
-
-
-
   const handleRequestSort = (property: string) => {
     if (orderBy === property && order === DESC) {
       setOrder(ASC);
@@ -134,7 +131,7 @@ const TransactionList = (props:any): React.ReactElement => {
     <Grid container spacing={9} className="Container">
       <Grid item xs={12} lg={12}>
         <h1 id="client-manager-title" className="Transactions__header">
-          Transactions list
+          Recent transactions
         </h1>
       </Grid>
       <Grid>
