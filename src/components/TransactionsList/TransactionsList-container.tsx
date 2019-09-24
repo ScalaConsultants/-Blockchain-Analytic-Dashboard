@@ -14,6 +14,7 @@ import TransactionListPagination from './TransactionsListPagination-view';
 import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
 import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy } from './types';
+import { timestampToDate } from './../../helpers/helpers';
 import { Block } from "../../types";
 
 const headerCols: HeaderColsInterface[] = [
@@ -22,7 +23,7 @@ const headerCols: HeaderColsInterface[] = [
   { id: 'exchange', numeric: false, disablePadding: false, label: 'Exchange rate' },
 ];
 
-
+//Add props type
 const TransactionList = (props:any): React.ReactElement => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
@@ -74,18 +75,7 @@ const TransactionList = (props:any): React.ReactElement => {
     ActionsComponent: TransactionListPagination
   };
 
-  const timestampToDate = (timestamp: number) => {
-    const fullDate = new Date(timestamp)
-        .toISOString()
-        .substr(0, 19);
-
-    const date = fullDate.slice(0, 10);
-    const time = fullDate.slice(11, -3);
-
-    return time + ' ' + date
-  }
-
-  const transactionListHeaderGenerate = (headerCols: HeaderColsInterface[]) =>
+  const renderTransactionListHeader = (headerCols: HeaderColsInterface[]) =>
     (headerCols.map((row: HeaderColsInterface) => (
       <TableCell
         key={row.id}
@@ -109,7 +99,7 @@ const TransactionList = (props:any): React.ReactElement => {
       </TableCell>
     )));
 
-  const transactionListRowsGenerate = (blokchain: Block[]) =>
+  const renderTransactionListRows = (blokchain: Block[]) =>
     (stableSort(
       blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
       getSorting(order, orderBy)
@@ -140,11 +130,11 @@ const TransactionList = (props:any): React.ReactElement => {
             <Table>
               <TableHead>
                 <TableRow>
-                  {transactionListHeaderGenerate(headerCols)}
+                  {renderTransactionListHeader(headerCols)}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {transactionListRowsGenerate(props.blokchain)}
+                {renderTransactionListRows(props.blokchain)}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 48 * emptyRows }}>
                     <TableCell colSpan={6} />

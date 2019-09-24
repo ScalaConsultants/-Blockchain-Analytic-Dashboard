@@ -26,3 +26,14 @@ export const desc = (a: any, b: any, orderBy: any) => {
 export const getSorting = (order: any, orderBy: any) => (
   order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy)
 );
+
+export const timestampToDate = (timestamp: number) => {
+  const fullDate = new Date(timestamp)
+      .toISOString()
+      .substr(0, 19);
+
+  const date = fullDate.slice(0, 10);
+  const time = fullDate.slice(11, -3);
+
+  return time + ' ' + date
+}
