@@ -17,7 +17,7 @@ const mapState = (state: State) => ({
   loader: state.loader > 0
 });
 
-const App = (props: object): React.ReactElement => {
+const App = (): React.ReactElement => {
   const { blokchain, loader } = useMappedState(mapState);
   const dispatch = useDispatch();
   const dep = 0;
