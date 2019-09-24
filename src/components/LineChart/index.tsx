@@ -1,3 +1,3 @@
-import LineChart from './LineChart-container';
+import LineChart from './LineChart-redux';
 
 export default LineChart;
