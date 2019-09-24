@@ -43,7 +43,7 @@ const ButtonAppBar = (props: any): React.ReactElement => {
           <MenuIcon />
         </IconButton>
         <div className="MenuSpace" />
-        <Button color="inherit" onClick={() => goTo('/')}>
+        <Button color="secondary" onClick={() => goTo('/')}>
           Tezos Data Analytics Dashboard v0.01
         </Button>
         <div style={{ marginLeft: '1rem' }}>

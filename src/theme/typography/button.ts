@@ -3,8 +3,7 @@ import {
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_WEIGHT,
   DEFAULT_FONT_STYLE,
-  DEFAULT_LINE_HEIGHT,
-  BUTTON_TEXT_COLOR
+  DEFAULT_LINE_HEIGHT
 } from '../constants';
 
 const button = {
@@ -12,8 +11,7 @@ const button = {
   fontSize: DEFAULT_FONT_SIZE,
   fontWight: DEFAULT_FONT_WEIGHT,
   fontStyle: DEFAULT_FONT_STYLE,
-  lineHeight: DEFAULT_LINE_HEIGHT,
-  color: BUTTON_TEXT_COLOR
+  lineHeight: DEFAULT_LINE_HEIGHT
 };
 
 export default button;
