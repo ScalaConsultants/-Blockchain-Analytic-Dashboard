@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
+import Typography from '@material-ui/core/Typography';
 
 import TransactionListPagination from './TransactionsListPagination-view';
 import DetailsModal from './TransactionsListDetailsModal-view';
@@ -120,9 +121,9 @@ const TransactionList = (props:any): React.ReactElement => {
   return (
     <Grid container spacing={9} className="Container">
       <Grid item xs={12} lg={12}>
-        <h1 id="client-manager-title" className="Transactions__header">
-          Recent transactions
-        </h1>
+        <Typography variant="h2" gutterBottom>
+        Recent transactions
+      </Typography>
       </Grid>
       <Grid>
         <Grid container spacing={9} className="Container">

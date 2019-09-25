@@ -28,15 +28,5 @@ export const transactionsDetailsModalStyle = makeStyles(theme => ({
   }
 }));
 
-export const transactionListFilterInput = {
-  border: '1px solid #eee',
-  padding: '10px',
-  margin: '0px 10px'
-};
-
-export const transactionListFilterLabel = {
-  display: 'inline-block',
-  color: '#777'
-};
 
 
