@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TransactionsList from '../TransactionsList';
-import LineChart from '../../containers/Charts/Line'
+import LineChart from '../LineChart';
 
 const DetailsView = () => {
 

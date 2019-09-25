@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import LineChart from '../../components/charts/Line/Line';
+import LineChart from '../charts/Line/Line';
 
-import FormControlField from '../../components/FormControl/FormControl';
+import FormControlField from '../FormControl/FormControl';
 
-import { LOADER_STATE } from '../../store/actions/loader';
-
-import { Blockchain, Block, State } from '../../types';
+import { Block } from '../../types';
 import {
   convertTimeStamp,
   convertTimeStampToHours,
   getSelectedDate
 } from './helpers';
 
-const mapState = (state: State): Blockchain => ({
-  blokchain: state.tezos.blocks
-});
+const LineCharts = (props:any): React.ReactElement => {
+  const {blokchain, actions} = props;
 
-const LineCharts = (): React.ReactElement => {
-  const dispatch = useDispatch();
-  const { blokchain } = useMappedState(mapState);
   const [dateFrom, setDateFrom] = useState(getSelectedDate(7));
   const [label, setLabel] = useState([
     '19-04-2019'
@@ -63,29 +56,15 @@ const LineCharts = (): React.ReactElement => {
 
     setLabel(labels.slice(0, 100));
     setData(elements.slice(0, 100));
-    setLoaderFalse();
+    actions.setLoaderFalse();
   };
 
   const triggerSetDateFrom = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setDateFrom(e.target.value);
   };
 
-  const setLoaderFalse = (): void => {
-    dispatch({
-      type: LOADER_STATE,
-      show: false
-    });
-  };
-
-  const setLoaderTrue = (): void => {
-    dispatch({
-      type: LOADER_STATE,
-      show: true
-    });
-  };
-
   const submitChart = () => {
-    setLoaderTrue();
+    actions.setLoaderTrue();
     setTimeout(() => filterChart(blokchain, config.chartType), 100);
   };
 
@@ -133,7 +112,7 @@ const LineCharts = (): React.ReactElement => {
   const buyers: string[] = [];
 
   const renderSellers = () => (
-    blokchain.slice(0, 50).map(item => {
+    blokchain.slice(0, 50).map((item:Block) => {
       if (!sellers.includes(item.source)) {
         sellers.push(item.source);
         return (
@@ -145,7 +124,7 @@ const LineCharts = (): React.ReactElement => {
   );
 
   const renderBuyers = () => {
-    return blokchain.slice(0, 50).map(item => {
+    return blokchain.slice(0, 50).map((item:Block) => {
       if (!buyers.includes(item.destination)) {
         buyers.push(item.destination);
         return (
