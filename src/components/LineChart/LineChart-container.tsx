@@ -194,7 +194,7 @@ const LineCharts = (props:any): React.ReactElement => {
           )}
         <Button
           variant="contained"
-          color="secondary"
+          color="primary"
           onClick={(): void => {
             setTimeout(() => submitChart(), 100);
           }}
