@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import LineChart from '../charts/Line/Line';
+import LineChart from './Line-view';
 
 import {
   convertTimeStampToHours,
