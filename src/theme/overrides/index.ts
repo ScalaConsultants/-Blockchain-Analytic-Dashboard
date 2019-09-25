@@ -1,12 +1,14 @@
 import MuiButton from './button';
-import { MuiTable, MuiTableCell } from './table';
+import { MuiTable, MuiTableCell, MuiTableRow, MuiTableSortLabel } from './table';
 import MuiTypography from './typography';
 
 const overrides = {
   MuiButton,
   MuiTable,
   MuiTableCell,
-  MuiTypography
+  MuiTypography,
+  MuiTableRow,
+  MuiTableSortLabel
 };
 
 export default overrides;

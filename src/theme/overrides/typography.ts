@@ -5,7 +5,9 @@ const MuiTypography = {
     fontFamily: DEFAULT_FONT_FAMILY,
     fontSize: '1rem',
     color: '#fff',
-    borderBottom: '1px solid #9EE32D'
+    borderBottom: '1px solid #9EE32D',
+    width: '14rem',
+    padding: '0.5rem'
   }
 };
 
