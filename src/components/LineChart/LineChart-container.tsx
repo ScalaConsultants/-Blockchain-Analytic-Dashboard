@@ -112,7 +112,7 @@ const LineCharts = (props:any): React.ReactElement => {
   const buyers: string[] = [];
 
   const renderSellers = () => (
-    blokchain.slice(0, 50).map((item:any) => {
+    blokchain.slice(0, 50).map((item:Block) => {
       if (!sellers.includes(item.source)) {
         sellers.push(item.source);
         return (
@@ -124,7 +124,7 @@ const LineCharts = (props:any): React.ReactElement => {
   );
 
   const renderBuyers = () => {
-    return blokchain.slice(0, 50).map((item:any) => {
+    return blokchain.slice(0, 50).map((item:Block) => {
       if (!buyers.includes(item.destination)) {
         buyers.push(item.destination);
         return (

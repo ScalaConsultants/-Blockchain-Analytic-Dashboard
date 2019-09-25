@@ -3,13 +3,13 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import LineChartContainer from './LineChart-container';
 import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
-import { Block } from "../../types";
+import { Block, State} from "../../types";
 
 import { LOADER_STATE } from '../../store/actions/loader';
 
 
 const LineChartRedux = () => {
-    const mapState = (state: any): { blokchain: Block[] } => ({
+    const mapState = (state: State): { blokchain: Block[] } => ({
         blokchain: getBlockchainByDatasource(state, state.dataSource)
       });
       

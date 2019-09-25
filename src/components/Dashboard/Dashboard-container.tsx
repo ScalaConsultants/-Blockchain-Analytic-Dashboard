@@ -1,9 +1,12 @@
 import React from 'react';
 import StackedBarChart from './StackedBarChart';
-import SimpleHorizontalBarChart from './SimpleHorizontalBarChart';
+import SimpleHorizontalBarChart from './SimpleHorizontalBarChart'
 
-const totalWalletsAmounts = (groupingKey: string, blockchain: any) =>
-  blockchain.reduce((acc: any, next: any): any => {
+import { DashboardProps, Item } from './types';
+import { Block } from '../../types';
+
+const totalWalletsAmounts = (groupingKey: string, blockchain: Block[]) =>
+  blockchain.reduce((acc: any, next:any):any => {
     const alreadyExist = acc.find(
       (item: any) => item.key === next[groupingKey]
     );
@@ -22,7 +25,7 @@ const totalWalletsAmounts = (groupingKey: string, blockchain: any) =>
 const TEZOS_EXCHANGE_RATE = 1.05;
 const ETHEREUM_EXCHANGE_RATE = 183.48;
 
-function Dashboard(props:any): React.ReactElement {
+const Dashboard = (props:DashboardProps): React.ReactElement => {
   const { tezos, ethereum } = props;
 
   return (

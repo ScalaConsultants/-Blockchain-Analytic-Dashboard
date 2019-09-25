@@ -1,20 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { setFontStyle } from './helpers';
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-interface Props {
-  data: ChartData[];
-  width?: number;
-  height?: number;
-  spaceBetweenBars?: number;
-  barHeight?: number;
-  barColor?: string;
-  selectedBarColor?: string;
-}
+import { ChartProps } from './types';
 
 const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
@@ -23,7 +10,7 @@ const SimpleBarChart = ({
   width = 1200,
   height = 80,
   barHeight = 60
-}: Props) => {
+}: ChartProps) => {
   const canvasRef = useRef(null);
   const totalDataValues = data.reduce((acc, next) => acc + next.value, 0);
   useEffect(() => {
