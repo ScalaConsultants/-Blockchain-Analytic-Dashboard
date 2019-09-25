@@ -2,43 +2,36 @@ import React, { useEffect, useState } from 'react';
 
 import LineChart from '../charts/Line/Line';
 
-import { Block } from '../../types';
 import {
-  convertTimeStamp,
   convertTimeStampToHours,
-  getSelectedDate
 } from './helpers';
 
-const LineCharts = (props:any): React.ReactElement => {
-  const {blokchain, actions} = props;
+import testData from './data';
+
+const LineCharts = (props: any): React.ReactElement => {
+  const { blokchain, actions } = props;
 
   const [label, setLabel] = useState([
     '19-04-2019'
   ]);
   const [data, setData] = useState([10, 20, 30, 40]);
 
-  const filterChart = (blokchain: Block[]): void => {
+  const filterChart = (): void => {
     const labels: any[] = [];
     const elements: number[] = [];
 
-    blokchain.forEach((item: Block): void => {
-      const timeStampConverted: string = convertTimeStamp(item.timestamp);
+    testData.forEach((item): void => {
+      elements.push(item.totalValue);
+      labels.push(convertTimeStampToHours(item.interval));
 
-      // if (timeStampConverted === dateFrom) {
-      //   chartType === 'selers'
-      //     ? (item.source === seller && elements.push(item.amount))
-      //     : (item.destination === buyer && elements.push(item.amount));
-      //   labels.push(convertTimeStampToHours(item.timestamp));
-      // }
     });
-
-    setLabel(labels.slice(0, 100));
-    setData(elements.slice(0, 100));
+    setLabel(labels);
+    setData(elements);
     actions.setLoaderFalse();
   };
 
   useEffect((): void => {
-    filterChart(blokchain);
+    filterChart();
   }, [blokchain]);
 
   const chartLineData = {
@@ -46,23 +39,22 @@ const LineCharts = (props:any): React.ReactElement => {
     datasets: [
       {
         label: 'ETH',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
+        backgroundColor: 'rgba(255,99,132,0.0)',
+        borderColor: 'rgba(107,94,233,0.5)',
+        borderWidth: 4,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data
+        data,
+        lineTension: 0,
       }
-    ]
-  };
-
+    ],
+  }
 
   return (
-    <div>
+    <div style={{ height: '400px' }}>
       <LineChart
         data={chartLineData}
         width={100}
-        height={100}
         options={{
           maintainAspectRatio: false
         }}
