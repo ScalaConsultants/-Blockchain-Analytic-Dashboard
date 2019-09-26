@@ -4,20 +4,7 @@ import {
   setFontStyle
 } from './helpers';
 
-interface ChartData {
-  name: string;
-  value: number;
-}
-
-interface Props {
-  data: ChartData[];
-  width?: number;
-  height?: number;
-  spaceBetweenBars?: number;
-  barHeight?: number;
-  barColor?: string;
-  selectedBarColor?: string;
-}
+import { ChartProps } from './types';
 
 const CHART_DETAILS_COLOR = 'rgb(72,72,72)';
 
@@ -26,7 +13,7 @@ const SimpleHorizontalBarChart = ({
   width = 1200,
   height = 160,
   barHeight = 60
-}: Props) => {
+}: ChartProps) => {
   const canvasRef = useRef(null);
   useEffect(() => {
     if (canvasRef.current) {
