@@ -12,14 +12,12 @@ export const MuiTableRow = {
     root: {
         border: '0.65rem solid',
         borderColor: DEFAULT_BG_COLOR + '!important',
-    },
+    }
+}
 
-    head: {
-        borderTop: 'none',
-        borderLeft: 'none',
-        borderRight: 'none',
-        borderColor: '#252D48 !important',
-        marginBottom: '1rem'
+export const MuiTableHead = {
+    root: {
+        borderBottom: '4px solid #252D48'
     }
 }
 
@@ -28,18 +26,32 @@ export const MuiTableCell = {
         color: '#fff',
         background: PRIMARY_MAIN_COLOR,
         border: 'none',
+        fontSize: '0.75rem',
+        fontFamily: DEFAULT_FONT_FAMILY,
+
+        '&:first-child': {
+            borderRadius: '25px 0 0 25px'
+        },
+
+        '&:last-child': {
+            borderRadius: '0 25px 25px 0'
+        }
     },
 
     head: {
-        color: '#fff',
+        color: '#fff'
     }
 }
 
 export const MuiTableSortLabel = {
-
     root: {
-        hover: {
+        fontFamily: DEFAULT_FONT_FAMILY,
+        '&:hover': {
             color: '#9EE32D',
         }
+    },
+
+    icon: {
+        fill: '#9EE32D',
     }
 }

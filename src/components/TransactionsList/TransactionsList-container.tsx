@@ -17,7 +17,6 @@ import { stableSort, getSorting } from '../../helpers/helpers';
 import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy } from './types';
 import { timestampToDate } from './../../helpers/helpers';
 import { Block } from "../../types";
-import { width } from '@material-ui/system';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
