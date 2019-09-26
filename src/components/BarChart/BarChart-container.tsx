@@ -19,6 +19,8 @@ const BarChartContainer = () => {
     FRAUD_COLOR,
     CHART_BAR_WIDTH,
     CHART_BAR_FONT_SIZE,
+    CHART_BAR_BOX_SHADOW,
+    CHART_BAR_BORDER_RADIUS,
     DEFAULT_FONT_FAMILY,
     DEFAULT_FONT_WEIGHT,
     DEFAULT_FONT_STYLE,
@@ -39,12 +41,18 @@ const BarChartContainer = () => {
     }
   );
 
+  console.log(CHART_BAR_BOX_SHADOW)
+
   return (
     <BarChartView 
       data={segmentsData}
       onClick={onSegmentClick}
       activeSegment={activeSegment}
-      colors={{ grey, common }}
+      segmentStyles={{ 
+        borderRadius: CHART_BAR_BORDER_RADIUS,
+        boxShadow: CHART_BAR_BOX_SHADOW,
+        colors: { grey, common }
+      }}
       styles={{
         color: grey[400],
         fontFamily: DEFAULT_FONT_FAMILY,

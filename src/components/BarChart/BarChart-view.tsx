@@ -2,7 +2,7 @@ import React from 'react';
 import BarChartSegments from './BarChartSegments-view';
 import { SegmentsProps } from './types';
 
-const BarChartView = ({ data, activeSegment, colors, onClick, styles }: SegmentsProps) => (
+const BarChartView = ({ data, activeSegment, segmentStyles, onClick, styles }: SegmentsProps) => (
   <div style={{
     ...styles,
     background: '#253152',
@@ -11,7 +11,7 @@ const BarChartView = ({ data, activeSegment, colors, onClick, styles }: Segments
     borderRadius: '2px',
     position: 'relative',
   }}>
-    <BarChartSegments data={data} activeSegment={activeSegment} onClick={onClick} colors={colors} />
+    <BarChartSegments data={data} activeSegment={activeSegment} onClick={onClick} segmentStyles={segmentStyles} />
   </div>
 );
 

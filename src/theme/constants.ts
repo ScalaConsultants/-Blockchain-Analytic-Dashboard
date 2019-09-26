@@ -15,3 +15,5 @@ export const FRAUD_COLOR = 'linear-gradient(90deg, #2A2D3A 0%, #34363F 100%)';
 
 export const CHART_BAR_WIDTH = 1024;
 export const CHART_BAR_FONT_SIZE = '0.675rem';
+export const CHART_BAR_BOX_SHADOW = '0px 0px 20px rgba(135, 101, 239, 0.4)';
+export const CHART_BAR_BORDER_RADIUS = '2px';

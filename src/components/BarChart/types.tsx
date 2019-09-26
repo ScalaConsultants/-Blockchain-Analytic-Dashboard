@@ -17,6 +17,6 @@ export interface SegmentsProps {
   data: [];
   activeSegment: number;
   styles: object;
-  colors: object;
+  segmentStyles: object;
   onClick: any;
 }
