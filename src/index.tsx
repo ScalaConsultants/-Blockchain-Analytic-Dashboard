@@ -12,7 +12,6 @@ import rootSaga from './store/sagas/root';
 
 const store = configureStore();
 store.runSaga(rootSaga);
-console.log(theme)
 ReactDOM.render(
   <StoreContext.Provider value={store}>
     <ThemeProvider theme={theme}>
