@@ -50,14 +50,36 @@ const LineCharts = (props: any): React.ReactElement => {
     ],
   }
 
+  const chartLineOptions = {
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: 'rgb(163,167,176,0.1)'
+        },
+        ticks: {
+          maxTicksLimit: 10,
+          fontColor: 'rgb(163,167,176,0.8)', // this here
+        },
+      }],
+      yAxes: [{
+        gridLines: {
+          color: 'rgb(163,167,176,0.1)'
+        },
+        ticks: {
+          maxTicksLimit: 10,
+          fontColor: 'rgb(163,167,176,0.8)',
+        },
+      }]
+    }
+  }
+
   return (
-    <div style={{ height: '400px' }}>
+    <div style={{ height: '400px', background: 'linear-gradient(193.66deg, rgba(37, 45, 72, 0) 49.65%, #252D48 100%)', padding: 10, borderRadius: 5 }}>
       <LineChart
         data={chartLineData}
         width={100}
-        options={{
-          maintainAspectRatio: false
-        }}
+        options={chartLineOptions}
       />
     </div>
   );
