@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
+import Typography from '@material-ui/core/Typography';
 
 import TransactionListPagination from './TransactionsListPagination-view';
 import DetailsModal from './TransactionsListDetailsModal-view';
@@ -21,10 +22,11 @@ const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
   { id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp' },
   { id: 'exchange', numeric: false, disablePadding: false, label: 'Exchange rate' },
+  { id: 'description', numeric: false, disablePadding: false, label: 'Description' }
 ];
 
 //Add props type
-const TransactionList = (props:any): React.ReactElement => {
+const TransactionList = (props: any): React.ReactElement => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
 
@@ -108,6 +110,7 @@ const TransactionList = (props:any): React.ReactElement => {
         <TableCell>{row.amount}</TableCell>
         <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
         <TableCell>Exchange rate</TableCell>
+        <TableCell>Description</TableCell>
       </TableRow>
     )));
 
@@ -118,40 +121,38 @@ const TransactionList = (props:any): React.ReactElement => {
   };
 
   return (
-    <Grid container spacing={9} className="Container">
+    <Grid container className="Container">
       <Grid item xs={12} lg={12}>
-        <h1 id="client-manager-title" className="Transactions__header">
+        <Typography variant="h2" gutterBottom>
           Recent transactions
-        </h1>
+      </Typography>
       </Grid>
-      <Grid>
-        <Grid container spacing={9} className="Container">
-          <Grid item xs={12} lg={12}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {renderTransactionListHeader(headerCols)}
+      <Grid container spacing={9} className="Container">
+        <Grid item xs={12} lg={12}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {renderTransactionListHeader(headerCols)}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {renderTransactionListRows(props.blokchain)}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 48 * emptyRows }}>
+                  <TableCell colSpan={6} />
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {renderTransactionListRows(props.blokchain)}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 48 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    {...tablePaginationProps}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </Grid>
-          <DetailsModal {...modalDetailsProps} />
+              )}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  {...tablePaginationProps}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
         </Grid>
+        <DetailsModal {...modalDetailsProps} />
       </Grid>
     </Grid>
 
