@@ -1,4 +1,5 @@
 import React from 'react';
+import BarChart from '../BarChart';
 
 import TransactionsList from '../TransactionsList';
 import LineChart from '../LineChart';
@@ -7,8 +8,9 @@ const DetailsView = () => {
 
     return (
         <>
-            <LineChart/>
-            <TransactionsList/>
+            <BarChart />
+            <LineChart />
+            <TransactionsList />
         </>
     )
 }
