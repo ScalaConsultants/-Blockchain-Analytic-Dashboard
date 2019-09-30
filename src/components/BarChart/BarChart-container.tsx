@@ -32,7 +32,7 @@ const BarChartContainer = () => {
       adjustedClasses.push(classes.BarChartSegmentActive);
     }
 
-    if (!(index === activeSegment) && index === 0) {
+    if (index !== activeSegment && index === 0) {
       adjustedClasses.push(classes.BarChartSegmentFirstInactive)
     }
 
