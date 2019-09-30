@@ -42,7 +42,7 @@ const BarChartContainer = () => {
   };
 
   const data = wallets.reduce((acc: any, object: any, index: any) => {
-    if (!(object.percentage < 0.1)) {
+    if (object.percentage > 0.1) {
       acc.elements.push((
         <div
           className={getClasses(index)}
