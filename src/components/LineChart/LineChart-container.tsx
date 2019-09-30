@@ -7,6 +7,7 @@ import {
 } from './helpers';
 
 import testData from './data';
+import classes from './LineChart.module.css';
 
 const LineCharts = (props: any): React.ReactElement => {
   const { blokchain, actions } = props;
@@ -75,7 +76,7 @@ const LineCharts = (props: any): React.ReactElement => {
   }
 
   return (
-    <div style={{ height: '400px', background: 'linear-gradient(193.66deg, rgba(37, 45, 72, 0) 49.65%, #252D48 100%)', padding: 10, borderRadius: 5 }}>
+    <div className={classes.LineChartContainer}>
       <LineChart
         data={chartLineData}
         width={100}
