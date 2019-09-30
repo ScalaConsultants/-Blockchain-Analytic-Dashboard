@@ -1,68 +1,65 @@
 import React, { useState } from 'react';
-import { useTheme } from '@material-ui/styles';
-import { getTotalWalletsAmounts, getTotalDataValues, getSegmentsData } from './helpers';
+import { BAR_CHART_WIDTH } from '../../theme/constants';
 import BarChartView from './BarChart-view';
 
-const chartData = require('./BarChart-data.json');
+import classes from './BarChart.module.css';
+
+const wallets = require('./wallets-data.json')
 
 const BarChartContainer = () => {
   const [activeSegment, updateActiveSegment] = useState(0);
 
-  const onSegmentClick = (index: number) => {
-    updateActiveSegment(index);
-  }
+  const onClick = (index: number) => updateActiveSegment(index);
 
-  const { constants: { 
-    MARKET_COLOR,
-    PRIVATE_COLOR,
-    DAAP_COLOR,
-    FRAUD_COLOR,
-    CHART_BAR_WIDTH,
-    CHART_BAR_FONT_SIZE,
-    CHART_BAR_BOX_SHADOW,
-    CHART_BAR_BORDER_RADIUS,
-    DEFAULT_FONT_FAMILY,
-    DEFAULT_FONT_WEIGHT,
-    DEFAULT_FONT_STYLE,
-    DEFAULT_LINE_HEIGHT
-  }, palette: { grey, common }} = useTheme();
+  const getStyle: any = (acc: any, object: any) => ({
+    position: 'absolute',
+    height: '100%',
+    top: 0,
+    left: acc.position,
+    width: BAR_CHART_WIDTH * object.percentage / 100,
+  })
 
-  const totalWalletsAmounts = getTotalWalletsAmounts('source', chartData);
-  const totalDataValues = getTotalDataValues(totalWalletsAmounts);
-  const segmentsData = getSegmentsData(
-    totalWalletsAmounts,
-    totalDataValues, 
-    CHART_BAR_WIDTH,
-    {
-      market: MARKET_COLOR,
-      private: PRIVATE_COLOR,
-      daap: DAAP_COLOR,
-      fraud: FRAUD_COLOR
+  const getClasses = (index: any): any => {
+    const adjustedClasses = [classes.BarChartSegment]
+    const colors = [
+      'BarChartSegmentMarketColor', 
+      'BarChartSegmentPrivateColor', 
+      'BarChartSegmentDaapColor', 
+      'BarChartSegmentFraudColor'
+    ];
+
+    if (index < 10 && index === activeSegment) {
+      adjustedClasses.push(classes.BarChartSegmentActive);
     }
-  );
 
-  console.log(CHART_BAR_BOX_SHADOW)
+    if (!(index === activeSegment) && index === 0) {
+      adjustedClasses.push(classes.BarChartSegmentFirst)
+    }
 
-  return (
-    <BarChartView 
-      data={segmentsData}
-      onClick={onSegmentClick}
-      activeSegment={activeSegment}
-      segmentStyles={{ 
-        borderRadius: CHART_BAR_BORDER_RADIUS,
-        boxShadow: CHART_BAR_BOX_SHADOW,
-        colors: { grey, common }
-      }}
-      styles={{
-        color: grey[400],
-        fontFamily: DEFAULT_FONT_FAMILY,
-        fontSize: CHART_BAR_FONT_SIZE,
-        fontWeight: DEFAULT_FONT_WEIGHT,
-        fontStyle: DEFAULT_FONT_STYLE,
-        lineHeight: DEFAULT_LINE_HEIGHT
-      }} 
-    />
-  )
+    adjustedClasses.push(classes[colors[Math.round(Math.random() * 3)]])
+
+    return adjustedClasses.join(' ');
+  };
+
+  const data = wallets.reduce((acc: any, object: any, index: any) => {
+    if (!(object.percentage < 0.1)) {
+      acc.elements.push((
+        <div
+          className={getClasses(index)}
+          onClick={() => onClick(index)}
+          key={object.walletHash} 
+          style={getStyle(acc, object)}>
+          {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
+        </div>
+      ))
+    }
+    return {
+      position: acc.position + BAR_CHART_WIDTH * object.percentage / 100,
+      elements: acc.elements
+    };
+  }, { position: 0, elements: [] }).elements
+
+  return <BarChartView data={data} />
 };
 
 export default BarChartContainer;

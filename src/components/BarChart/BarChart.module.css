@@ -1,0 +1,47 @@
+.BarChartContainer {
+  background-color: #253152;
+  color: #cccccc;
+  height: 21.67px;
+  border-radius: 2px;
+  position: relative;
+  line-height: 1.0625rem;
+  font-family: Quicksand, sans-serif;
+  font-size: 0.675rem;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.BarChartSegment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}
+
+.BarChartSegmentActive {
+  box-shadow: 0px 0px 20px rgba(135, 101, 239, 0.4);
+  border-radius: 2px;
+  z-index: 100;
+  transform: scale(1.05);
+  color: white;
+}
+
+.BarChartSegmentFirst {
+  border-radius: 2px 0px 0px 2px;
+}
+
+.BarChartSegmentMarketColor {
+  background: linear-gradient(90deg, #6B5EE9 0%, #8765EF 100%);
+}
+
+.BarChartSegmentPrivateColor {
+  background: linear-gradient(90deg, #5975FF 0%, #569AF5 100%);
+}
+
+.BarChartSegmentDaapColor {
+  background: linear-gradient(90deg, #74798C 0%, #A9B0CC 100%);
+}
+
+.BarChartSegmentFraudColor {
+  background: linear-gradient(90deg, #2A2D3A 0%, #34363F 100%);
+}

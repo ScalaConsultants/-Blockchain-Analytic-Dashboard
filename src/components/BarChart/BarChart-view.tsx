@@ -1,17 +1,11 @@
 import React from 'react';
-import BarChartSegments from './BarChartSegments-view';
-import { SegmentsProps } from './types';
+import { ViewProps } from './types';
 
-const BarChartView = ({ data, activeSegment, segmentStyles, onClick, styles }: SegmentsProps) => (
-  <div style={{
-    ...styles,
-    background: '#253152',
-    boxShadow: 'inset 0px 4px 10px #0F1935',
-    height: '21.67px',
-    borderRadius: '2px',
-    position: 'relative',
-  }}>
-    <BarChartSegments data={data} activeSegment={activeSegment} onClick={onClick} segmentStyles={segmentStyles} />
+import classes from './BarChart.module.css';
+
+const BarChartView = ({ data }: ViewProps) => (
+  <div className={classes.BarChartContainer}>
+    {data}
   </div>
 );
 
