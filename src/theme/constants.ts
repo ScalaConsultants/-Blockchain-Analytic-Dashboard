@@ -1,4 +1,4 @@
-export const DEFAULT_FONT_FAMILY = 'Quicksand';
+export const DEFAULT_FONT_FAMILY = 'Quicksand, sans-serif';
 export const DEFAULT_FONT_SIZE = '0.875rem';
 export const DEFAULT_FONT_WEIGHT = 'bold';
 export const DEFAULT_FONT_STYLE = 'normal';
