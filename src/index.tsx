@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { StoreContext } from 'redux-react-hook';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
 import './index.css';
@@ -11,11 +12,12 @@ import rootSaga from './store/sagas/root';
 
 const store = configureStore();
 store.runSaga(rootSaga);
-
 ReactDOM.render(
   <StoreContext.Provider value={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <CssBaseline>
+        <App />
+      </ CssBaseline>
     </ThemeProvider>
   </StoreContext.Provider>,
   document.getElementById('root')
