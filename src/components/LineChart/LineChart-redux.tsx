@@ -7,7 +7,6 @@ import { Block, State} from "../../types";
 
 import { LOADER_STATE } from '../../store/actions/loader';
 
-
 const LineChartRedux = () => {
     const mapState = (state: State): { blokchain: Block[] } => ({
         blokchain: getBlockchainByDatasource(state, state.dataSource)
