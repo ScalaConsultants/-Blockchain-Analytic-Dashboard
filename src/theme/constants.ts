@@ -13,7 +13,7 @@ export const PRIVATE_COLOR = 'linear-gradient(90deg, #5975FF 0%, #569AF5 100%)';
 export const DAAP_COLOR = 'linear-gradient(90deg, #74798C 0%, #A9B0CC 100%)';
 export const FRAUD_COLOR = 'linear-gradient(90deg, #2A2D3A 0%, #34363F 100%)';
 
-export const BAR_CHART_WIDTH = 1024;
+export const BAR_CHART_WIDTH = 2000;
 export const CHART_BAR_FONT_SIZE = '0.675rem';
 export const BAR_CHART_BOX_SHADOW = '0px 0px 20px rgba(135, 101, 239, 0.4)';
 export const CHART_BAR_BORDER_RADIUS = '2px';

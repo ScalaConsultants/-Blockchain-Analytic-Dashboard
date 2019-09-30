@@ -22,10 +22,10 @@ const BarChartContainer = () => {
   const getClasses = (index: any): any => {
     const adjustedClasses = [classes.BarChartSegment]
     const colors = [
-      'BarChartSegmentMarketColor', 
-      'BarChartSegmentPrivateColor', 
-      'BarChartSegmentDaapColor', 
-      'BarChartSegmentFraudColor'
+      'BarChartSegmentColorMarket', 
+      'BarChartSegmentColorPrivate', 
+      'BarChartSegmentColorDaap', 
+      'BarChartSegmentColorFraud'
     ];
 
     if (index < 10 && index === activeSegment) {
@@ -33,7 +33,7 @@ const BarChartContainer = () => {
     }
 
     if (!(index === activeSegment) && index === 0) {
-      adjustedClasses.push(classes.BarChartSegmentFirst)
+      adjustedClasses.push(classes.BarChartSegmentFirstInactive)
     }
 
     adjustedClasses.push(classes[colors[Math.round(Math.random() * 3)]])

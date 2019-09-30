@@ -26,22 +26,22 @@
   color: white;
 }
 
-.BarChartSegmentFirst {
+.BarChartSegmentFirstInactive {
   border-radius: 2px 0px 0px 2px;
 }
 
-.BarChartSegmentMarketColor {
+.BarChartSegmentColorMarket {
   background: linear-gradient(90deg, #6B5EE9 0%, #8765EF 100%);
 }
 
-.BarChartSegmentPrivateColor {
+.BarChartSegmentColorPrivate {
   background: linear-gradient(90deg, #5975FF 0%, #569AF5 100%);
 }
 
-.BarChartSegmentDaapColor {
+.BarChartSegmentColorDaap {
   background: linear-gradient(90deg, #74798C 0%, #A9B0CC 100%);
 }
 
-.BarChartSegmentFraudColor {
+.BarChartSegmentColorFraud {
   background: linear-gradient(90deg, #2A2D3A 0%, #34363F 100%);
 }
