@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import BarChartView from './BarChart-view';
 import clsx from 'clsx';
 import { BarChartSegment } from './BarChart-styles';
+import { Wallet, Accumulator } from './types';
 
 const BarChartContainer = ({ width = 2000 }) => {
-  const wallets: any = []; //TODO: import data 
+  const wallets: Wallet[] = []; //TODO: import data 
 
   const [activeSegment, updateActiveSegment] = useState(0);
 
   const onClick = (index: number) => updateActiveSegment(index);
 
-  const getStyle: any = (acc: any, object: any) => ({
+  const getStyle: any = (acc: any, object: Wallet) => ({
     position: 'absolute',
     height: '100%',
     top: 0,
@@ -18,7 +19,7 @@ const BarChartContainer = ({ width = 2000 }) => {
     width: width * object.percentage / 100,
   })
 
-  const getClasses = (index: any): any => {
+  const getClasses = (index: number): string => {
     const classes = BarChartSegment();
     const num = Math.round(Math.random() * 3);
 
@@ -32,7 +33,7 @@ const BarChartContainer = ({ width = 2000 }) => {
     });
   };
 
-  const data = wallets.reduce((acc: any, object: any, index: any) => {
+  const data = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
     if (object.percentage > 0.1) {
       acc.elements.push((
         <div

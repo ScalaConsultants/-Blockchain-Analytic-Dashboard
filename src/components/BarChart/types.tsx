@@ -1,3 +1,14 @@
+export interface Wallet {
+  walletHash: string,
+  totalValue: number,
+  percentage: number
+}
+
 export interface ViewProps {
-  data: [];
+  data: React.ReactElement<'div'>[];
 };
+
+export interface Accumulator {
+  position: number,
+  elements: React.ReactElement<'div'>[]
+}
