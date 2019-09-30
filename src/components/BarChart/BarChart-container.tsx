@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import BarChartView from './BarChart-view';
+import clsx from 'clsx';
+import { BarChartSegment } from './BarChart-styles';
 
-import classes from './BarChart.module.css';
-
-const BarChartContainer = () => {
+const BarChartContainer = ({ width = 2000 }) => {
   const wallets: any = []; //TODO: import data 
-  const BAR_CHART_WIDTH = 2000;
 
   const [activeSegment, updateActiveSegment] = useState(0);
 
@@ -16,29 +15,21 @@ const BarChartContainer = () => {
     height: '100%',
     top: 0,
     left: acc.position,
-    width: BAR_CHART_WIDTH * object.percentage / 100,
+    width: width * object.percentage / 100,
   })
 
   const getClasses = (index: any): any => {
-    const adjustedClasses = [classes.BarChartSegment]
-    const colors = [
-      'BarChartSegmentColorMarket', 
-      'BarChartSegmentColorPrivate', 
-      'BarChartSegmentColorDaap', 
-      'BarChartSegmentColorFraud'
-    ];
+    const classes = BarChartSegment();
+    const num = Math.round(Math.random() * 3);
 
-    if (index < 10 && index === activeSegment) {
-      adjustedClasses.push(classes.BarChartSegmentActive);
-    }
-
-    if (index !== activeSegment && index === 0) {
-      adjustedClasses.push(classes.BarChartSegmentFirstInactive)
-    }
-
-    adjustedClasses.push(classes[colors[Math.round(Math.random() * 3)]])
-
-    return adjustedClasses.join(' ');
+    return clsx(classes.root, {
+      [classes.active]: index < 10 && index === activeSegment,
+      [classes.firstInactive]: index !== activeSegment && index === 0,
+      [classes.market]: num === 0,
+      [classes.private]: num === 1,
+      [classes.daap]: num === 2,
+      [classes.fraud]: num === 3
+    });
   };
 
   const data = wallets.reduce((acc: any, object: any, index: any) => {
@@ -54,7 +45,7 @@ const BarChartContainer = () => {
       ))
     }
     return {
-      position: acc.position + BAR_CHART_WIDTH * object.percentage / 100,
+      position: acc.position + width * object.percentage / 100,
       elements: acc.elements
     };
   }, { position: 0, elements: [] }).elements
