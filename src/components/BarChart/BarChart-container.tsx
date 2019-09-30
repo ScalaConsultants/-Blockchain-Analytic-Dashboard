@@ -4,9 +4,9 @@ import BarChartView from './BarChart-view';
 
 import classes from './BarChart.module.css';
 
-const wallets = require('./wallets-data.json')
-
 const BarChartContainer = () => {
+  const wallets: any = []; //TODO: import data 
+
   const [activeSegment, updateActiveSegment] = useState(0);
 
   const onClick = (index: number) => updateActiveSegment(index);
