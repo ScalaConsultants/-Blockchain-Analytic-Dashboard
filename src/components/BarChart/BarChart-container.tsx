@@ -11,7 +11,7 @@ const BarChartContainer = ({ width = 2000 }) => {
 
   const onClick = (index: number) => updateActiveSegment(index);
 
-  const getStyle: any = (acc: any, object: Wallet) => ({
+  const getStyle: any = (acc: Accumulator, object: Wallet) => ({
     position: 'absolute',
     height: '100%',
     top: 0,
