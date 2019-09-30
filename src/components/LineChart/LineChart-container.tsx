@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { lineChartContainerStyle } from './LineChart-styles';
 
-import LineChart from './Line-view';
+import LineView from './Line-view';
 
 import {
   convertTimeStampToHours,
 } from './helpers';
 
 import testData from './data';
-import classes from './LineChart.module.css';
 
 const LineCharts = (props: any): React.ReactElement => {
   const { blokchain, actions } = props;
+  const classes = lineChartContainerStyle();
 
-  const [label, setLabel] = useState([
+
+  const [labels, setLabels] = useState([
     '19-04-2019'
   ]);
   const [data, setData] = useState([10, 20, 30, 40]);
 
   const filterChart = (): void => {
-    const labels: any[] = [];
+    const labels: string[] = [];
     const elements: number[] = [];
 
     testData.forEach((item): void => {
@@ -26,7 +28,7 @@ const LineCharts = (props: any): React.ReactElement => {
       labels.push(convertTimeStampToHours(item.interval));
 
     });
-    setLabel(labels);
+    setLabels(labels);
     setData(elements);
     actions.setLoaderFalse();
   };
@@ -36,7 +38,7 @@ const LineCharts = (props: any): React.ReactElement => {
   }, [blokchain]);
 
   const chartLineData = {
-    labels: label,
+    labels: labels,
     datasets: [
       {
         label: 'ETH',
@@ -76,8 +78,8 @@ const LineCharts = (props: any): React.ReactElement => {
   }
 
   return (
-    <div className={classes.LineChartContainer}>
-      <LineChart
+    <div className={classes.lineChartContainer}>
+      <LineView
         data={chartLineData}
         width={100}
         options={chartLineOptions}

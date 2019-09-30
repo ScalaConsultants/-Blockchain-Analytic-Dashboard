@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LineChart from './Line-view';
+import LineView from './Line-view';
 
 describe('Line', () => {
   const props = {
@@ -8,17 +8,17 @@ describe('Line', () => {
   };
 
   it('should base render', () => {
-    const wrapper = shallow(<LineChart {...props}/>);
+    const wrapper = shallow(<LineView {...props}/>);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render once', () => {
-    const wrapper = shallow(<LineChart {...props}/>);
+    const wrapper = shallow(<LineView {...props}/>);
     expect(wrapper).toHaveLength(1);
   });
 
   it('should render component with proper data', () => {
-    const wrapper = shallow(<LineChart {...props}/>);
+    const wrapper = shallow(<LineView {...props}/>);
     expect(wrapper.prop('data')).toEqual('test');
   });
 });
