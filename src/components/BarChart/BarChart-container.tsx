@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { BarChartSegment } from './BarChart-styles';
 import { Wallet, Accumulator } from './types';
 
-const BarChartContainer = ({ width = 2000 }) => {
+const BarChartContainer = (props:any) => {
+  const { width, blokchain } = props;
   const wallets: Wallet[] = []; //TODO: import data 
 
   const [activeSegment, updateActiveSegment] = useState(0);
