@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { BAR_CHART_WIDTH } from '../../theme/constants';
 import BarChartView from './BarChart-view';
 
 import classes from './BarChart.module.css';
 
 const BarChartContainer = () => {
   const wallets: any = []; //TODO: import data 
+  const BAR_CHART_WIDTH = 2000;
 
   const [activeSegment, updateActiveSegment] = useState(0);
 

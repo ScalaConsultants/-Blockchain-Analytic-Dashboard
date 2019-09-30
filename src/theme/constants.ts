@@ -7,5 +7,3 @@ export const DEFAULT_BG_COLOR = '#161B32';
 
 export const PRIMARY_MAIN_COLOR = '#252D48';
 export const SECONDARY_MAIN_COLOR = '#A3A7B0';
-
-export const BAR_CHART_WIDTH = 2000;
