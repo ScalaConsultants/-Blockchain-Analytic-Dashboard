@@ -65,7 +65,7 @@ const fetchTransactionsRequest = async (): Promise<any> => {
 };
 
 export function* doFetchTransactions(): any {
-  yield put(loaderActions.showLoader());
+  // yield put(loaderActions.showLoader());
   const response = yield call(fetchTransactionsRequest);
   yield put(loaderActions.hideLoader());
   if (response) yield put(blokchainActions.BlokchainSetTransactions(response));

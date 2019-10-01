@@ -5,8 +5,7 @@ import * as ethereumSagas from "./ethereum/transactions";
 
 export default function* root(): any {
   yield all([
-    blokchainSagas.watchDoFetchTransactions(),
-    blokchainIntervalSagas.watchDoFetchMoreTransactions(),
+    // blokchainSagas.watchDoFetchTransactions(),
     ethereumSagas.watchDoFetchTransactions()
   ]);
 }

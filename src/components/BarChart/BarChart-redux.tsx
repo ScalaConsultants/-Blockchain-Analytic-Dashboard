@@ -2,18 +2,19 @@ import React from 'react';
 import { useMappedState } from 'redux-react-hook';
 
 import BarChartContainer from './BarChart-container';
-import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
-import { Block, State } from "../../types";
+
 
 const BarChartRedux = () => {
-    const mapState = (state: State): { blokchain: Block[] } => ({
-        blokchain: getBlockchainByDatasource(state, state.dataSource)
+
+    const mapState = (state: any): any => ({
+        wallets: state.ethereum.wallets
     });
 
-    const { blokchain } = useMappedState(mapState);
+    const { wallets } = useMappedState(mapState);
+
 
     return (
-        <BarChartContainer blokchain={blokchain} width={2000} />
+        <BarChartContainer wallets={wallets} width={2000} />
     )
 }
 

@@ -39,11 +39,11 @@ const App = (): React.ReactElement => {
 
     const fetchEthereumTransactions = (): void => {
       dispatch({
-        type: EthereumActions.ETHEREUM_FETCH_TRANSACTIONS
+        type: EthereumActions.ETHEREUM_FETCH_WALLETS
       });
     };
 
-    fetchTransactions();
+    // fetchTransactions();
     fetchEthereumTransactions();
     // setInterval(fetchMoreTransactions, 1000 * fetchMoreIntervalSeconds);
   }, [dep]);

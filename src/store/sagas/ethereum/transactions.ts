@@ -8,7 +8,7 @@ export const getPage = (state: any): number => state.ethereum.page;
 
 async function fetchTransactions(page: number): Promise<any> {
   const res = await fetch(
-    `${process.env.REACT_APP_CORS_PROXY}https://blockchain-ethereum-api-dev.scalac.io/api/transactions?page=${page}`
+    `http://localhost:5000/api/v1/ethereum/wallets?groupBy=from&limit=100`
   );
   return res.json();
 }
@@ -18,37 +18,25 @@ function* doFetchTransactions(): any {
   const showLoader = page === 1;
 
   // Show loader on initial fetch
-  if (showLoader) {
-    yield put(loaderActions.showLoader());
-  }
+  // yield put(loaderActions.showLoader());
 
-  const transactions = yield fetchTransactions(page);
+  const wallets = yield fetchTransactions(page);
 
-  if (transactions.length > 0) {
+  if (wallets.length > 0) {
     yield put({
-      type: ethereumActions.ETHEREUM_SET_TRANSACTIONS,
-      transactions
-    });
-
-    yield put({
-      type: ethereumPageActions.ETHEREUM_FETCH_MORE_TRANSACTIONS
+      type: ethereumActions.ETHEREUM_SET_WALLETS,
+      wallets
     });
   }
 
   // Hide on consecutive requests
-  if (showLoader) {
     yield put(loaderActions.hideLoader());
-  }
+
 }
 
 export function* watchDoFetchTransactions(): any {
   yield takeEvery(
-    ethereumActions.ETHEREUM_FETCH_TRANSACTIONS,
-    doFetchTransactions
-  );
-
-  yield takeEvery(
-    ethereumPageActions.ETHEREUM_FETCH_MORE_TRANSACTIONS,
+    ethereumActions.ETHEREUM_FETCH_WALLETS,
     doFetchTransactions
   );
 }
