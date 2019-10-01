@@ -39,7 +39,7 @@ export const BarChartSegment = makeStyles((theme: ExtendedTheme) => ({
   private: {
     background: theme.constants.PRIVATE_COLOR
   },
-  daap: {
+  dapp: {
     background: theme.constants.DAAP_COLOR
   },
   fraud: {
