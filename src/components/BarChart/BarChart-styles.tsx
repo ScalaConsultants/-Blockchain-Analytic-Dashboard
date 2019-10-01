@@ -1,6 +1,7 @@
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import { ExtendedTheme } from './../../types';
 
-export const BarChartContainer = makeStyles((theme: Theme) => ({
+export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
     background: '#253152',
     color: theme.palette.grey[400],
@@ -15,7 +16,7 @@ export const BarChartContainer = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const BarChartSegment = makeStyles((theme: Theme) => ({
+export const BarChartSegment = makeStyles((theme: ExtendedTheme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -33,15 +34,15 @@ export const BarChartSegment = makeStyles((theme: Theme) => ({
     borderRadius: '2px 0px 0px 2px'
   },
   market: {
-    background: 'linear-gradient(90deg, #6B5EE9 0%, #8765EF 100%)'
+    background: theme.constants.MARKET_COLOR
   },
   private: {
-    background: 'linear-gradient(90deg, #5975FF 0%, #569AF5 100%)'
+    background: theme.constants.PRIVATE_COLOR
   },
   daap: {
-    background: 'linear-gradient(90deg, #74798C 0%, #A9B0CC 100%)'
+    background: theme.constants.DAAP_COLOR
   },
   fraud: {
-    background: 'linear-gradient(90deg, #2A2D3A 0%, #34363F 100%)'
+    background: theme.constants.FRAUD_COLOR
   }
 }));
