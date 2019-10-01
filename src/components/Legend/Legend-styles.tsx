@@ -52,7 +52,7 @@ export const LegendList = makeStyles((theme: ExtendedTheme) => ({
       background: theme.constants.PRIVATE_COLOR
     },
     '&:nth-child(3)::before': {
-      background: theme.constants.DAAP_COLOR
+      background: theme.constants.DAPP_COLOR
     },
     '&:nth-child(4)::before': {
       background: theme.constants.FRAUD_COLOR

@@ -76,7 +76,7 @@ export interface ExtendedTheme extends Theme {
   constants: {
     MARKET_COLOR: string,
     PRIVATE_COLOR: string,
-    DAAP_COLOR: string,
+    DAPP_COLOR: string,
     FRAUD_COLOR: string,
     DEFAULT_FONT_FAMILY: string,
     DEFAULT_FONT_STYLE: string,
