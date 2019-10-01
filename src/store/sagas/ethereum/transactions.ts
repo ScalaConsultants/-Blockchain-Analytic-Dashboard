@@ -18,7 +18,9 @@ function* doFetchTransactions(): any {
   const showLoader = page === 1;
 
   // Show loader on initial fetch
-  // yield put(loaderActions.showLoader());
+  if (showLoader) {
+    yield put(loaderActions.showLoader());
+  }
 
   const wallets = yield fetchTransactions(page);
 
@@ -30,8 +32,9 @@ function* doFetchTransactions(): any {
   }
 
   // Hide on consecutive requests
+  if (showLoader) {
     yield put(loaderActions.hideLoader());
-
+  }
 }
 
 export function* watchDoFetchTransactions(): any {

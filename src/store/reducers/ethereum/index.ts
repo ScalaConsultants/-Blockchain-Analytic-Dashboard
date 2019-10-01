@@ -7,6 +7,6 @@ import wallets from "./wallets";
 export default combineReducers({
   blocks,
   summedBlocks: summed,
-  page
+  page,
   wallets
 });
