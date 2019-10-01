@@ -3,6 +3,7 @@ import BarChart from '../BarChart';
 
 import TransactionsList from '../TransactionsList';
 import LineChart from '../LineChart';
+import Legend from '../Legend';
 
 const DetailsView = () => {
 
@@ -10,6 +11,7 @@ const DetailsView = () => {
         <>
             <BarChart />
             <LineChart />
+            <Legend />
             <TransactionsList />
         </>
     )
