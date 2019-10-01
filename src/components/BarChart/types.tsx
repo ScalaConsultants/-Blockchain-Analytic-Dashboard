@@ -21,3 +21,7 @@ export interface Props {
   wallets: Wallet[],
   width: number
 }
+
+export interface State {
+  ethereum: Wallets
+}
