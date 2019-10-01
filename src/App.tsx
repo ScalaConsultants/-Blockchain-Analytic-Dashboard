@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 import Routes from './router/routes';
-import * as BlokchainActions from './store/actions/tezos/blokchain';
 import * as EthereumActions from './store/actions/ethereum/transactions';
 import './App.css';
 import Loader from './components/loader/Loader';
@@ -24,27 +23,14 @@ const App = (): React.ReactElement => {
     // Fetch initial blockchain e.g. 50k
     if (blokchain.length) return;
 
-    const fetchTransactions = (): void => {
-      dispatch({
-        type: BlokchainActions.BLOKCHAIN_FETCH_TRANSACTIONS
-      });
-    };
-
-    // Fetch more transactions every specified amount of time
-    const fetchMoreTransactions = (): void => {
-      dispatch({
-        type: BlokchainActions.BLOKCHAIN_FETCH_MORE_TRANSACTIONS
-      });
-    };
-
-    const fetchEthereumTransactions = (): void => {
+    const fetchEthereumWallets = (): void => {
       dispatch({
         type: EthereumActions.ETHEREUM_FETCH_WALLETS
       });
     };
 
     // fetchTransactions();
-    fetchEthereumTransactions();
+    fetchEthereumWallets();
     // setInterval(fetchMoreTransactions, 1000 * fetchMoreIntervalSeconds);
   }, [dep]);
 
