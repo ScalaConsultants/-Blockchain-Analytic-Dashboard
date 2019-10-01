@@ -29,6 +29,7 @@ const BarChartContainer = (props: any) => {
   //  ];
 
 
+  const classes = BarChartSegment();
 
   const [activeSegment, updateActiveSegment] = useState(0);
 
@@ -43,7 +44,6 @@ const BarChartContainer = (props: any) => {
   })
 
   const getClasses = (index: number): string => {
-    const classes = BarChartSegment();
     const num = Math.round(Math.random() * 3);
 
     return clsx(classes.root, {
@@ -60,7 +60,7 @@ const BarChartContainer = (props: any) => {
     if (object.percentage > 0.1) {
       acc.elements.push((
         <div
-          // className={getClasses(index)}
+          className={getClasses(index)}
           onClick={() => onClick(index)}
           key={object.walletHash} 
           style={getStyle(acc, object)}>
