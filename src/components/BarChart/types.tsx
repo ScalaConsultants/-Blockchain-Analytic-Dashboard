@@ -12,3 +12,12 @@ export interface Accumulator {
   position: number,
   elements: React.ReactElement<'div'>[]
 }
+
+export interface Wallets {
+  wallets: Wallet[]
+}
+
+export interface Props {
+  wallets: Wallet[],
+  width: number
+}

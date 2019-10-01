@@ -2,11 +2,11 @@ import React from 'react';
 import { useMappedState } from 'redux-react-hook';
 
 import BarChartContainer from './BarChart-container';
-
+import { Wallets } from './types';
 
 const BarChartRedux = () => {
 
-    const mapState = (state: any): any => ({
+    const mapState = (state: any): Wallets => ({
         wallets: state.ethereum.wallets
     });
 

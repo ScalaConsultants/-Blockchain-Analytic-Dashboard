@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import BarChartView from './BarChart-view';
 import clsx from 'clsx';
 import { BarChartSegment } from './BarChart-styles';
-import { Wallet, Accumulator } from './types';
+import { Wallet, Accumulator, Props } from './types';
 
-const BarChartContainer = (props: any) => {
+const BarChartContainer = (props: Props) => {
   const { width, wallets = [] } = props;
 
   const classes = BarChartSegment();
