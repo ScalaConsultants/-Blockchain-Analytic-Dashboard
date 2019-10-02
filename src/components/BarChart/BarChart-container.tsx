@@ -3,15 +3,16 @@ import BarChartView from './BarChart-view';
 import clsx from 'clsx';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 import { Wallet, Accumulator, BarChartProps } from './types';
+import { Link } from 'react-router-dom'
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { width, wallets = [] } = props;
+  const { width, wallets = [], actions } = props;
 
   const classes = useBarChartSegmentStyles();
 
   const [activeSegment, updateActiveSegment] = useState(0);
 
-  const onClick = (index: number) => updateActiveSegment(index);
+  // const onClick = (index: number) => updateActiveSegment(index);
 
   const getStyle: any = (acc: Accumulator, object: Wallet) => ({
     position: 'absolute',
@@ -37,13 +38,15 @@ const BarChartContainer = (props: BarChartProps) => {
   const data = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
     if (object.percentage > 0.1) {
       acc.elements.push((
-        <div
-          className={getClasses(index)}
-          onClick={() => onClick(index)}
-          key={object.walletHash} 
-          style={getStyle(acc, object)}>
-          {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
-        </div>
+        <Link to={object.walletHash}>
+          <div
+              className={getClasses(index)}
+              onClick={() => actions.fetchEthereumTransactions(object.walletHash)}
+              key={object.walletHash}
+              style={getStyle(acc, object)}>
+              {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
+          </div>
+        </Link>
       ))
     }
     return {

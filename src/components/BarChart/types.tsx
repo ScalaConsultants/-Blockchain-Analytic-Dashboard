@@ -19,7 +19,8 @@ export interface Wallets {
 
 export interface BarChartProps {
   wallets: Wallet[],
-  width: number
+  width: number,
+  actions: any
 }
 
 export interface State {

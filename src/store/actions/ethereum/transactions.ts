@@ -4,8 +4,9 @@ export const ETHEREUM_FETCH_TRANSACTIONS = 'ETHEREUM_FETCH_TRANSACTIONS';
 
 export const ETHEREUM_SET_TRANSACTIONS = 'ETHEREUM_SET_TRANSACTIONS';
 
-export const ethereumFetchTransactions = (): ActionType => ({
-  type: ETHEREUM_FETCH_TRANSACTIONS
+export const ethereumFetchTransactions = (data:any): any => ({
+  type: ETHEREUM_FETCH_TRANSACTIONS,
+  data: data
 });
 
 export const ethereumSetTransactions = (blocks: any): any => ({

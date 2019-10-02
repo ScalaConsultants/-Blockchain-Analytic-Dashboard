@@ -10,8 +10,9 @@ async function fetchWallets(): Promise<any> {
   return res.json();
 }
 
-function* doFetchWallets(): any {
+function* doFetchWallets(payload:any): any {
 
+  console.log(payload);
   // Show loader on initial fetch
     yield put(loaderActions.showLoader());
   
