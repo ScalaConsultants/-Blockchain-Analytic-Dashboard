@@ -15,7 +15,9 @@ import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
 import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy, TransactionsListProps } from './types';
 import { timestampToDate } from './../../helpers/helpers';
-import { Block } from "../../types";
+import { Block } from '../../types';
+
+import testData from './data';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
@@ -26,9 +28,6 @@ const headerCols: HeaderColsInterface[] = [
 
 //Add props type
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
-
-  console.log(props);
-
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
 
@@ -78,18 +77,18 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       </TableCell>
     )));
 
-  const renderTransactionListRows = (blokchain: Block[]) =>
+  const renderTransactionListRows = (blokchain: any) => (
     (stableSort(
       blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
       getSorting(order, orderBy)
-    ).map((row: Block, index: number) => (
-      <TableRow onClick={() => handleClickOpen(row)} hover key={`Transaction${index}`}>
+    ).map((row: any, index: number) => (
+      <TableRow key={index + row.timestamp}>
         <TableCell>{row.amount}</TableCell>
         <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
-        <TableCell>Exchange rate</TableCell>
-        <TableCell>Description</TableCell>
+        <TableCell>{row.exchange}</TableCell>
+        <TableCell>{row.description}</TableCell>
       </TableRow>
-    )));
+    ))));
 
   const modalDetailsProps: ModalDetailsProps = {
     open,
@@ -97,13 +96,13 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     data: selectedRow
   };
 
-  let hasNextPage = (props.blokchain.length / 50) > 1;
+  let hasNextPage = (testData.length / 50) > 1;
 
-  const itemCount = hasNextPage ? props.blokchain.length + 1 : props.blokchain.length;
+  const itemCount = hasNextPage ? testData.length + 1 : testData.length;
 
-  const loadMoreItems:any = !hasNextPage ? () => { } : props.blokchain.length;
+  const loadMoreItems:any = !hasNextPage ? () => { } : testData.length;
 
-  const isItemLoaded = (index: any) => !page || index < props.blokchain.length;
+  const isItemLoaded = (index: any) => !page || index < testData.length;
 
   const Item = (index: any) => {
     let content;
@@ -112,16 +111,16 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     } else {
       content = (
         <Table>
-          {( index.index === 0 ) &&
-            ( <TableHead>
+          
+            <TableHead>
               <TableRow>
                 {renderTransactionListHeader(headerCols)}
               </TableRow>
-            </TableHead> )
-            }
+            </TableHead> 
+            
 
           <TableBody>
-            {renderTransactionListRows(props.blokchain)}
+            {renderTransactionListRows(testData)}
           </TableBody>
         </Table>
       )
