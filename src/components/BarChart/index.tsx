@@ -1,3 +1,3 @@
-import BarChartContainer from './BarChart-container';
+import BarChartRedux from './BarChart-redux';
 
-export default BarChartContainer;
+export default BarChartRedux;

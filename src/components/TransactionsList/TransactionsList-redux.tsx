@@ -2,12 +2,11 @@ import React from 'react';
 import { useMappedState } from 'redux-react-hook';
 
 import TransactionListContainer from './TransactionsList-container';
-import { getBlockchainByDatasource } from '../../store/reducers/dataSource';
 import { Block } from "../../types";
 
 const TransactionListRedux = () => {
     const mapState = (state: any): { blokchain: Block[] } => ({
-        blokchain: getBlockchainByDatasource(state, state.dataSource)
+        blokchain: []
       });
       
     let initState: Block[] = [];

@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
-import blocks from "./blokchain-blocks";
-import { blokchainSummed } from "./blokchain-summed";
+import transactions from "./transactions";
 
 export default combineReducers({
-  blocks,
-  summedBlocks: blokchainSummed
-});
+    transactions
+  });
