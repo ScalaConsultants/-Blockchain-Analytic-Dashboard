@@ -1,4 +1,5 @@
 import { SvgIconProps } from "@material-ui/core/SvgIcon";
+import { Theme } from '@material-ui/core/styles';
 
 export interface Config {
   chartType: string;
@@ -70,3 +71,15 @@ export interface MenuItemType {
   icon?: React.ReactElement<SvgIconProps>,
   description?: string
 }
+
+export interface ExtendedTheme extends Theme {
+  constants: {
+    MARKET_COLOR: string,
+    PRIVATE_COLOR: string,
+    DAPP_COLOR: string,
+    FRAUD_COLOR: string,
+    DEFAULT_FONT_FAMILY: string,
+    DEFAULT_FONT_STYLE: string,
+    DEFAULT_FONT_WEIGHT: any
+  }
+};
