@@ -10,7 +10,7 @@ import {
 import testData from './data';
 
 const LineCharts = (props: any): React.ReactElement => {
-  const { blokchain, actions } = props;
+  const { blokchain } = props;
   const classes = lineChartContainerStyle();
 
 
@@ -30,7 +30,6 @@ const LineCharts = (props: any): React.ReactElement => {
     });
     setLabels(labels);
     setData(elements);
-    actions.setLoaderFalse();
   };
 
   useEffect((): void => {

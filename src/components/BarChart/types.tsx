@@ -17,7 +17,7 @@ export interface Wallets {
   wallets: Wallet[]
 }
 
-export interface Props {
+export interface BarChartProps {
   wallets: Wallet[],
   width: number
 }

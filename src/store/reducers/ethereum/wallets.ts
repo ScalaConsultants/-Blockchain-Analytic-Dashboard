@@ -1,5 +1,4 @@
-import { ETHEREUM_SET_WALLETS } from '../../actions/ethereum/transactions';
-import { Block } from '../../../types';
+import { ETHEREUM_SET_WALLETS } from '../../actions/ethereum/wallets';
 
 const initState: any = [];
 

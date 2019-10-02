@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import BarChartView from './BarChart-view';
 import clsx from 'clsx';
-import { BarChartSegment } from './BarChart-styles';
-import { Wallet, Accumulator, Props } from './types';
+import { useBarChartSegmentStyles } from './BarChart-styles';
+import { Wallet, Accumulator, BarChartProps } from './types';
 
-const BarChartContainer = (props: Props) => {
+const BarChartContainer = (props: BarChartProps) => {
   const { width, wallets = [] } = props;
 
-  const classes = BarChartSegment();
+  const classes = useBarChartSegmentStyles();
 
   const [activeSegment, updateActiveSegment] = useState(0);
 
