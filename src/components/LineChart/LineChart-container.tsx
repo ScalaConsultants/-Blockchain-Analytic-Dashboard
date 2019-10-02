@@ -7,12 +7,9 @@ import {
   convertTimeStampToHours,
 } from './helpers';
 
-import testData from './data';
-
 const LineCharts = (props: any): React.ReactElement => {
-  const { blokchain } = props;
+  const { transactions = []} = props;
   const classes = lineChartContainerStyle();
-
 
   const [labels, setLabels] = useState([
     '19-04-2019'
@@ -23,7 +20,7 @@ const LineCharts = (props: any): React.ReactElement => {
     const labels: string[] = [];
     const elements: number[] = [];
 
-    testData.forEach((item): void => {
+    transactions.forEach((item:any): void => {
       elements.push(item.totalValue);
       labels.push(convertTimeStampToHours(item.interval));
 
@@ -34,7 +31,7 @@ const LineCharts = (props: any): React.ReactElement => {
 
   useEffect((): void => {
     filterChart();
-  }, [blokchain]);
+  }, [transactions]);
 
   const chartLineData = {
     labels: labels,
