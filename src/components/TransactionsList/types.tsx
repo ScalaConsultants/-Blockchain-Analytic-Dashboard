@@ -22,3 +22,8 @@ export interface ModalDetailsProps {
     handleClose: () => void;
     data: Block | {};
 }
+
+export interface TransactionsListProps {
+    initState: Block[];
+    blokchain: Block[];
+}

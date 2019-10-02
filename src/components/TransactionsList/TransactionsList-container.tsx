@@ -7,14 +7,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid/Grid';
 import Tooltip from '@material-ui/core/Tooltip/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
 import Typography from '@material-ui/core/Typography';
+import { FixedSizeList as List } from 'react-window';
+import InfiniteLoader from 'react-window-infinite-loader';
 
-import TransactionListPagination from './TransactionsListPagination-view';
 import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
-import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy } from './types';
+import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy, TransactionsListProps } from './types';
 import { timestampToDate } from './../../helpers/helpers';
 import { Block } from "../../types";
 
@@ -26,16 +25,15 @@ const headerCols: HeaderColsInterface[] = [
 ];
 
 //Add props type
-const TransactionList = (props: any): React.ReactElement => {
+const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
 
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState({});
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(100);
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.blokchain.length - page * rowsPerPage);
+  const [page] = React.useState(0);
+  const [rowsPerPage] = React.useState(100);
   const ASC = 'asc';
   const DESC = 'desc';
 
@@ -48,33 +46,9 @@ const TransactionList = (props: any): React.ReactElement => {
     setOrderBy(property);
   };
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const handleClickOpen = (data: Record<string, any>) => {
     setSelectedRow(data);
     setOpen(true);
-  };
-
-  const tablePaginationProps = {
-    rowsPerPageOptions: [15, 25, 50, 100, 250],
-    colSpan: 3,
-    count: props.blokchain.length,
-    rowsPerPage,
-    page,
-    SelectProps: {
-      inputProps: { 'aria-label': 'rows per page' },
-      native: true
-    },
-    onChangePage: handleChangePage,
-    onChangeRowsPerPage: handleChangeRowsPerPage,
-    ActionsComponent: TransactionListPagination
   };
 
   const renderTransactionListHeader = (headerCols: HeaderColsInterface[]) =>
@@ -120,43 +94,73 @@ const TransactionList = (props: any): React.ReactElement => {
     data: selectedRow
   };
 
-  return (
-    <Grid container className="Container">
-      <Grid item xs={12} lg={12}>
-        <Typography variant="h2" gutterBottom>
-          Recent transactions
-      </Typography>
-      </Grid>
-      <Grid container spacing={9} className="Container">
-        <Grid item xs={12} lg={12}>
-          <Table>
-            <TableHead>
+  let hasNextPage = (props.blokchain.length / 50) > 1;
+
+  const itemCount = hasNextPage ? props.blokchain.length + 1 : props.blokchain.length;
+
+  const loadMoreItems:any = !hasNextPage ? () => { } : props.blokchain.length;
+
+  const isItemLoaded = (index: any) => !page || index < props.blokchain.length;
+
+  const Item = (index: any) => {
+    let content;
+    if (!isItemLoaded(index)) {
+      content = "Loading...";
+    } else {
+      content = (
+        <Table>
+          {( index.index == 0 ) &&
+            ( <TableHead>
               <TableRow>
                 {renderTransactionListHeader(headerCols)}
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {renderTransactionListRows(props.blokchain)}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 48 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  {...tablePaginationProps}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
+            </TableHead> )
+            }
+
+          <TableBody>
+            {renderTransactionListRows(props.blokchain)}
+          </TableBody>
+        </Table>
+      )
+    }
+
+      return <div>{content}</div>;
+    };
+    
+    return (
+      <Grid container className="Container">
+        <Grid item xs={12} lg={12}>
+          <Typography variant="h2" gutterBottom>
+            Recent transactions
+      </Typography>
         </Grid>
-        <DetailsModal {...modalDetailsProps} />
+        <Grid container spacing={9} className="Container">
+          <Grid item xs={12} lg={12}>
+            <InfiniteLoader
+              isItemLoaded={isItemLoaded}
+              itemCount={itemCount}
+              loadMoreItems={loadMoreItems}
+            >
+              {({ onItemsRendered, ref }) => (
+                <List
+                  className="List"
+                  height={300}
+                  itemCount={itemCount}
+                  itemSize={30}
+                  onItemsRendered={onItemsRendered}
+                  ref={ref}
+                  width={1224}
+                >
+                  {Item}
+                </List>
+              )}
+            </InfiniteLoader>
+          </Grid>
+          <DetailsModal {...modalDetailsProps} />
+        </Grid>
       </Grid>
-    </Grid>
 
-  );
-};
+    );
+  };
 
-export default TransactionList;
+  export default TransactionList;
