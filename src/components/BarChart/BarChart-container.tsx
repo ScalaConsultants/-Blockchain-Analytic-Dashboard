@@ -29,7 +29,7 @@ const BarChartContainer = (props: BarChartProps) => {
       [classes.firstInactive]: index !== activeSegment && index === 0,
       [classes.market]: num === 0,
       [classes.private]: num === 1,
-      [classes.daap]: num === 2,
+      [classes.dapp]: num === 2,
       [classes.fraud]: num === 3
     });
   };
