@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import BarChartView from './BarChart-view';
 import clsx from 'clsx';
-import { BarChartSegment } from './BarChart-styles';
-import { Wallet, Accumulator } from './types';
+import { useBarChartSegmentStyles } from './BarChart-styles';
+import { Wallet, Accumulator, BarChartProps } from './types';
 
-const BarChartContainer = ({ width = 2000 }) => {
-  const wallets: Wallet[] = []; //TODO: import data 
+const BarChartContainer = (props: BarChartProps) => {
+  const { width, wallets = [] } = props;
+
+  const classes = useBarChartSegmentStyles();
 
   const [activeSegment, updateActiveSegment] = useState(0);
 
@@ -20,7 +22,6 @@ const BarChartContainer = ({ width = 2000 }) => {
   })
 
   const getClasses = (index: number): string => {
-    const classes = BarChartSegment();
     const num = Math.round(Math.random() * 3);
 
     return clsx(classes.root, {
