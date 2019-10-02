@@ -26,6 +26,9 @@ const headerCols: HeaderColsInterface[] = [
 
 //Add props type
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
+
+  console.log(props);
+
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
 
@@ -109,7 +112,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     } else {
       content = (
         <Table>
-          {( index.index == 0 ) &&
+          {( index.index === 0 ) &&
             ( <TableHead>
               <TableRow>
                 {renderTransactionListHeader(headerCols)}
