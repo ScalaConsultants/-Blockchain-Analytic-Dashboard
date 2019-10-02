@@ -6,16 +6,15 @@ import { Block, State} from "../../types";
 
 
 const LineChartRedux = () => {
-    const mapState = (state: State): { blokchain: Block[] } => ({
-        blokchain: []
+    const mapState = (state: any): any => ({
+        transactions: state
       });
       
-    let initState: Block[] = [];
-    const { blokchain } = useMappedState(mapState);
-
+    const { transactions } = useMappedState(mapState);
+    console.log(transactions);
     
     return (
-        <LineChartContainer initState={initState} blokchain={blokchain} />
+        <LineChartContainer transactions={transactions} />
     ) 
 }
 

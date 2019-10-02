@@ -1,4 +1,3 @@
-import { ActionType } from '../../../types';
 
 export const ETHEREUM_FETCH_TRANSACTIONS = 'ETHEREUM_FETCH_TRANSACTIONS';
 
@@ -9,7 +8,7 @@ export const ethereumFetchTransactions = (data:any): any => ({
   data: data
 });
 
-export const ethereumSetTransactions = (blocks: any): any => ({
+export const ethereumSetTransactions = (transactions: any): any => ({
   type: ETHEREUM_SET_TRANSACTIONS,
-  blocks
+  transactions
 });
