@@ -1,3 +1,5 @@
+import { RouteComponentProps } from 'react-router-dom';
+
 export interface Transaction {
     interval:string,
     totalValue:number
@@ -11,5 +13,14 @@ export interface State {
     ethereum: Transactions
 }
 
-export interface LineChartProps extends Transactions{
+export type WalletHash = {
+    walletHash: string
+}
+
+export interface DetailsViewActions {
+    fetchEthereumTransactions: Function
+}
+
+export interface LineChartProps extends Transactions, RouteComponentProps<WalletHash> {
+    actions:DetailsViewActions
 }

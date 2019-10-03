@@ -7,7 +7,7 @@ export default (): React.ReactElement => {
   const routes = (
     <Container>
       <Route exact path="/" component={DetailsView} />
-      <Route exact path="/:wallet_hash" component={DetailsView} />
+      <Route exact path="/:walletHash" component={DetailsView} />
     </Container>
   );
 

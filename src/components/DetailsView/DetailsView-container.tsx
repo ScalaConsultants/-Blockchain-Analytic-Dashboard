@@ -1,23 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import DetailsView from './DetailsView-view';
-import { DetailsViewProps } from './types';
 
-const DetailsViewContainer = (props: DetailsViewProps) => {
-
-    const { actions, routeProps } = props;
-    const walletHash = routeProps.match.params.wallet_hash;
-
-    const checkWalletHashAndFetchTransactions = () => {
-        if (walletHash) {
-            actions.fetchEthereumTransactions(walletHash);
-        }
-    }
-
-    useEffect((): void => {
-        checkWalletHashAndFetchTransactions();
-    }, []);
-
+const DetailsViewContainer = () => {
     return <DetailsView />;
-
 }
+
 export default DetailsViewContainer;
