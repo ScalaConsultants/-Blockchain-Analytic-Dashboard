@@ -5,7 +5,7 @@ import * as loaderActions from '../../actions/loader';
 
 async function fetchTransactions(data:any): Promise<any> {
   const res = await fetch(
-    `http://localhost:5000/api/v1/ethereum/wallets/linechart?limit=100&walletHash=`+data
+    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/linechart?limit=100&walletHash=${data}`
   );
   return res.json();
 }

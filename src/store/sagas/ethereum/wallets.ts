@@ -5,7 +5,7 @@ import * as loaderActions from '../../actions/loader';
 
 async function fetchWallets(): Promise<any> {
   const res = await fetch(
-    `http://localhost:5000/api/v1/ethereum/wallets?groupBy=from&limit=50`
+    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets?groupBy=from&limit=50`
   );
   return res.json();
 }
