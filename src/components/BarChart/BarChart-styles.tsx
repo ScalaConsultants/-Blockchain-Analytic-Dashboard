@@ -16,7 +16,7 @@ export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   }
 }));
 
-export const useBarChartSegmentStyles = makeStyles((theme: Theme) => ({
+export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
