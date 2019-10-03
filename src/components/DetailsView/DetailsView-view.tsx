@@ -1,10 +1,10 @@
 import React from 'react';
-import BarChart from '../BarChart';
 
+import BarChart from '../BarChart';
 import TransactionsList from '../TransactionsList';
 import LineChart from '../LineChart';
 
-const DetailsView = () => {
+const DetailsView = (props:any) => {
 
     return (
         <>

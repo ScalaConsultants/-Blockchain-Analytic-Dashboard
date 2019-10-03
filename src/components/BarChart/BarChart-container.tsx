@@ -10,7 +10,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
   const classes = useBarChartSegmentStyles();
 
-  const [activeSegment, updateActiveSegment] = useState(0);
+  const [activeSegment] = useState(0);
 
   // const onClick = (index: number) => updateActiveSegment(index);
 
