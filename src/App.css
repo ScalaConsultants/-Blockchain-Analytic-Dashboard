@@ -56,3 +56,19 @@
     transform: rotate(360deg);
   }
 }
+
+.transactionsListTable thead, .transactionsListTable tbody { display: block; }
+
+.transactionsListTable tbody {
+    height: 200px;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+    margin-top: 10px;
+}
+
+.transactionsListTable tbody td,
+.transactionsListTable tbody th,
+.transactionsListTable thead th,
+.transactionsListTable thead td {
+  width: 24vw;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,8 +8,6 @@ import Grid from '@material-ui/core/Grid/Grid';
 import Tooltip from '@material-ui/core/Tooltip/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
-import { FixedSizeList as List } from 'react-window';
-import InfiniteLoader from 'react-window-infinite-loader';
 
 import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
@@ -38,6 +36,9 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const [rowsPerPage] = React.useState(100);
   const ASC = 'asc';
   const DESC = 'desc';
+
+  let list: Array<any> = [];
+  let currentIndex = 50;
 
   const handleRequestSort = (property: string) => {
     if (orderBy === property && order === DESC) {
@@ -85,7 +86,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       <TableRow key={index + row.timestamp}>
         <TableCell>{row.amount}</TableCell>
         <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
-        <TableCell>{row.exchange}</TableCell>
+        <TableCell>{row.exchange || 'no info'}</TableCell>
         <TableCell>{row.description}</TableCell>
       </TableRow>
     ))));
@@ -96,73 +97,43 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     data: selectedRow
   };
 
-  let hasNextPage = (testData.length / 50) > 1;
+  const loadMore = () => {
+    list = [...testData.slice(0, currentIndex)];
+  }
 
-  const itemCount = hasNextPage ? testData.length + 1 : testData.length;
+  loadMore();
+  const handleScroll = (target: HTMLBodyElement) => {
+    if (target.scrollTop + target.clientHeight >= target.scrollHeight) {
+      currentIndex += 20;
+      loadMore();
+    }
+  }
 
-  const loadMoreItems:any = !hasNextPage ? () => { } : testData.length;
-
-  const isItemLoaded = (index: any) => !page || index < testData.length;
-
-  const Item = (index: any) => {
-    let content;
-    if (!isItemLoaded(index)) {
-      content = "Loading...";
-    } else {
-      content = (
-        <Table>
-          
+  return (
+    <Grid container className="Container" >
+      <Grid item xs={12} lg={12}>
+        <Typography variant="h2" gutterBottom>
+          Recent transactions
+      </Typography>
+      </Grid>
+      <Grid container spacing={9} className="Container">
+        <Grid item xs={12} lg={12}>
+          <Table className="transactionsListTable">
             <TableHead>
               <TableRow>
                 {renderTransactionListHeader(headerCols)}
               </TableRow>
-            </TableHead> 
-            
-
-          <TableBody>
-            {renderTransactionListRows(testData)}
-          </TableBody>
-        </Table>
-      )
-    }
-
-      return <div>{content}</div>;
-    };
-    
-    return (
-      <Grid container className="Container">
-        <Grid item xs={12} lg={12}>
-          <Typography variant="h2" gutterBottom>
-            Recent transactions
-      </Typography>
+            </TableHead>
+            <TableBody onScroll={(e: any) => handleScroll(e.target)} id="transactionsListTableBody">
+              {renderTransactionListRows(list)}
+            </TableBody>
+          </Table>
         </Grid>
-        <Grid container spacing={9} className="Container">
-          <Grid item xs={12} lg={12}>
-            <InfiniteLoader
-              isItemLoaded={isItemLoaded}
-              itemCount={itemCount}
-              loadMoreItems={loadMoreItems}
-            >
-              {({ onItemsRendered, ref }) => (
-                <List
-                  className="List"
-                  height={300}
-                  itemCount={itemCount}
-                  itemSize={30}
-                  onItemsRendered={onItemsRendered}
-                  ref={ref}
-                  width={1224}
-                >
-                  {Item}
-                </List>
-              )}
-            </InfiniteLoader>
-          </Grid>
-          <DetailsModal {...modalDetailsProps} />
-        </Grid>
+        <DetailsModal {...modalDetailsProps} />
       </Grid>
+    </Grid>
 
-    );
-  };
+  );
+};
 
-  export default TransactionList;
+export default TransactionList;
