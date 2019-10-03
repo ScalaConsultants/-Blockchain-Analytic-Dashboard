@@ -1,12 +1,4 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-
-export const transactionsListPaginationStyle = makeStyles((theme: Theme) => createStyles({
-  root: {
-    flexShrink: 0,
-    color: theme.palette.text.secondary,
-    marginLeft: theme.spacing(2.5)
-  }
-}));
+import { makeStyles } from '@material-ui/core/styles';
 
 export const transactionsDetailsModalStyle = makeStyles(theme => ({
   dialogTitle: {
@@ -26,6 +18,25 @@ export const transactionsDetailsModalStyle = makeStyles(theme => ({
     paddingRight: theme.spacing(3),
     paddingLeft: theme.spacing(3)
   }
+}));
+
+export const transactionsListTableStyle = makeStyles( () => ({
+  thead: {
+    display: 'block'
+  }, 
+
+  tbody: {
+    display: 'block',
+    height: '200px',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    marginTop: '10px'
+  },
+
+  td: {
+    width: '24vw'
+  }
+
 }));
 
 

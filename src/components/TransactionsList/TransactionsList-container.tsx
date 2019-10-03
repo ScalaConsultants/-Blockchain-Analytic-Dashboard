@@ -13,6 +13,7 @@ import DetailsModal from './TransactionsListDetailsModal-view';
 import { stableSort, getSorting } from '../../helpers/helpers';
 import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy, TransactionsListProps } from './types';
 import { timestampToDate } from './../../helpers/helpers';
+import { transactionsListTableStyle } from './TransactionsList-styles';
 import { Block } from '../../types';
 
 import testData from './data';
@@ -36,6 +37,8 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const [rowsPerPage] = React.useState(100);
   const ASC = 'asc';
   const DESC = 'desc';
+
+  const classes = transactionsListTableStyle();
 
   let list: Array<any> = [];
   let currentIndex = 50;
@@ -61,6 +64,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
         align={row.numeric ? 'right' : 'left'}
         padding={row.disablePadding ? 'none' : 'default'}
         sortDirection={orderBy === row.id ? order : false}
+        className={classes.td}
       >
         <Tooltip
           title="Sort"
@@ -84,10 +88,10 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       getSorting(order, orderBy)
     ).map((row: any, index: number) => (
       <TableRow key={index + row.timestamp}>
-        <TableCell>{row.amount}</TableCell>
-        <TableCell component="th" scope="row">{timestampToDate(row.timestamp)}</TableCell>
-        <TableCell>{row.exchange || 'no info'}</TableCell>
-        <TableCell>{row.description}</TableCell>
+        <TableCell className={classes.td}>{row.amount}</TableCell>
+        <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
+        <TableCell className={classes.td}>{row.exchange || 'no info'}</TableCell>
+        <TableCell className={classes.td}>{row.description}</TableCell>
       </TableRow>
     ))));
 
@@ -118,13 +122,17 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       </Grid>
       <Grid container spacing={9} className="Container">
         <Grid item xs={12} lg={12}>
-          <Table className="transactionsListTable">
-            <TableHead>
+          <Table>
+            <TableHead className={classes.thead}>
               <TableRow>
                 {renderTransactionListHeader(headerCols)}
               </TableRow>
             </TableHead>
-            <TableBody onScroll={(e: any) => handleScroll(e.target)} id="transactionsListTableBody">
+            <TableBody 
+              onScroll={(e: any) => handleScroll(e.target)} 
+              id="transactionsListTableBody"
+              className={classes.tbody}
+              >
               {renderTransactionListRows(list)}
             </TableBody>
           </Table>
