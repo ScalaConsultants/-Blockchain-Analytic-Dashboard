@@ -1,8 +1,4 @@
-export interface Wallet {
-  walletHash: string,
-  totalValue: number,
-  percentage: number
-}
+import { Wallet, Wallets } from '../../types';
 
 export interface ViewProps {
   data: React.ReactElement<'div'>[];
@@ -11,10 +7,6 @@ export interface ViewProps {
 export interface Accumulator {
   position: number,
   elements: React.ReactElement<'div'>[]
-}
-
-export interface Wallets {
-  wallets: Wallet[]
 }
 
 export interface BarChartProps {

@@ -2,7 +2,9 @@ import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import BarChartContainer from './BarChart-container';
-import { Wallets, State } from './types';
+import { State } from './types';
+import { Wallets } from '../../types';
+
 import * as ethereumActions from '../../store/actions/ethereum/transactions';
 
 
@@ -16,7 +18,7 @@ const BarChartRedux = () => {
 
     const { wallets } = useMappedState(mapState);
 
-    const fetchEthereumTransactions = (data:any): void => {
+    const fetchEthereumTransactions = (data: string): void => {
         dispatch({
             type: ethereumActions.ETHEREUM_FETCH_TRANSACTIONS,
             data: data

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import DetailsViewView from './DetailsView-view';
+import DetailsView from './DetailsView-view';
 import { DetailsViewProps } from './types';
 
 const DetailsViewContainer = (props: DetailsViewProps) => {
@@ -17,7 +17,7 @@ const DetailsViewContainer = (props: DetailsViewProps) => {
         checkWalletHashAndFetchTransactions();
     }, []);
 
-    return <DetailsViewView />;
+    return <DetailsView />;
 
 }
 export default DetailsViewContainer;

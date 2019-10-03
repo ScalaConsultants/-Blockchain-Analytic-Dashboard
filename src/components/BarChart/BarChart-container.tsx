@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import BarChartView from './BarChart-view';
-import clsx from 'clsx';
-import { useBarChartSegmentStyles } from './BarChart-styles';
-import { Wallet, Accumulator, BarChartProps } from './types';
 import { Link } from 'react-router-dom'
+import clsx from 'clsx';
+
+import { Accumulator, BarChartProps } from './types';
+import { Wallet } from '../../types';
+
+import BarChartView from './BarChart-view';
+import { useBarChartSegmentStyles } from './BarChart-styles';
+
 
 const BarChartContainer = (props: BarChartProps) => {
   const { width, wallets = [], actions } = props;
