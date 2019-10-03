@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { lineChartContainerStyle } from './LineChart-styles';
 
 import LineView from './Line-view';
+import { LineChartProps } from './types';
 
 import {
   convertTimeStampToHours,
 } from './helpers';
 
-const LineCharts = (props: any): React.ReactElement => {
-  const { transactions = []} = props;
+const LineCharts = (props: LineChartProps): React.ReactElement => {
+  const { transactions = [] } = props;
   const classes = lineChartContainerStyle();
 
   const [labels, setLabels] = useState([
@@ -20,7 +21,7 @@ const LineCharts = (props: any): React.ReactElement => {
     const labels: string[] = [];
     const elements: number[] = [];
 
-    transactions.forEach((item:any): void => {
+    transactions.forEach((item: any): void => {
       elements.push(item.totalValue);
       labels.push(convertTimeStampToHours(item.interval));
 
