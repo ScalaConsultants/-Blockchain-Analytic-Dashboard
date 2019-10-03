@@ -35,9 +35,6 @@ export const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
       padding: '6px 9px'
     }
   },
-  focused: {
-    border: '1px solid red'
-  },
   textarea: {
     minHeight: '44px'
   },
