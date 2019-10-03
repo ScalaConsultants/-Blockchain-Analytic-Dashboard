@@ -42,11 +42,10 @@ const BarChartContainer = (props: BarChartProps) => {
   const data = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
     if (object.percentage > 0.1) {
       acc.elements.push((
-        <Link to={object.walletHash}>
+        <Link to={object.walletHash} key={object.walletHash}>
           <div
               className={getClasses(index)}
               onClick={() => actions.fetchEthereumTransactions(object.walletHash)}
-              key={object.walletHash}
               style={getStyle(acc, object)}>
               {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
           </div>
