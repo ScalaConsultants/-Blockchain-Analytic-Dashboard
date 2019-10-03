@@ -80,6 +80,7 @@ export interface ExtendedTheme extends Theme {
     FRAUD_COLOR: string,
     DEFAULT_FONT_FAMILY: string,
     DEFAULT_FONT_STYLE: string,
-    DEFAULT_FONT_WEIGHT: any
+    DEFAULT_FONT_WEIGHT: any,
+    DEFAULT_FONT_SIZE: string
   }
 };
