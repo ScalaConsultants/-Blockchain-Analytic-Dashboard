@@ -1,16 +1,19 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
+import { FetchTransactionsAction } from './../../actions/ethereum/types';
+import { Transactions } from '../../../types';
+
 import * as ethereumActions from '../../actions/ethereum/transactions';
 import * as loaderActions from '../../actions/loader';
 
-async function fetchTransactions(data:any): Promise<any> {
+async function fetchTransactions(data:string): Promise<Transactions> {
   const res = await fetch(
     `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/linechart?limit=100&walletHash=${data}`
   );
   return res.json();
 }
 
-function* doFetchTransactions(action:any): any {
+function* doFetchTransactions(action:FetchTransactionsAction) {
 
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
@@ -30,7 +33,7 @@ function* doFetchTransactions(action:any): any {
 
 }
 
-export function* watchDoFetchTransactions(): any {
+export function* watchDoFetchTransactions() {
   yield takeEvery(
     ethereumActions.ETHEREUM_FETCH_TRANSACTIONS,
     doFetchTransactions

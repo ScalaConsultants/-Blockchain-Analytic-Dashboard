@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { lineChartContainerStyle } from './LineChart-styles';
+import { lineChartContainerStyle, chartLineOptions, chartLineData } from './LineChart-styles';
 
 import LineView from './Line-view';
 import { LineChartProps } from './types';
+import { Transaction } from '../../types';
 
-import {
-  convertTimeStampToHours,
-} from './helpers';
+import { convertTimeStampToHours } from './helpers';
 
 const LineCharts = (props: LineChartProps): React.ReactElement => {
   const { transactions = [] } = props;
@@ -21,7 +20,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
     const labels: string[] = [];
     const elements: number[] = [];
 
-    transactions.forEach((item: any): void => {
+    transactions.forEach((item: Transaction): void => {
       elements.push(item.totalValue);
       labels.push(convertTimeStampToHours(item.interval));
 
@@ -33,51 +32,12 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   useEffect((): void => {
     filterChart();
   }, [transactions]);
-
-  const chartLineData = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'ETH',
-        backgroundColor: 'rgba(255,99,132,0.0)',
-        borderColor: 'rgba(107,94,233,0.5)',
-        borderWidth: 4,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data,
-        lineTension: 0,
-      }
-    ],
-  }
-
-  const chartLineOptions = {
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'rgb(163,167,176,0.1)'
-        },
-        ticks: {
-          maxTicksLimit: 10,
-          fontColor: 'rgb(163,167,176,0.8)', // this here
-        },
-      }],
-      yAxes: [{
-        gridLines: {
-          color: 'rgb(163,167,176,0.1)'
-        },
-        ticks: {
-          maxTicksLimit: 10,
-          fontColor: 'rgb(163,167,176,0.8)',
-        },
-      }]
-    }
-  }
+  
 
   return (
     <div className={classes.lineChartContainer}>
       <LineView
-        data={chartLineData}
+        data={chartLineData(data, labels)}
         width={100}
         options={chartLineOptions}
       />

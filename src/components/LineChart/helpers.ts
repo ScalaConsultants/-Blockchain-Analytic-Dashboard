@@ -4,7 +4,7 @@ export const convertTimeStampToHour = (date: number): number => {
   return formattedDate;
 };
 
-export const convertTimeStampToHours = (date: number): string => {
+export const convertTimeStampToHours = (date: string): string => {
   const newDate = new Date(date);
   const hours = newDate.getHours();
   const minutes = newDate.getMinutes();

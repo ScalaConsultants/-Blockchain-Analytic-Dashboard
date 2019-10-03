@@ -11,7 +11,5 @@ export interface State {
     ethereum: Transactions
 }
 
-export interface LineChartProps {
-
-    transactions: Transaction []
+export interface LineChartProps extends Transactions{
 }

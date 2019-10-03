@@ -33,6 +33,10 @@ export interface Transaction {
   totalValue: number
 }
 
+export interface Transactions {
+  transactions: Transaction []
+}
+
 export interface Block {
   source: string;
   timestamp: number;
