@@ -9,10 +9,14 @@ export interface Accumulator {
   elements: React.ReactElement<'div'>[]
 }
 
+export interface BarChartActions {
+  fetchEthereumTransactions: Function
+}
+
 export interface BarChartProps {
   wallets: Wallet[],
   width: number,
-  actions: any
+  actions: BarChartActions
 }
 
 export interface State {

@@ -5,9 +5,9 @@ import DetailsViewContainer from './DetailsView-container';
 import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
 
 import { RouteComponentProps } from 'react-router-dom';
+import { WalletHash } from './types';
 
-
-const BarChartRedux = (props:RouteComponentProps) => {
+const BarChartRedux = (props:RouteComponentProps<WalletHash>) => {
     const dispatch = useDispatch();
 
     const fetchEthereumTransactions = (data:string): void => {
