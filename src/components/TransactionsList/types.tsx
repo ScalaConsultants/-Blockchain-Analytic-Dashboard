@@ -23,7 +23,23 @@ export interface ModalDetailsProps {
     data: Block | {};
 }
 
-export interface TransactionsListProps {
-    initState: Block[];
-    blokchain: Block[];
+export interface Transaction {
+    interval:string,
+    totalValue:number
+}
+
+export interface Transactions {
+    transactions: Transaction []
+}
+
+export interface State {
+    ethereum: Transactions
+}
+
+export interface TransactionsListActions {
+    fetchEthereumTransactions: Function
+}
+
+export interface TransactionsListProps extends Transactions {
+    actions: TransactionsListActions
 }
