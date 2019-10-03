@@ -5,7 +5,8 @@ import BarChartContainer from './BarChart-container';
 import { State } from './types';
 import { Wallets } from '../../types';
 
-import * as ethereumActions from '../../store/actions/ethereum/transactions';
+import * as transactionsActions from '../../store/actions/ethereum/transactions';
+import * as walletActions from '../../store/actions/ethereum/wallets';
 
 
 const BarChartRedux = () => {
@@ -20,13 +21,20 @@ const BarChartRedux = () => {
 
     const fetchEthereumTransactions = (data: string): void => {
         dispatch({
-            type: ethereumActions.ETHEREUM_FETCH_TRANSACTIONS,
+            type: transactionsActions.ETHEREUM_FETCH_TRANSACTIONS,
             data: data
         });
     };
 
+    const fetchEthereumWallets = (): void => {
+        dispatch({
+          type: walletActions.ETHEREUM_FETCH_WALLETS
+        });
+      };
+
     const actions = {
-        fetchEthereumTransactions
+        fetchEthereumTransactions,
+        fetchEthereumWallets
     }
 
     return (
