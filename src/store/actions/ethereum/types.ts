@@ -1,14 +1,14 @@
-export interface Wallet {
-    walletHash: string,
-    totalValue: number,
-    percentage: number
+import { ActionType, Wallets, Transaction } from '../../../types';
+
+export interface SetTransactionsAction extends ActionType {
+    transactions: Transaction[]
 }
 
-export interface Wallets {
-    wallets: Wallet[]
+export interface FetchTransactionsAction extends ActionType {
+    data: string
 }
 
-export interface setWalletsAction {
-    type: string,
+export interface SetWalletsAction extends ActionType {
     wallets: Wallets
 }
+

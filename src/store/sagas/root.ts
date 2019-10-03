@@ -1,8 +1,9 @@
 import { all } from "redux-saga/effects";
-import * as ethereumSagas from "./ethereum/wallets";
+import ethereumSagas from "./ethereum";
 
 export default function* root(): any {
   yield all([
-    ethereumSagas.watchDoFetchWallets()
+    ethereumSagas.watchDoFetchWallets(),
+    ethereumSagas.watchDoFetchTransactions()
   ]);
 }

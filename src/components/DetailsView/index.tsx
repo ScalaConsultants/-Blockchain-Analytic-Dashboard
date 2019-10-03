@@ -1,3 +1,3 @@
-import DetailsView from './DetailsView-view';
+import DetailsView from './DetailsView-redux';
 
 export default DetailsView;

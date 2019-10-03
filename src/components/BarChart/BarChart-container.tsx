@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import BarChartView from './BarChart-view';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import clsx from 'clsx';
+
+import { Accumulator, BarChartProps } from './types';
+import { Wallet } from '../../types';
+
+import BarChartView from './BarChart-view';
 import { useBarChartSegmentStyles } from './BarChart-styles';
-import { Wallet, Accumulator, BarChartProps } from './types';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { width, wallets = [] } = props;
+  const { width, wallets = [], actions } = props;
 
   const classes = useBarChartSegmentStyles();
 
-  const [activeSegment, updateActiveSegment] = useState(0);
+  const [activeSegment] = useState(0);
 
-  const onClick = (index: number) => updateActiveSegment(index);
+  // const onClick = (index: number) => updateActiveSegment(index);
 
   const getStyle: any = (acc: Accumulator, object: Wallet) => ({
     position: 'absolute',
@@ -19,7 +23,7 @@ const BarChartContainer = (props: BarChartProps) => {
     top: 0,
     left: acc.position,
     width: width * object.percentage / 100,
-  })
+  });
 
   const getClasses = (index: number): string => {
     const num = Math.round(Math.random() * 3);
@@ -34,16 +38,21 @@ const BarChartContainer = (props: BarChartProps) => {
     });
   };
 
+  useEffect((): void => {
+    actions.fetchEthereumWallets();
+  }, []);
+
   const data = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
     if (object.percentage > 0.1) {
       acc.elements.push((
-        <div
-          className={getClasses(index)}
-          onClick={() => onClick(index)}
-          key={object.walletHash} 
-          style={getStyle(acc, object)}>
-          {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
-        </div>
+        <Link to={object.walletHash} key={object.walletHash}>
+          <div
+            className={getClasses(index)}
+            onClick={() => actions.fetchEthereumTransactions(object.walletHash)}
+            style={getStyle(acc, object)}>
+            {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
+          </div>
+        </Link>
       ))
     }
     return {

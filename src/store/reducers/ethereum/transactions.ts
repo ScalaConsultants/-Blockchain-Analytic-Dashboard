@@ -1,12 +1,13 @@
 import { ETHEREUM_SET_TRANSACTIONS } from '../../actions/ethereum/transactions';
-import { Block } from '../../../types';
+import { Transaction } from '../../../types';
+import { SetTransactionsAction } from '../../actions/ethereum/types';
 
-const initState: Block[] = [];
+const initState: Transaction[] = [];
 
-export default (state = initState, action: any): Block[] => {
+export default (state = initState, action: SetTransactionsAction): Transaction[] => {
   switch (action.type) {
     case ETHEREUM_SET_TRANSACTIONS:
-      return [...state, ...action.transactions];
+      return [...action.transactions];
     default:
       return state;
   }
