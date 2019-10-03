@@ -1,10 +1,6 @@
-export interface Wallet {
-    walletHash: string,
-    totalValue: number,
-    percentage: number
-}
+import {Wallet} from '../../../types';
 
-export interface setWalletsAction {
+export interface SetWalletsActionReducer {
     type: string,
     wallets: Wallet []
 }

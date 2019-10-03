@@ -1,22 +1,34 @@
 import React from 'react';
-import { useMappedState } from 'redux-react-hook';
+import { useMappedState, useDispatch } from 'redux-react-hook';
+
+import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
 
 import LineChartContainer from './LineChart-container';
-import { Block, State} from "../../types";
-
+import {State, Transactions} from './types';
 
 const LineChartRedux = () => {
-    const mapState = (state: State): { blokchain: Block[] } => ({
-        blokchain: []
-      });
-      
-    let initState: Block[] = [];
-    const { blokchain } = useMappedState(mapState);
+    const mapState = (state: State): Transactions => ({
+        transactions: state.ethereum.transactions
+    });
 
-    
+    const dispatch = useDispatch();
+
+    const fetchEthereumTransactions = (data:string): void => {
+        dispatch({
+            type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
+            data: data
+        });
+    };
+
+    const { transactions } = useMappedState(mapState);
+
+    const actions = {
+        fetchEthereumTransactions
+    }
+
     return (
-        <LineChartContainer initState={initState} blokchain={blokchain} />
-    ) 
+        <LineChartContainer transactions={transactions} actions={actions} />
+    )
 }
 
 export default LineChartRedux;

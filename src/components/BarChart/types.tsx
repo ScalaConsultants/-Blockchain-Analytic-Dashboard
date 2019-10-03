@@ -1,8 +1,4 @@
-export interface Wallet {
-  walletHash: string,
-  totalValue: number,
-  percentage: number
-}
+import { Wallet, Wallets } from '../../types';
 
 export interface ViewProps {
   data: React.ReactElement<'div'>[];
@@ -13,13 +9,15 @@ export interface Accumulator {
   elements: React.ReactElement<'div'>[]
 }
 
-export interface Wallets {
-  wallets: Wallet[]
+export interface BarChartActions {
+  fetchEthereumTransactions: Function,
+  fetchEthereumWallets: Function
 }
 
 export interface BarChartProps {
   wallets: Wallet[],
-  width: number
+  width: number,
+  actions: BarChartActions
 }
 
 export interface State {

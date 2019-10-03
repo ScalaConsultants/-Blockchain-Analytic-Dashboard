@@ -1,44 +1,4 @@
-import { SvgIconProps } from "@material-ui/core/SvgIcon";
 import { Theme } from '@material-ui/core/styles';
-
-export interface Config {
-  chartType: string;
-  label: string;
-  title: string;
-}
-
-/* eslint-disable camelcase */
-export interface Block {
-  source: string;
-  timestamp: number;
-  block_level: number;
-  amount: number;
-  counter: number;
-  destination: string;
-  fee: number;
-}
-
-export interface SummedBlock extends Block {
-  transactions: number;
-}
-
-export interface Blockchain {
-  blokchain: Block[];
-}
-
-export interface State {
-  tezos: {
-    blocks: Block[];
-    summedBlocks: any[];
-  };
-  ethereum: {
-    blocks: Block[];
-    summedBlocks: any[];
-    page: number;
-  };
-  loader: number;
-  dataSource: string;
-}
 
 export interface EventTarget {
   target: {
@@ -56,20 +16,37 @@ export interface ActionType {
   type: string;
 }
 
-export interface FetchTransactionsAction extends ActionType {
-  transactions: Block[];
+export interface State {
+  loader: number
 }
 
-export interface DataSourceActionType extends ActionType {
-  type: string;
+export interface Wallet {
+  walletHash: string,
+  totalValue: number,
+  percentage: number
+}
+
+export interface Wallets {
+  wallets: Wallet[]
+}
+
+export interface Transaction {
+  interval: string,
+  totalValue: number
+}
+
+export interface Transactions {
+  transactions: Transaction []
+}
+
+export interface Block {
   source: string;
-}
-
-export interface MenuItemType {
-  name: string,
-  route: string,
-  icon?: React.ReactElement<SvgIconProps>,
-  description?: string
+  timestamp: number;
+  block_level: number;
+  amount: number;
+  counter: number;
+  destination: string;
+  fee: number;
 }
 
 export interface ExtendedTheme extends Theme {
