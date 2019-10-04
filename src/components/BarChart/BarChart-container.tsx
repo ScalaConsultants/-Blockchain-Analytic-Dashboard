@@ -48,7 +48,12 @@ const BarChartContainer = (props: BarChartProps) => {
         <Link to={object.walletHash} key={object.walletHash}>
           <div
             className={getClasses(index)}
-            onClick={() => actions.fetchEthereumTransactionsSummed({walletHash:object.walletHash})}
+            onClick={
+              () => {
+                actions.flushEthereumTransactions();
+                actions.fetchEthereumTransactions({walletHash:object.walletHash, page: 1});
+                actions.fetchEthereumTransactionsSummed({walletHash:object.walletHash});
+            }}
             style={getStyle(acc, object)}>
             {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
           </div>

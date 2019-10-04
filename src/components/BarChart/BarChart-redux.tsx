@@ -3,9 +3,10 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import BarChartContainer from './BarChart-container';
 import { State } from './types';
-import { Wallets, TransactionsSummedData} from '../../types';
+import { Wallets, TransactionsSummedData, TransactionsData } from '../../types';
 
-import * as transactionsActions from '../../store/actions/ethereum/transactions-summed';
+import * as transactionsActionsSummed from '../../store/actions/ethereum/transactions-summed';
+import * as transactionsActions from '../../store/actions/ethereum/transactions';
 import * as walletActions from '../../store/actions/ethereum/wallets';
 
 
@@ -21,8 +22,15 @@ const BarChartRedux = () => {
 
     const fetchEthereumTransactionsSummed = (transactionsSummedData: TransactionsSummedData): void => {
         dispatch({
-            type: transactionsActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
+            type: transactionsActionsSummed.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
             transactionsSummedData: transactionsSummedData
+        });
+    };
+    
+    const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
+        dispatch({
+            type: transactionsActions.ETHEREUM_FETCH_TRANSACTIONS,
+            transactionsData: transactionsData
         });
     };
 
@@ -32,9 +40,17 @@ const BarChartRedux = () => {
         });
       };
 
+    const flushEthereumTransactions = (): void => {
+        dispatch({
+          type: transactionsActions.ETHEREUM_FLUSH_TRANSACTIONS
+        });
+      };
+
     const actions = {
         fetchEthereumTransactionsSummed,
-        fetchEthereumWallets
+        fetchEthereumWallets,
+        fetchEthereumTransactions,
+        flushEthereumTransactions
     }
 
     return (

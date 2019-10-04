@@ -27,7 +27,7 @@ export const transactionsListTableStyle = makeStyles( () => ({
 
   tbody: {
     display: 'block',
-    height: '200px',
+    height: '350px',
     overflowY: 'auto',
     overflowX: 'hidden',
     marginTop: '10px'

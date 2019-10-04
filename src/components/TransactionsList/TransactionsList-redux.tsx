@@ -3,7 +3,8 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
 import TransactionListContainer from './TransactionsList-container';
-import {State, Transactions} from './types';
+import { State } from './types';
+import { Transactions, TransactionsData } from '../../types';
 
 const TransactionListRedux = () => {
     const mapState = (state: State): Transactions => ({
@@ -12,10 +13,10 @@ const TransactionListRedux = () => {
 
     const dispatch = useDispatch();
 
-    const fetchEthereumTransactions = (data:string): void => {
+    const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
         dispatch({
             type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
-            data: data
+            transactionsData: transactionsData
         });
     };
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,9 +15,7 @@ import { stableSort, getSorting } from '../../helpers/helpers';
 import { HeaderColsInterface, ModalDetailsProps, Order, OrderBy, TransactionsListProps } from './types';
 import { timestampToDate } from './../../helpers/helpers';
 import { transactionsListTableStyle } from './TransactionsList-styles';
-import { Block } from '../../types';
-
-import testData from './data';
+import { Transaction } from '../../types';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
@@ -25,10 +24,13 @@ const headerCols: HeaderColsInterface[] = [
   { id: 'description', numeric: false, disablePadding: false, label: 'Description' }
 ];
 
-//Add props type
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('name');
+
+  const { actions, match, transactions} = props;
+
+  const walletHash = match.params.walletHash;
 
   const [open, setOpen] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState({});
@@ -40,8 +42,8 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
 
   const classes = transactionsListTableStyle();
 
-  let list: Array<any> = [];
-  let currentIndex = 50;
+  let [pageNumber, setPageNumber]:[number, Function] = React.useState(1);
+
 
   const handleRequestSort = (property: string) => {
     if (orderBy === property && order === DESC) {
@@ -82,15 +84,15 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       </TableCell>
     )));
 
-  const renderTransactionListRows = (blokchain: any) => (
+  const renderTransactionListRows = (transactions: Transaction[]) => (
     (stableSort(
-      blokchain.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+      transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
       getSorting(order, orderBy)
     ).map((row: any, index: number) => (
       <TableRow key={index + row.timestamp}>
-        <TableCell className={classes.td}>{row.amount}</TableCell>
+        <TableCell className={classes.td}>{row.value}</TableCell>
         <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
-        <TableCell className={classes.td}>{row.exchange || 'no info'}</TableCell>
+        <TableCell className={classes.td}>{row.gasPrice || 'no info'}</TableCell>
         <TableCell className={classes.td}>{row.description}</TableCell>
       </TableRow>
     ))));
@@ -101,17 +103,21 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     data: selectedRow
   };
 
-  const loadMore = () => {
-    list = [...testData.slice(0, currentIndex)];
-  }
-
-  loadMore();
   const handleScroll = (target: HTMLBodyElement) => {
-    if (target.scrollTop + target.clientHeight >= target.scrollHeight) {
-      currentIndex += 20;
-      loadMore();
+    if (target.scrollTop + target.clientHeight >= target.scrollHeight - 30) {
+      setPageNumber(pageNumber++);
     }
   }
+
+  const checkWalletHashAndFetchTransactions = (pageNumber:number) => {
+    if (walletHash) {
+      actions.fetchEthereumTransactions({walletHash:walletHash, page: pageNumber});
+    }
+  }
+
+  useEffect((): void => {
+    checkWalletHashAndFetchTransactions(pageNumber);
+  }, [pageNumber]);
 
   return (
     <Grid container className="Container" >
@@ -133,7 +139,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
               id="transactionsListTableBody"
               className={classes.tbody}
               >
-              {renderTransactionListRows(list)}
+              {renderTransactionListRows(transactions)}
             </TableBody>
           </Table>
         </Grid>
@@ -144,4 +150,4 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   );
 };
 
-export default TransactionList;
+export default withRouter(TransactionList);
