@@ -1,8 +1,8 @@
-import { watchDoFetchTransactions } from './transactions';
+import { watchDoFetchTransactionsSummed } from './transactions-summed';
 import { watchDoFetchWallets } from './wallets';
  
 
 export default {
-    watchDoFetchTransactions,
+    watchDoFetchTransactionsSummed,
     watchDoFetchWallets
 }

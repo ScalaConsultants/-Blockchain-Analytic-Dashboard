@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 
-import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
+import * as EthereumTransactions from '../../store/actions/ethereum/transactions-summed';
 
 import LineChartContainer from './LineChart-container';
 import {State, Transactions} from './types';
@@ -13,9 +13,9 @@ const LineChartRedux = () => {
 
     const dispatch = useDispatch();
 
-    const fetchEthereumTransactions = (data:string): void => {
+    const fetchEthereumTransactionsSummed = (data:string): void => {
         dispatch({
-            type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
+            type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
             data: data
         });
     };
@@ -23,7 +23,7 @@ const LineChartRedux = () => {
     const { transactions } = useMappedState(mapState);
 
     const actions = {
-        fetchEthereumTransactions
+        fetchEthereumTransactionsSummed
     }
 
     return (
