@@ -16,7 +16,6 @@ async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsS
 function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
 
   const {transactionsSummedData} = action;
-  console.log('test',transactionsSummedData)
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
 
