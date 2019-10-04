@@ -63,6 +63,11 @@ export interface Block {
   fee: number;
 }
 
+export interface TransactionsData {
+  page:number,
+  walletHash: string
+}
+
 export interface ExtendedTheme extends Theme {
   constants: {
     MARKET_COLOR: string,

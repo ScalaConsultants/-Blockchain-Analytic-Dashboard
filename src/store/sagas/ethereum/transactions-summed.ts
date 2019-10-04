@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
-import { FetchTransactionsAction } from '../../actions/ethereum/types';
+import { FetchTransactionsSummedAction } from '../../actions/ethereum/types';
 import { TransactionsSummed } from '../../../types';
 
 import * as ethereumActions from '../../actions/ethereum/transactions-summed';
@@ -13,7 +13,7 @@ async function fetchTransactionsSummed(data:string): Promise<TransactionsSummed>
   return res.json();
 }
 
-function* doFetchTransactionsSummed(action:FetchTransactionsAction) {
+function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
 
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
