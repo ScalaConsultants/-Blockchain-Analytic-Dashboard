@@ -19,14 +19,16 @@ function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
   yield put(loaderActions.showLoader());
 
 
-  const transactions = yield fetchTransactionsSummed(action.data);
+  const transactionsSummed = yield fetchTransactionsSummed(action.data);
 
-  if (transactions.length > 0) {
+  if (transactionsSummed.length > 0) {
     yield put({
       type: ethereumActions.ETHEREUM_SET_TRANSACTIONS_SUMMED,
-      transactions
+      transactionsSummed
     });
   }
+
+  // console.log(transactionsSummed)
 
   // Hide on consecutive requests
   yield put(loaderActions.hideLoader());

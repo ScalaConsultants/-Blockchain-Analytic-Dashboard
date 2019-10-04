@@ -1,16 +1,8 @@
 import { RouteComponentProps } from 'react-router-dom';
-
-export interface Transaction {
-    interval:string,
-    totalValue:number
-}
-
-export interface Transactions {
-    transactions: Transaction []
-}
+import { TransactionsSummed }  from '../../types';
 
 export interface State {
-    ethereum: Transactions
+    ethereum: TransactionsSummed
 }
 
 export type WalletHash = {
@@ -21,6 +13,6 @@ export interface DetailsViewActions {
     fetchEthereumTransactionsSummed: Function
 }
 
-export interface LineChartProps extends Transactions, RouteComponentProps<WalletHash> {
+export interface LineChartProps extends TransactionsSummed, RouteComponentProps<WalletHash> {
     actions:DetailsViewActions
 }
