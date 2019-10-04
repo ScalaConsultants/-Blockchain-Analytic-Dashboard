@@ -1,11 +1,5 @@
-import {Block} from "../../types";
-
-export interface TablePaginationActionsProps {
-    count: number;
-    page: number;
-    rowsPerPage: number;
-    onChangePage: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, newPage: number) => void;
-}
+import { Block, Transactions } from "../../types";
+import { RouteComponentProps } from 'react-router-dom';
 
 export interface HeaderColsInterface {
     id: string;
@@ -14,11 +8,19 @@ export interface HeaderColsInterface {
     label: string;
 }
 
-export type Order = 'asc' | 'desc';
-export type OrderBy = string;
+export interface State {
+    ethereum: Transactions
+}
 
-export interface ModalDetailsProps {
-    open: boolean;
-    handleClose: () => void;
-    data: Block | {};
+export type WalletHash = {
+    walletHash: string
+}
+
+export interface TransactionsListActions {
+    fetchEthereumTransactions: Function,
+    flushEthereumTransactions: Function
+}
+
+export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {
+    actions:TransactionsListActions
 }

@@ -18,7 +18,7 @@ export const MuiTableRow = {
 export const MuiTableHead = {
     root: {
         borderBottom: '4px solid #252D48'
-    }
+    } 
 }
 
 export const MuiTableCell = {
@@ -47,11 +47,15 @@ export const MuiTableSortLabel = {
     root: {
         fontFamily: DEFAULT_FONT_FAMILY,
         '&:hover': {
-            color: '#9EE32D',
+            color: '#9EE32D'
         }
     },
 
     icon: {
         fill: '#9EE32D',
+    },
+
+    active: {
+        color: '#9EE32D !important'
     }
 }

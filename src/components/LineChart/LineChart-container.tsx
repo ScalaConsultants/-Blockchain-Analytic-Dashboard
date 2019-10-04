@@ -42,7 +42,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
 
   useEffect((): void => {
     checkWalletHashAndFetchTransactions();
-  }, []);
+  }, [match.params.walletHash]);
 
 
   return (

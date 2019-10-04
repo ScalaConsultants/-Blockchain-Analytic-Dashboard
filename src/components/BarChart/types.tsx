@@ -10,8 +10,7 @@ export interface Accumulator {
 }
 
 export interface BarChartActions {
-  fetchEthereumTransactionsSummed: Function,
-  fetchEthereumWallets: Function
+  fetchEthereumWallets: Function,
 }
 
 export interface BarChartProps {
