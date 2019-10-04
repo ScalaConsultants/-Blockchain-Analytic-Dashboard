@@ -8,9 +8,6 @@ export interface HeaderColsInterface {
     label: string;
 }
 
-export type Order = 'asc' | 'desc';
-export type OrderBy = string;
-
 export interface ModalDetailsProps {
     open: boolean;
     handleClose: () => void;
