@@ -65,7 +65,8 @@ export interface Block {
 
 export interface TransactionsData {
   page:number,
-  walletHash: string
+  walletHash: string,
+  resultsPerPage?:number
 }
 
 export interface ExtendedTheme extends Theme {
