@@ -8,12 +8,6 @@ export interface HeaderColsInterface {
     label: string;
 }
 
-export interface ModalDetailsProps {
-    open: boolean;
-    handleClose: () => void;
-    data: Block | {};
-}
-
 export interface State {
     ethereum: Transactions
 }
@@ -23,7 +17,8 @@ export type WalletHash = {
 }
 
 export interface TransactionsListActions {
-    fetchEthereumTransactions: Function
+    fetchEthereumTransactions: Function,
+    flushEthereumTransactions: Function
 }
 
 export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {

@@ -20,10 +20,17 @@ const TransactionListRedux = () => {
         });
     };
 
+    const flushEthereumTransactions = (): void => {
+        dispatch({
+          type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
+        });
+      };
+
     const { transactions } = useMappedState(mapState);
 
     const actions = {
-        fetchEthereumTransactions
+        fetchEthereumTransactions,
+        flushEthereumTransactions
     }
     
     return (

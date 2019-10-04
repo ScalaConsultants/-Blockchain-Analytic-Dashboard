@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,9 +8,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import { HeaderColsInterface, ModalDetailsProps, TransactionsListProps } from './types';
+import { HeaderColsInterface, TransactionsListProps } from './types';
 import { timestampToDate } from './../../helpers/helpers';
-import { transactionsListTableStyle } from './TransactionsList-styles';
+import { useTransactionsListTableStyles } from './TransactionsList-styles';
 import { Transaction } from '../../types';
 
 const headerCols: HeaderColsInterface[] = [
@@ -23,9 +23,13 @@ const headerCols: HeaderColsInterface[] = [
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const { actions, match, transactions } = props;
   const walletHash = match.params.walletHash;
-  const classes = transactionsListTableStyle();
+  const classes = useTransactionsListTableStyles();
+
+  let route = props.match.url;
 
   let [pageNumber, setPageNumber]: [number, Function] = React.useState(1);
+
+  console.log(route);
 
   const renderTransactionListHeader = (headerCols: HeaderColsInterface[]) =>
     (headerCols.map((row: HeaderColsInterface) => (
@@ -55,15 +59,20 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     }
   }
 
-  const checkWalletHashAndFetchTransactions = (pageNumber: number) => {
+  const checkWalletHashAndFetchTransactions = (walletHash: any, pageNumber: number) => {
     if (walletHash) {
       actions.fetchEthereumTransactions({ walletHash: walletHash, page: pageNumber });
     }
   }
 
   useEffect((): void => {
-    checkWalletHashAndFetchTransactions(pageNumber);
+    checkWalletHashAndFetchTransactions(walletHash, pageNumber);
   }, [pageNumber]);
+
+  useEffect((): void => {
+    actions.flushEthereumTransactions();
+    checkWalletHashAndFetchTransactions(match.params.walletHash, 1);
+  }, [route]);
 
   return (
     <Grid container className="Container" >
