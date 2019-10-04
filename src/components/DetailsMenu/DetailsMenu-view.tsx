@@ -7,8 +7,6 @@ import EditWalletModal from '../EditWalletModal';
 import { DetailsMenuStyles } from './DetailsMenu-styles';
 import { ViewProps } from './types';
 
-// @ts-ignore
-
 const DetailsMenu = ({ id, address, description, updateDescription }: ViewProps) => {
   const classes = DetailsMenuStyles();
   const classesRoot = clsx([classes.root, classes.fonts]);
