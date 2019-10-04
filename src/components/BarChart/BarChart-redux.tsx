@@ -3,9 +3,9 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import BarChartContainer from './BarChart-container';
 import { State } from './types';
-import { Wallets } from '../../types';
+import { Wallets, TransactionsSummedData} from '../../types';
 
-import * as transactionsActions from '../../store/actions/ethereum/transactions';
+import * as transactionsActions from '../../store/actions/ethereum/transactions-summed';
 import * as walletActions from '../../store/actions/ethereum/wallets';
 
 
@@ -19,10 +19,10 @@ const BarChartRedux = () => {
 
     const { wallets } = useMappedState(mapState);
 
-    const fetchEthereumTransactions = (data: string): void => {
+    const fetchEthereumTransactionsSummed = (transactionsSummedData: TransactionsSummedData): void => {
         dispatch({
-            type: transactionsActions.ETHEREUM_FETCH_TRANSACTIONS,
-            data: data
+            type: transactionsActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
+            transactionsSummedData: transactionsSummedData
         });
     };
 
@@ -33,7 +33,7 @@ const BarChartRedux = () => {
       };
 
     const actions = {
-        fetchEthereumTransactions,
+        fetchEthereumTransactionsSummed,
         fetchEthereumWallets
     }
 
