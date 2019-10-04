@@ -25,11 +25,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const walletHash = match.params.walletHash;
   const classes = useTransactionsListTableStyles();
 
-  let route = props.match.url;
-
   let [pageNumber, setPageNumber]: [number, Function] = React.useState(1);
-
-  console.log(route);
 
   const renderTransactionListHeader = (headerCols: HeaderColsInterface[]) =>
     (headerCols.map((row: HeaderColsInterface) => (
@@ -72,7 +68,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   useEffect((): void => {
     actions.flushEthereumTransactions();
     checkWalletHashAndFetchTransactions(match.params.walletHash, 1);
-  }, [route]);
+  }, [match.params.walletHash]);
 
   return (
     <Grid container className="Container" >

@@ -17,9 +17,6 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   ]);
   const [data, setData] = useState([10, 20, 30, 40]);
 
-  let route = props.match.url;
-
-
   const checkWalletHashAndFetchTransactions = () => {
     if (walletHash) {
       actions.fetchEthereumTransactionsSummed({walletHash:walletHash});
@@ -45,7 +42,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
 
   useEffect((): void => {
     checkWalletHashAndFetchTransactions();
-  }, [route]);
+  }, [match.params.walletHash]);
 
 
   return (
