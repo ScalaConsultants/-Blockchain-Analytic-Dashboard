@@ -1,4 +1,4 @@
-import { ActionType, Wallets, Transaction, TransactionSummed, TransactionsData } from '../../../types';
+import { ActionType, Wallets, Transaction, TransactionSummed, TransactionsData, TransactionsSummedData } from '../../../types';
 
 export interface SetTransactionsAction extends ActionType {
     transactions: Transaction[]
@@ -17,6 +17,6 @@ export interface SetTransactionsSummedAction extends ActionType {
 }
 
 export interface FetchTransactionsSummedAction extends ActionType {
-    data: string
+    transactionsSummedData: TransactionsSummedData
 }
 

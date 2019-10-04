@@ -19,7 +19,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
 
   const checkWalletHashAndFetchTransactions = () => {
     if (walletHash) {
-      actions.fetchEthereumTransactionsSummed(walletHash);
+      actions.fetchEthereumTransactionsSummed({walletHash:walletHash});
     }
   }
 

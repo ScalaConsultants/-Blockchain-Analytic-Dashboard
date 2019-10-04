@@ -5,7 +5,7 @@ import * as EthereumTransactions from '../../store/actions/ethereum/transactions
 
 import LineChartContainer from './LineChart-container';
 import { State } from './types';
-import { TransactionsSummed } from '../../types';
+import { TransactionsSummed, TransactionsSummedData } from '../../types';
 
 const LineChartRedux = () => {
     const mapState = (state: State): TransactionsSummed => ({
@@ -14,10 +14,10 @@ const LineChartRedux = () => {
 
     const dispatch = useDispatch();
 
-    const fetchEthereumTransactionsSummed = (data:string): void => {
+    const fetchEthereumTransactionsSummed = (transactionsSummedData: TransactionsSummedData): void => {
         dispatch({
             type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
-            data: data
+            transactionsSummedData: transactionsSummedData
         });
     };
 

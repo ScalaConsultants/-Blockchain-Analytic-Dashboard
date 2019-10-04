@@ -69,6 +69,10 @@ export interface TransactionsData {
   resultsPerPage?:number
 }
 
+export interface TransactionsSummedData {
+  walletHash: string,
+}
+
 export interface ExtendedTheme extends Theme {
   constants: {
     MARKET_COLOR: string,
