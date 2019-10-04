@@ -19,10 +19,10 @@ const BarChartRedux = () => {
 
     const { wallets } = useMappedState(mapState);
 
-    const fetchEthereumTransactionsSummed = (transacionsSummedData: TransactionsSummedData): void => {
+    const fetchEthereumTransactionsSummed = (transactionsSummedData: TransactionsSummedData): void => {
         dispatch({
             type: transactionsActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
-            transacionsSummedData: transacionsSummedData
+            transactionsSummedData: transactionsSummedData
         });
     };
 
