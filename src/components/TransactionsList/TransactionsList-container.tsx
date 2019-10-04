@@ -8,7 +8,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import DetailsModal from './TransactionsListDetailsModal-view';
 import { HeaderColsInterface, ModalDetailsProps, TransactionsListProps } from './types';
 import { timestampToDate } from './../../helpers/helpers';
 import { transactionsListTableStyle } from './TransactionsList-styles';
@@ -22,22 +21,11 @@ const headerCols: HeaderColsInterface[] = [
 ];
 
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
-  const { actions, match, transactions} = props;
-
+  const { actions, match, transactions } = props;
   const walletHash = match.params.walletHash;
-
-  const [open, setOpen] = React.useState(false);
-  const [selectedRow, setSelectedRow] = React.useState({});
-
   const classes = transactionsListTableStyle();
 
-  let [pageNumber, setPageNumber]:[number, Function] = React.useState(1);
-
-
-  const handleClickOpen = (data: Record<string, any>) => {
-    setSelectedRow(data);
-    setOpen(true);
-  };
+  let [pageNumber, setPageNumber]: [number, Function] = React.useState(1);
 
   const renderTransactionListHeader = (headerCols: HeaderColsInterface[]) =>
     (headerCols.map((row: HeaderColsInterface) => (
@@ -52,7 +40,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     )));
 
   const renderTransactionListRows = (transactions: Transaction[]) => (
-      transactions.map((row: any, index: number) => (
+    transactions.map((row: any, index: number) => (
       <TableRow key={index + row.timestamp}>
         <TableCell className={classes.td}>{row.value}</TableCell>
         <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
@@ -61,21 +49,15 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       </TableRow>
     )));
 
-  const modalDetailsProps: ModalDetailsProps = {
-    open,
-    handleClose: () => setOpen(false),
-    data: selectedRow
-  };
-
   const handleScroll = (target: HTMLBodyElement) => {
     if (target.scrollTop + target.clientHeight >= target.scrollHeight - 30) {
       setPageNumber(pageNumber++);
     }
   }
 
-  const checkWalletHashAndFetchTransactions = (pageNumber:number) => {
+  const checkWalletHashAndFetchTransactions = (pageNumber: number) => {
     if (walletHash) {
-      actions.fetchEthereumTransactions({walletHash:walletHash, page: pageNumber});
+      actions.fetchEthereumTransactions({ walletHash: walletHash, page: pageNumber });
     }
   }
 
@@ -98,19 +80,17 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
                 {renderTransactionListHeader(headerCols)}
               </TableRow>
             </TableHead>
-            <TableBody 
-              onScroll={(e: any) => handleScroll(e.target)} 
+            <TableBody
+              onScroll={(e: any) => handleScroll(e.target)}
               id="transactionsListTableBody"
               className={classes.tbody}
-              >
+            >
               {renderTransactionListRows(transactions)}
             </TableBody>
           </Table>
         </Grid>
-        <DetailsModal {...modalDetailsProps} />
       </Grid>
     </Grid>
-
   );
 };
 
