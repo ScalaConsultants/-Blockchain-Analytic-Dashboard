@@ -18,7 +18,7 @@ export type WalletHash = {
 }
 
 export interface DetailsViewActions {
-    fetchEthereumTransactions: Function
+    fetchEthereumTransactionsSummed: Function
 }
 
 export interface LineChartProps extends Transactions, RouteComponentProps<WalletHash> {

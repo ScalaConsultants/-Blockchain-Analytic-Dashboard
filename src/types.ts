@@ -31,12 +31,26 @@ export interface Wallets {
 }
 
 export interface Transaction {
-  interval: string,
-  totalValue: number
+  hash: string,
+  from: string,
+  to: string,
+  timestamp: number,
+  value: number,
+  gas: number,
+  gasPrice: number
 }
 
 export interface Transactions {
   transactions: Transaction []
+}
+
+export interface TransactionSummed {
+  interval: string,
+  totalValue: number
+}
+
+export interface TransactionsSummed {
+  transactionsSummed: TransactionSummed []
 }
 
 export interface Block {
@@ -47,6 +61,12 @@ export interface Block {
   counter: number;
   destination: string;
   fee: number;
+}
+
+export interface TransactionsData {
+  page:number,
+  walletHash: string,
+  resultsPerPage?:number
 }
 
 export interface ExtendedTheme extends Theme {

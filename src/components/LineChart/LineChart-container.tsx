@@ -3,7 +3,7 @@ import { lineChartContainerStyle, chartLineOptions, chartLineData } from './Line
 
 import LineView from './Line-view';
 import { LineChartProps } from './types';
-import { Transaction } from '../../types';
+import { TransactionSummed } from '../../types';
 
 import { convertTimeStampToHours } from './helpers';
 import { withRouter } from 'react-router-dom';
@@ -19,7 +19,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
 
   const checkWalletHashAndFetchTransactions = () => {
     if (walletHash) {
-      actions.fetchEthereumTransactions(walletHash);
+      actions.fetchEthereumTransactionsSummed(walletHash);
     }
   }
 
@@ -27,7 +27,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
     const labels: string[] = [];
     const elements: number[] = [];
 
-    transactions.forEach((item: Transaction): void => {
+    transactions.forEach((item: TransactionSummed): void => {
       elements.push(item.totalValue);
       labels.push(convertTimeStampToHours(item.interval));
 

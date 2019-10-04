@@ -7,7 +7,7 @@ const initState: Transaction[] = [];
 export default (state = initState, action: SetTransactionsAction): Transaction[] => {
   switch (action.type) {
     case ETHEREUM_SET_TRANSACTIONS:
-      return [...action.transactions];
+      return [...state, ...action.transactions];
     default:
       return state;
   }
