@@ -45,7 +45,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
         <TableCell className={classes.td}>{row.value}</TableCell>
         <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
         <TableCell className={classes.td}>{row.gasPrice || 'no info'}</TableCell>
-        <TableCell className={classes.td}>{row.description}</TableCell>
+        <TableCell className={classes.td}>{props.description}</TableCell>
       </TableRow>
     )));
 

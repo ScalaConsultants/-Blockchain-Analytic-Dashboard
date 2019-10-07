@@ -41,7 +41,8 @@ export interface Transaction {
 }
 
 export interface Transactions {
-  transactions: Transaction []
+  transactions: Transaction [],
+  description?: string
 }
 
 export interface TransactionSummed {

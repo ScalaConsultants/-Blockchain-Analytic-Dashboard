@@ -6,7 +6,7 @@ import TransactionListContainer from './TransactionsList-container';
 import { State } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
-const TransactionListRedux = () => {
+const TransactionListRedux = (props: any) => {
     const mapState = (state: State): Transactions => ({
         transactions: state.ethereum.transactions
     });
@@ -34,7 +34,7 @@ const TransactionListRedux = () => {
     }
     
     return (
-        <TransactionListContainer transactions={transactions} actions={actions} />
+        <TransactionListContainer description={props.description} transactions={transactions} actions={actions} />
     ) 
 }
 

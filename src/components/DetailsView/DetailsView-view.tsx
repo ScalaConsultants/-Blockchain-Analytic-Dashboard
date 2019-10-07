@@ -5,23 +5,30 @@ import LineChart from '../LineChart';
 import Legend from '../Legend';
 import DetailsMenu from '../DetailsMenu';
 import { withRouter } from 'react-router-dom';
+import { DetailsViewProps } from './types';
 
-const DetailsView = (props: any) => {
+const DetailsView = (props: DetailsViewProps) => {
     const address = props.match.params.walletHash || '';
-    const id = address && Math.floor(Math.random() * (30 - 1) + 1);
+    const id: string = address && `${Math.floor(Math.random() * (30 - 1) + 1)}`;
+    const [description, updateDescription] = React.useState("This wallet belongs to market");
+
+    const update = (value: string): void => {
+        updateDescription(value)
+    };
+
     return (
         <>  
             <DetailsMenu
                 id={id}
                 address={address}
-                description="This wallet belongs to market"
+                description={description}
                 type="market" 
                 blockchain="Ethereum"
-                updateDescription={() => {}}/>
+                updateDescription={update}/>
             <BarChart />
             <LineChart />
             <Legend />
-            <TransactionsList />
+            <TransactionsList description={description} />
         </>
     )
 }
