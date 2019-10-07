@@ -1,5 +1,5 @@
 export interface Props {
-  id: number,
+  id: string,
   address: string,
   description: string,
 }

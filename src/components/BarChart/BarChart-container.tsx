@@ -4,18 +4,16 @@ import clsx from 'clsx';
 
 import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
-
+import { withRouter } from 'react-router-dom';
 import BarChartView from './BarChart-view';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { width, wallets = [], actions } = props;
-
+  const { width, wallets = [], actions, match } = props;
+  const walletHash = match.params.walletHash;
   const classes = useBarChartSegmentStyles();
 
-  const [activeSegment] = useState(0);
-
-  // const onClick = (index: number) => updateActiveSegment(index);
+  const [activeSegment, updateActiveSegment] = useState({ isActive: false, index: 0 });
 
   const getStyle: any = (acc: Accumulator, object: Wallet) => ({
     position: 'absolute',
@@ -29,14 +27,21 @@ const BarChartContainer = (props: BarChartProps) => {
     const num = Math.round(Math.random() * 3);
 
     return clsx(classes.root, {
-      [classes.active]: index < 10 && index === activeSegment,
-      [classes.firstInactive]: index !== activeSegment && index === 0,
+      [classes.active]: activeSegment.isActive && index < 10 && index === activeSegment.index,
+      [classes.firstInactive]: activeSegment.isActive && index !== activeSegment.index && index === 0,
       [classes.market]: num === 0,
       [classes.private]: num === 1,
       [classes.dapp]: num === 2,
       [classes.fraud]: num === 3
     });
   };
+
+  useEffect((): void => {
+    updateActiveSegment({
+      isActive: true,
+      index: wallets.findIndex(val => val.walletHash === walletHash)
+    })
+  }, [walletHash])
 
   useEffect((): void => {
     actions.fetchEthereumWallets();
@@ -63,4 +68,4 @@ const BarChartContainer = (props: BarChartProps) => {
   return <BarChartView data={data} />
 };
 
-export default BarChartContainer;
+export default withRouter(BarChartContainer);

@@ -1,8 +1,8 @@
 export interface ViewProps {
-  id: number,
+  id: string,
   address: string
   description: string,
   type: string,
   blockchain: string,
-  updateDescription: () => void
+  updateDescription: (val: string) => void
 };

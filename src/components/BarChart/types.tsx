@@ -1,3 +1,4 @@
+import { RouteComponentProps } from 'react-router-dom';
 import { Wallet, Wallets } from '../../types';
 
 export interface ViewProps {
@@ -13,7 +14,11 @@ export interface BarChartActions {
   fetchEthereumWallets: Function,
 }
 
-export interface BarChartProps {
+export interface WalletHash {
+  walletHash: string
+}
+
+export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
   width: number,
   actions: BarChartActions

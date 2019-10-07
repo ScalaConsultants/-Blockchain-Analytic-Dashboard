@@ -22,5 +22,10 @@ export interface TransactionsListActions {
 }
 
 export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {
-    actions:TransactionsListActions
+    actions:TransactionsListActions,
+    description: string
+}
+
+export interface TransactionsListPropsRedux {
+    description: string
 }
