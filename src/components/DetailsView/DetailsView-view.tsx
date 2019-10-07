@@ -4,14 +4,16 @@ import TransactionsList from '../TransactionsList';
 import LineChart from '../LineChart';
 import Legend from '../Legend';
 import DetailsMenu from '../DetailsMenu';
+import { withRouter } from 'react-router-dom';
 
-const DetailsView = () => {
-
+const DetailsView = (props: any) => {
+    const address = props.match.params.walletHash || '';
+    const id = address && Math.floor(Math.random() * (30 - 1) + 1);
     return (
         <>  
             <DetailsMenu
-                id={350054}
-                address="0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F"
+                id={id}
+                address={address}
                 description="This wallet belongs to market"
                 type="market" 
                 blockchain="Ethereum"
@@ -24,4 +26,4 @@ const DetailsView = () => {
     )
 }
 
-export default DetailsView;
+export default withRouter(DetailsView);
