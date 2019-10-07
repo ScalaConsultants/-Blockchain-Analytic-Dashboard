@@ -39,10 +39,10 @@ export const chartLineData = (data: number[], labels:string[]) => {
     labels: labels,
     datasets: [
       {
-        label: 'ETH',
+        label: '',
         backgroundColor: 'rgba(255,99,132,0.0)',
         borderColor: 'rgba(107,94,233,0.5)',
-        borderWidth: 4,
+        borderWidth: 0,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data,
