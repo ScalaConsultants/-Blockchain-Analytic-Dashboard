@@ -25,3 +25,7 @@ export interface TransactionsListProps extends Transactions, RouteComponentProps
     actions:TransactionsListActions,
     description: string
 }
+
+export interface TransactionsListPropsRedux {
+    description: string
+}

@@ -3,10 +3,10 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
 import TransactionListContainer from './TransactionsList-container';
-import { State } from './types';
+import { State, TransactionsListPropsRedux } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
-const TransactionListRedux = (props: any) => {
+const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
     const mapState = (state: State): Transactions => ({
         transactions: state.ethereum.transactions
     });
@@ -34,7 +34,7 @@ const TransactionListRedux = (props: any) => {
     }
     
     return (
-        <TransactionListContainer description={props.description} transactions={transactions} actions={actions} />
+        <TransactionListContainer description={description} transactions={transactions} actions={actions} />
     ) 
 }
 
