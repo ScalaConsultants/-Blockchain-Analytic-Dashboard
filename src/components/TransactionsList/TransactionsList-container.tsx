@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { HeaderColsInterface, TransactionsListProps } from './types';
 import { timestampToDate } from '../../helpers/helpers';
 import useTransactionsListTableStyles from './TransactionsList-styles';
-import { Transaction } from '../../types';
+import { Transaction, Transactions } from '../../types';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
@@ -38,7 +38,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     ));
 
   const renderTransactionListRows = (transactionsList: Transaction[]) =>
-    transactionsList.map((row: any) => (
+    transactionsList.map((row: Transaction) => (
       <TableRow key={row.timestamp}>
         <TableCell className={classes.td}>{row.value}</TableCell>
         <TableCell className={classes.td} scope="row">

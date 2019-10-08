@@ -5,15 +5,13 @@ import * as loaderActions from '../../actions/loader';
 import { Wallets } from '../../../types';
 
 async function fetchWallets(): Promise<Wallets> {
-  const res = await fetch(
-    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets?groupBy=buyer&limit=50`
-  );
+  const res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets?groupBy=buyer&limit=50`);
   return res.json();
 }
 
 function* doFetchWallets() {
   // Show loader on initial fetch
-    yield put(loaderActions.showLoader());
+  yield put(loaderActions.showLoader());
 
   const wallets = yield fetchWallets();
 
@@ -25,12 +23,9 @@ function* doFetchWallets() {
   }
 
   // Hide on consecutive requests
-    yield put(loaderActions.hideLoader());
+  yield put(loaderActions.hideLoader());
 }
 
 export function* watchDoFetchWallets() {
-  yield takeEvery(
-    ethereumActions.ETHEREUM_FETCH_WALLETS,
-    doFetchWallets
-  );
+  yield takeEvery(ethereumActions.ETHEREUM_FETCH_WALLETS, doFetchWallets);
 }

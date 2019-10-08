@@ -1,6 +1,6 @@
 import { Wallet } from '../../../types';
 
 export interface SetWalletsActionReducer {
-    type: string,
-    wallets: Wallet []
+  type: string;
+  wallets: Wallet[];
 }

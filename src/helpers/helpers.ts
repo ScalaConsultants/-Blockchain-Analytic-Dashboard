@@ -11,8 +11,8 @@ export const stableSort = (array: any, cmp: any): any => {
 export const desc = (a: any, b: any, orderBy: any) => {
   if (!b[orderBy] || !a[orderBy]) return 0;
 
-  const aVal = typeof (a[orderBy]) === 'string' ? a[orderBy].toLowerCase() : a[orderBy];
-  const bVal = typeof (b[orderBy]) === 'string' ? b[orderBy].toLowerCase() : b[orderBy];
+  const aVal = typeof a[orderBy] === 'string' ? a[orderBy].toLowerCase() : a[orderBy];
+  const bVal = typeof b[orderBy] === 'string' ? b[orderBy].toLowerCase() : b[orderBy];
 
   if (bVal < aVal) {
     return -1;
@@ -23,17 +23,14 @@ export const desc = (a: any, b: any, orderBy: any) => {
   return 0;
 };
 
-export const getSorting = (order: any, orderBy: any) => (
-  order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy)
-);
+export const getSorting = (order: any, orderBy: any) =>
+  (order === 'desc' ? (a: any, b: any) => desc(a, b, orderBy) : (a: any, b: any) => -desc(a, b, orderBy));
 
 export const timestampToDate = (timestamp: number) => {
-  const fullDate = new Date(timestamp)
-      .toISOString()
-      .substr(0, 19);
+  const fullDate = new Date(timestamp).toISOString().substr(0, 19);
 
   const date = fullDate.slice(0, 10);
   const time = fullDate.slice(11, -3);
 
-  return `${time}-${date}`
+  return `${time}-${date}`;
 };

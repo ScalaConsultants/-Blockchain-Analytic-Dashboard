@@ -1,17 +1,14 @@
-import {
-    TEZOS_SET_TRANSACTIONS
-
-} from '../../actions/tezos/transactions';
+import { TEZOS_SET_TRANSACTIONS } from '../../actions/tezos/transactions';
 
 const initState: any = [];
 
 const transactions = (state = initState, action: any): any => {
-    switch (action.type) {
-        case TEZOS_SET_TRANSACTIONS:
-            return action.transactions;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case TEZOS_SET_TRANSACTIONS:
+      return action.transactions;
+    default:
+      return state;
+  }
 };
 
 export default transactions;

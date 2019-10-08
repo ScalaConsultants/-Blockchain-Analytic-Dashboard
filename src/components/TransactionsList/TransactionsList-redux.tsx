@@ -7,35 +7,33 @@ import { State, TransactionsListPropsRedux } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
 const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
-    const mapState = (state: State): Transactions => ({
-        transactions: state.ethereum.transactions
+  const mapState = (state: State): Transactions => ({
+    transactions: state.ethereum.transactions
+  });
+
+  const dispatch = useDispatch();
+
+  const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
+    dispatch({
+      type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
+      transactionsData
     });
+  };
 
-    const dispatch = useDispatch();
+  const flushEthereumTransactions = (): void => {
+    dispatch({
+      type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
+    });
+  };
 
-    const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
-        dispatch({
-            type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
-            transactionsData: transactionsData
-        });
-    };
+  const { transactions } = useMappedState(mapState);
 
-    const flushEthereumTransactions = (): void => {
-        dispatch({
-            type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
-        });
-    };
+  const actions = {
+    fetchEthereumTransactions,
+    flushEthereumTransactions
+  };
 
-    const { transactions } = useMappedState(mapState);
-
-    const actions = {
-        fetchEthereumTransactions,
-        flushEthereumTransactions
-    };
-
-    return (
-        <TransactionListContainer description={description} transactions={transactions} actions={actions} />
-    );
+  return <TransactionListContainer description={description} transactions={transactions} actions={actions} />;
 };
 
 export default TransactionListRedux;
