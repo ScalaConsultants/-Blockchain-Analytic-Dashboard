@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { HeaderColsInterface, TransactionsListProps } from './types';
 import { timestampToDate } from '../../helpers/helpers';
 import useTransactionsListTableStyles from './TransactionsList-styles';
-import { Transaction, Transactions } from '../../types';
+import { Transaction } from '../../types';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
@@ -24,7 +24,9 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const { actions, match, transactions } = props;
   const [walletHash] = React.useState(match.params.walletHash);
   const classes = useTransactionsListTableStyles();
-  let [pageNumber, setPageNumber]: [number, Function] = React.useState(1);
+
+  /* eslint-disable-next-line prefer-const */
+  let [pageNumber, setPageNumber] = React.useState(1);
 
   const renderTransactionListHeader = (headerColumns: HeaderColsInterface[]) =>
     headerColumns.map((row: HeaderColsInterface) => (
@@ -32,7 +34,8 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
         key={row.id}
         align={row.numeric ? 'right' : 'left'}
         padding={row.disablePadding ? 'none' : 'default'}
-        className={classes.td}>
+        className={classes.td}
+      >
         {row.label}
       </TableCell>
     ));
@@ -56,7 +59,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   };
 
   const checkWalletHashAndFetchTransactions = (wallet: string, page: number) =>
-  wallet && actions.fetchEthereumTransactions({ wallet, page });
+    wallet && actions.fetchEthereumTransactions({ wallet, page });
 
   // on handleScroll fetch next page of transactions
   useEffect((): void => {
@@ -71,7 +74,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   }, [match.params.walletHash]);
 
   return (
-    <Grid container className="Container" >
+    <Grid container className="Container">
       <Grid item xs={12} lg={12}>
         <Typography variant="h2" gutterBottom>
           Recent transactions
@@ -86,7 +89,8 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
             <TableBody
               onScroll={(e: any) => handleScroll(e.target)}
               id="transactionsListTableBody"
-              className={classes.tbody}>
+              className={classes.tbody}
+            >
               {renderTransactionListRows(transactions)}
             </TableBody>
           </Table>
