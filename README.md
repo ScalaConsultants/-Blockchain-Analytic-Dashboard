@@ -36,4 +36,7 @@ Runs Cypress tests to completion. By default will run all tests headlessly in th
 
 Update packages to the latest version.
 
+### `yarn run lint`
+
+Run eslint.
 

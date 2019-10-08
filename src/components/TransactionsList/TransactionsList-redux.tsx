@@ -31,12 +31,11 @@ const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
     const actions = {
         fetchEthereumTransactions,
         flushEthereumTransactions
-    }
-    
+    };
+
     return (
         <TransactionListContainer description={description} transactions={transactions} actions={actions} />
-    ) 
-}
+    );
+};
 
 export default TransactionListRedux;
-

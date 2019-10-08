@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
-import { FetchTransactionsAction } from './../../actions/ethereum/types';
+import { FetchTransactionsAction } from '../../actions/ethereum/types';
 import { Transactions } from '../../../types';
 
 import * as ethereumActions from '../../actions/ethereum/transactions';
@@ -8,6 +8,7 @@ import * as loaderActions from '../../actions/loader';
 
 async function fetchTransactions(walletHash:string, page:number, resultsPerPage:number = 20): Promise<Transactions> {
   const res = await fetch(
+    /* eslint-disable-next-line max-len */
     `${process.env.REACT_APP_HOST}/api/v1/ethereum/transactions?resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
   );
   return res.json();
@@ -31,7 +32,6 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
 
   // Hide on consecutive requests
   yield put(loaderActions.hideLoader());
-
 }
 
 export function* watchDoFetchTransactions() {

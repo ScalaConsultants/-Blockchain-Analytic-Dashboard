@@ -1,5 +1,5 @@
 import { RouteComponentProps } from 'react-router-dom';
-import { TransactionsSummed }  from '../../types';
+import { TransactionsSummed } from '../../types';
 
 export interface State {
     ethereum: TransactionsSummed

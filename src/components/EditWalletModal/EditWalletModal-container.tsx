@@ -12,7 +12,7 @@ const EditWalletModal = ({ id, address, description, update }: ContainerProps) =
 
   const handleClose = () => {
     setOpen(false);
-    setDescriptionState(description)
+    setDescriptionState(description);
   };
 
   const handleUpdate = () => {
@@ -23,7 +23,7 @@ const EditWalletModal = ({ id, address, description, update }: ContainerProps) =
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDescriptionState(event.target.value);
-  }
+  };
 
   return (
     <EditWalletModalView
@@ -36,7 +36,7 @@ const EditWalletModal = ({ id, address, description, update }: ContainerProps) =
       handleUpdate={handleUpdate}
       handleChange={handleChange}
     />
-  )
+  );
 };
 
 export default EditWalletModal;

@@ -3,7 +3,7 @@ import { Wallet, Wallets } from '../../types';
 
 export interface ViewProps {
   data: React.ReactElement<'div'>[];
-};
+}
 
 export interface Accumulator {
   position: number,

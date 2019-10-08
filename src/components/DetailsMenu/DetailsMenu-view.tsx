@@ -5,20 +5,21 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import EditWalletModal from '../EditWalletModal';
 import ChartDescription from '../ChartDescription';
-import { DetailsMenuStyles } from './DetailsMenu-styles';
+import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 
 const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain }: ViewProps) => {
   const classes = DetailsMenuStyles();
   const classesRoot = clsx([classes.root, classes.fonts]);
-  const classesInfo = clsx([classes.margin, classes.white])
+  const classesInfo = clsx([classes.margin, classes.white]);
 
   return (
-    <Grid 
-      container 
+    <Grid
+      container
       direction="row"
-      alignItems="center" 
-      className={classesRoot}>
+      alignItems="center"
+      className={classesRoot}
+    >
         <Grid item xs={1}>
           <Button
             className={classes.back}
@@ -42,7 +43,8 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
             id={id}
             address={address}
             description={description}
-            update={updateDescription} />
+            update={updateDescription}
+          />
         </Grid>
         <Grid item xs={1}>
         <ChartDescription type={type} blockchain={blockchain}/>

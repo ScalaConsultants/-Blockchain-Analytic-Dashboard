@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { withRouter } from 'react-router-dom';
 
 import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
-import { withRouter } from 'react-router-dom';
 import BarChartView from './BarChart-view';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
@@ -20,7 +20,7 @@ const BarChartContainer = (props: BarChartProps) => {
     height: '100%',
     top: 0,
     left: acc.position,
-    width: width * object.percentage / 100,
+    width: width * object.percentage / 100
   });
 
   const getClasses = (index: number): string => {
@@ -41,7 +41,7 @@ const BarChartContainer = (props: BarChartProps) => {
       isActive: true,
       index: wallets.findIndex(val => val.walletHash === walletHash)
     })
-  }, [walletHash])
+  }, [walletHash]);
 
   useEffect((): void => {
     actions.fetchEthereumWallets();
@@ -53,7 +53,8 @@ const BarChartContainer = (props: BarChartProps) => {
         <Link to={object.walletHash} key={object.walletHash}>
           <div
             className={getClasses(index)}
-            style={getStyle(acc, object)}>
+            style={getStyle(acc, object)}
+          >
             {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
           </div>
         </Link>
@@ -63,7 +64,7 @@ const BarChartContainer = (props: BarChartProps) => {
       position: acc.position + width * object.percentage / 100,
       elements: acc.elements
     };
-  }, { position: 0, elements: [] }).elements
+  }, { position: 0, elements: [] }).elements;
 
   return <BarChartView data={data} />
 };

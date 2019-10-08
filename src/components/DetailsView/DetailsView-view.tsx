@@ -1,13 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import BarChart from '../BarChart';
 import TransactionsList from '../TransactionsList';
 import LineChart from '../LineChart';
 import Legend from '../Legend';
 import DetailsMenu from '../DetailsMenu';
-import { withRouter } from 'react-router-dom';
 import { DetailsViewProps } from './types';
-import Grid from '@material-ui/core/Grid';
-import { useDetailsMenuStyles } from './DetailsView-styles'
+import useDetailsMenuStyles from './DetailsView-styles';
 
 const DetailsView = (props: DetailsViewProps) => {
     const classes = useDetailsMenuStyles();
@@ -16,18 +16,19 @@ const DetailsView = (props: DetailsViewProps) => {
     const [description, updateDescription] = React.useState("This wallet belongs to market");
 
     const update = (value: string): void => {
-        updateDescription(value)
+        updateDescription(value);
     };
 
     return (
-        <>  
+        <>
             <DetailsMenu
                 id={id}
                 address={address}
                 description={description}
-                type="market" 
+                type="market"
                 blockchain="Ethereum"
-                updateDescription={update}/>
+                updateDescription={update}
+            />
             <Grid container justify="flex-start" alignItems="center">
                 <Grid item xs={1} className={classes.label}>
                     ETH
@@ -40,7 +41,7 @@ const DetailsView = (props: DetailsViewProps) => {
             <Legend />
             <TransactionsList description={description} />
         </>
-    )
-}
+    );
+};
 
 export default withRouter(DetailsView);

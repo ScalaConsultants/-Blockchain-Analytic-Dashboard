@@ -5,4 +5,4 @@ export interface ViewProps {
   type: string,
   blockchain: string,
   updateDescription: (val: string) => void
-};
+}

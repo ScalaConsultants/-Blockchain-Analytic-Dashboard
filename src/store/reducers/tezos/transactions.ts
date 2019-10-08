@@ -1,5 +1,5 @@
 import {
-    TEZOS_SET_TRANSACTIONS,
+    TEZOS_SET_TRANSACTIONS
 
 } from '../../actions/tezos/transactions';
 

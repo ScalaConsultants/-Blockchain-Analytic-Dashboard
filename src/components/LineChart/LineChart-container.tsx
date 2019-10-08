@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { lineChartContainerStyle, chartLineOptions, chartLineData } from './LineChart-styles';
 
 import LineView from './Line-view';
@@ -6,7 +7,6 @@ import { LineChartProps } from './types';
 import { TransactionSummed } from '../../types';
 
 import { convertTimeStampToHours } from './helpers';
-import { withRouter } from 'react-router-dom';
 
 const LineCharts = (props: LineChartProps): React.ReactElement => {
   const { transactionsSummed = [], match, actions } = props;
@@ -19,9 +19,9 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
 
   const checkWalletHashAndFetchTransactions = () => {
     if (walletHash) {
-      actions.fetchEthereumTransactionsSummed({walletHash:walletHash});
+      actions.fetchEthereumTransactionsSummed({ walletHash:walletHash });
     }
-  }
+  };
 
   const filterChart = (): void => {
     const labels: string[] = [];
@@ -30,7 +30,6 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
     transactionsSummed.forEach((item: TransactionSummed): void => {
       elements.push(item.totalValue);
       labels.push(convertTimeStampToHours(item.interval));
-
     });
     setLabels(labels);
     setData(elements);
@@ -43,7 +42,6 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   useEffect((): void => {
     checkWalletHashAndFetchTransactions();
   }, [match.params.walletHash]);
-
 
   return (
     <div className={classes.lineChartContainer}>

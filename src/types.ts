@@ -57,6 +57,7 @@ export interface TransactionsSummed {
 export interface Block {
   source: string;
   timestamp: number;
+  /* eslint-disable-next-line camelcase */
   block_level: number;
   amount: number;
   counter: number;
@@ -85,4 +86,4 @@ export interface ExtendedTheme extends Theme {
     DEFAULT_FONT_WEIGHT: any,
     DEFAULT_FONT_SIZE: string
   }
-};
+}

@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useTransactionsListTableStyles = makeStyles( () => ({
+const useTransactionsListTableStyles = makeStyles(() => ({
   thead: {
     display: 'block'
-  }, 
+  },
 
   tbody: {
     display: 'block',
@@ -17,3 +17,5 @@ export const useTransactionsListTableStyles = makeStyles( () => ({
     width: '24vw'
   }
 }));
+
+export default useTransactionsListTableStyles;

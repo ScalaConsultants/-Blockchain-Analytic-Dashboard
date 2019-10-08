@@ -9,7 +9,7 @@ const Legend = () => {
       <h5 className={classes.title}>Legend:</h5>
       <LegendView />
     </div>
-  )
+  );
 };
 
 export default Legend;

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ExtendedTheme } from './../../types';
+import { ExtendedTheme } from '../../types';
 
 export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
@@ -21,7 +21,7 @@ export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.palette.grey[400],
+    color: theme.palette.grey[400]
   },
   active: {
     boxShadow: '0px 0px 20px rgba(135, 101, 239, 0.4)',

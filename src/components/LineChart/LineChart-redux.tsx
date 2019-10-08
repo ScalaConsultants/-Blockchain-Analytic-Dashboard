@@ -25,11 +25,11 @@ const LineChartRedux = () => {
 
     const actions = {
         fetchEthereumTransactionsSummed
-    }
+    };
 
     return (
         <LineChartContainer transactionsSummed={transactionsSummed} actions={actions} />
-    )
-}
+    );
+};
 
 export default LineChartRedux;
