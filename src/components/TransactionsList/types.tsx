@@ -2,30 +2,30 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Transactions } from '../../types';
 
 export interface HeaderColsInterface {
-    id: string;
-    numeric: boolean;
-    disablePadding: boolean;
-    label: string;
+  id: string;
+  numeric: boolean;
+  disablePadding: boolean;
+  label: string;
 }
 
 export interface State {
-    ethereum: Transactions
+  ethereum: Transactions;
 }
 
-export type WalletHash = {
-    walletHash: string
+export interface WalletHash {
+  walletHash: string;
 }
 
 export interface TransactionsListActions {
-    fetchEthereumTransactions: Function,
-    flushEthereumTransactions: Function
+  fetchEthereumTransactions: Function;
+  flushEthereumTransactions: Function;
 }
 
 export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {
-    actions:TransactionsListActions,
-    description: string
+  actions: TransactionsListActions;
+  description: string;
 }
 
 export interface TransactionsListPropsRedux {
-    description: string
+  description: string;
 }

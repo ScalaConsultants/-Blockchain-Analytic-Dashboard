@@ -22,9 +22,9 @@ const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
 
     const flushEthereumTransactions = (): void => {
         dispatch({
-          type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
+            type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
         });
-      };
+    };
 
     const { transactions } = useMappedState(mapState);
 

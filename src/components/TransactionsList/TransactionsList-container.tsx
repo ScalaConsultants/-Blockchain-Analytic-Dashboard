@@ -22,32 +22,32 @@ const headerCols: HeaderColsInterface[] = [
 
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const { actions, match, transactions } = props;
-  const walletHash = match.params.walletHash;
+  const [walletHash] = React.useState(match.params.walletHash);
   const classes = useTransactionsListTableStyles();
-
   let [pageNumber, setPageNumber]: [number, Function] = React.useState(1);
 
-  const renderTransactionListHeader = (headerCols: HeaderColsInterface[]) =>
-    (headerCols.map((row: HeaderColsInterface) => (
+  const renderTransactionListHeader = (headerColumns: HeaderColsInterface[]) =>
+    headerColumns.map((row: HeaderColsInterface) => (
       <TableCell
         key={row.id}
         align={row.numeric ? 'right' : 'left'}
         padding={row.disablePadding ? 'none' : 'default'}
-        className={classes.td}
-      >
+        className={classes.td}>
         {row.label}
       </TableCell>
-    )));
+    ));
 
-  const renderTransactionListRows = (transactions: Transaction[]) => (
-    transactions.map((row: any, index: number) => (
-      <TableRow key={index + row.timestamp}>
+  const renderTransactionListRows = (transactionsList: Transaction[]) =>
+    transactionsList.map((row: any) => (
+      <TableRow key={row.timestamp}>
         <TableCell className={classes.td}>{row.value}</TableCell>
-        <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
+        <TableCell className={classes.td} scope="row">
+          {timestampToDate(row.timestamp)}
+        </TableCell>
         <TableCell className={classes.td}>{row.gasPrice || 'no info'}</TableCell>
         <TableCell className={classes.td}>{props.description}</TableCell>
       </TableRow>
-    )));
+    ));
 
   const handleScroll = (target: HTMLBodyElement) => {
     if (target.scrollTop + target.clientHeight >= target.scrollHeight - 30) {
@@ -55,11 +55,8 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     }
   };
 
-  const checkWalletHashAndFetchTransactions = (walletHash: any, pageNumber: number) => {
-    if (walletHash) {
-      actions.fetchEthereumTransactions({ walletHash, page: pageNumber });
-    }
-  };
+  const checkWalletHashAndFetchTransactions = (wallet: string, page: number) =>
+  wallet && actions.fetchEthereumTransactions({ wallet, page });
 
   // on handleScroll fetch next page of transactions
   useEffect((): void => {
@@ -84,15 +81,12 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
         <Grid item xs={12} lg={12}>
           <Table>
             <TableHead className={classes.thead}>
-              <TableRow>
-                {renderTransactionListHeader(headerCols)}
-              </TableRow>
+              <TableRow>{renderTransactionListHeader(headerCols)}</TableRow>
             </TableHead>
             <TableBody
               onScroll={(e: any) => handleScroll(e.target)}
               id="transactionsListTableBody"
-              className={classes.tbody}
-            >
+              className={classes.tbody}>
               {renderTransactionListRows(transactions)}
             </TableBody>
           </Table>
