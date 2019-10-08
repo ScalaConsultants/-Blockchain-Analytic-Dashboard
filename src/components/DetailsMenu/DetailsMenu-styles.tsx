@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
 import { ExtendedTheme } from '../../types';
 
-export const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
+const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
     marginBottom: '15px'
   },
@@ -26,4 +26,6 @@ export const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
     marginTop: '20px',
     marginBottom: '5px'
   }
-}))
+}));
+
+export default DetailsMenuStyles;

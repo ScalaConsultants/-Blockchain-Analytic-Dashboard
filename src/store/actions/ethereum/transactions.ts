@@ -10,7 +10,7 @@ export const ETHEREUM_FLUSH_TRANSACTIONS = 'ETHEREUM_FLUSH_TRANSACTIONS';
 
 export const ethereumFetchTransactions = (transactionsData: TransactionsData): FetchTransactionsAction => ({
   type: ETHEREUM_FETCH_TRANSACTIONS,
-  transactionsData: transactionsData
+  transactionsData
 });
 
 export const ethereumSetTransactions = (transactions: Transaction[]): SetTransactionsAction => ({

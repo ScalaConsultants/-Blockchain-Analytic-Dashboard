@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ExtendedTheme } from './../../types';
+import { ExtendedTheme } from '../../types';
 
-export const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
+const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
   modal: {
     background: 'transparent',
     display: 'flex',
@@ -24,7 +24,7 @@ export const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
     padding: '4px 6px',
     borderRadius: '4px',
     marginRight: '15px',
-    marginTop: '15px',
+    marginTop: '15px'
   },
   description: {
     border: '1px solid #569AF5',
@@ -43,7 +43,7 @@ export const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
     height: '26px',
     border: '1px solid #5699F6',
     borderRadius: '4px',
-    textTransform: 'none',
+    textTransform: 'none'
   },
   buttonFirst: {
     background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)',
@@ -83,3 +83,5 @@ export const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
     border: 'none'
   }
 }));
+
+export default EditWalletModalStyles;

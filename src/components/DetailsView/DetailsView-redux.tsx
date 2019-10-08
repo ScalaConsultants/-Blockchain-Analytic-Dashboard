@@ -2,11 +2,6 @@ import React from 'react';
 
 import DetailsViewContainer from './DetailsView-container';
 
-const DetailsViewRedux = () => {
-    
-    return (
-        <DetailsViewContainer/>
-    )
-}
+const DetailsViewRedux = () => <DetailsViewContainer/>;
 
 export default DetailsViewRedux;

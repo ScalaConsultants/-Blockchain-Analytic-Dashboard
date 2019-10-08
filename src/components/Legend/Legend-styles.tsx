@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ExtendedTheme } from './../../types';
+import { ExtendedTheme } from '../../types';
 
 export const LegendContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
@@ -39,11 +39,12 @@ export const LegendList = makeStyles((theme: ExtendedTheme) => ({
       marginLeft: '18px'
     },
     '&::before': {
+      /* eslint-disable-next-line quotes */
       content: "''",
       width: '12px',
       height: '12px',
       borderRadius: '50%',
-      marginRight: '10px',
+      marginRight: '10px'
     },
     '&:nth-child(1)::before': {
       background: theme.constants.MARKET_COLOR

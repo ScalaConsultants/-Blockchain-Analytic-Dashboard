@@ -12,10 +12,8 @@ async function fetchWallets(): Promise<Wallets> {
 }
 
 function* doFetchWallets() {
-
   // Show loader on initial fetch
     yield put(loaderActions.showLoader());
-  
 
   const wallets = yield fetchWallets();
 
@@ -28,7 +26,6 @@ function* doFetchWallets() {
 
   // Hide on consecutive requests
     yield put(loaderActions.hideLoader());
-  
 }
 
 export function* watchDoFetchWallets() {

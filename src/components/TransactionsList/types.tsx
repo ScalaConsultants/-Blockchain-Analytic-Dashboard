@@ -1,5 +1,5 @@
-import { Block, Transactions } from "../../types";
 import { RouteComponentProps } from 'react-router-dom';
+import { Transactions } from '../../types';
 
 export interface HeaderColsInterface {
     id: string;

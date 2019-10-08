@@ -19,8 +19,8 @@ export const chartLineOptions = {
       },
       ticks: {
         maxTicksLimit: 10,
-        fontColor: 'rgb(163,167,176,0.8)', // this here
-      },
+        fontColor: 'rgb(163,167,176,0.8)' // this here
+      }
     }],
     yAxes: [{
       gridLines: {
@@ -28,26 +28,24 @@ export const chartLineOptions = {
       },
       ticks: {
         maxTicksLimit: 10,
-        fontColor: 'rgb(163,167,176,0.8)',
-      },
+        fontColor: 'rgb(163,167,176,0.8)'
+      }
     }]
   }
-}
+};
 
-export const chartLineData = (data: number[], labels:string[]) => {
-  return {
-    labels: labels,
-    datasets: [
-      {
-        label: '',
-        backgroundColor: 'rgba(255,99,132,0.0)',
-        borderColor: 'rgba(107,94,233,0.5)',
-        borderWidth: 0,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data,
-        lineTension: 0,
-      }
-    ]
-  }
-}
+export const chartLineData = (data: number[], labels:string[]) => ({
+  labels,
+  datasets: [
+    {
+      label: '',
+      backgroundColor: 'rgba(255,99,132,0.0)',
+      borderColor: 'rgba(107,94,233,0.5)',
+      borderWidth: 0,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data,
+      lineTension: 0
+    }
+  ]
+});

@@ -35,5 +35,5 @@ export const timestampToDate = (timestamp: number) => {
   const date = fullDate.slice(0, 10);
   const time = fullDate.slice(11, -3);
 
-  return time + ' - ' + date
-}
+  return `${time}-${date}`
+};

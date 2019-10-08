@@ -9,8 +9,8 @@ import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import { HeaderColsInterface, TransactionsListProps } from './types';
-import { timestampToDate } from './../../helpers/helpers';
-import { useTransactionsListTableStyles } from './TransactionsList-styles';
+import { timestampToDate } from '../../helpers/helpers';
+import useTransactionsListTableStyles from './TransactionsList-styles';
 import { Transaction } from '../../types';
 
 const headerCols: HeaderColsInterface[] = [
@@ -53,20 +53,20 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     if (target.scrollTop + target.clientHeight >= target.scrollHeight - 30) {
       setPageNumber(pageNumber++);
     }
-  }
+  };
 
   const checkWalletHashAndFetchTransactions = (walletHash: any, pageNumber: number) => {
     if (walletHash) {
-      actions.fetchEthereumTransactions({ walletHash: walletHash, page: pageNumber });
+      actions.fetchEthereumTransactions({ walletHash, page: pageNumber });
     }
-  }
+  };
 
-  //on handleScroll fetch next page of transactions
+  // on handleScroll fetch next page of transactions
   useEffect((): void => {
     checkWalletHashAndFetchTransactions(walletHash, pageNumber);
   }, [pageNumber]);
 
-  //on route change (when user clicked on bar-chart) - cleared transactions list and download the first page
+  // on route change (when user clicked on bar-chart) - cleared transactions list and download the first page
   useEffect((): void => {
     actions.flushEthereumTransactions();
     setPageNumber(1);
@@ -78,7 +78,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       <Grid item xs={12} lg={12}>
         <Typography variant="h2" gutterBottom>
           Recent transactions
-      </Typography>
+        </Typography>
       </Grid>
       <Grid container spacing={9} className="Container">
         <Grid item xs={12} lg={12}>

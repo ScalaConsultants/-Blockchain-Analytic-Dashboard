@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
 import { ExtendedTheme } from '../../types';
 
-export const ChartDescriptionStyles = makeStyles((theme: ExtendedTheme) => ({
+const ChartDescriptionStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
     width: '115px',
     height: '18px',
@@ -43,4 +43,6 @@ export const ChartDescriptionStyles = makeStyles((theme: ExtendedTheme) => ({
   fraud: {
     background: theme.constants.FRAUD_COLOR
   }
-})); 
+}));
+
+export default ChartDescriptionStyles;
