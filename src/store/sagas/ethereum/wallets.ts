@@ -6,7 +6,7 @@ import { Wallets } from '../../../types';
 
 async function fetchWallets(): Promise<Wallets> {
   const res = await fetch(
-    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets?groupBy=from&limit=50`
+    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets?groupBy=buyer&limit=50`
   );
   return res.json();
 }
