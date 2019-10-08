@@ -6,7 +6,7 @@ import { Transactions } from '../../../types';
 import * as ethereumActions from '../../actions/ethereum/transactions';
 import * as loaderActions from '../../actions/loader';
 
-async function fetchTransactions(walletHash:string, page:number, resultsPerPage:number = 20): Promise<Transactions> {
+async function fetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
   const res = await fetch(
     /* eslint-disable-next-line max-len */
     `${process.env.REACT_APP_HOST}/api/v1/ethereum/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
@@ -15,7 +15,6 @@ async function fetchTransactions(walletHash:string, page:number, resultsPerPage:
 }
 
 function* doFetchTransactions(action: FetchTransactionsAction) {
-
   const { transactionsData } = action;
 
   // Show loader on initial fetch
@@ -35,8 +34,5 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
 }
 
 export function* watchDoFetchTransactions() {
-  yield takeEvery(
-    ethereumActions.ETHEREUM_FETCH_TRANSACTIONS,
-    doFetchTransactions
-  );
+  yield takeEvery(ethereumActions.ETHEREUM_FETCH_TRANSACTIONS, doFetchTransactions);
 }

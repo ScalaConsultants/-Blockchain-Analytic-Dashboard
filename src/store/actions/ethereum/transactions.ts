@@ -7,7 +7,6 @@ export const ETHEREUM_SET_TRANSACTIONS = 'ETHEREUM_SET_TRANSACTIONS';
 
 export const ETHEREUM_FLUSH_TRANSACTIONS = 'ETHEREUM_FLUSH_TRANSACTIONS';
 
-
 export const ethereumFetchTransactions = (transactionsData: TransactionsData): FetchTransactionsAction => ({
   type: ETHEREUM_FETCH_TRANSACTIONS,
   transactionsData

@@ -1,28 +1,28 @@
 import {
-    ActionType,
-    Wallets,
-    Transaction,
-    TransactionSummed,
-    TransactionsData,
-    TransactionsSummedData
+  ActionType,
+  Wallets,
+  Transaction,
+  TransactionSummed,
+  TransactionsData,
+  TransactionsSummedData
 } from '../../../types';
 
 export interface SetTransactionsAction extends ActionType {
-    transactions: Transaction[]
+  transactions: Transaction[];
 }
 
 export interface FetchTransactionsAction extends ActionType {
-    transactionsData: TransactionsData
+  transactionsData: TransactionsData;
 }
 
 export interface SetWalletsAction extends ActionType {
-    wallets: Wallets
+  wallets: Wallets;
 }
 
 export interface SetTransactionsSummedAction extends ActionType {
-    transactionsSummed: TransactionSummed[]
+  transactionsSummed: TransactionSummed[];
 }
 
 export interface FetchTransactionsSummedAction extends ActionType {
-    transactionsSummedData: TransactionsSummedData
+  transactionsSummedData: TransactionsSummedData;
 }
