@@ -16,18 +16,34 @@ async function fetchTransactions(walletHash: string, page: number, resultsPerPag
 
 function* doFetchTransactions(action: FetchTransactionsAction) {
   const { transactionsData } = action;
+  const { ETHEREUM_SET_TRANSACTIONS, ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED, ETHEREUM_FETCH_TRANSACTIONS_FAILED } = ethereumActions;
 
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
+
 
   const transactions = yield fetchTransactions(transactionsData.walletHash, transactionsData.page);
 
   if (transactions.length > 0) {
     yield put({
-      type: ethereumActions.ETHEREUM_SET_TRANSACTIONS,
+      type: ETHEREUM_SET_TRANSACTIONS,
       transactions
     });
   }
+
+    try {
+      if (transactions.length > 0) {
+        yield put({
+          type: ETHEREUM_SET_TRANSACTIONS,
+          transactions
+        });
+      }
+      yield put({
+        type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED
+      });
+    } catch (e) {
+      yield put({type: ETHEREUM_FETCH_TRANSACTIONS_FAILED, message: e.message});
+    }
 
   // Hide on consecutive requests
   yield put(loaderActions.hideLoader());

@@ -15,6 +15,10 @@ const useTransactionsListTableStyles = makeStyles(() => ({
 
   td: {
     width: '24vw'
+  },
+
+  grid: {
+    position: 'relative'
   }
 }));
 
