@@ -21,13 +21,15 @@ export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.palette.grey[400]
+    color: theme.palette.grey[400],
+    width: '100%',
+    height: '100%'
   },
   active: {
-    boxShadow: '0px 0px 20px rgba(135, 101, 239, 0.4)',
+    boxShadow: '0px 0px 20px rgba(135, 101, 239, .8)',
     borderRadius: '2px',
     zIndex: 100,
-    transform: 'scale(1.05)',
+    transform: 'scale(1.3)',
     color: theme.palette.common.white
   },
   firstInactive: {
@@ -44,5 +46,8 @@ export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   fraud: {
     background: theme.constants.FRAUD_COLOR
+  },
+  shadow: {
+    background: 'rgba(0, 0, 0, .6)'
   }
 }));
