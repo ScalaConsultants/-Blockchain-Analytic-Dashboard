@@ -95,7 +95,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
               {renderTransactionListRows(transactions)}
             </TableBody>
           </Table>
-          { transactionsIsFetching ? <Loader fullPage={ false } /> : null }
+          <Loader isLoading={transactionsIsFetching}  fullPage={ false } />
         </Grid>
       </Grid>
     </Grid>
