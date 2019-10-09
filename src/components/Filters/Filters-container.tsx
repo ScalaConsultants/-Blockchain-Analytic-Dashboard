@@ -1,16 +1,16 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
+import clsx from 'clsx';
 
 import useFiltersStyles from './Filters-styles';
 
 const Filters = () => {
   const classes = useFiltersStyles();
   const blockchains: string[] = ['BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'XTZ', 'ADA', 'EOS', 'XLM'];
-  const activeClasses = [classes.button, classes.active]
 
   const filterHandler = (eventTarget: HTMLBodyElement) => {
     const active: boolean = eventTarget.className === classes.button;
-    active && (eventTarget.className = activeClasses.join(' '));
+    active && (eventTarget.className = clsx(classes.button, classes.active));
     !active && (eventTarget.className = classes.button);
   }
 
