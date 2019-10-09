@@ -1,12 +1,12 @@
 import React from 'react';
-import { BarChartContainer } from './BarChart-styles';
+import { useBarChartContainer } from './BarChart-styles';
 import { ViewProps } from './types';
 
-const BarChartView = ({ data }: ViewProps) => {
-  const classes = BarChartContainer();
+const BarChartView = ({ data, containerRef }: ViewProps) => {
+  const classes = useBarChartContainer();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={containerRef}>
       {data}
     </div>
   );
