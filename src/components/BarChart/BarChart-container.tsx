@@ -23,18 +23,28 @@ const BarChartContainer = (props: BarChartProps) => {
     width: width * object.percentage / 100
   });
 
-  const getClasses = (index: number): string => {
+  const getOuterClasses = (index: number): string => {
     const num = Math.round(Math.random() * 3);
+    const active = activeSegment.isActive && index < 10 && index === activeSegment.index;
+    const firstSegmentInactive = activeSegment.isActive && index !== activeSegment.index && index === 0;
 
-    return clsx(classes.root, {
-      [classes.active]: activeSegment.isActive && index < 10 && index === activeSegment.index,
-      [classes.firstInactive]: activeSegment.isActive && index !== activeSegment.index && index === 0,
+    return clsx({
+      [classes.active]: active,
+      [classes.firstInactive]: firstSegmentInactive,
       [classes.market]: num === 0,
       [classes.private]: num === 1,
       [classes.dapp]: num === 2,
       [classes.fraud]: num === 3
     });
   };
+
+  const getInnerClasses = (index: number) => {
+    const active = activeSegment.isActive && index < 10 && index === activeSegment.index;
+
+    return clsx(classes.root, {
+      [classes.shadow]: !active
+    })
+  }
 
   useEffect((): void => {
     updateActiveSegment({
@@ -52,10 +62,14 @@ const BarChartContainer = (props: BarChartProps) => {
       acc.elements.push((
         <Link to={object.walletHash} key={object.walletHash}>
           <div
-            className={getClasses(index)}
+            className={getOuterClasses(index)}
             style={getStyle(acc, object)}
           >
-            {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
+            <div
+              className={getInnerClasses(index)}
+            >
+              {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
+            </div>
           </div>
         </Link>
       ))
