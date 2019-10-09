@@ -61,7 +61,7 @@ const BarChartContainer = (props: BarChartProps) => {
     const containerWidth = parseFloat(getComputedStyle(segmentsContainer.current).width || '');
 
     return (
-      <div className={lastSegmentClasses} style={{
+      <div key="last-segment-label" className={lastSegmentClasses} style={{
         ...defaultSegmentStyles,
         left: posX,
         width: containerWidth - posX
