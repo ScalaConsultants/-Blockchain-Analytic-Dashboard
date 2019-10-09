@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Grid from '@material-ui/core/Grid/Grid';
 import clsx from 'clsx';
@@ -7,29 +7,45 @@ import useFiltersStyles from './Filters-styles';
 
 const Filters = () => {
   const classes = useFiltersStyles();
-  const blockchains: string[] = ['BTC', 'ETH', 'XRP', 'LTC', 'BCH', 'XTZ', 'ADA', 'EOS', 'XLM'];
+  const [activeBlockchainButtons, setBlockchainButtons]:[ Record<string, boolean>, Function] = useState({
+    'BTC': false,
+    'ETH': true,
+    'XRP': false,
+    'LTC': false,
+    'BCH': false,
+    'XTZ': true,
+    'ADA': false,
+    'EOS': false,
+    'XLM': false
+  });
 
-  const filterHandler = (eventTarget: HTMLBodyElement) => {
-    const active: boolean = eventTarget.className === classes.button;
-    active && (eventTarget.className = clsx(classes.button, classes.active));
-    !active && (eventTarget.className = classes.button);
+  const filterHandler = (label: string) => {
+    if (label === 'ETH' || label === 'XTZ') {
+      const buttons = activeBlockchainButtons;
+      buttons[label] = !buttons[label];
+      setBlockchainButtons({ ...buttons });
+    }
   }
 
-  const renderButtons = (labels: string[]) =>
-    labels.map((label: string) => (
-      <button
-        className={classes.button}
-        key={label}
-        onClick={(e: any) => filterHandler(e.target)}
-      >
-        {label}
-      </button>
-    ))
-
+  const renderButtons = (labels: Record<string, boolean>) =>
+    Object.keys(labels).map((label: string) => {
+      const btnClass = clsx(classes.button, {
+        [classes.active]: activeBlockchainButtons[label]
+      })
+      return (
+        <button
+          className={btnClass}
+          key={label}
+          onClick={() => filterHandler(label)}
+        >
+          {label}
+        </button>
+      )
+    })
   return (
     <Grid container justify="flex-start" alignItems="center" className="Container">
       <Grid item xs={3}>
-        {renderButtons(blockchains)}
+        {renderButtons(activeBlockchainButtons)}
       </Grid>
       <Grid item xs={3}>
         Filter - Blockchain Zoom
