@@ -27,10 +27,10 @@ const BarChartContainer = (props: BarChartProps) => {
     top: 0,
   }
 
-  const getStyle: any = (acc: Accumulator, object: Wallet) => ({
+  const getStyle: any = (position: number, percentage: number) => ({
     ...defaultSegmentStyles,
-    left: acc.position,
-    width: width * object.percentage / 100
+    left: position,
+    width: width * percentage / 100
   });
 
   const getOuterClasses = (index: number): string => {
@@ -72,6 +72,22 @@ const BarChartContainer = (props: BarChartProps) => {
     )
   }
 
+  const createSegment = (walletHash: string, percentage: number, position: number, index: number) =>
+    (
+      <Link to={walletHash} key={walletHash}>
+        <div
+          className={getOuterClasses(index)}
+          style={getStyle(position, percentage)}
+        >
+          <div
+            className={getInnerClasses(index)}
+          >
+            {(index < 10 && percentage >= 1) ? <div>{`${Math.floor(percentage)}%`}</div> : null}
+          </div>
+        </div>
+      </Link>
+    );
+
   useEffect((): void => {
     updateActiveSegment({
       isActive: true,
@@ -84,29 +100,19 @@ const BarChartContainer = (props: BarChartProps) => {
   }, []);
 
   const data = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
-    const segment = (
-      <Link to={object.walletHash} key={object.walletHash}>
-        <div
-          className={getOuterClasses(index)}
-          style={getStyle(acc, object)}
-        >
-          <div
-            className={getInnerClasses(index)}
-          >
-            {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
-          </div>
-        </div>
-      </Link>
-    )
+    const { walletHash, percentage } = object;
+    const { position } = acc;
 
+    // Render segments higher then 0.1
     if (object.percentage > 0.1) {
-      acc.elements.push(segment);
+      acc.elements.push(createSegment(walletHash, percentage, position, index));
 
       // Last Segment
       if (index === wallets.length - 1) {  
         acc.elements.push(createLastSegment(acc.position, object.percentage))
       }
     }
+
     return {
       position: acc.position + width * object.percentage / 100,
       elements: acc.elements
