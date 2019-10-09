@@ -109,7 +109,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
       // Last Segment
       if (index === wallets.length - 1) {  
-        acc.elements.push(createLastSegment(acc.position, object.percentage))
+        acc.elements.push(createLastSegment(position, percentage))
       }
     }
 
