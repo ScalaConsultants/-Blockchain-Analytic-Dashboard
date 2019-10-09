@@ -12,9 +12,14 @@ const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
   fonts: {
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
-    fontWeight: theme.constants.DEFAULT_FONT_WEIGHT,
     fontSize: '0.75rem',
     lineHeight: '0.75rem'
+  },
+  fontWeightBold: {
+    fontWeight: theme.constants.DEFAULT_FONT_WEIGHT,
+  },
+  fontWeightNormal: {
+    fontWeight: 'normal',
   },
   white: {
     color: theme.palette.common.white

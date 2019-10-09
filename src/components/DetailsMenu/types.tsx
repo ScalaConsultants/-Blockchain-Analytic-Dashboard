@@ -4,5 +4,6 @@ export interface ViewProps {
   description: string,
   type: string,
   blockchain: string,
+  activeFilters: Record<string, string>
   updateDescription: (val: string) => void
 }

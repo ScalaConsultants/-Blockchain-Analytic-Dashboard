@@ -8,10 +8,12 @@ import ChartDescription from '../ChartDescription';
 import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 
-const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain }: ViewProps) => {
+const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain, activeFilters }: ViewProps) => {
+  const { tab, zoom, top } = activeFilters;
   const classes = DetailsMenuStyles();
-  const classesRoot = clsx([classes.root, classes.fonts]);
+  const classesRoot = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
   const classesInfo = clsx([classes.margin, classes.white]);
+  const classesFilters = clsx([classes.margin, classes.grey, classes.fontWeightNormal]);
 
   return (
     <Grid
@@ -47,8 +49,27 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
           />
         </Grid>
         <Grid item xs={1}>
-        <ChartDescription type={type} blockchain={blockchain}/>
+          <ChartDescription type={type} blockchain={blockchain}/>
         </Grid>
+      <Grid 
+        container direction="row"
+        justify="flex-start"
+        alignItems="center" 
+        className={classesFilters}
+      >
+        <Grid item xs={1}>
+          FILTERS
+        </Grid>
+        <Grid item xs={1}>
+          {tab}
+        </Grid>
+        <Grid item xs={1}>
+          {zoom}
+        </Grid>
+        <Grid item xs={1}>
+          {`Top ${top}`}
+        </Grid>
+      </Grid>
     </Grid>
   );
 };
