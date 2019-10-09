@@ -20,7 +20,7 @@ const Filters = () => {
 
   const filterHandler = (label: string) => {
     if (label === 'ETH' || label === 'XTZ') {
-      const buttons = activeBlockchainButtons;
+      const buttons = { ...activeBlockchainButtons };
       buttons[label] = !buttons[label];
       setBlockchainButtons({ ...buttons });
     }
