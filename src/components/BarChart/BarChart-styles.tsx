@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
-export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
+export const useBarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
     background: '#253152',
     color: theme.palette.grey[400],
@@ -17,11 +17,15 @@ export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
 }));
 
 export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
-  root: {
+  color: {
+    color: theme.palette.grey[400],
+  },
+  center: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.palette.grey[400],
+  },
+  fullSize: {
     width: '100%',
     height: '100%'
   },
