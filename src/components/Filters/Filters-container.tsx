@@ -6,7 +6,7 @@ import useFiltersStyles from './Filters-styles';
 
 const Filters = () => {
   const classes = useFiltersStyles();
-  const [activeBlockchainButtons, setBlockchainButtons]:[ Record<string, boolean>, Function] = useState({
+  const [activeBlockchainButtons, setBlockchainButtons]: [ Record<string, boolean>, Function] = useState({
     'BTC': false,
     'ETH': true,
     'XRP': false,
@@ -24,23 +24,25 @@ const Filters = () => {
       buttons[label] = !buttons[label];
       setBlockchainButtons({ ...buttons });
     }
-  }
+  };
 
   const renderButtons = (labels: Record<string, boolean>) =>
     Object.keys(labels).map((label: string) => {
       const btnClass = clsx(classes.button, {
         [classes.active]: activeBlockchainButtons[label]
-      })
+      });
       return (
         <button
+          type="button"
           className={btnClass}
           key={label}
           onClick={() => filterHandler(label)}
         >
           {label}
         </button>
-      )
-    })
+      );
+    });
+
   return (
     <Grid container justify="flex-start" alignItems="center" className="Container">
       <Grid item xs={3}>
@@ -56,7 +58,7 @@ const Filters = () => {
         Filter - Blockchain Top List
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
 export default Filters;
