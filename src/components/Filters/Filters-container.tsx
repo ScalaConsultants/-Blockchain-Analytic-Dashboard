@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 
 import useFiltersStyles from './Filters-styles';
@@ -9,7 +9,7 @@ const Filters = () => {
   const activeClasses = [classes.button, classes.active]
 
   const filterHandler = (eventTarget: HTMLBodyElement) => {
-    const active: boolean = eventTarget.className === classes.button ? true : false;
+    const active: boolean = eventTarget.className === classes.button;
     active && (eventTarget.className = activeClasses.join(' '));
     !active && (eventTarget.className = classes.button);
   }
@@ -18,7 +18,7 @@ const Filters = () => {
     data.map((button: string, index: number) => (
       <button
         className={classes.button}
-        key={index}
+        key={button}
         onClick={(e: any) => filterHandler(e.target)}
       >
         {button}
