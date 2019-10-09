@@ -22,7 +22,7 @@ const headerCols: HeaderColsInterface[] = [
 ];
 
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
-  const { actions, match, transactions, transactionsIsFetching } = props;
+  const { actions, match, transactions, status: { transactionsIsFetching } } = props;
   const [walletHash] = React.useState(match.params.walletHash);
   const classes = useTransactionsListTableStyles();
 

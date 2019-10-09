@@ -18,7 +18,7 @@ const App = (): React.ReactElement => {
     <div className="App">
       <Router>
         <Routes />
-        {loader ? <Loader /> : null}
+        {loader ? null : null}
       </Router>
     </div>
   );

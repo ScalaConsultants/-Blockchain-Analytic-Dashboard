@@ -9,27 +9,24 @@ import * as loaderActions from '../../actions/loader';
 async function fetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
   const res = await fetch(
     /* eslint-disable-next-line max-len */
-    `${process.env.REACT_APP_HOST}/api/v1/ethereum/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
+    `${process.env.REACT_APP_HOST}/api/v1/ethereum/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE`
   );
   return res.json();
 }
 
 function* doFetchTransactions(action: FetchTransactionsAction) {
   const { transactionsData } = action;
-  const { ETHEREUM_SET_TRANSACTIONS, ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED, ETHEREUM_FETCH_TRANSACTIONS_FAILED } = ethereumActions;
+  const { ETHEREUM_FETCH_TRANSACTIONS_STARTED, ETHEREUM_SET_TRANSACTIONS, ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED, ETHEREUM_FETCH_TRANSACTIONS_FAILED } = ethereumActions;
 
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
 
+  yield put({
+    type: ETHEREUM_FETCH_TRANSACTIONS_STARTED
+  });
+
 
   const transactions = yield fetchTransactions(transactionsData.walletHash, transactionsData.page);
-
-  if (transactions.length > 0) {
-    yield put({
-      type: ETHEREUM_SET_TRANSACTIONS,
-      transactions
-    });
-  }
 
     try {
       if (transactions.length > 0) {

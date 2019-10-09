@@ -42,7 +42,12 @@ export interface Transaction {
 
 export interface Transactions {
   transactions: Transaction [],
-  description?: string
+  description?: string,
+  status: StatusRedux
+}
+
+export interface StatusRedux {
+  transactionsIsFetching: boolean
 }
 
 export interface TransactionSummed {

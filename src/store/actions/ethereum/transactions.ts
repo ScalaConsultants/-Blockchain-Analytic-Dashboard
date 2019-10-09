@@ -2,6 +2,7 @@ import { SetTransactionsAction, FetchTransactionsAction } from './types';
 import { Transaction, TransactionsData } from '../../../types';
 
 export const ETHEREUM_FETCH_TRANSACTIONS = 'ETHEREUM_FETCH_TRANSACTIONS';
+export const ETHEREUM_FETCH_TRANSACTIONS_STARTED = 'ETHEREUM_FETCH_TRANSACTIONS_STARTED ';
 export const ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED = 'ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED';
 export const ETHEREUM_FETCH_TRANSACTIONS_FAILED = 'ETHEREUM_FETCH_TRANSACTIONS_FAILED';
 
@@ -21,4 +22,12 @@ export const ethereumSetTransactions = (transactions: Transaction[]): SetTransac
 
 export const ethereumFlushTransactions = () => ({
   type: ETHEREUM_FLUSH_TRANSACTIONS
+});
+
+export const ethereumFetchTransactionsSucceeded = () => ({
+  type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED
+});
+
+export const ethereumFetchTransactionsFailed = () => ({
+  type: ETHEREUM_FETCH_TRANSACTIONS_FAILED
 });

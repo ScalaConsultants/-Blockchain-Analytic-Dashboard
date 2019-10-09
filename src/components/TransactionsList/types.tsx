@@ -24,7 +24,6 @@ export interface TransactionsListActions {
 export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {
   actions: TransactionsListActions;
   description: string;
-  transactionsIsFetching?: boolean;
 }
 
 export interface TransactionsListPropsRedux {

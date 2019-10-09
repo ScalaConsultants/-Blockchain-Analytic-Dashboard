@@ -8,6 +8,7 @@ import { Transactions, TransactionsData } from '../../types';
 
 const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
   const mapState = (state: State): Transactions => ({
+    status: state.ethereum.status,
     transactions: state.ethereum.transactions
   });
 
@@ -26,14 +27,21 @@ const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
     });
   };
 
-  const { transactions } = useMappedState(mapState);
+  const { status, transactions } = useMappedState(mapState);
 
   const actions = {
     fetchEthereumTransactions,
     flushEthereumTransactions
   };
 
-  return <TransactionListContainer description={description} transactions={transactions} actions={actions} />;
+  return (
+    <TransactionListContainer
+      actions={actions}
+      description={description}
+      status={status}
+      transactions={transactions}
+    />
+  );
 };
 
 export default TransactionListRedux;
