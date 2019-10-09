@@ -15,7 +15,7 @@ const Filters = () => {
   }
 
   const renderButtons = (data: string[]) =>
-    data.map((button: string, index: number) => (
+    data.map((button: string) => (
       <button
         className={classes.button}
         key={button}
