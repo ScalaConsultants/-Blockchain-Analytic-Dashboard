@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Grid from '@material-ui/core/Grid/Grid';
 import clsx from 'clsx';
 
@@ -14,14 +15,14 @@ const Filters = () => {
     !active && (eventTarget.className = classes.button);
   }
 
-  const renderButtons = (data: string[]) =>
-    data.map((button: string) => (
+  const renderButtons = (labels: string[]) =>
+    labels.map((label: string) => (
       <button
         className={classes.button}
-        key={button}
+        key={label}
         onClick={(e: any) => filterHandler(e.target)}
       >
-        {button}
+        {label}
       </button>
     ))
 
