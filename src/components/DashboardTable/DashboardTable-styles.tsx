@@ -29,5 +29,8 @@ export const useDashboardTableStyles = makeStyles((theme: ExtendedTheme) => ({
     borderBottom: '2px solid #253152',
     paddingBottom: '5px',
     margin: '0 0 25px 0'
+  },
+  row: {
+    margin: '0 0 30px 0'
   }
 }));
