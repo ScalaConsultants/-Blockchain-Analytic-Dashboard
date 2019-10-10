@@ -13,6 +13,9 @@ export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
     fontSize: '0.675rem',
     fontWeight: 'bold',
     fontStyle: 'normal'
+  },
+  loader: {
+    padding: 0
   }
 }));
 

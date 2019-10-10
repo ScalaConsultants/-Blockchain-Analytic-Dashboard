@@ -10,16 +10,16 @@ const Loader = ({
   loaderContainerClass,
   loaderSize
 }: LoaderProps) => {
-  const { container, root } = LoaderDefaultStyles(fullPage || false);
+  const { containerAdditional, containerBase, root } = LoaderDefaultStyles(fullPage || false);
 
   return (
     <>
       {isLoading ? (
-        <div className={loaderContainerClass || container}>
+        <div className={`${containerBase} ${loaderContainerClass || containerAdditional}`}>
           <CircularProgress
             className={loaderClass || root}
             disableShrink
-            size={loaderSize || 100}
+            size={loaderSize || 80}
           />
         </div>
       ) : null}

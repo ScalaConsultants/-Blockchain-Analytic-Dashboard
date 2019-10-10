@@ -9,7 +9,13 @@ import BarChartView from './BarChart-view';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { width, wallets = [], actions, match } = props;
+  const {
+    actions,
+    match,
+    wallets = [],
+    status: { walletsIsFetching },
+    width
+  } = props;
   const walletHash = match.params.walletHash;
   const classes = useBarChartSegmentStyles();
 
@@ -66,7 +72,7 @@ const BarChartContainer = (props: BarChartProps) => {
     };
   }, { position: 0, elements: [] }).elements;
 
-  return <BarChartView data={data} />
+  return <BarChartView data={data} isLoading={walletsIsFetching}/>
 };
 
 export default withRouter(BarChartContainer);

@@ -10,16 +10,30 @@ async function fetchWallets(): Promise<Wallets> {
 }
 
 function* doFetchWallets() {
+  const {
+    ETHEREUM_FETCH_WALLETS_FAILED,
+    ETHEREUM_FETCH_WALLETS_STARTED,
+    ETHEREUM_FETCH_WALLETS_SUCCEEDED,
+    ETHEREUM_SET_WALLETS
+  } = ethereumActions;
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
+  yield put({ type: ETHEREUM_FETCH_WALLETS_STARTED });
+
 
   const wallets = yield fetchWallets();
 
-  if (wallets.length > 0) {
-    yield put({
-      type: ethereumActions.ETHEREUM_SET_WALLETS,
-      wallets
-    });
+  try {
+    if (wallets.length > 0) {
+      yield put({
+        type: ETHEREUM_SET_WALLETS,
+        wallets
+      });
+    }
+    yield put({ type: ETHEREUM_FETCH_WALLETS_SUCCEEDED });
+  } catch (e) {
+    // TODO temporary solution - I will fix it in next step
+    yield put({type: ETHEREUM_FETCH_WALLETS_FAILED, message: e.message});
   }
 
   // Hide on consecutive requests

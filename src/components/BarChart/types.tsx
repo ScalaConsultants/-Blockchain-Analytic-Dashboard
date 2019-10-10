@@ -1,7 +1,8 @@
 import { RouteComponentProps } from 'react-router-dom';
-import { Wallet, Wallets } from '../../types';
+import { Wallet, Wallets, StatusRedux } from '../../types';
 
 export interface ViewProps {
+  isLoading: boolean;
   data: React.ReactElement<'div'>[];
 }
 
@@ -21,7 +22,8 @@ export interface WalletHash {
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
   width: number,
-  actions: BarChartActions
+  actions: BarChartActions,
+  status: StatusRedux
 }
 
 export interface State {
