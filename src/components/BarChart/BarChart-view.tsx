@@ -1,13 +1,13 @@
 import React from 'react';
-import { BarChartContainer } from './BarChart-styles';
+import { useBarChartContainer } from './BarChart-styles';
 import { ViewProps } from './types';
 import Loader from '../loader';
 
-const BarChartView = ({ data, isLoading }: ViewProps) => {
-  const classes = BarChartContainer();
+const BarChartView = ({ data, containerRef, isLoading }: ViewProps) => {
+  const classes = useBarChartContainer();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={containerRef}>
       {data}
       <Loader
         isLoading={isLoading}

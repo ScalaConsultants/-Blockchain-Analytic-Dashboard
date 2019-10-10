@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { withRouter } from 'react-router-dom';
@@ -17,30 +17,81 @@ const BarChartContainer = (props: BarChartProps) => {
     width
   } = props;
   const walletHash = match.params.walletHash;
+
   const classes = useBarChartSegmentStyles();
+
+  const lastSegmentClasses = clsx([classes.color, classes.center])
+
+  const segmentsContainer: React.MutableRefObject<any> = useRef();
 
   const [activeSegment, updateActiveSegment] = useState({ isActive: false, index: 0 });
 
-  const getStyle: any = (acc: Accumulator, object: Wallet) => ({
+  const defaultSegmentStyles: Record<string, string | number> = {
     position: 'absolute',
     height: '100%',
     top: 0,
-    left: acc.position,
-    width: width * object.percentage / 100
+  };
+
+  const getStyle: any = (position: number, percentage: number) => ({
+    ...defaultSegmentStyles,
+    left: position,
+    width: width * percentage / 100
   });
 
-  const getClasses = (index: number): string => {
+  const getOuterClasses = (index: number): string => {
     const num = Math.round(Math.random() * 3);
+    const active = activeSegment.isActive && index < 10 && index === activeSegment.index;
+    const firstSegmentInactive = activeSegment.isActive && index !== activeSegment.index && index === 0;
 
-    return clsx(classes.root, {
-      [classes.active]: activeSegment.isActive && index < 10 && index === activeSegment.index,
-      [classes.firstInactive]: activeSegment.isActive && index !== activeSegment.index && index === 0,
+    return clsx({
+      [classes.active]: active,
+      [classes.firstInactive]: firstSegmentInactive,
       [classes.market]: num === 0,
       [classes.private]: num === 1,
       [classes.dapp]: num === 2,
       [classes.fraud]: num === 3
     });
   };
+
+  const getInnerClasses = (index: number) => {
+    const active = activeSegment.isActive && index < 10 && index === activeSegment.index;
+
+    return clsx(classes.color, classes.center, classes.fullSize, {
+      [classes.shadow]: !active
+    })
+  };
+
+  const createLastSegment = (pos: number, percentage: number) => {
+    const posX = pos + (width * percentage / 100);
+    const containerWidth = parseFloat(getComputedStyle(segmentsContainer.current).width || '');
+
+    return (
+      <div key="last-segment-label" className={lastSegmentClasses} style={{
+        ...defaultSegmentStyles,
+        left: posX,
+        width: containerWidth - posX
+      }}>
+          {/* TODO: assign real percentage from BE*/}
+          5%
+      </div>
+    )
+  }
+
+  const createSegment = (walletHash: string, percentage: number, position: number, index: number) =>
+    (
+      <Link to={`/wallet/${walletHash}`} key={walletHash}>
+        <div
+          className={getOuterClasses(index)}
+          style={getStyle(position, percentage)}
+        >
+          <div
+            className={getInnerClasses(index)}
+          >
+            {(index < 10 && percentage >= 1) ? <div>{`${Math.floor(percentage)}%`}</div> : null}
+          </div>
+        </div>
+      </Link>
+    );
 
   useEffect((): void => {
     updateActiveSegment({
@@ -54,25 +105,29 @@ const BarChartContainer = (props: BarChartProps) => {
   }, []);
 
   const data = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
+    const { walletHash, percentage } = object;
+    const { position } = acc;
+
+    // Render segments higher then 0.1
     if (object.percentage > 0.1) {
-      acc.elements.push((
-        <Link to={object.walletHash} key={object.walletHash}>
-          <div
-            className={getClasses(index)}
-            style={getStyle(acc, object)}
-          >
-            {(index < 10 && object.percentage >= 1) ? <div>{`${Math.floor(object.percentage)}%`}</div> : null}
-          </div>
-        </Link>
-      ))
+      acc.elements.push(createSegment(walletHash, percentage, position, index));
+
+      // Last Segment
+      if (index === wallets.length - 1 && segmentsContainer.current) {
+        acc.elements.push(createLastSegment(position, percentage))
+      }
     }
+
     return {
       position: acc.position + width * object.percentage / 100,
       elements: acc.elements
     };
   }, { position: 0, elements: [] }).elements;
 
-  return <BarChartView data={data} isLoading={walletsIsFetching}/>
+  return <BarChartView
+    containerRef={segmentsContainer}
+    data={data}
+    isLoading={walletsIsFetching}/>
 };
 
 export default withRouter(BarChartContainer);

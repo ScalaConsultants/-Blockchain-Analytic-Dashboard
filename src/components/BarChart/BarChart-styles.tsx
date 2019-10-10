@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
-export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
+export const useBarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
     background: '#253152',
     color: theme.palette.grey[400],
@@ -20,17 +20,23 @@ export const BarChartContainer = makeStyles((theme: ExtendedTheme) => ({
 }));
 
 export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
-  root: {
+  color: {
+    color: theme.palette.grey[400],
+  },
+  center: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.palette.grey[400]
+  },
+  fullSize: {
+    width: '100%',
+    height: '100%'
   },
   active: {
-    boxShadow: '0px 0px 20px rgba(135, 101, 239, 0.4)',
+    boxShadow: '0px 0px 20px rgba(135, 101, 239, .8)',
     borderRadius: '2px',
     zIndex: 100,
-    transform: 'scale(1.05)',
+    transform: 'scale(1.3)',
     color: theme.palette.common.white
   },
   firstInactive: {
@@ -47,5 +53,8 @@ export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   fraud: {
     background: theme.constants.FRAUD_COLOR
+  },
+  shadow: {
+    background: 'rgba(0, 0, 0, .6)'
   }
 }));

@@ -4,6 +4,7 @@ import { Wallet, Wallets, StatusRedux } from '../../types';
 export interface ViewProps {
   isLoading: boolean;
   data: React.ReactElement<'div'>[];
+  containerRef: React.RefObject<any>
 }
 
 export interface Accumulator {
