@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
 
 // @ts-ignore
-const LoaderDefaultStyles = (fullPage: boolean) => {
+const useLoaderDefaultStyles = (fullPage: boolean) => {
   const positionTypeContainer = fullPage ? 'fixed' : 'absolute';
   const paddingContainer = fullPage ? 'none' : '50px';
   const createStyles = makeStyles(() => ({
@@ -28,4 +28,4 @@ const LoaderDefaultStyles = (fullPage: boolean) => {
   return createStyles();
 };
 
-export default LoaderDefaultStyles;
+export default useLoaderDefaultStyles;

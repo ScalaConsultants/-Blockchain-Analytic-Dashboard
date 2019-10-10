@@ -1,3 +1,3 @@
-import Loader from './Loader';
+import Loader from './Loader-container';
 
 export default Loader;

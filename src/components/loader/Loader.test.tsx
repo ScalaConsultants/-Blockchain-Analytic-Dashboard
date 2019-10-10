@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Loader from './Loader';
+import Loader from './Loader-container';
 
 describe('Loader', () => {
   it('should render', () => {

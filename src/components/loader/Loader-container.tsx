@@ -1,6 +1,6 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import LoaderDefaultStyles from './Loader-styles';
+import useLoaderDefaultStyles from './Loader-styles';
 import { LoaderProps } from './types';
 
 const Loader = ({
@@ -10,7 +10,7 @@ const Loader = ({
   loaderContainerClass,
   loaderSize
 }: LoaderProps) => {
-  const { containerAdditional, containerBase, root } = LoaderDefaultStyles(fullPage || false);
+  const { containerAdditional, containerBase, root } = useLoaderDefaultStyles(fullPage || false);
 
   return (
     <>

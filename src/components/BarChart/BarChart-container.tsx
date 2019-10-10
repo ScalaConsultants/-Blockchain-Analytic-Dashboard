@@ -124,10 +124,13 @@ const BarChartContainer = (props: BarChartProps) => {
     };
   }, { position: 0, elements: [] }).elements;
 
-  return <BarChartView
-    containerRef={segmentsContainer}
-    data={data}
-    isLoading={walletsIsFetching}/>
+  return (
+    <BarChartView
+      containerRef={segmentsContainer}
+      data={data}
+      isLoading={walletsIsFetching}
+    />
+  )
 };
 
 export default withRouter(BarChartContainer);
