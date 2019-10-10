@@ -16,7 +16,12 @@ async function fetchTransactions(walletHash: string, page: number, resultsPerPag
 
 function* doFetchTransactions(action: FetchTransactionsAction) {
   const { transactionsData } = action;
-  const { ETHEREUM_FETCH_TRANSACTIONS_STARTED, ETHEREUM_SET_TRANSACTIONS, ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED, ETHEREUM_FETCH_TRANSACTIONS_FAILED } = ethereumActions;
+  const {
+    ETHEREUM_FETCH_TRANSACTIONS_FAILED ,
+    ETHEREUM_FETCH_TRANSACTIONS_STARTED,
+    ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED,
+    ETHEREUM_SET_TRANSACTIONS
+  } = ethereumActions;
 
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
@@ -35,10 +40,9 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
           transactions
         });
       }
-      yield put({
-        type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED
-      });
+      yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED });
     } catch (e) {
+      // TODO temporary solution - I will fix it in next step
       yield put({type: ETHEREUM_FETCH_TRANSACTIONS_FAILED, message: e.message});
     }
 

@@ -23,11 +23,3 @@ export const ethereumSetTransactions = (transactions: Transaction[]): SetTransac
 export const ethereumFlushTransactions = () => ({
   type: ETHEREUM_FLUSH_TRANSACTIONS
 });
-
-export const ethereumFetchTransactionsSucceeded = () => ({
-  type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED
-});
-
-export const ethereumFetchTransactionsFailed = () => ({
-  type: ETHEREUM_FETCH_TRANSACTIONS_FAILED
-});
