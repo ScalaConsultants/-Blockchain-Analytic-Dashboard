@@ -23,9 +23,6 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
     ETHEREUM_SET_TRANSACTIONS
   } = ethereumActions;
 
-  // Show loader on initial fetch
-  yield put(loaderActions.showLoader());
-
   yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_STARTED });
 
 
@@ -43,9 +40,6 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
       // TODO temporary solution - I will fix it in next step
       yield put({type: ETHEREUM_FETCH_TRANSACTIONS_FAILED, message: e.message});
     }
-
-  // Hide on consecutive requests
-  yield put(loaderActions.hideLoader());
 }
 
 export function* watchDoFetchTransactions() {

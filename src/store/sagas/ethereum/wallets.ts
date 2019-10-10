@@ -16,10 +16,8 @@ function* doFetchWallets() {
     ETHEREUM_FETCH_WALLETS_SUCCEEDED,
     ETHEREUM_SET_WALLETS
   } = ethereumActions;
-  // Show loader on initial fetch
-  yield put(loaderActions.showLoader());
-  yield put({ type: ETHEREUM_FETCH_WALLETS_STARTED });
 
+  yield put({ type: ETHEREUM_FETCH_WALLETS_STARTED });
 
   const wallets = yield fetchWallets();
 
@@ -35,9 +33,6 @@ function* doFetchWallets() {
     // TODO temporary solution - I will fix it in next step
     yield put({type: ETHEREUM_FETCH_WALLETS_FAILED, message: e.message});
   }
-
-  // Hide on consecutive requests
-  yield put(loaderActions.hideLoader());
 }
 
 export function* watchDoFetchWallets() {

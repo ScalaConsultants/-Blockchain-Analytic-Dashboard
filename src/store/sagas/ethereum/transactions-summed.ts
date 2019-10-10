@@ -22,11 +22,7 @@ function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
     ETHEREUM_SET_TRANSACTIONS_SUMMED
   } = ethereumActions;
 
-  // Show loader on initial fetch
-  yield put(loaderActions.showLoader());
-
   yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED });
-
 
   const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash);
 
@@ -43,13 +39,6 @@ function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
     // TODO temporary solution - I will fix it in next step
     yield put({type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.message});
   }
-
-
-  // console.log(transactionsSummed)
-
-  // Hide on consecutive requests
-  yield put(loaderActions.hideLoader());
-
 }
 
 export function* watchDoFetchTransactionsSummed() {
