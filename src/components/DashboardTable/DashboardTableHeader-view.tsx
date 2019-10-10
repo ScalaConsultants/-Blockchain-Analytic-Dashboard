@@ -5,7 +5,7 @@ import Legend from '../Legend';
 const DashboardTableHeader = () => {
   return (
     <Grid container alignItems="center">
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Grid container alignItems="center">
           <Grid item xs={6}>
             Blockchain
@@ -15,7 +15,7 @@ const DashboardTableHeader = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={9}>
         <Grid container alignItems="center">
         <Grid item xs={1}>
           Value
