@@ -74,7 +74,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
   const createSegment = (walletHash: string, percentage: number, position: number, index: number) =>
     (
-      <Link to={walletHash} key={walletHash}>
+      <Link to={`/wallet/${walletHash}`} key={walletHash}>
         <div
           className={getOuterClasses(index)}
           style={getStyle(position, percentage)}
@@ -108,7 +108,7 @@ const BarChartContainer = (props: BarChartProps) => {
       acc.elements.push(createSegment(walletHash, percentage, position, index));
 
       // Last Segment
-      if (index === wallets.length - 1) {  
+      if (index === wallets.length - 1 && segmentsContainer.current) {  
         acc.elements.push(createLastSegment(position, percentage))
       }
     }
