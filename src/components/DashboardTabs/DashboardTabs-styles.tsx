@@ -18,10 +18,10 @@ export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
   underline: {
     width: '80%',
     height: '2px',
-    background: 'transparent',
+    background: 'transparent'
   },
   active: {
-    background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)',
+    background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)'
   },
   tab: {
     cursor: 'pointer',

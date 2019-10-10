@@ -1,3 +1,3 @@
 export interface ViewProps {
-  tabs: React.ReactElement<'div'>[]
+  tabs: React.ReactElement<'div'>[];
 }

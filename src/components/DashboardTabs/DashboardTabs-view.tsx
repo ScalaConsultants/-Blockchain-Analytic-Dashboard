@@ -19,7 +19,7 @@ const DashboardTabsView = ({ tabs }: ViewProps) => {
         <Grid container justify="flex-end">
           {/* TODO: import component */}
           Volume type:
-      </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

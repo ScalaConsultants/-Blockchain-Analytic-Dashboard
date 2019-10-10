@@ -8,7 +8,7 @@ const DashboardTabs = () => {
   const classes = useDashboardStyles();
 
   const tabsList = ['Buying', 'Selling', 'Data'];
-  
+
   const [active, setActive] = useState(0);
 
   const onClick = (index: number) => setActive(index);
@@ -19,26 +19,18 @@ const DashboardTabs = () => {
     });
     const tabClasses = clsx(classes.tab, {
       [classes.white]: index === active
-    })
+    });
     return (
-      <Grid 
-        item xs={4}
-        key={name}
-      >
-        <Grid
-          container
-          justify="center"
-          className={tabClasses}
-          onClick={() => onClick(index)}
-        >
+      <Grid item xs={4} key={name}>
+        <Grid container justify="center" className={tabClasses} onClick={() => onClick(index)}>
           <Grid item>{name}</Grid>
-          <Grid item className={underlineClasses}></Grid>
+          <Grid item className={underlineClasses} />
         </Grid>
       </Grid>
-    )
+    );
   });
 
-  return <DashboardTabsView tabs={tabs}/>
+  return <DashboardTabsView tabs={tabs} />;
 };
 
 export default DashboardTabs;
