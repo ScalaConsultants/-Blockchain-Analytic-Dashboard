@@ -24,5 +24,9 @@ export const useDashboardTableStyles = makeStyles((theme: ExtendedTheme) => ({
     height: '12px',
     background: 'radial-gradient(50% 1368.05% at 50% 48.72%, #78CC33 0%, #BEE32D 100%)',
     borderRadius: '50%'
+  },
+  header: {
+    borderBottom: '2px solid #253152',
+    paddingBottom: '5px'
   }
 }));
