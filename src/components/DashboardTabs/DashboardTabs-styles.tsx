@@ -35,7 +35,7 @@ export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
     }
   },
   margin: {
-    margin: '15px 0'
+    margin: '70px 0 40px'
   },
   padding: {
     padding: '0 30px 0 0'
