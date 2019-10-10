@@ -41,13 +41,9 @@ export interface Transaction {
 }
 
 export interface Transactions {
-  transactions: Transaction [],
   description?: string,
-  status: StatusRedux
-}
-
-export interface StatusRedux {
-  transactionsIsFetching: boolean
+  status: StatusRedux,
+  transactions: Transaction []
 }
 
 export interface TransactionSummed {
@@ -56,8 +52,15 @@ export interface TransactionSummed {
 }
 
 export interface TransactionsSummed {
+  status: StatusRedux,
   transactionsSummed: TransactionSummed []
 }
+
+export interface StatusRedux {
+  transactionsIsFetching: boolean,
+  transactionsSummedIsFetching: boolean
+}
+
 
 export interface Block {
   source: string;

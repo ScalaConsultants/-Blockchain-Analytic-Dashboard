@@ -9,6 +9,7 @@ import { TransactionsSummed, TransactionsSummedData } from '../../types';
 
 const LineChartRedux = () => {
     const mapState = (state: State): TransactionsSummed => ({
+        status: state.ethereum.status,
         transactionsSummed: state.ethereum.transactionsSummed
     });
 
@@ -21,14 +22,18 @@ const LineChartRedux = () => {
         });
     };
 
-    const { transactionsSummed } = useMappedState(mapState);
+    const { status, transactionsSummed } = useMappedState(mapState);
 
     const actions = {
         fetchEthereumTransactionsSummed
     };
 
     return (
-        <LineChartContainer transactionsSummed={transactionsSummed} actions={actions} />
+        <LineChartContainer
+          actions={actions}
+          status={status}
+          transactionsSummed={transactionsSummed}
+        />
     );
 };
 

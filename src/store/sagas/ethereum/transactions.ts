@@ -26,9 +26,7 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
 
-  yield put({
-    type: ETHEREUM_FETCH_TRANSACTIONS_STARTED
-  });
+  yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_STARTED });
 
 
   const transactions = yield fetchTransactions(transactionsData.walletHash, transactionsData.page);

@@ -14,20 +14,36 @@ async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsS
 }
 
 function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
-
   const {transactionsSummedData} = action;
+  const {
+    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED,
+    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED,
+    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED,
+    ETHEREUM_SET_TRANSACTIONS_SUMMED
+  } = ethereumActions;
+
   // Show loader on initial fetch
   yield put(loaderActions.showLoader());
+
+  yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED });
 
 
   const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash);
 
-  if (transactionsSummed.length > 0) {
-    yield put({
-      type: ethereumActions.ETHEREUM_SET_TRANSACTIONS_SUMMED,
-      transactionsSummed
-    });
+  try {
+    if (transactionsSummed.length > 0) {
+      yield put({
+        type: ETHEREUM_SET_TRANSACTIONS_SUMMED,
+        transactionsSummed
+      });
+    }
+    yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED });
+
+  } catch (e) {
+    // TODO temporary solution - I will fix it in next step
+    yield put({type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.message});
   }
+
 
   // console.log(transactionsSummed)
 

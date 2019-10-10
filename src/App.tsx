@@ -18,7 +18,6 @@ const App = (): React.ReactElement => {
     <div className="App">
       <Router>
         <Routes />
-        <Loader isLoading={loader}/>
       </Router>
     </div>
   );
