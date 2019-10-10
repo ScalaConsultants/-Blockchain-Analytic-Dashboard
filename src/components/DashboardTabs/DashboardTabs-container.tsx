@@ -17,7 +17,7 @@ const DashboardTabs = () => {
     const underlineClasses = clsx([classes.underline], {
       [classes.active]: index === active
     });
-    const tabClasses = clsx(classes.tab, {
+    const tabClasses = clsx([classes.tab, classes.padding], {
       [classes.white]: index === active
     });
     return (
