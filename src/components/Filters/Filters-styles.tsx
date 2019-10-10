@@ -20,7 +20,7 @@ const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
   },
 
   active: {
-    color: '#fff',
+    color: theme.palette.common.white,
     background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)'
   }
 }));
