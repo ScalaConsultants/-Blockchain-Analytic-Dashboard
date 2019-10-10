@@ -66,4 +66,4 @@ e.g.
     loaderClass={loader}
     />
 ```
-
+In case of scaled Loader - parent should have set 'position: relative' in styles.
