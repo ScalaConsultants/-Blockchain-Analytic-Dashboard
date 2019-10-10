@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import BarChart from '../BarChart';
 import { useDashboardTableStyles } from './DashboardTable-styles';
 
 const DashboardTableBody = () => {
@@ -25,7 +26,7 @@ const DashboardTableBody = () => {
         </Grid>
       </Grid>
       <Grid item xs={9}>
-        Chart
+        <BarChart />
       </Grid>
     </Grid>
   )
