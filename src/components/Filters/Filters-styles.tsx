@@ -7,7 +7,7 @@ const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
     background: '#253152',
     borderRadius: '4px',
     borderColor: '#253152',
-    width: '38px',
+    minWidth: '38px',
     height: '23px',
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
@@ -20,7 +20,7 @@ const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
   },
 
   active: {
-    color: '#fff',
+    color: theme.palette.common.white,
     background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)'
   }
 }));
