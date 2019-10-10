@@ -2,9 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 import { FetchTransactionsSummedAction } from '../../actions/ethereum/types';
 import { TransactionsSummed } from '../../../types';
-
 import * as ethereumActions from '../../actions/ethereum/transactions-summed';
-import * as loaderActions from '../../actions/loader';
 
 async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
   const res = await fetch(

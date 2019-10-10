@@ -1,7 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-
 import * as ethereumActions from '../../actions/ethereum/wallets';
-import * as loaderActions from '../../actions/loader';
 import { Wallets } from '../../../types';
 
 async function fetchWallets(): Promise<Wallets> {
