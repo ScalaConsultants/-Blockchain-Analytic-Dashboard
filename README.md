@@ -40,3 +40,30 @@ Update packages to the latest version.
 
 Run eslint.
 
+
+## Usage of common components
+
+### Loader
+Can be used as full page loader or scaled to the element.
+Loader has default styles but feel free to use 'loaderClass' or/and 'loaderContainerClass' or/and 'size' to modify them.
+props: 
+```
+{
+  isLoading: boolean;
+  fullPage?: boolean;
+  loaderClass?: string;
+  loaderContainerClass?: string;
+  loaderSize?: number | string;
+  }
+```
+
+e.g.
+```
+<Loader 
+    isLoading={transactionsIsFetching} 
+    fullPage={false} 
+    loaderSize={30}
+    loaderClass={loader}
+    />
+```
+
