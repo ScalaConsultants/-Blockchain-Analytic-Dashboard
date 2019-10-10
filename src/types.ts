@@ -58,9 +58,9 @@ export interface TransactionsSummed {
 }
 
 export interface StatusRedux {
-  walletsIsFetching: boolean,
   transactionsIsFetching: boolean,
-  transactionsSummedIsFetching: boolean
+  transactionsSummedIsFetching: boolean,
+  walletsIsFetching: boolean
 }
 
 export interface Block {

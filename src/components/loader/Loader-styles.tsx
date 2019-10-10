@@ -17,7 +17,7 @@ const LoaderDefaultStyles = (fullPage: boolean) => {
     },
 
     containerAdditional: {
-      padding: paddingContainer,
+      padding: paddingContainer
     },
 
     root: {
