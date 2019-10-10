@@ -3,8 +3,8 @@ import { Wallet, Wallets, StatusRedux } from '../../types';
 
 export interface ViewProps {
   isLoading: boolean;
+  containerRef: React.RefObject<any>;
   data: React.ReactElement<'div'>[];
-  containerRef: React.RefObject<any>
 }
 
 export interface Accumulator {
