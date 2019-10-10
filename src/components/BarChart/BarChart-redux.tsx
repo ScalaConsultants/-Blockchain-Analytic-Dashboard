@@ -10,11 +10,12 @@ import * as walletActions from '../../store/actions/ethereum/wallets';
 const BarChartRedux = () => {
 
     const mapState = (state: State): Wallets => ({
+        status: state.ethereum.status,
         wallets: state.ethereum.wallets
     });
     const dispatch = useDispatch();
 
-    const { wallets } = useMappedState(mapState);
+    const { status, wallets } = useMappedState(mapState);
 
     const fetchEthereumWallets = (): void => {
         dispatch({
@@ -27,7 +28,12 @@ const BarChartRedux = () => {
     };
 
     return (
-        <BarChartContainer wallets={wallets} width={2000} actions={actions} />
+        <BarChartContainer
+          actions={actions}
+          status={status}
+          wallets={wallets}
+          width={2000}
+        />
     )
 };
 

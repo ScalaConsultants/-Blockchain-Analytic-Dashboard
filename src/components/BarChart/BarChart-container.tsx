@@ -9,8 +9,13 @@ import BarChartView from './BarChart-view';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { width, wallets = [], actions, match } = props;
-
+  const {
+    actions,
+    match,
+    wallets = [],
+    status: { walletsIsFetching },
+    width
+  } = props;
   const walletHash = match.params.walletHash;
 
   const classes = useBarChartSegmentStyles();
@@ -25,7 +30,7 @@ const BarChartContainer = (props: BarChartProps) => {
     position: 'absolute',
     height: '100%',
     top: 0,
-  }
+  };
 
   const getStyle: any = (position: number, percentage: number) => ({
     ...defaultSegmentStyles,
@@ -54,7 +59,7 @@ const BarChartContainer = (props: BarChartProps) => {
     return clsx(classes.color, classes.center, classes.fullSize, {
       [classes.shadow]: !active
     })
-  }
+  };
 
   const createLastSegment = (pos: number, percentage: number) => {
     const posX = pos + (width * percentage / 100);
@@ -108,7 +113,7 @@ const BarChartContainer = (props: BarChartProps) => {
       acc.elements.push(createSegment(walletHash, percentage, position, index));
 
       // Last Segment
-      if (index === wallets.length - 1 && segmentsContainer.current) {  
+      if (index === wallets.length - 1 && segmentsContainer.current) {
         acc.elements.push(createLastSegment(position, percentage))
       }
     }
@@ -119,7 +124,13 @@ const BarChartContainer = (props: BarChartProps) => {
     };
   }, { position: 0, elements: [] }).elements;
 
-  return <BarChartView data={data} containerRef={segmentsContainer} />
+  return (
+    <BarChartView
+      containerRef={segmentsContainer}
+      data={data}
+      isLoading={walletsIsFetching}
+    />
+  )
 };
 
 export default withRouter(BarChartContainer);

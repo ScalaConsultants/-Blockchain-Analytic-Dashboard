@@ -12,6 +12,7 @@ import { HeaderColsInterface, TransactionsListProps } from './types';
 import { timestampToDate } from '../../helpers/helpers';
 import useTransactionsListTableStyles from './TransactionsList-styles';
 import { Transaction } from '../../types';
+import Loader from '../loader';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
@@ -21,7 +22,12 @@ const headerCols: HeaderColsInterface[] = [
 ];
 
 const TransactionList = (props: TransactionsListProps): React.ReactElement => {
-  const { actions, match, transactions } = props;
+  const {
+    actions,
+    match,
+    status: { transactionsIsFetching },
+    transactions
+  } = props;
   const [walletHash] = React.useState(match.params.walletHash);
   const classes = useTransactionsListTableStyles();
 
@@ -81,7 +87,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
         </Typography>
       </Grid>
       <Grid container spacing={9} className="Container">
-        <Grid item xs={12} lg={12}>
+        <Grid item xs={12} lg={12} className={classes.grid}>
           <Table>
             <TableHead className={classes.thead}>
               <TableRow>{renderTransactionListHeader(headerCols)}</TableRow>
@@ -94,6 +100,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
               {renderTransactionListRows(transactions)}
             </TableBody>
           </Table>
+          <Loader isLoading={transactionsIsFetching} fullPage={false} />
         </Grid>
       </Grid>
     </Grid>
