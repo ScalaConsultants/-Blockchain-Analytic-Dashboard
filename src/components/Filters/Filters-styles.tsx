@@ -7,7 +7,7 @@ const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
     background: '#253152',
     borderRadius: '4px',
     borderColor: '#253152',
-    width: '38px',
+    minWidth: '38px',
     height: '23px',
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
