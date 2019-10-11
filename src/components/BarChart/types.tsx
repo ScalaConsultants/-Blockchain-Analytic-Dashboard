@@ -22,11 +22,20 @@ export interface WalletHash {
 
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
-  width: number,
   actions: BarChartActions,
   status: StatusRedux
+  override: Customization
 }
 
 export interface State {
   ethereum: Wallets
+}
+
+export interface Customization {
+  minPercentage?: number,
+  restLabel?: boolean,
+  increaseSegmentSize?: number,
+  activeSegmentZoom?: boolean,
+  autoSegmentSize?: boolean,
+  shadowSegment?: boolean
 }
