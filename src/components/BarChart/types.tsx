@@ -2,7 +2,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Wallet, Wallets } from '../../types';
 
 export interface ViewProps {
-  data: React.ReactElement<'div'>[];
+  data: React.ReactElement<'div'>[],
   containerRef: React.RefObject<any>
 }
 
@@ -21,10 +21,19 @@ export interface WalletHash {
 
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
-  width: number,
-  actions: BarChartActions
+  actions: BarChartActions,
+  override: Customization
 }
 
 export interface State {
   ethereum: Wallets
+}
+
+export interface Customization {
+  minPercentage?: number,
+  restLabel?: boolean,
+  increaseSegmentSize?: number,
+  activeSegmentZoom?: boolean,
+  autoSegmentSize?: boolean,
+  shadowSegment?: boolean
 }

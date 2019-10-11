@@ -32,5 +32,8 @@ export const useDashboardTableStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   row: {
     margin: '0 0 30px 0'
+  },
+  barchart: {
+    height: '38px'
   }
 }));

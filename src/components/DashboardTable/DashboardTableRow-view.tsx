@@ -12,8 +12,14 @@ const DashboardTableRow = (props: Row) => {
       <Grid item xs={3}>
         <DashboardTableSideCols {...props}/>
       </Grid>
-      <Grid item xs={9}>
-        <BarChart />
+      <Grid item xs={9} className={classes.barchart}>
+        <BarChart 
+          restLabel={false}
+          shadowSegment={false}
+          activeSegmentZoom={false}
+          minPercentage={2}
+          increaseSegmentSize={2}
+        />
       </Grid>
     </Grid>
   );

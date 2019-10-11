@@ -2,12 +2,12 @@ import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import BarChartContainer from './BarChart-container';
-import { State } from './types';
+import { State, Customization } from './types';
 import { Wallets } from '../../types';
 
 import * as walletActions from '../../store/actions/ethereum/wallets';
 
-const BarChartRedux = () => {
+const BarChartRedux = (props: Customization) => {
 
     const mapState = (state: State): Wallets => ({
         wallets: state.ethereum.wallets
@@ -27,7 +27,7 @@ const BarChartRedux = () => {
     };
 
     return (
-        <BarChartContainer wallets={wallets} width={2000} actions={actions} />
+        <BarChartContainer wallets={wallets} actions={actions} override={{...props}} />
     )
 };
 
