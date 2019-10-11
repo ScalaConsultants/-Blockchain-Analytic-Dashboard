@@ -39,7 +39,7 @@ const DetailsView = (props: DetailsViewProps) => {
                 <Grid item xs={1} className={classes.label}>
                     ETH
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={10} className={classes.barchart}>
                     <BarChart />
                 </Grid>
             </Grid>
