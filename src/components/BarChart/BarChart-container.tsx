@@ -11,7 +11,7 @@ import { Wallet } from '../../types';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { wallets = [], actions, match, override } = props;
+  const { wallets = [], actions, match, status: { walletsIsFetching }, override } = props;
 
   const segmentsContainer: React.MutableRefObject<any> = useRef();
 
@@ -77,7 +77,7 @@ const BarChartContainer = (props: BarChartProps) => {
     return clsx(classes.color, classes.center, classes.fullSize, {
       [classes.shadow]: shadowSegment && !active
     })
-  }
+  };
 
   const createLastSegment = (pos: number, percentage: number) => {
     const { width, increaseSegmentSize } = customization;
@@ -143,7 +143,7 @@ const BarChartContainer = (props: BarChartProps) => {
     };
   }, { position: 0, elements: [] }).elements;
 
-  return <BarChartView data={segments} containerRef={segmentsContainer} />
+  return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />
 };
 
 export default withRouter(BarChartContainer);

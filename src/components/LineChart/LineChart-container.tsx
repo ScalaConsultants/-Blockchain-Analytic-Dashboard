@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { lineChartContainerStyle, chartLineOptions, chartLineData } from './LineChart-styles';
-
 import LineView from './Line-view';
+import Loader from '../loader';
+
 import { LineChartProps } from './types';
 import { TransactionSummed } from '../../types';
 
 import { convertTimeStampToHours } from './helpers';
 
 const LineCharts = (props: LineChartProps): React.ReactElement => {
-  const { transactionsSummed = [], match, actions } = props;
+  const {
+    actions,
+    match,
+    status: { transactionsSummedIsFetching },
+    transactionsSummed = []
+  } = props;
   const walletHash = match.params.walletHash;
   const classes = lineChartContainerStyle();
   const [labels, setLabels] = useState([
@@ -50,6 +56,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
         width={100}
         options={chartLineOptions}
       />
+      <Loader isLoading={transactionsSummedIsFetching} fullPage={false}/>
     </div>
   );
 };

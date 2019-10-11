@@ -2,9 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 import { FetchTransactionsSummedAction } from '../../actions/ethereum/types';
 import { TransactionsSummed } from '../../../types';
-
 import * as ethereumActions from '../../actions/ethereum/transactions-summed';
-import * as loaderActions from '../../actions/loader';
 
 async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
   const res = await fetch(
@@ -14,26 +12,31 @@ async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsS
 }
 
 function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
-
   const {transactionsSummedData} = action;
-  // Show loader on initial fetch
-  yield put(loaderActions.showLoader());
+  const {
+    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED,
+    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED,
+    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED,
+    ETHEREUM_SET_TRANSACTIONS_SUMMED
+  } = ethereumActions;
 
+  yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED });
 
   const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash);
 
-  if (transactionsSummed.length > 0) {
-    yield put({
-      type: ethereumActions.ETHEREUM_SET_TRANSACTIONS_SUMMED,
-      transactionsSummed
-    });
+  try {
+    if (transactionsSummed.length > 0) {
+      yield put({
+        type: ETHEREUM_SET_TRANSACTIONS_SUMMED,
+        transactionsSummed
+      });
+    }
+    yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED });
+
+  } catch (e) {
+    // TODO temporary solution - I will fix it in next step
+    yield put({type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.message});
   }
-
-  // console.log(transactionsSummed)
-
-  // Hide on consecutive requests
-  yield put(loaderActions.hideLoader());
-
 }
 
 export function* watchDoFetchTransactionsSummed() {

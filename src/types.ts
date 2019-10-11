@@ -27,7 +27,8 @@ export interface Wallet {
 }
 
 export interface Wallets {
-  wallets: Wallet[]
+  wallets: Wallet[],
+  status: StatusRedux
 }
 
 export interface Transaction {
@@ -41,8 +42,9 @@ export interface Transaction {
 }
 
 export interface Transactions {
-  transactions: Transaction [],
-  description?: string
+  description?: string,
+  status: StatusRedux,
+  transactions: Transaction []
 }
 
 export interface TransactionSummed {
@@ -51,7 +53,14 @@ export interface TransactionSummed {
 }
 
 export interface TransactionsSummed {
+  status: StatusRedux,
   transactionsSummed: TransactionSummed []
+}
+
+export interface StatusRedux {
+  transactionsIsFetching: boolean,
+  transactionsSummedIsFetching: boolean,
+  walletsIsFetching: boolean
 }
 
 export interface Block {

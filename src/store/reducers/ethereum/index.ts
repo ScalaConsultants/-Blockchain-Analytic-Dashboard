@@ -1,11 +1,13 @@
-import { combineReducers } from "redux";
-import wallets from "./wallets";
-import transactions from "./transactions";
-import transactionsSummed from "./transactions-summed";
+import { combineReducers } from 'redux';
+import wallets from './wallets';
+import transactions from './transactions';
+import transactionsSummed from './transactions-summed';
+import status from './status';
 
 
 export default combineReducers({
   wallets,
+  status,
   transactions,
   transactionsSummed
 });

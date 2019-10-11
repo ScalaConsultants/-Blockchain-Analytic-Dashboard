@@ -1,9 +1,10 @@
 import { RouteComponentProps } from 'react-router-dom';
-import { Wallet, Wallets } from '../../types';
+import { Wallet, Wallets, StatusRedux } from '../../types';
 
 export interface ViewProps {
-  data: React.ReactElement<'div'>[],
-  containerRef: React.RefObject<any>
+  isLoading: boolean;
+  containerRef: React.RefObject<any>;
+  data: React.ReactElement<'div'>[];
 }
 
 export interface Accumulator {
@@ -21,7 +22,9 @@ export interface WalletHash {
 
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
+  width: number,
   actions: BarChartActions,
+  status: StatusRedux
   override: Customization
 }
 
