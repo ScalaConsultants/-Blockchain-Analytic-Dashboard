@@ -34,8 +34,8 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
         });
       }
       yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED });
-    } catch (e) {
-      yield put({type: ETHEREUM_FETCH_TRANSACTIONS_FAILED, message: e.message});
+    } catch (error) {
+      yield put({type: ETHEREUM_FETCH_TRANSACTIONS_FAILED, code: error.code});
     }
 }
 

@@ -27,8 +27,8 @@ function* doFetchWallets() {
       });
     }
     yield put({ type: ETHEREUM_FETCH_WALLETS_SUCCEEDED });
-  } catch (e) {
-    yield put({type: ETHEREUM_FETCH_WALLETS_FAILED, message: e.message});
+  } catch (error) {
+    yield put({type: ETHEREUM_FETCH_WALLETS_FAILED, code: error.code});
   }
 }
 
