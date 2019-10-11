@@ -28,5 +28,6 @@ export interface BarChartProps extends RouteComponentProps<WalletHash> {
 }
 
 export interface State {
-  ethereum: Wallets
+  ethereum: Wallets,
+  notifications: object
 }

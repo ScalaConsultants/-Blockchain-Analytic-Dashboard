@@ -7,7 +7,7 @@ import * as ethereumActions from '../../actions/ethereum/transactions';
 async function fetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
   const res = await fetch(
     /* eslint-disable-next-line max-len */
-    `${process.env.REACT_APP_HOST}/api/v1/ethereum/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
+    `${process.env.REACT_APP_HOST}/api/v1/ethereum/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE`
   );
   return res.json();
 }
