@@ -28,7 +28,6 @@ function* doFetchWallets() {
     }
     yield put({ type: ETHEREUM_FETCH_WALLETS_SUCCEEDED });
   } catch (e) {
-    // TODO temporary solution - I will fix it in next step
     yield put({type: ETHEREUM_FETCH_WALLETS_FAILED, message: e.message});
   }
 }

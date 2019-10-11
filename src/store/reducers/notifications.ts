@@ -11,37 +11,27 @@ const filterNotifications = (notifications: [], omittedID: string) => (
   notifications.filter((notification: object) => notification.id !== omittedID)
 );
 
+const err1 = {
+  description: 'Test errora 1',
+  type: 'error',
+  id: createRandomID('error')
+};
+
+const err3 = {
+  description: 'Test errora 2',
+  type: 'error',
+  id: createRandomID('error')
+};
+
 const errors = (state = initState, action: any): any => {
   switch (action.type) {
     case ETHEREUM_FETCH_TRANSACTIONS_FAILED:
     case ETHEREUM_FETCH_TRANSACTIONS:
-      return  [
-        {
-          description: 'Test errora 1',
-          type: 'error',
-          id: createRandomID('error')
-        },
-        {
-          description: 'Test errora 2',
-          type: 'error',
-          id: createRandomID('error')
-        },
-        {
-          description: 'Test errora 3',
-          type: 'error',
-          id: createRandomID('error')
-        }
-      ];
+      return [...state, err1];
     case CLEAR_NOTIFICATION_ERROR:
       // @ts-ignore
-
-      console.log("RESUUULT", action.notificationID,  filterNotifications(state, action.notificationID));
-
-      // @ts-ignore
-      // return filterNotifications(state, action.data.notificationID);
       return filterNotifications(state, action.notificationID);
     default:
-      // return state;
       return state;
   }
 };

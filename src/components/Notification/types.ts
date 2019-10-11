@@ -12,9 +12,3 @@ export interface NotificationMessage {
   id: string;
   type?: string;
 }
-
-
-export interface testWTF {
-  errors: string;
-  warnings?: string;
-}
