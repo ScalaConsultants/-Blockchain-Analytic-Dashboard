@@ -22,7 +22,6 @@ export interface WalletHash {
 
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
-  width: number,
   actions: BarChartActions,
   status: StatusRedux
   override: Customization
