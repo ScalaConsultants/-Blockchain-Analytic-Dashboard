@@ -6,10 +6,10 @@ const types = {
 };
 
 const FilterVolumeTypeRedux = () => {
-    const sort = (direction: string): void => {
-      // TODO
-      console.log('sort', direction);
-    };
+  const sort = (direction: string): void => {
+    // TODO
+    console.log('sort', direction);
+  };
 
   return (
     <FilterVolumeTypeContainer
