@@ -16,7 +16,7 @@ export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT
   },
   underline: {
-    width: '80%',
+    width: '100%',
     height: '2px',
     background: 'transparent'
   },
@@ -24,6 +24,7 @@ export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
     background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)'
   },
   tab: {
+    marginRight: '10px',
     cursor: 'pointer',
     textAlign: 'center',
     '&:hover': {
@@ -34,6 +35,9 @@ export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
     }
   },
   margin: {
-    margin: '15px 0'
+    margin: '70px 0 40px'
+  },
+  padding: {
+    padding: '0 30px 0 0'
   }
 }));

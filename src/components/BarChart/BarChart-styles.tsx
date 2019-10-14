@@ -5,7 +5,7 @@ export const useBarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
     background: '#253152',
     color: theme.palette.grey[400],
-    height: '21.67px',
+    height: '100%',
     borderRadius: '2px',
     position: 'relative',
     lineHeight: '1.0625rem',

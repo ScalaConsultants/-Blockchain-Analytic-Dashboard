@@ -6,7 +6,6 @@ export const LegendContainer = makeStyles((theme: ExtendedTheme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    margin: '0.5rem 0 0 0',
     height: '15px',
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,

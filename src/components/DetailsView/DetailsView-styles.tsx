@@ -2,6 +2,9 @@ import { makeStyles } from '@material-ui/styles';
 import { ExtendedTheme } from '../../types';
 
 const useDetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
+  barchart: {
+    height: '21.67px'
+  },
   label: {
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
