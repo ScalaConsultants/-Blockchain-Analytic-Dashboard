@@ -1,3 +1,3 @@
-import FilterVolumeType from './FilterVolumeType-container';
+import FilterVolumeType from './FilterVolumeType-redux';
 
 export default FilterVolumeType;

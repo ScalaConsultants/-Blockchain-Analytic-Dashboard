@@ -16,7 +16,7 @@ const DashboardTabsView = ({ tabs }: ViewProps) => {
           {tabs}
         </Grid>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={9}>
         <Grid container justify="flex-end">
           <FilterVolumeType/>
         </Grid>

@@ -1,22 +1,18 @@
 import React from 'react';
 import useFilterVolumeType from "./FilterVolumeType-styles";
+import { ViewProps } from './types';
 
-const types = {
-  relative: 'Relative'
-};
-
-const FilterVolumeTypeContainer = () => {
+const FilterVolumeTypeContainer = ({ type, sort }: ViewProps) => {
   const { typeDescription } = useFilterVolumeType();
-
   return (
-    <>
+    <div>
       <span>Volume Type:&nbsp;</span>
-      <span className={typeDescription}>{types.relative}&nbsp;&nbsp;</span>
+      <span className={typeDescription}>{type}&nbsp;&nbsp;</span>
       <span>
-        <img src="./icons/down.svg" alt="down"/>
-        <img src="./icons/up.svg" alt="up"/>
+        <img src="./icons/down.svg" onClick={() => sort('desc')} alt="desc"/>
+        <img src="./icons/up.svg" onClick={() => sort('asc')} alt="asc"/>
       </span>
-    </>
+    </div>
   );
 };
 
