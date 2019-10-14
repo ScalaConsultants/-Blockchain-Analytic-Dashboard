@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
-import { State } from "../BarChart/types";
-import { Notifications } from "./types";
 import { useSnackbar } from 'notistack';
+import { State } from '../BarChart/types';
+import { Notifications } from './types';
 import { CLEAR_NOTIFICATION } from '../../store/actions/notifications';
 
 const NotificationRedux = () => {
@@ -23,20 +23,17 @@ const NotificationRedux = () => {
 
   const { notifications } = useMappedState(mapState);
   return (
-    <> {
-        Object.keys(notifications).map((messagesGroupLabel: string) => (
-          // @ts-ignore
-          notifications[messagesGroupLabel].map((msg) => (
-            enqueueSnackbar(msg.description, {
-              variant: msg.type,
-              persist: false,
-              onClose: () => clearNotification(msg.id, msg.type)})
-            )
-          )
-        ))
-      }
+    <>
+      {Object.keys(notifications).map((messagesGroupLabel: string) =>
+        // @ts-ignore
+        notifications[messagesGroupLabel].map(msg =>
+          enqueueSnackbar(msg.description, {
+            variant: msg.type,
+            persist: false,
+            onClose: () => clearNotification(msg.id, msg.type) })
+        ))}
     </>
-  )
+  );
 };
 
 export default NotificationRedux;
