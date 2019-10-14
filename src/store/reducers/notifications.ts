@@ -1,5 +1,9 @@
 import { combineReducers } from "redux";
-import { ETHEREUM_FETCH_TRANSACTIONS_FAILED, ETHEREUM_FETCH_TRANSACTIONS } from '../actions/ethereum/transactions';
+import { ETHEREUM_FETCH_TRANSACTIONS_FAILED } from '../actions/ethereum/transactions';
+import { ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED } from '../actions/ethereum/transactions-summed';
+import { ETHEREUM_FETCH_WALLETS_FAILED } from '../actions/ethereum/wallets';
+import { TEZOS_FETCH_TRANSACTIONS_FAILED } from '../actions/tezos/transactions';
+
 import { CLEAR_NOTIFICATION_ERROR } from '../actions/notifications';
 
 const errorCodes = {
@@ -31,7 +35,9 @@ const newNotification = (type: string, code: string) => ({
 const errors = (state = initState, action: any): any => {
   switch (action.type) {
     case ETHEREUM_FETCH_TRANSACTIONS_FAILED:
-    case ETHEREUM_FETCH_TRANSACTIONS:
+    case ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED:
+    case ETHEREUM_FETCH_WALLETS_FAILED:
+    case TEZOS_FETCH_TRANSACTIONS_FAILED:
       return [...state, newNotification('error', action.code)];
     case CLEAR_NOTIFICATION_ERROR:
       // @ts-ignore
@@ -41,45 +47,6 @@ const errors = (state = initState, action: any): any => {
   }
 };
 
-// const infos = (state = initState, action: any): any => {
-//   switch (action.type) {
-//     case ETHEREUM_FETCH_TRANSACTIONS_FAILED:
-//     case ETHEREUM_FETCH_TRANSACTIONS:
-//       return  [
-//         {
-//           description: 'Test info 1',
-//           type: 'info',
-//           id: createRandomID('info')
-//         }
-//       ];
-//     default:
-//       return state;
-//   }
-// };
-//
-// const successes = (state = initState, action: any): any => {
-//   switch (action.type) {
-//     case ETHEREUM_FETCH_TRANSACTIONS_FAILED:
-//     case ETHEREUM_FETCH_TRANSACTIONS:
-//       return  [
-//         {
-//           description: 'Test success 1',
-//           type: 'success',
-//           id: createRandomID('success')
-//         },
-//         {
-//           description: 'Test success 2',
-//           type: 'success',
-//           id: createRandomID('success')
-//         }
-//       ];
-//     default:
-//       return state;
-//   }
-// };
-
 export default combineReducers({
-  errors,
-  // successes,
-  // infos
+  errors
 });
