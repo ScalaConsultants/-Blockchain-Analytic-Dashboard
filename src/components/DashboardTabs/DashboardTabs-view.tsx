@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
 import { useDashboardStyles } from './DashboardTabs-styles';
 import { ViewProps } from './types';
+import FilterVolumeType from '../FilterVolumeType';
 
 const DashboardTabsView = ({ tabs }: ViewProps) => {
   const classes = useDashboardStyles();
@@ -17,8 +18,7 @@ const DashboardTabsView = ({ tabs }: ViewProps) => {
       </Grid>
       <Grid item xs={8}>
         <Grid container justify="flex-end">
-          {/* TODO: import component */}
-          Volume type:
+          <FilterVolumeType/>
         </Grid>
       </Grid>
     </Grid>
