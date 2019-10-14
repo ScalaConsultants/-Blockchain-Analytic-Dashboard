@@ -3,10 +3,10 @@ import { ETHEREUM_FETCH_TRANSACTIONS_FAILED, ETHEREUM_FETCH_TRANSACTIONS } from 
 import { CLEAR_NOTIFICATION_ERROR } from '../actions/notifications';
 
 const errorCodes = {
-  '500': 'Przepraszamy wystąpił przy próbie nawiązania połączenia z serwerem. Spróbuj ponownie później.',
   '401': 'Wystąpił problem z upranieniami.',
   '403': 'Nie masz odpowiednich upranień do wykonania operacji.',
   '404': 'Nie odnaleziono strony.',
+  '500': 'Przepraszamy wystąpił przy próbie nawiązania połączenia z serwerem. Spróbuj ponownie później.',
   'default': 'Przepraszamy, wystąpił problem. Spróbuj ponownie później.'
 };
 
