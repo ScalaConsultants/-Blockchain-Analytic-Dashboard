@@ -3,8 +3,9 @@ import { ETHEREUM_FETCH_TRANSACTIONS_FAILED } from '../actions/ethereum/transact
 import { ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED } from '../actions/ethereum/transactions-summed';
 import { ETHEREUM_FETCH_WALLETS_FAILED } from '../actions/ethereum/wallets';
 import { TEZOS_FETCH_TRANSACTIONS_FAILED } from '../actions/tezos/transactions';
-
 import { CLEAR_NOTIFICATION_ERROR } from '../actions/notifications';
+
+import { NotificationMessage } from '../../components/Notification/types';
 
 const errorCodes = {
   '401': 'Wystąpił problem z upranieniami.',
@@ -14,15 +15,14 @@ const errorCodes = {
   'default': 'Przepraszamy, wystąpił problem. Spróbuj ponownie później.'
 };
 
-const initState: Array<object> = [];
+const initState: [] = [];
 
 const createRandomID = (notificationType: string) =>
   `${notificationType}-${Math.random().toString(36).substring(2, 15) + 
   Math.random().toString(36).substring(2, 15)}`;
 
 const filterNotifications = (notifications: [], omittedID: string) => (
-  // @ts-ignore
-  notifications.filter((notification: object) => notification.id !== omittedID)
+  notifications.filter((notification: NotificationMessage) => notification.id !== omittedID)
 );
 
 const newNotification = (type: string, code: string) => ({
@@ -40,7 +40,6 @@ const errors = (state = initState, action: any): any => {
     case TEZOS_FETCH_TRANSACTIONS_FAILED:
       return [...state, newNotification('error', action.code)];
     case CLEAR_NOTIFICATION_ERROR:
-      // @ts-ignore
       return filterNotifications(state, action.notificationID);
     default:
       return state;
