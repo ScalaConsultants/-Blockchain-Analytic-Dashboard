@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 
+import FilterDataPicker from './FilterDataPicker-view';
 import useFiltersStyles from './Filters-styles';
 
 const Filters = () => {
@@ -92,6 +94,8 @@ const Filters = () => {
       </Grid>
       <Grid item xs={2}>
         <Typography variant="h3">Date</Typography>
+        <FilterDataPicker label="From" />
+        <FilterDataPicker label="To" />
       </Grid>
       <Grid item xs={3}>
         <Typography variant="h3">Top list</Typography>
@@ -99,6 +103,7 @@ const Filters = () => {
       </Grid>
       <Grid item xs={1}>
         <Typography variant="h3">Refresh</Typography>
+        <AutorenewIcon className={classes.refresh} />
       </Grid>
     </Grid>
   );

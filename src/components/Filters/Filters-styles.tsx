@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
-const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
+ export const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
+  
   button: {
     color: '#A3A7B0',
     background: '#253152',
@@ -22,7 +23,12 @@ const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
   active: {
     color: theme.palette.common.white,
     background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)'
+  },
+
+  refresh: {
+    color: '#597CFD'
   }
+
 }));
 
 export default useFiltersStyles;
