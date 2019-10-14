@@ -4,7 +4,8 @@ export interface Notifications {
 
 export interface NotificationTypes {
   errors?: NotificationMessage [];
-  warnings?: NotificationMessage [];
+  infos?: NotificationMessage [];
+  successes?: NotificationMessage [];
 }
 
 export interface NotificationMessage {
