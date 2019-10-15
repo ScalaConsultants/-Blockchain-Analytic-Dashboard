@@ -1,5 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { Wallet, Wallets, StatusRedux } from '../../types';
+import { NotificationTypes } from '../Notification/types';
 
 export interface ViewProps {
   isLoading: boolean;
@@ -28,7 +29,8 @@ export interface BarChartProps extends RouteComponentProps<WalletHash> {
 }
 
 export interface State {
-  ethereum: Wallets
+  ethereum: Wallets,
+  notifications: NotificationTypes
 }
 
 export interface Customization {
