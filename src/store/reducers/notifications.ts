@@ -8,11 +8,11 @@ import { CLEAR_NOTIFICATION_ERROR } from '../actions/notifications';
 import { NotificationMessage } from '../../components/Notification/types';
 
 const errorCodes = {
-  '401': 'Wystąpił problem z upranieniami.',
-  '403': 'Nie masz odpowiednich upranień do wykonania operacji.',
-  '404': 'Nie odnaleziono strony.',
-  '500': 'Przepraszamy wystąpił przy próbie nawiązania połączenia z serwerem. Spróbuj ponownie później.',
-  'default': 'Przepraszamy, wystąpił problem. Spróbuj ponownie później.'
+  '401': 'There was a problem with your permissions.',
+  '403': 'You don\'t have proper permissions to perform this operation.',
+  '404': 'Page not found.',
+  '500': 'The connection to server failed. Please try again later.',
+  'default': 'Sorry, we encountered a problem. Please try again later.'
 };
 
 const initState: [] = [];
