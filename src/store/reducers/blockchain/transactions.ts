@@ -1,14 +1,14 @@
-import { ETHEREUM_SET_TRANSACTIONS, ETHEREUM_FLUSH_TRANSACTIONS } from '../../actions/ethereum/transactions';
+import { SET_TRANSACTIONS, FLUSH_TRANSACTIONS } from '../../actions/blockchain/transactions';
 import { Transaction } from '../../../types';
-import { SetTransactionsAction } from '../../actions/ethereum/types';
+import { SetTransactionsAction } from '../../actions/blockchain/types';
 
 const initState: Transaction[] = [];
 
 export default (state = initState, action: SetTransactionsAction): Transaction[] => {
   switch (action.type) {
-    case ETHEREUM_SET_TRANSACTIONS:
+    case SET_TRANSACTIONS:
       return [...state, ...action.transactions];
-    case ETHEREUM_FLUSH_TRANSACTIONS:
+    case FLUSH_TRANSACTIONS:
       return initState;
     default:
       return state;

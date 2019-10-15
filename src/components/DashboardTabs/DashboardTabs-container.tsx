@@ -4,14 +4,20 @@ import Grid from '@material-ui/core/Grid';
 import DashboardTabsView from './DashboardTabs-view';
 import { useDashboardStyles } from './DashboardTabs-styles';
 
-const DashboardTabs = () => {
+const DashboardTabs = (props: any) => {
+
+  const { actions } = props;
+
   const classes = useDashboardStyles();
 
-  const tabsList = ['Buying', 'Selling', 'Data'];
+  const tabsList = ['Buyer', 'Seller', 'Data'];
 
   const [active, setActive] = useState(0);
 
-  const onClick = (index: number) => setActive(index);
+  const onClick = (index: number) => {
+    setActive(index);
+    actions.fetchEthereumWallets({groupBy: tabsList[index].toLowerCase()});
+  };
 
   const tabs = tabsList.map((name, index) => {
     const underlineClasses = clsx([classes.underline], {

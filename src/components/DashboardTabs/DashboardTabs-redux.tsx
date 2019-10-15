@@ -3,16 +3,9 @@ import { useDispatch } from 'redux-react-hook';
 
 import * as walletActions from '../../store/actions/blockchain/wallets';
 
-import FiltersContainer from './DashboardFilters-container';
+import TabsContainer from './DashboardTabs-container';
 
-const initState: any = {
-  blockchains: ['ETH'],
-  topList: '10',
-  zoom: '1 day',
-  groupBy: 'buyer'
-}
-
-const FiltersRedux = (state = initState) => {
+const TabsRedux = () => {
   const dispatch = useDispatch();
 
   
@@ -28,8 +21,8 @@ const FiltersRedux = (state = initState) => {
   };
 
   return (
-    <FiltersContainer actions={actions} />
+    <TabsContainer actions={actions} />
   );
 };
 
-export default FiltersRedux;
+export default TabsRedux;

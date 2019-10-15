@@ -1,3 +1,3 @@
-import Filters from './DashboardFilters-container';
+import Filters from './DashboardFilters-redux';
 
 export default Filters;

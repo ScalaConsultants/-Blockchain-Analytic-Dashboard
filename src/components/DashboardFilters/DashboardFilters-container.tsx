@@ -7,7 +7,11 @@ import clsx from 'clsx';
 import useFiltersStyles from './DashboardFilters-styles';
 import { Link } from '@material-ui/core';
 
-const Filters = () => {
+const Filters = (props: any) => {
+
+  const { actions } = props;
+
+  console.log(actions)
 
   const [activeBlockchainButtons, setBlockchainButtons]: [Record<string, boolean>, Function] = useState({
     'BTC': false,
@@ -102,7 +106,7 @@ const Filters = () => {
     const activeZoom = activeFilters(activeZoomButtons);
     const activeTopList = activeFilters(activeTopListButtons);
 
-    
+    actions.fetchEthereumWallets({limit: Number(activeTopList[0])});
     //setFilters({ activeBlockchain, activeZoom, activeTopList});
   }
 

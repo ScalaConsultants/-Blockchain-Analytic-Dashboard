@@ -1,8 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
-import { FetchTransactionsAction } from '../../actions/ethereum/types';
+import { FetchTransactionsAction } from '../../actions/blockchain/types';
 import { Transactions } from '../../../types';
-import * as ethereumActions from '../../actions/ethereum/transactions';
+import * as blockchainActions from '../../actions/blockchain/transactions';
 
 async function fetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
   const res = await fetch(
@@ -15,13 +15,13 @@ async function fetchTransactions(walletHash: string, page: number, resultsPerPag
 function* doFetchTransactions(action: FetchTransactionsAction) {
   const { transactionsData } = action;
   const {
-    ETHEREUM_FETCH_TRANSACTIONS_FAILED ,
-    ETHEREUM_FETCH_TRANSACTIONS_STARTED,
-    ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED,
-    ETHEREUM_SET_TRANSACTIONS
-  } = ethereumActions;
+   FETCH_TRANSACTIONS_FAILED ,
+   FETCH_TRANSACTIONS_STARTED,
+   FETCH_TRANSACTIONS_SUCCEEDED,
+   SET_TRANSACTIONS
+  } = blockchainActions;
 
-  yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_STARTED });
+  yield put({ type: FETCH_TRANSACTIONS_STARTED });
 
 
   const transactions = yield fetchTransactions(transactionsData.walletHash, transactionsData.page);
@@ -29,17 +29,17 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
     try {
       if (transactions.length > 0) {
         yield put({
-          type: ETHEREUM_SET_TRANSACTIONS,
+          type: SET_TRANSACTIONS,
           transactions
         });
       }
-      yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED });
+      yield put({ type: FETCH_TRANSACTIONS_SUCCEEDED });
     } catch (e) {
       // TODO temporary solution - I will fix it in next step
-      yield put({type: ETHEREUM_FETCH_TRANSACTIONS_FAILED, message: e.message});
+      yield put({type: FETCH_TRANSACTIONS_FAILED, message: e.message});
     }
 }
 
 export function* watchDoFetchTransactions() {
-  yield takeEvery(ethereumActions.ETHEREUM_FETCH_TRANSACTIONS, doFetchTransactions);
+  yield takeEvery(blockchainActions.FETCH_TRANSACTIONS, doFetchTransactions);
 }
