@@ -7,7 +7,8 @@ import DetailsView from '../components/DetailsView';
 export default (): React.ReactElement => {
   const routes = (
     <Container>
-      <Route exact path="/wallet/:walletHash" component={DetailsView} />
+      <Route exact path="/wallet/:walletHash/:filters" component={DetailsView} />
+      <Route exact path="/filters/:filters" component={DashboardView} />
       <Route exact path="/" component={DashboardView} />
     </Container>
   );
