@@ -5,10 +5,6 @@ const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
     marginBottom: '15px'
   },
-  back: {
-    textTransform: 'none',
-    color: theme.palette.grey[400]
-  },
   fonts: {
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
