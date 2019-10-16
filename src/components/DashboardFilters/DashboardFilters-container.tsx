@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
@@ -9,7 +9,7 @@ import useFiltersStyles from './DashboardFilters-styles';
 
 const Filters = (props: any) => {
 
-  const { actions } = props;
+  const { actions, match } = props;
 
   const [activeBlockchainButtons, setBlockchainButtons]: [Record<string, boolean>, Function] = useState({
     'BTC': false,
@@ -40,7 +40,6 @@ const Filters = (props: any) => {
 
   const [filters, setFilters]:any = useState({});
 
-  const groupBy = 'buyer';
   let setURL: boolean= false;
   let newFilters: any = {};
 
@@ -106,7 +105,6 @@ const Filters = (props: any) => {
     }
   }
 
-
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeZoom = activeFilters(activeZoomButtons);
@@ -132,7 +130,6 @@ const Filters = (props: any) => {
     handleRefresh(false);
   }, [activeBlockchainButtons, setURL, activeTopListButtons, activeZoomButtons]);
 
-  
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
       <Grid item xs={3}>
@@ -149,7 +146,7 @@ const Filters = (props: any) => {
       </Grid>
       <Grid item xs={3}>
         <Typography variant="h3">Refresh</Typography>
-        <Link to={`/filters/${groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
+        <Link replace={true} to={`/${match.params.groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
           <AutorenewIcon className={classes.refresh} onClick={ () => !setURL }/>
         </Link>
       </Grid>
@@ -157,4 +154,4 @@ const Filters = (props: any) => {
   );
 };
 
-export default Filters;
+export default withRouter(Filters);
