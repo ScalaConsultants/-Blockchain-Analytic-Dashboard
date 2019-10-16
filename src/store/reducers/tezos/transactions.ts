@@ -4,7 +4,7 @@ import { SetTransactionsAction } from '../../actions/types';
 
 const initState: Transaction[] = [];
 
-export default (state = initState, action: SetTransactionsAction): Transaction[] => {
+const transactions = (state = initState, action: SetTransactionsAction): Transaction[] => {
   switch (action.type) {
     case TEZOS_SET_TRANSACTIONS:
       return [...state, ...action.transactions];
@@ -14,3 +14,14 @@ export default (state = initState, action: SetTransactionsAction): Transaction[]
       return state;
   }
 };
+
+const errors = (state = initState, action: any): any => {
+  switch (action.type) {
+    case TEZOS_SET_TRANSACTIONS:
+      return action.transactions;
+    default:
+      return state;
+  }
+};
+
+export default transactions;

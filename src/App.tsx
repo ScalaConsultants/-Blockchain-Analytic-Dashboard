@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 import Routes from './router/routes';
 import './App.css';
+import Notifications from './components/Notification';
 
 const App = (): React.ReactElement => {
   return (
@@ -9,8 +11,19 @@ const App = (): React.ReactElement => {
       <Router>
         <Routes />
       </Router>
+      <Notifications/>
     </div>
   );
 };
 
-export default App;
+const IntegrationNotistack = () => (
+  <SnackbarProvider
+    maxSnack={3}
+    preventDuplicate
+  >
+    <App />
+  </SnackbarProvider>
+
+);
+
+export default IntegrationNotistack;

@@ -67,3 +67,13 @@ e.g.
     />
 ```
 In case of scaled Loader - parent should have set 'position: relative' in styles.
+
+
+### Notification
+It's general mechanism. Notification can have three types: error, info or success
+E.g. to add new error notification: add proper action type to the switch:
+```$xslt
+/Users/agatakulbicka/Documents/BLOCKCHAIN/Blockchain-Analytic-Dashboard/src/store/reducers/notifications.ts
+```
+
+Infos and successes haven't been implemented yet.

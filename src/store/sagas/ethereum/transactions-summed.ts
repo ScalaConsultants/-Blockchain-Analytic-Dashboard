@@ -33,9 +33,8 @@ function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
     }
     yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED });
 
-  } catch (e) {
-    // TODO temporary solution - I will fix it in next step
-    yield put({type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.message});
+  } catch (error) {
+    yield put({type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED, code: error.code});
   }
 }
 
