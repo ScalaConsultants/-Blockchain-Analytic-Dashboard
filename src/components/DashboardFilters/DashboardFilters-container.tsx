@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -38,9 +38,11 @@ const Filters = (props: any) => {
     '1000': false
   });
 
-  const groupBy = 'buyer';
-
   const [filters, setFilters]:any = useState({});
+
+  const groupBy = 'buyer';
+  let setURL: boolean= false;
+  let newFilters: any = {};
 
   const classes = useFiltersStyles();
 
@@ -70,7 +72,6 @@ const Filters = (props: any) => {
     filterType === activeBlockchainButtons && blockchainFilterHandler(buttonLabel);
     filterType === activeZoomButtons && zoomFilterHandler(buttonLabel);
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
-    handleRefresh(false);
   };
 
   const activeFilters = (filterObj: any) => Object.keys(filterObj).filter((item: any) =>  filterObj[item] === true);
@@ -85,7 +86,9 @@ const Filters = (props: any) => {
           type="button"
           className={btnClass}
           key={buttonLabel}
-          onClick={() => filterHandler(buttonLabel, buttonLabels)}
+          onClick={() => {
+            filterHandler(buttonLabel, buttonLabels); 
+          }}
         >
           {buttonLabel}
         </button>
@@ -103,25 +106,33 @@ const Filters = (props: any) => {
     }
   }
 
+
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeZoom = activeFilters(activeZoomButtons);
     const activeTopList = activeFilters(activeTopListButtons);
     const dates: any = setZoomFilter(activeZoom); 
 
-    setFilters({
+    newFilters = {
       limit: Number(activeTopList[0]),
       type: activeBlockchain,
       from: dates[0], 
       to: dates[1]
-    })
-    
+    }  
+
+    setFilters({...newFilters});
+
     isDataFetched && activeBlockchain.forEach((blockchain: string) => {
       blockchain === 'ETH' && actions.fetchEthereumWallets({limit: Number(activeTopList[0]), from: dates[0], to: dates[1]});
       blockchain === 'XTZ' && actions.fetchTezosWallets({limit: Number(activeTopList[0]), from: dates[0], to: dates[1]});
     })
   }
 
+  useEffect((): void => {
+    handleRefresh(false);
+  }, [activeBlockchainButtons, setURL, activeTopListButtons, activeZoomButtons]);
+
+  
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
       <Grid item xs={3}>
@@ -139,7 +150,7 @@ const Filters = (props: any) => {
       <Grid item xs={3}>
         <Typography variant="h3">Refresh</Typography>
         <Link to={`/filters/${groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
-          <AutorenewIcon className={classes.refresh} onClick={() => handleRefresh(true)}/>
+          <AutorenewIcon className={classes.refresh} onClick={ () => !setURL }/>
         </Link>
       </Grid>
     </Grid>
