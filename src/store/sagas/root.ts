@@ -1,10 +1,14 @@
-import { all } from "redux-saga/effects";
-import ethereumSagas from "./blockchain";
+import { all } from 'redux-saga/effects';
+import ethereumSagas from './ethereum';
+import tezosSagas from './tezos'
 
 export default function* root(): any {
   yield all([
-    ethereumSagas.watchDoFetchWallets(),
-    ethereumSagas.watchDoFetchTransactionsSummed(),
-    ethereumSagas.watchDoFetchTransactions()
+    ethereumSagas.ethereumWatchDoFetchWallets(),
+    ethereumSagas.ethereumWatchDoFetchTransactionsSummed(),
+    ethereumSagas.ethereumWatchDoFetchTransactions(),
+    tezosSagas.tezosWatchDoFetchWallets(),
+    tezosSagas.tezosWatchDoFetchTransactionsSummed(),
+    tezosSagas.tezosWatchDoFetchTransactions()
   ]);
 }

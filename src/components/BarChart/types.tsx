@@ -14,6 +14,7 @@ export interface Accumulator {
 
 export interface BarChartActions {
   fetchEthereumWallets: Function,
+  fetchTezosWallets: Function
 }
 
 export interface WalletHash {

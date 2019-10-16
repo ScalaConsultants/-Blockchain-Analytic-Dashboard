@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 
 import useFiltersStyles from './DashboardFilters-styles';
-import { Link } from '@material-ui/core';
 
 const Filters = (props: any) => {
 
   const { actions } = props;
-
-  console.log(actions)
 
   const [activeBlockchainButtons, setBlockchainButtons]: [Record<string, boolean>, Function] = useState({
     'BTC': false,
@@ -40,9 +38,11 @@ const Filters = (props: any) => {
     '1000': false
   });
 
-  const classes = useFiltersStyles();
+  const groupBy = 'buyer';
 
- //const [filters, setFilters]: [string, Function] = useState(' ');
+  const [filters, setFilters]:any = useState({});
+
+  const classes = useFiltersStyles();
 
   const blockchainFilterHandler = (buttonLabel: string) => {
     if (buttonLabel === 'ETH' || buttonLabel === 'XTZ') {
@@ -70,19 +70,10 @@ const Filters = (props: any) => {
     filterType === activeBlockchainButtons && blockchainFilterHandler(buttonLabel);
     filterType === activeZoomButtons && zoomFilterHandler(buttonLabel);
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
+    handleRefresh(false);
   };
 
   const activeFilters = (filterObj: any) => Object.keys(filterObj).filter((item: any) =>  filterObj[item] === true);
-
-  // useEffect((): any => {
-  //   const activeBlockchain = activeFilters(activeBlockchainButtons);
-  //   const activeZoom = activeFilters(activeZoomButtons);
-  //   const activeTopList = activeFilters(activeTopListButtons);
-  //   setFilters({ activeBlockchain, activeZoom, activeTopList});
-
-  // }, [activeBlockchainButtons, activeZoomButtons, activeTopListButtons]);
-
-  
 
   const renderButtons = (buttonLabels: Record<string, boolean>) =>
     Object.keys(buttonLabels).map((buttonLabel: string) => {
@@ -101,13 +92,34 @@ const Filters = (props: any) => {
       );
     });
 
-  const handleRefresh = () => {
+  const setZoomFilter = (dateFilter: String[]) => {
+    const oneDay = [1567296000, 1567382400];
+    const week = [1567296000, 1567814400];
+
+    if (dateFilter[0] === '1 day') {
+      return oneDay;
+    } else if (dateFilter[0] === '7 days') {
+      return week;
+    }
+  }
+
+  const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeZoom = activeFilters(activeZoomButtons);
     const activeTopList = activeFilters(activeTopListButtons);
+    const dates: any = setZoomFilter(activeZoom); 
 
-    actions.fetchEthereumWallets({limit: Number(activeTopList[0])});
-    //setFilters({ activeBlockchain, activeZoom, activeTopList});
+    setFilters({
+      limit: Number(activeTopList[0]),
+      type: activeBlockchain,
+      from: dates[0], 
+      to: dates[1]
+    })
+    
+    isDataFetched && activeBlockchain.forEach((blockchain: string) => {
+      blockchain === 'ETH' && actions.fetchEthereumWallets({limit: Number(activeTopList[0]), from: dates[0], to: dates[1]});
+      blockchain === 'XTZ' && actions.fetchTezosWallets({limit: Number(activeTopList[0]), from: dates[0], to: dates[1]});
+    })
   }
 
   return (
@@ -126,9 +138,9 @@ const Filters = (props: any) => {
       </Grid>
       <Grid item xs={3}>
         <Typography variant="h3">Refresh</Typography>
-        {/* <Link to={`/filters/${filters}`}> */}
-        <AutorenewIcon className={classes.refresh} onClick={handleRefresh} />
-        {/* </Link> */}
+        <Link to={`/filters/${groupBy}/${filters.limit}/${filters.type}/${filters.from}/${filters.to}`}>
+          <AutorenewIcon className={classes.refresh} onClick={() => handleRefresh(true)}/>
+        </Link>
       </Grid>
     </Grid>
   );

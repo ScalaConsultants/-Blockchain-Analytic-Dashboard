@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 
-import * as EthereumTransactions from '../../store/actions/blockchain/transactions';
+import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
 import TransactionListContainer from './TransactionsList-container';
 import { State, TransactionsListPropsRedux } from './types';
 import { Transactions, TransactionsData } from '../../types';
@@ -16,14 +16,14 @@ const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
 
   const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
     dispatch({
-      type: EthereumTransactions.FETCH_TRANSACTIONS,
+      type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
       transactionsData
     });
   };
 
   const flushEthereumTransactions = (): void => {
     dispatch({
-      type: EthereumTransactions.FLUSH_TRANSACTIONS
+      type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
     });
   };
 

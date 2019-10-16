@@ -5,7 +5,7 @@ import {
   TransactionSummed,
   TransactionsData,
   TransactionsSummedData
-} from '../../../types';
+} from '../../types';
 
 export interface SetTransactionsAction extends ActionType {
   transactions: Transaction[];

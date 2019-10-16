@@ -1,12 +1,12 @@
-import { SET_TRANSACTIONS_SUMMED } from '../../actions/blockchain/transactions-summed';
+import { ETHEREUM_SET_TRANSACTIONS_SUMMED } from '../../actions/ethereum/transactions-summed';
 import { TransactionSummed } from '../../../types';
-import { SetTransactionsSummedAction } from '../../actions/blockchain/types';
+import { SetTransactionsSummedAction } from '../../actions/types';
 
 const initState: TransactionSummed[] = [];
 
 export default (state = initState, action: SetTransactionsSummedAction): TransactionSummed[] => {
   switch (action.type) {
-    case SET_TRANSACTIONS_SUMMED:
+    case ETHEREUM_SET_TRANSACTIONS_SUMMED:
       return [...action.transactionsSummed];
     default:
       return state;
