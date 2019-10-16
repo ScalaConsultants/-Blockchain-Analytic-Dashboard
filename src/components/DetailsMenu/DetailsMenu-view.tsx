@@ -1,12 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import EditWalletModal from '../EditWalletModal';
 import ChartDescription from '../ChartDescription';
 import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
+import ButtonBack from '../ButtonBack';
 
 const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain, activeFilters }: ViewProps) => {
   const { tab, zoom, top } = activeFilters;
@@ -18,9 +17,7 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
   return (
     <Grid container direction="row" alignItems="center" className={classesRoot}>
       <Grid item xs={1}>
-        <Button className={classes.back} startIcon={<ArrowBackIosIcon fontSize="inherit" />}>
-          back
-        </Button>
+        <ButtonBack/>
       </Grid>
       <Grid item xs={8}>
         <Grid container alignItems="center" className={classesInfo}>
