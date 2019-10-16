@@ -1,9 +1,9 @@
-import { tezosWatchDoFetchTransactionsSummed } from './transactions-summed';
-import { tezosWatchDoFetchTransactions } from './transactions';
-import { tezosWatchDoFetchWallets } from './wallets';
+import { watchDoFetchTransactionsSummed } from './transactions-summed';
+import { watchDoFetchTransactions } from './transactions';
+import { watchDoFetchWallets } from './wallets';
  
 export default {
-    tezosWatchDoFetchTransactionsSummed,
-    tezosWatchDoFetchWallets,
-    tezosWatchDoFetchTransactions
+    watchDoFetchTransactionsSummed,
+    watchDoFetchWallets,
+    watchDoFetchTransactions
 }

@@ -4,14 +4,14 @@ import { FetchTransactionsSummedAction } from '../../actions/types';
 import { TransactionsSummed } from '../../../types';
 import * as ethereumActions from '../../actions/ethereum/transactions-summed';
 
-async function ethereumFetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
+async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
   const res = await fetch(
     `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/linechart?limit=100&walletHash=${walletHash}`
   );
   return res.json();
 }
 
-function* ethereumDoFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
+function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
   const {transactionsSummedData} = action;
   const {
     ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED,
@@ -22,7 +22,7 @@ function* ethereumDoFetchTransactionsSummed(action:FetchTransactionsSummedAction
 
   yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED });
 
-  const transactionsSummed = yield ethereumFetchTransactionsSummed(transactionsSummedData.walletHash);
+  const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash);
 
   try {
     if (transactionsSummed.length > 0) {
@@ -39,9 +39,9 @@ function* ethereumDoFetchTransactionsSummed(action:FetchTransactionsSummedAction
   }
 }
 
-export function* ethereumWatchDoFetchTransactionsSummed() {
+export function* watchDoFetchTransactionsSummed() {
   yield takeEvery(
     ethereumActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
-    ethereumDoFetchTransactionsSummed
+    doFetchTransactionsSummed
   );
 }

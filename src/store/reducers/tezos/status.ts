@@ -19,7 +19,7 @@ import { SetTransactionsAction } from '../../actions/types';
 
 const initState: boolean = false;
 
-const tezosTransactionsIsFetching = (state = initState, action: SetTransactionsAction) => {
+const transactionsIsFetching = (state = initState, action: SetTransactionsAction) => {
   switch (action.type) {
     case TEZOS_FETCH_TRANSACTIONS_STARTED:
       return true;
@@ -31,7 +31,7 @@ const tezosTransactionsIsFetching = (state = initState, action: SetTransactionsA
   }
 };
 
-const tezosTransactionsSummedIsFetching = (state = initState, action: SetTransactionsAction) => {
+const transactionsSummedIsFetching = (state = initState, action: SetTransactionsAction) => {
   switch (action.type) {
     case TEZOS_FETCH_TRANSACTIONS_SUMMED_STARTED:
       return true;
@@ -43,7 +43,7 @@ const tezosTransactionsSummedIsFetching = (state = initState, action: SetTransac
   }
 };
 
-const tezosWalletsIsFetching = (state = initState, action: SetTransactionsAction) => {
+const walletsIsFetching = (state = initState, action: SetTransactionsAction) => {
   switch (action.type) {
     case TEZOS_FETCH_WALLETS_STARTED:
       return true;
@@ -56,7 +56,7 @@ const tezosWalletsIsFetching = (state = initState, action: SetTransactionsAction
 };
 
 export default combineReducers({
-  tezosTransactionsIsFetching,
-  tezosTransactionsSummedIsFetching,
-  tezosWalletsIsFetching
+  transactionsIsFetching,
+  transactionsSummedIsFetching,
+  walletsIsFetching
 });

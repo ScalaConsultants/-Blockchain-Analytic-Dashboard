@@ -4,11 +4,11 @@ import tezosSagas from './tezos'
 
 export default function* root(): any {
   yield all([
-    ethereumSagas.ethereumWatchDoFetchWallets(),
-    ethereumSagas.ethereumWatchDoFetchTransactionsSummed(),
-    ethereumSagas.ethereumWatchDoFetchTransactions(),
-    tezosSagas.tezosWatchDoFetchWallets(),
-    tezosSagas.tezosWatchDoFetchTransactionsSummed(),
-    tezosSagas.tezosWatchDoFetchTransactions()
+    ethereumSagas.watchDoFetchWallets(),
+    ethereumSagas.watchDoFetchTransactionsSummed(),
+    ethereumSagas.watchDoFetchTransactions(),
+    tezosSagas.watchDoFetchWallets(),
+    tezosSagas.watchDoFetchTransactionsSummed(),
+    tezosSagas.watchDoFetchTransactions()
   ]);
 }

@@ -3,14 +3,14 @@ import * as ethereumActions from '../../actions/ethereum/wallets';
 import { Wallets } from '../../../types';
 
 
-async function ethereumFetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
+async function fetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
   const res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/cache?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);
 
   console.log('res ', res);
   return res.json();
 }
 
-function* ethereumDoFetchWallets(action: any) {
+function* doFetchWallets(action: any) {
   const { payload } = action;
   const {
     ETHEREUM_FETCH_WALLETS_FAILED,
@@ -21,7 +21,7 @@ function* ethereumDoFetchWallets(action: any) {
 
   yield put({ type: ETHEREUM_FETCH_WALLETS_STARTED });
 
-  const wallets = yield ethereumFetchWallets(payload);
+  const wallets = yield fetchWallets(payload);
 
   try {
     if (wallets.length > 0) {
@@ -37,6 +37,6 @@ function* ethereumDoFetchWallets(action: any) {
   }
 }
 
-export function* ethereumWatchDoFetchWallets() {
-  yield takeEvery(ethereumActions.ETHEREUM_FETCH_WALLETS, ethereumDoFetchWallets);
+export function* watchDoFetchWallets() {
+  yield takeEvery(ethereumActions.ETHEREUM_FETCH_WALLETS, doFetchWallets);
 }

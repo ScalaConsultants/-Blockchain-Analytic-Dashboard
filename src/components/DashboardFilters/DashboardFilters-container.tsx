@@ -138,7 +138,7 @@ const Filters = (props: any) => {
       </Grid>
       <Grid item xs={3}>
         <Typography variant="h3">Refresh</Typography>
-        <Link to={`/filters/${groupBy}/${filters.limit}/${filters.type}/${filters.from}/${filters.to}`}>
+        <Link to={`/filters/${groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
           <AutorenewIcon className={classes.refresh} onClick={() => handleRefresh(true)}/>
         </Link>
       </Grid>

@@ -4,7 +4,7 @@ import { FetchTransactionsAction } from '../../actions/types';
 import { Transactions } from '../../../types';
 import * as blockchainActions from '../../actions/tezos/transactions';
 
-async function tezosFetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
+async function fetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
   const res = await fetch(
     /* eslint-disable-next-line max-len */
     `${process.env.REACT_APP_HOST}/api/v1/tezos/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
@@ -12,7 +12,7 @@ async function tezosFetchTransactions(walletHash: string, page: number, resultsP
   return res.json();
 }
 
-function* tezosDoFetchTransactions(action: FetchTransactionsAction) {
+function* doFetchTransactions(action: FetchTransactionsAction) {
   const { transactionsData } = action;
   const {
    TEZOS_FETCH_TRANSACTIONS_FAILED ,
@@ -24,7 +24,7 @@ function* tezosDoFetchTransactions(action: FetchTransactionsAction) {
   yield put({ type: TEZOS_FETCH_TRANSACTIONS_STARTED });
 
 
-  const transactions = yield tezosFetchTransactions(transactionsData.walletHash, transactionsData.page);
+  const transactions = yield fetchTransactions(transactionsData.walletHash, transactionsData.page);
 
     try {
       if (transactions.length > 0) {
@@ -40,6 +40,6 @@ function* tezosDoFetchTransactions(action: FetchTransactionsAction) {
     }
 }
 
-export function* tezosWatchDoFetchTransactions() {
-  yield takeEvery(blockchainActions.TEZOS_FETCH_TRANSACTIONS, tezosDoFetchTransactions);
+export function* watchDoFetchTransactions() {
+  yield takeEvery(blockchainActions.TEZOS_FETCH_TRANSACTIONS, doFetchTransactions);
 }

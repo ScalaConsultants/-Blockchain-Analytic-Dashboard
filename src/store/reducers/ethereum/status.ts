@@ -19,7 +19,7 @@ import { SetTransactionsAction } from '../../actions/types';
 
 const initState: boolean = false;
 
-const ethereumTransactionsIsFetching = (state = initState, action: SetTransactionsAction) => {
+const transactionsIsFetching = (state = initState, action: SetTransactionsAction) => {
   switch (action.type) {
     case ETHEREUM_FETCH_TRANSACTIONS_STARTED:
       return true;
@@ -31,7 +31,7 @@ const ethereumTransactionsIsFetching = (state = initState, action: SetTransactio
   }
 };
 
-const ethereumTransactionsSummedIsFetching = (state = initState, action: SetTransactionsAction) => {
+const transactionsSummedIsFetching = (state = initState, action: SetTransactionsAction) => {
   switch (action.type) {
     case ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED:
       return true;
@@ -43,7 +43,7 @@ const ethereumTransactionsSummedIsFetching = (state = initState, action: SetTran
   }
 };
 
-const ethereumWalletsIsFetching = (state = initState, action: SetTransactionsAction) => {
+const walletsIsFetching = (state = initState, action: SetTransactionsAction) => {
   switch (action.type) {
     case ETHEREUM_FETCH_WALLETS_STARTED:
       return true;
@@ -56,7 +56,7 @@ const ethereumWalletsIsFetching = (state = initState, action: SetTransactionsAct
 };
 
 export default combineReducers({
-  ethereumTransactionsIsFetching,
-  ethereumTransactionsSummedIsFetching,
-  ethereumWalletsIsFetching
+  transactionsIsFetching,
+  transactionsSummedIsFetching,
+  walletsIsFetching
 });

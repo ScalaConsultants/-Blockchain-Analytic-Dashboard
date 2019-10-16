@@ -3,14 +3,14 @@ import * as blockchainActions from '../../actions/tezos/wallets';
 import { Wallets } from '../../../types';
 
 
-async function tezosFetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
+async function fetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
   const res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/tezos/wallets/cache?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);
 
   console.log('res ', res);
   return res.json();
 }
 
-function* tezosDoFetchWallets(action: any) {
+function* foFetchWallets(action: any) {
   const { payload } = action;
   const {
     TEZOS_FETCH_WALLETS_FAILED,
@@ -21,7 +21,7 @@ function* tezosDoFetchWallets(action: any) {
 
   yield put({ type: TEZOS_FETCH_WALLETS_STARTED });
 
-  const wallets = yield tezosFetchWallets(payload);
+  const wallets = yield fetchWallets(payload);
 
   try {
     if (wallets.length > 0) {
@@ -37,6 +37,6 @@ function* tezosDoFetchWallets(action: any) {
   }
 }
 
-export function* tezosWatchDoFetchWallets() {
-  yield takeEvery(blockchainActions.TEZOS_FETCH_WALLETS, tezosDoFetchWallets);
+export function* watchDoFetchWallets() {
+  yield takeEvery(blockchainActions.TEZOS_FETCH_WALLETS, foFetchWallets);
 }
