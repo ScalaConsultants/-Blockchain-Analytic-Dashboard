@@ -10,14 +10,14 @@ const FiltersRedux = () => {
   const dispatch = useDispatch();
 
   
-  const fetchEthereumWallets = (payload: any = 1): void => {
+  const fetchEthereumWallets = (payload: number = 1): void => {
     dispatch({
       type: ethereumWalletActions.ETHEREUM_FETCH_WALLETS,
       payload: payload
     });
   };
 
-  const fetchTezosWallets = (payload: any = 1): void => {
+  const fetchTezosWallets = (payload: number = 1): void => {
     dispatch({
       type: tezosWalletActions.TEZOS_FETCH_WALLETS,
       payload: payload

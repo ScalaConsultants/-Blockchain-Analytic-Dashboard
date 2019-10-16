@@ -6,26 +6,41 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 
 import useFiltersStyles from './DashboardFilters-styles';
+import { FiltersProps } from './types'
 
 const Filters = (props: any) => {
-
   const { actions, match } = props;
 
+  const urlParams = match.params;
+
+  const checkActiveBlockchains = (label:string) => {
+    const activeBlockchains = urlParams.blockchains.split(',');
+    return activeBlockchains.indexOf(label) !== -1;
+  }
+
+  const checkActiveZoom = (label: string) => {
+    const zoom = urlParams.to - urlParams.from;
+    return (label === '1 day' && zoom === 86400) ? true : (label === '7 days' && zoom !== 86400) ? true : false;
+  };
+
+  const checkActiveTopList = (label: string) => label === urlParams.limit ? true : false;
+
   const [activeBlockchainButtons, setBlockchainButtons]: [Record<string, boolean>, Function] = useState({
-    'BTC': false,
-    'ETH': true,
-    'XRP': false,
-    'LTC': false,
-    'BCH': false,
-    'XTZ': true,
-    'ADA': false,
-    'EOS': false,
-    'XLM': false
+    'BTC': checkActiveBlockchains('BTC'),
+    'ETH': checkActiveBlockchains('ETH'),
+    'XRP': checkActiveBlockchains('XRP'),
+    'LTC': checkActiveBlockchains('LTC'),
+    'BCH': checkActiveBlockchains('BCH'),
+    'XTZ': checkActiveBlockchains('XTZ'),
+    'ADA': checkActiveBlockchains('ADA'),
+    'EOS': checkActiveBlockchains('EOS'),
+    'XLM': checkActiveBlockchains('XLM'),
   });
 
+
   const [activeZoomButtons, setZoomButtons]: [Record<string, boolean>, Function] = useState({
-    '1 day': true,
-    '7 days': false,
+    '1 day': checkActiveZoom('1 day'),
+    '7 days': checkActiveZoom('7 days'),
     // '1 month': false,
     // '3 months': false,
     // '1 year': false,
@@ -33,15 +48,15 @@ const Filters = (props: any) => {
   });
 
   const [activeTopListButtons, setTopListButtons]: [Record<string, boolean>, Function] = useState({
-    '10': true,
-    '100': false,
-    '1000': false
+    '10': checkActiveTopList('10'),
+    '100': checkActiveTopList('100'),
+    '1000': checkActiveTopList('1000')
   });
 
-  const [filters, setFilters]:any = useState({});
+  const [filters, setFilters]:[FiltersProps, Function] = useState({});
 
   let setURL: boolean= false;
-  let newFilters: any = {};
+  let newFilters: FiltersProps = {};
 
   const classes = useFiltersStyles();
 
@@ -73,7 +88,7 @@ const Filters = (props: any) => {
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
   };
 
-  const activeFilters = (filterObj: any) => Object.keys(filterObj).filter((item: any) =>  filterObj[item] === true);
+  const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) =>  filterObj[item] === true);
 
   const renderButtons = (buttonLabels: Record<string, boolean>) =>
     Object.keys(buttonLabels).map((buttonLabel: string) => {
@@ -94,22 +109,22 @@ const Filters = (props: any) => {
       );
     });
 
-  const setZoomFilter = (dateFilter: String[]) => {
+  const setZoomFilter = (dateFilter: string[]) => {
     const oneDay = [1567296000, 1567382400];
     const week = [1567296000, 1567814400];
 
     if (dateFilter[0] === '1 day') {
       return oneDay;
-    } else if (dateFilter[0] === '7 days') {
-      return week;
     }
+    
+    return week;
   }
 
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeZoom = activeFilters(activeZoomButtons);
     const activeTopList = activeFilters(activeTopListButtons);
-    const dates: any = setZoomFilter(activeZoom); 
+    const dates: number[] = setZoomFilter(activeZoom); 
 
     newFilters = {
       limit: Number(activeTopList[0]),
