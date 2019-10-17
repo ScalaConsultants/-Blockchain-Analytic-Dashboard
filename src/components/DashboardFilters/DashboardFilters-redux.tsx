@@ -3,30 +3,22 @@ import { useDispatch } from 'redux-react-hook';
 
 import * as ethereumWalletActions from '../../store/actions/ethereum/wallets';
 import * as tezosWalletActions from '../../store/actions/tezos/wallets';
+import { getWalletByDatasource } from '../../store/actions/helpers';
 
 import FiltersContainer from './DashboardFilters-container';
 
 const FiltersRedux = () => {
   const dispatch = useDispatch();
-
   
-  const fetchEthereumWallets = (payload: number = 1): void => {
+  const fetchWalletsByDataSource = (payload: number = 1, dataSource:string): void => {
     dispatch({
-      type: ethereumWalletActions.ETHEREUM_FETCH_WALLETS,
-      payload: payload
-    });
-  };
-
-  const fetchTezosWallets = (payload: number = 1): void => {
-    dispatch({
-      type: tezosWalletActions.TEZOS_FETCH_WALLETS,
+      type: getWalletByDatasource(dataSource),
       payload: payload
     });
   };
 
   const actions = {
-    fetchEthereumWallets,
-    fetchTezosWallets
+    fetchWalletsByDataSource,
   };
 
   return (

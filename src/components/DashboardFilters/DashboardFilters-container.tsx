@@ -139,9 +139,8 @@ const Filters = (props: any) => {
 
   const fetchNewData = (activeBlockchains: string[]) => {
     activeBlockchains.forEach((blockchain: string) => {
-      console.log(filters);
-      blockchain === 'ETH' && actions.fetchEthereumWallets({limit: filters.limit, from: filters.from, to: filters.to});
-      blockchain === 'XTZ' && actions.fetchTezosWallets({limit: filters.limit, from: filters.from, to: filters.to});
+      blockchain === 'ETH' && actions.fetchWalletsByDataSource({limit: filters.limit, from: filters.from, to: filters.to}, 'ETHEREUM');
+      blockchain === 'XTZ' && actions.fetchWalletsByDataSource({limit: filters.limit, from: filters.from, to: filters.to}, 'TEZOS');
     })
   }
 
