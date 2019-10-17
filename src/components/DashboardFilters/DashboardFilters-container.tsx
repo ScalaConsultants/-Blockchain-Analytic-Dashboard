@@ -55,7 +55,6 @@ const Filters = (props: any) => {
 
   const [filters, setFilters]:[FiltersProps, Function] = useState({});
 
-  let setURL: boolean= false;
   let newFilters: FiltersProps = {};
 
   const classes = useFiltersStyles();
@@ -135,15 +134,20 @@ const Filters = (props: any) => {
 
     setFilters({...newFilters});
 
-    isDataFetched && activeBlockchain.forEach((blockchain: string) => {
-      blockchain === 'ETH' && actions.fetchEthereumWallets({limit: Number(activeTopList[0]), from: dates[0], to: dates[1]});
-      blockchain === 'XTZ' && actions.fetchTezosWallets({limit: Number(activeTopList[0]), from: dates[0], to: dates[1]});
+    isDataFetched && fetchNewData(activeBlockchain);
+  }
+
+  const fetchNewData = (activeBlockchains: string[]) => {
+    activeBlockchains.forEach((blockchain: string) => {
+      console.log(filters);
+      blockchain === 'ETH' && actions.fetchEthereumWallets({limit: filters.limit, from: filters.from, to: filters.to});
+      blockchain === 'XTZ' && actions.fetchTezosWallets({limit: filters.limit, from: filters.from, to: filters.to});
     })
   }
 
   useEffect((): void => {
     handleRefresh(false);
-  }, [activeBlockchainButtons, setURL, activeTopListButtons, activeZoomButtons]);
+  }, [activeBlockchainButtons, activeTopListButtons, activeZoomButtons]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
@@ -162,7 +166,7 @@ const Filters = (props: any) => {
       <Grid item xs={3}>
         <Typography variant="h3">Refresh</Typography>
         <Link replace={true} to={`/${match.params.groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
-          <AutorenewIcon className={classes.refresh} onClick={ () => !setURL }/>
+          <AutorenewIcon className={classes.refresh} onClick={ () => handleRefresh(true) }/>
         </Link>
       </Grid>
     </Grid>
