@@ -8,6 +8,7 @@ import Legend from '../Legend';
 import DetailsMenu from '../DetailsMenu';
 import { DetailsViewProps } from './types';
 import useDetailsMenuStyles from './DetailsView-styles';
+import View from '../View';
 
 const DetailsView = (props: DetailsViewProps) => {
     const classes = useDetailsMenuStyles();
@@ -25,7 +26,7 @@ const DetailsView = (props: DetailsViewProps) => {
     };
 
     return (
-        <>
+        <View>
             <DetailsMenu
                 id={id}
                 address={address}
@@ -46,7 +47,7 @@ const DetailsView = (props: DetailsViewProps) => {
             <LineChart />
             <Legend />
             <TransactionsList description={description} />
-        </>
+        </View>
     );
 };
 
