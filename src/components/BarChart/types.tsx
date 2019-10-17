@@ -14,8 +14,7 @@ export interface Accumulator {
 }
 
 export interface BarChartActions {
-  fetchEthereumWallets: Function,
-  fetchTezosWallets: Function
+  fetchWalletsByDataSource: Function,
 }
 
 export interface WalletHash {
@@ -25,8 +24,9 @@ export interface WalletHash {
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
   wallets: Wallet[],
   actions: BarChartActions,
-  status: StatusRedux
-  override: Customization
+  status: StatusRedux,
+  override: Customization,
+  dataSource: string
 }
 
 export interface State {
