@@ -15,7 +15,7 @@ import {
   ETHEREUM_FETCH_WALLETS_STARTED,
   ETHEREUM_FETCH_WALLETS_SUCCEEDED
 } from '../../actions/ethereum/wallets';
-import { SetTransactionsAction } from '../../actions/ethereum/types';
+import { SetTransactionsAction } from '../../actions/types';
 
 const initState: boolean = false;
 

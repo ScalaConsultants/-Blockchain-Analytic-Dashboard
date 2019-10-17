@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
-import { FetchTransactionsAction } from '../../actions/ethereum/types';
+import { FetchTransactionsAction } from '../../actions/types';
 import { Transactions } from '../../../types';
 import * as ethereumActions from '../../actions/ethereum/transactions';
 
@@ -15,10 +15,10 @@ async function fetchTransactions(walletHash: string, page: number, resultsPerPag
 function* doFetchTransactions(action: FetchTransactionsAction) {
   const { transactionsData } = action;
   const {
-    ETHEREUM_FETCH_TRANSACTIONS_FAILED ,
-    ETHEREUM_FETCH_TRANSACTIONS_STARTED,
-    ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED,
-    ETHEREUM_SET_TRANSACTIONS
+   ETHEREUM_FETCH_TRANSACTIONS_FAILED ,
+   ETHEREUM_FETCH_TRANSACTIONS_STARTED,
+   ETHEREUM_FETCH_TRANSACTIONS_SUCCEEDED,
+   ETHEREUM_SET_TRANSACTIONS
   } = ethereumActions;
 
   yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_STARTED });

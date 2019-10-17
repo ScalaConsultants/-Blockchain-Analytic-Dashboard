@@ -17,7 +17,7 @@ const DashboardTableRow = (props: Row) => {
           restLabel={false}
           shadowSegment={false}
           activeSegmentZoom={false}
-          minPercentage={2}
+          minPercentage={0.5}
           increaseSegmentSize={2}
         />
       </Grid>

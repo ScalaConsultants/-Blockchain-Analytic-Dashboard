@@ -4,7 +4,7 @@ import tezos from "./tezos";
 import notifications from './notifications';
 
 export default combineReducers({
-  ethereum,
-  notifications,
-  tezos
+    notifications,
+    ethereum,
+    tezos
 });

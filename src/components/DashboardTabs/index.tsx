@@ -1,3 +1,3 @@
-import DashboardTabs from './DashboardTabs-container';
+import DashboardTabs from './DashboardTabs-redux';
 
 export default DashboardTabs;

@@ -1,4 +1,4 @@
-import { SetTransactionsSummedAction, FetchTransactionsSummedAction } from './types';
+import { SetTransactionsSummedAction, FetchTransactionsSummedAction } from '../types';
 import { TransactionSummed, TransactionsSummedData } from '../../../types';
 
 export const ETHEREUM_FETCH_TRANSACTIONS_SUMMED = 'ETHEREUM_FETCH_TRANSACTIONS_SUMMED';

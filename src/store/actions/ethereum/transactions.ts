@@ -1,4 +1,4 @@
-import { SetTransactionsAction, FetchTransactionsAction } from './types';
+import { SetTransactionsAction, FetchTransactionsAction } from '../types';
 import { Transaction, TransactionsData } from '../../../types';
 
 export const ETHEREUM_FETCH_TRANSACTIONS = 'ETHEREUM_FETCH_TRANSACTIONS';

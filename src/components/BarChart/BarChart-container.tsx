@@ -120,6 +120,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
   useEffect((): void => {
     actions.fetchEthereumWallets();
+    actions.fetchTezosWallets();
   }, []);
 
   segments = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {

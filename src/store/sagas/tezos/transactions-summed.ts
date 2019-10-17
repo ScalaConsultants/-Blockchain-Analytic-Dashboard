@@ -2,11 +2,11 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 import { FetchTransactionsSummedAction } from '../../actions/types';
 import { TransactionsSummed } from '../../../types';
-import * as ethereumActions from '../../actions/ethereum/transactions-summed';
+import * as tezosActions from '../../actions/tezos/transactions-summed';
 
 async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
   const res = await fetch(
-    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/linechart?limit=100&walletHash=${walletHash}`
+    `${process.env.REACT_APP_HOST}/api/v1/tezos/wallets/linechart?limit=100&walletHash=${walletHash}`
   );
   return res.json();
 }
@@ -14,33 +14,34 @@ async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsS
 function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
   const {transactionsSummedData} = action;
   const {
-    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED,
-    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED,
-    ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED,
-    ETHEREUM_SET_TRANSACTIONS_SUMMED
-  } = ethereumActions;
+    TEZOS_FETCH_TRANSACTIONS_SUMMED_FAILED,
+    TEZOS_FETCH_TRANSACTIONS_SUMMED_STARTED,
+    TEZOS_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED,
+    TEZOS_SET_TRANSACTIONS_SUMMED
+  } = tezosActions;
 
-  yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_STARTED });
+  yield put({ type: TEZOS_FETCH_TRANSACTIONS_SUMMED_STARTED });
 
   const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash);
 
   try {
     if (transactionsSummed.length > 0) {
       yield put({
-        type: ETHEREUM_SET_TRANSACTIONS_SUMMED,
+        type: TEZOS_SET_TRANSACTIONS_SUMMED,
         transactionsSummed
       });
     }
-    yield put({ type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED });
+    yield put({ type: TEZOS_FETCH_TRANSACTIONS_SUMMED_SUCCEEDED });
 
-  } catch (error) {
-    yield put({type: ETHEREUM_FETCH_TRANSACTIONS_SUMMED_FAILED, code: error.code});
+  } catch (e) {
+    // TODO temporary solution - I will fix it in next step
+    yield put({type: TEZOS_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.code});
   }
 }
 
 export function* watchDoFetchTransactionsSummed() {
   yield takeEvery(
-    ethereumActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
+    tezosActions.TEZOS_FETCH_TRANSACTIONS_SUMMED,
     doFetchTransactionsSummed
   );
 }

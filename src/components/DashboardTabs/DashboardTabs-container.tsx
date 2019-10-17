@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
 import DashboardTabsView from './DashboardTabs-view';
 import { useDashboardStyles } from './DashboardTabs-styles';
 
-const DashboardTabs = () => {
+const DashboardTabs = (props: any) => {
+
+  const { actions, match, history } = props;
+
   const classes = useDashboardStyles();
 
-  const tabsList = ['Buying', 'Selling', 'Data'];
+  const tabsList = ['buyer', 'seller', 'data'];
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(tabsList.findIndex((name: string) => name === match.params.groupBy));
 
-  const onClick = (index: number) => setActive(index);
+  const onClick = (index: number) => {
+    setActive(index);
+    
+    history.replace(`/${tabsList[index]}/${match.params.blockchains}/${match.params.limit}/${match.params.from}/${match.params.to}/`);
+    actions.fetchEthereumWallets({groupBy: tabsList[index].toLowerCase()});
+  };
 
   const tabs = tabsList.map((name, index) => {
     const underlineClasses = clsx([classes.underline], {
@@ -23,7 +32,7 @@ const DashboardTabs = () => {
     return (
       <Grid item xs={4} key={name}>
         <Grid container justify="center" className={tabClasses} onClick={() => onClick(index)}>
-          <Grid item>{name}</Grid>
+          <Grid item>{name.toUpperCase()}</Grid>
           <Grid item className={underlineClasses} />
         </Grid>
       </Grid>
@@ -33,4 +42,4 @@ const DashboardTabs = () => {
   return <DashboardTabsView tabs={tabs} />;
 };
 
-export default DashboardTabs;
+export default withRouter(DashboardTabs);

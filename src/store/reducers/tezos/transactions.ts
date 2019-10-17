@@ -1,11 +1,15 @@
-import { TEZOS_SET_TRANSACTIONS } from '../../actions/tezos/transactions';
+import { TEZOS_SET_TRANSACTIONS, TEZOS_FLUSH_TRANSACTIONS } from '../../actions/tezos/transactions';
+import { Transaction } from '../../../types';
+import { SetTransactionsAction } from '../../actions/types';
 
-const initState: any = [];
+const initState: Transaction[] = [];
 
-const transactions = (state = initState, action: any): any => {
+const transactions = (state = initState, action: SetTransactionsAction): Transaction[] => {
   switch (action.type) {
     case TEZOS_SET_TRANSACTIONS:
-      return action.transactions;
+      return [...state, ...action.transactions];
+    case TEZOS_FLUSH_TRANSACTIONS:
+      return initState;
     default:
       return state;
   }

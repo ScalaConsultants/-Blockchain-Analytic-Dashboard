@@ -1,5 +1,5 @@
 import React from 'react';
-import Filters from '../Filters';
+import Filters from '../DashboardFilters';
 import DashboardTabs from '../DashboardTabs';
 import DashboardTable from '../DashboardTable';
 

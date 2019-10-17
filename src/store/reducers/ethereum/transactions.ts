@@ -1,6 +1,6 @@
 import { ETHEREUM_SET_TRANSACTIONS, ETHEREUM_FLUSH_TRANSACTIONS } from '../../actions/ethereum/transactions';
 import { Transaction } from '../../../types';
-import { SetTransactionsAction } from '../../actions/ethereum/types';
+import { SetTransactionsAction } from '../../actions/types';
 
 const initState: Transaction[] = [];
 
