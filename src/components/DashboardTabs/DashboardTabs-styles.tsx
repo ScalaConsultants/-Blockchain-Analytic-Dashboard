@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
 export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
