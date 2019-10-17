@@ -6,7 +6,7 @@ import {
   DEFAULT_LINE_HEIGHT
 } from '../constants';
 
-const button = {
+const body1 = {
   fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: DEFAULT_FONT_SIZE,
   fontWeight: DEFAULT_FONT_WEIGHT,
@@ -14,4 +14,4 @@ const button = {
   lineHeight: DEFAULT_LINE_HEIGHT
 };
 
-export default button;
+export default body1;

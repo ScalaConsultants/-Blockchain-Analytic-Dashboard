@@ -86,6 +86,7 @@ export interface TransactionsSummedData {
 
 export interface ExtendedTheme extends Theme {
   constants: {
+    PRIMARY_MAIN_COLOR: string,
     MARKET_COLOR: string,
     PRIVATE_COLOR: string,
     DAPP_COLOR: string,
