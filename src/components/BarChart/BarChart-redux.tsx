@@ -4,15 +4,17 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 import BarChartContainer from './BarChart-container';
 import { State, Customization } from './types';
 import { Wallets } from '../../types';
+import { getBlockchainByDatasource } from '../../store/reducers/helpers';
 
 import * as ethereumWalletActions from '../../store/actions/ethereum/wallets';
 import * as tezosWalletActions from '../../store/actions/tezos/wallets';
 
 const BarChartRedux = (props: Customization) => {
+    const dataSource  = 'ETHEREUM'
 
     const mapState = (state: State): Wallets => ({
-        status: state.ethereum.status,
-        wallets: state.ethereum.wallets
+        status: getBlockchainByDatasource(state, dataSource).status,
+        wallets: getBlockchainByDatasource(state, dataSource).wallets
     });
     const dispatch = useDispatch();
 
