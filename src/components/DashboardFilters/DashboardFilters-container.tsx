@@ -20,10 +20,10 @@ const Filters = (props: any) => {
 
   const checkActiveZoom = (label: string) => {
     const zoom = urlParams.to - urlParams.from;
-    return (label === '1 day' && zoom === 86400) ? true : (label === '7 days' && zoom !== 86400) ? true : false;
+    return (label === '1 day' && zoom === 86400) ? true : (label === '7 days' && zoom !== 86400);
   };
 
-  const checkActiveTopList = (label: string) => label === urlParams.limit ? true : false;
+  const checkActiveTopList = (label: string) => label === urlParams.limit;
 
   const [activeBlockchainButtons, setBlockchainButtons]: [Record<string, boolean>, Function] = useState({
     'BTC': checkActiveBlockchains('BTC'),
@@ -88,7 +88,7 @@ const Filters = (props: any) => {
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
   };
 
-  const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) =>  filterObj[item] === true);
+  const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) =>  !!filterObj[item]);
 
   const renderButtons = (buttonLabels: Record<string, boolean>) =>
     Object.keys(buttonLabels).map((buttonLabel: string) => {

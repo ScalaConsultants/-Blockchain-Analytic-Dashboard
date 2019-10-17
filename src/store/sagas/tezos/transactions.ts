@@ -36,7 +36,7 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
       yield put({ type: TEZOS_FETCH_TRANSACTIONS_SUCCEEDED });
     } catch (e) {
       // TODO temporary solution - I will fix it in next step
-      yield put({type: TEZOS_FETCH_TRANSACTIONS_FAILED, message: e.message});
+      yield put({type: TEZOS_FETCH_TRANSACTIONS_FAILED, message: e.code});
     }
 }
 

@@ -35,7 +35,7 @@ function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
 
   } catch (e) {
     // TODO temporary solution - I will fix it in next step
-    yield put({type: TEZOS_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.message});
+    yield put({type: TEZOS_FETCH_TRANSACTIONS_SUMMED_FAILED, message: e.code});
   }
 }
 
