@@ -1,37 +1,44 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
+import { withRouter } from 'react-router-dom';
 
-import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
+import { fetchTransactionsByDatasource, flushTransactionstByDatasource } from '../../store/actions/blockchainSelectors';
+import { getBlockchainByDatasource } from '../../store/reducers/blockchainSelectors';
+
 import TransactionListContainer from './TransactionsList-container';
 import { State, TransactionsListPropsRedux } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
-const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
+const TransactionListRedux = (props: any) => {
   const mapState = (state: State): Transactions => ({
-    status: state.ethereum.status,
-    transactions: state.ethereum.transactions
-  });
+    status: getBlockchainByDatasource(state, blockchain).status,
+    transactions: getBlockchainByDatasource(state, blockchain).transactionsSummed
+    });
+
+  const blockchain = props.match.params.walletSource;
+  const description = props.description;
+
 
   const dispatch = useDispatch();
 
-  const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
+  const fetchTransactions = (transactionsData: TransactionsData): void => {
     dispatch({
-      type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
+      type: fetchTransactionsByDatasource(blockchain),
       transactionsData
     });
   };
 
-  const flushEthereumTransactions = (): void => {
+  const flushTransactions = (): void => {
     dispatch({
-      type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
+      type: flushTransactionstByDatasource(blockchain),
     });
   };
 
   const { status, transactions } = useMappedState(mapState);
 
   const actions = {
-    fetchEthereumTransactions,
-    flushEthereumTransactions
+    fetchTransactions,
+    flushTransactions
   };
 
   return (
@@ -40,8 +47,9 @@ const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
       description={description}
       status={status}
       transactions={transactions}
+      params={props.match.params}
     />
   );
 };
 
-export default TransactionListRedux;
+export default withRouter(TransactionListRedux);

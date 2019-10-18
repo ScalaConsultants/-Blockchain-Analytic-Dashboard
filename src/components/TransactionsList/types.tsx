@@ -17,8 +17,8 @@ export interface WalletHash {
 }
 
 export interface TransactionsListActions {
-  fetchEthereumTransactions: Function;
-  flushEthereumTransactions: Function;
+  fetchTransactions: Function;
+  flushTransactions: Function;
 }
 
 export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {
@@ -28,4 +28,5 @@ export interface TransactionsListProps extends Transactions, RouteComponentProps
 
 export interface TransactionsListPropsRedux {
   description: string;
+  params: any;
 }
