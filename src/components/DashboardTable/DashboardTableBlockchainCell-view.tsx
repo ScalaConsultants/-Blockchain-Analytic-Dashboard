@@ -11,7 +11,7 @@ const DashboardTableBlockchainCell = ({ name, icon }: BlockchainCell) => {
       <Grid item xs={3}>
         <img src={`${PUBLIC_URL}/icons/${icon}.png`} className={classes.img} />
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={9} className={classes.name}>
         {name}
       </Grid>
     </Grid>

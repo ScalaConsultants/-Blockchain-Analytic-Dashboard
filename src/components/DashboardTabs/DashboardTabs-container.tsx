@@ -19,7 +19,6 @@ const DashboardTabs = (props: any) => {
     setActive(index);
     
     history.replace(`/${tabsList[index]}/${match.params.blockchains}/${match.params.limit}/${match.params.from}/${match.params.to}/`);
-    actions.fetchEthereumWallets({groupBy: tabsList[index].toLowerCase()});
   };
 
   const tabs = tabsList.map((name, index) => {
@@ -32,7 +31,7 @@ const DashboardTabs = (props: any) => {
     return (
       <Grid item xs={4} key={name}>
         <Grid container justify="center" className={tabClasses} onClick={() => onClick(index)}>
-          <Grid item>{name.toUpperCase()}</Grid>
+          <Grid item className={classes.name}>{name}</Grid>
           <Grid item className={underlineClasses} />
         </Grid>
       </Grid>

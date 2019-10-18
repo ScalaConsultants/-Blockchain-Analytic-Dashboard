@@ -18,7 +18,13 @@ export interface BarChartActions {
 }
 
 export interface WalletHash {
-  walletHash: string
+  walletHash: string,
+  walletSource: string,
+  groupBy: string,
+  blockchains: string, 
+  limit: string, 
+  from: string, 
+  to: string
 }
 
 export interface BarChartProps extends RouteComponentProps<WalletHash> {
@@ -35,6 +41,7 @@ export interface State {
 }
 
 export interface Customization {
+  walletSource?: string,
   minPercentage?: number,
   restLabel?: boolean,
   increaseSegmentSize?: number,
