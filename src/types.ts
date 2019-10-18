@@ -102,5 +102,5 @@ export interface ExtendedTheme extends Theme {
 
 export enum Blockchains {
   ETH = 'ethereum',
-  TZX = 'tezos'
+  XTZ = 'tezos'
 }

@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-
+import { Blockchains } from '../../types';
+ 
 import useFiltersStyles from './DashboardFilters-styles';
 import { FiltersProps } from './types'
 
@@ -149,8 +150,8 @@ const Filters = (props: any) => {
 
   const fetchNewData = (activeBlockchains: string[]) => {
     activeBlockchains.forEach((blockchain: string) => {
-      blockchain === 'ETH' && actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, 'ETHEREUM');
-      blockchain === 'XTZ' && actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, 'TEZOS');
+      blockchain === 'ETH' && actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, Blockchains.ETH);
+      blockchain === 'XTZ' && actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, Blockchains.XTZ);
     })
   }
 

@@ -5,9 +5,9 @@ export const getBlockchainByDatasource = (
   dataSource: string
 ): any => {
   switch (dataSource) {
-    case Blockchains.ETH:
+    case Blockchains.XTZ:
       return state.tezos;
-    case Blockchains.TZX:
+    case Blockchains.ETH:
       return state.ethereum;
     default:
       return state.tezos;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { withRouter } from 'react-router-dom';
 
 import BarChartView from './BarChart-view';
 
