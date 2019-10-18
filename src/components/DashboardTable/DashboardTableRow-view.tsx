@@ -19,7 +19,7 @@ const DashboardTableRow = (props: Row) => {
           shadowSegment={false}
           activeSegmentZoom={false}
           minPercentage={0.5}
-          increaseSegmentSize={1}
+          increaseSegmentSize={2}
           walletSource={props.row.name}
         />
       </Grid>
