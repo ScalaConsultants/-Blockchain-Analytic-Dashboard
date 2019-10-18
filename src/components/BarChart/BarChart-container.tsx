@@ -12,6 +12,7 @@ import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
   const { wallets = [], actions, match, status: { walletsIsFetching }, override } = props;
+  const walletSource = override.walletSource || match.params.walletSource;
 
   const segmentsContainer: React.MutableRefObject<any> = useRef();
 
@@ -95,9 +96,10 @@ const BarChartContainer = (props: BarChartProps) => {
     )
   }
 
-  const createSegment = (walletHash: string, percentage: number, position: number, index: number) =>
-    (
-      <Link to={`/wallet/${walletHash}`} key={walletHash}>
+  const createSegment = (walletHash: string, percentage: number, position: number, index: number) => {
+    const { groupBy, blockchains, limit, from, to } = match.params;
+    return (
+      <Link to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`} key={walletHash}>
         <div
           className={getOuterClasses(index)}
           style={getStyle(position, percentage)}
@@ -110,6 +112,22 @@ const BarChartContainer = (props: BarChartProps) => {
         </div>
       </Link>
     );
+  }
+    
+
+  const fetchByBuyerOrSeller = () => {
+    const { groupBy } = match.params;
+
+    switch (walletSource) {
+      case 'ethereum':
+        actions.fetchEthereumWallets(groupBy);
+        break;
+      case 'tezos':
+        actions.fetchTezosWallets(groupBy)
+      default:
+        break;
+    }
+  };
 
   useEffect((): void => {
     updateActiveSegment({
@@ -118,10 +136,19 @@ const BarChartContainer = (props: BarChartProps) => {
     })
   }, [walletHash]);
 
-  useEffect((): void => {
-    actions.fetchEthereumWallets();
-    actions.fetchTezosWallets();
-  }, []);
+  useEffect(() => {
+    updateActiveSegment({
+      isActive: true,
+      index: wallets.findIndex(val => val.walletHash === walletHash)
+    })
+  }, [wallets])
+
+  useEffect(() => {
+    const { groupBy } = match.params;
+    if (groupBy === 'buyer' || groupBy === 'seller') {
+      fetchByBuyerOrSeller();
+    }
+  }, [match.params.groupBy])
 
   segments = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
     const { walletHash, percentage } = object;

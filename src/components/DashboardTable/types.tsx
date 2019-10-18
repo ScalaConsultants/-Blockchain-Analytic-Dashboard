@@ -10,3 +10,11 @@ export interface Row {
 export interface Table {
   rows: BlockchainCell[]
 };
+
+export interface Props {
+  match: {
+    params: {
+      blockchains: string
+    }
+  }
+}

@@ -7,6 +7,7 @@ import { Row } from './types';
 
 const DashboardTableRow = (props: Row) => {
   const classes = useDashboardTableStyles();
+  
   return (
     <Grid container alignItems="center" className={classes.row}>
       <Grid item xs={3}>
@@ -19,6 +20,7 @@ const DashboardTableRow = (props: Row) => {
           activeSegmentZoom={false}
           minPercentage={0.5}
           increaseSegmentSize={2}
+          walletSource={props.row.name}
         />
       </Grid>
     </Grid>

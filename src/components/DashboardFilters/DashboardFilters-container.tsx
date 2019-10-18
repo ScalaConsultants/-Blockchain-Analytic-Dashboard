@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
+import { useSnackbar } from 'notistack';
 
 import useFiltersStyles from './DashboardFilters-styles';
 import { FiltersProps } from './types'
@@ -12,6 +13,8 @@ const Filters = (props: any) => {
   const { actions, match } = props;
 
   const urlParams = match.params;
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const checkActiveBlockchains = (label:string) => {
     const activeBlockchains = urlParams.blockchains.split(',');
@@ -125,6 +128,14 @@ const Filters = (props: any) => {
     const activeTopList = activeFilters(activeTopListButtons);
     const dates: number[] = setZoomFilter(activeZoom); 
 
+    if (!activeBlockchain.length) {
+      enqueueSnackbar('At least one blockchain required', {
+        variant: 'info',
+        persist: false,
+      });
+      return;
+    } 
+
     newFilters = {
       limit: Number(activeTopList[0]),
       type: activeBlockchain,
@@ -133,16 +144,6 @@ const Filters = (props: any) => {
     }  
 
     setFilters({...newFilters});
-
-    isDataFetched && fetchNewData(activeBlockchain);
-  }
-
-  const fetchNewData = (activeBlockchains: string[]) => {
-    activeBlockchains.forEach((blockchain: string) => {
-      console.log(filters);
-      blockchain === 'ETH' && actions.fetchEthereumWallets({limit: filters.limit, from: filters.from, to: filters.to});
-      blockchain === 'XTZ' && actions.fetchTezosWallets({limit: filters.limit, from: filters.from, to: filters.to});
-    })
   }
 
   useEffect((): void => {
