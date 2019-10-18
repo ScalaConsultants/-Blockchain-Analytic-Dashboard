@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { withRouter } from 'react-router-dom';
 
 import BarChartView from './BarChart-view';
 
@@ -9,9 +8,11 @@ import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
 
 import { useBarChartSegmentStyles } from './BarChart-styles';
+import { Blockchains } from '../../types';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { wallets = [], actions, match, status: { walletsIsFetching }, override } = props;
+  const { wallets = [], actions, status: { walletsIsFetching }, override } = props;
+  const {match} = override;
   const walletSource = override.walletSource || match.params.walletSource;
 
   const segmentsContainer: React.MutableRefObject<any> = useRef();
@@ -113,21 +114,6 @@ const BarChartContainer = (props: BarChartProps) => {
       </Link>
     );
   }
-    
-
-  const fetchByBuyerOrSeller = () => {
-    const { groupBy } = match.params;
-
-    switch (walletSource) {
-      case 'ethereum':
-        actions.fetchEthereumWallets(groupBy);
-        break;
-      case 'tezos':
-        actions.fetchTezosWallets(groupBy)
-      default:
-        break;
-    }
-  };
 
   useEffect((): void => {
     updateActiveSegment({
@@ -146,7 +132,7 @@ const BarChartContainer = (props: BarChartProps) => {
   useEffect(() => {
     const { groupBy } = match.params;
     if (groupBy === 'buyer' || groupBy === 'seller') {
-      fetchByBuyerOrSeller();
+      actions.fetchWalletsByBlockchain(groupBy, walletSource);
     }
   }, [match.params.groupBy])
 
@@ -174,4 +160,4 @@ const BarChartContainer = (props: BarChartProps) => {
   return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />
 };
 
-export default withRouter(BarChartContainer);
+export default BarChartContainer;

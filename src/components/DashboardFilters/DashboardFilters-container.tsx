@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-
+import { Blockchains } from '../../types';
+ 
 import useFiltersStyles from './DashboardFilters-styles';
 import { FiltersProps } from './types'
 
@@ -144,6 +145,13 @@ const Filters = (props: any) => {
     }  
 
     setFilters({...newFilters});
+    isDataFetched && fetchNewData(activeBlockchain);
+  }
+
+  const fetchNewData = (activeBlockchains: string[]) => {
+    activeBlockchains.forEach((blockchain: string) => {
+      actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, blockchain);
+    })
   }
 
   useEffect((): void => {

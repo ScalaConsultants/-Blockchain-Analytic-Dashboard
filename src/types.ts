@@ -98,3 +98,8 @@ export interface ExtendedTheme extends Theme {
     DEFAULT_LINE_HEIGHT: string
   }
 }
+
+export enum Blockchains {
+  ETH = 'ETH',
+  XTZ = 'XTZ'
+}

@@ -8,8 +8,8 @@ import { BlockchainCell, Props } from './types';
 const DashboardTable = ({ match: { params: { blockchains }}}: Props) => {
 
   const blockchainNamesMap: any = {
-    ETH: { name: 'ethereum', icon: 'eth'},
-    XTZ: { name: 'tezos', icon: 'tezos'}
+    ETH: { name: 'ETH', icon: 'eth'},
+    XTZ: { name: 'XTZ', icon: 'tezos'}
   }
 
   const rows = blockchains.split(',').map((name: string): BlockchainCell  => blockchainNamesMap[name]);
