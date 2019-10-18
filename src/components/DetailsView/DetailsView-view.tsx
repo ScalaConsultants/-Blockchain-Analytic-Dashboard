@@ -21,6 +21,8 @@ const DetailsView = (props: DetailsViewProps) => {
         top: '100'
     }
 
+    console.log("KJJKHKHKJJHK", props);
+
     const update = (value: string): void => {
         updateDescription(value);
     };
@@ -35,6 +37,7 @@ const DetailsView = (props: DetailsViewProps) => {
                 blockchain="Ethereum"
                 updateDescription={update}
                 activeFilters={activeFilters}
+                params={props.match.params}
             />
             <Grid container justify="flex-start" alignItems="center">
                 <Grid item xs={1} className={classes.label}>
