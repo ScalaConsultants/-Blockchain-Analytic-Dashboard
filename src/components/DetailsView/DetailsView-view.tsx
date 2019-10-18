@@ -41,7 +41,7 @@ const DetailsView = (props: DetailsViewProps) => {
                     ETH
                 </Grid>
                 <Grid item xs={10} className={classes.barchart}>
-                    <BarChart increaseSegmentSize={1.5}/>
+                    <BarChart increaseSegmentSize={1}/>
                 </Grid>
             </Grid>
             <LineChart />

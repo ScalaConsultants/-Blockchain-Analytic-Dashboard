@@ -1,17 +1,23 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import DashboardTableView from './DashboardTable-view';
 
-const createData = (name: string, icon: string ) => ({ name, icon })
+import { Table } from './types';
 
-const rows = [
-  createData('Ethereum', 'eth'),
-  createData('Tezos', 'tezos'),
-];
+const DashboardTable = (props: any) => {
+  const { match: { params: { blockchains } } } = props;
 
-const DashboardTable = () => {
+  const blockchainNamesMap: any = {
+    ETH: { name: 'ethereum', icon: 'eth'},
+    XTZ: { name: 'tezos', icon: 'tezos'}
+  }
+
+  const rows = blockchains.split(',').map((name: string): Table  => blockchainNamesMap[name]);
+
   return (
     <DashboardTableView rows={rows}/>
   );
 }
 
-export default DashboardTable;
+export default withRouter(DashboardTable);

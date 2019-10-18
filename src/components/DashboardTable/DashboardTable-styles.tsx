@@ -35,5 +35,10 @@ export const useDashboardTableStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   barchart: {
     height: '38px'
+  },
+  name: {
+    '&::first-letter': {
+      textTransform: 'uppercase'
+    }
   }
 }));

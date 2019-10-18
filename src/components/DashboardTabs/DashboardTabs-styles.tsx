@@ -39,5 +39,10 @@ export const useDashboardStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   padding: {
     padding: '0 30px 0 0'
+  },
+  name: {
+    '&::first-letter': {
+      textTransform: 'uppercase'
+    }
   }
 }));

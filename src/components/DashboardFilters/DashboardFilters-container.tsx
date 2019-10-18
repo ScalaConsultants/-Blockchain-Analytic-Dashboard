@@ -134,16 +134,17 @@ const Filters = (props: any) => {
 
     setFilters({...newFilters});
 
-    isDataFetched && fetchNewData(activeBlockchain);
+    // isDataFetched && fetchNewData(activeBlockchain);
   }
 
-  const fetchNewData = (activeBlockchains: string[]) => {
-    activeBlockchains.forEach((blockchain: string) => {
-      console.log(filters);
-      blockchain === 'ETH' && actions.fetchEthereumWallets({limit: filters.limit, from: filters.from, to: filters.to});
-      blockchain === 'XTZ' && actions.fetchTezosWallets({limit: filters.limit, from: filters.from, to: filters.to});
-    })
-  }
+  // //TODO:
+  // const fetchNewData = (activeBlockchains: string[]) => {
+  //   activeBlockchains.forEach((blockchain: string) => {
+  //     // console.log(filters);
+  //     // blockchain === 'ETH' && actions.fetchEthereumWallets({limit: filters.limit, from: filters.from, to: filters.to});
+  //     // blockchain === 'XTZ' && actions.fetchTezosWallets({limit: filters.limit, from: filters.from, to: filters.to});
+  //   })
+  // }
 
   useEffect((): void => {
     handleRefresh(false);

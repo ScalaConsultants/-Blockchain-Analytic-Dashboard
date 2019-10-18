@@ -14,21 +14,22 @@ const BarChartRedux = (props: Customization) => {
         status: state.ethereum.status,
         wallets: state.ethereum.wallets
     });
+    
     const dispatch = useDispatch();
 
     const { status, wallets } = useMappedState(mapState);
 
-    const fetchEthereumWallets = (): void => {
+    const fetchEthereumWallets = (groupBy: string): void => {
         dispatch({
           type: ethereumWalletActions.ETHEREUM_FETCH_WALLETS,
-          payload: {limit: 10}
+          payload: {limit: 10, groupBy}
         });
       };
     
-    const fetchTezosWallets = (): void => {
+    const fetchTezosWallets = (groupBy: string): void => {
         dispatch({
           type: tezosWalletActions.TEZOS_FETCH_WALLETS,
-          payload: {limit: 10}
+          payload: {limit: 10, groupBy}
         });
       };
 
