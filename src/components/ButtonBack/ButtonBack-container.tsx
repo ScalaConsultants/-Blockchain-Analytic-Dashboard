@@ -4,7 +4,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router'
 import useButtonBackStyles from './ButtonBack-styles';
 
-const ButtonBack = ( { customBackLink = '/' }: any ) => {
+const ButtonBack = ( { customBackLink = '/' } ) => {
   const history = useHistory();
   const { back } = useButtonBackStyles();
 

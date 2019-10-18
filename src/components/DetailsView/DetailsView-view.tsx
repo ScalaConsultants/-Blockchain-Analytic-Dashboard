@@ -21,8 +21,6 @@ const DetailsView = (props: DetailsViewProps) => {
         top: '100'
     }
 
-    console.log("KJJKHKHKJJHK", props);
-
     const update = (value: string): void => {
         updateDescription(value);
     };
