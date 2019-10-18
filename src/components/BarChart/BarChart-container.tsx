@@ -11,7 +11,8 @@ import { Wallet } from '../../types';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { wallets = [], actions, match, status: { walletsIsFetching }, override, blockchain } = props;
+  const { wallets = [], actions, status: { walletsIsFetching }, override } = props;
+  const {match} = override;
   const walletSource = override.walletSource || match.params.walletSource;
 
   const segmentsContainer: React.MutableRefObject<any> = useRef();
@@ -159,4 +160,4 @@ const BarChartContainer = (props: BarChartProps) => {
   return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />
 };
 
-export default withRouter(BarChartContainer);
+export default BarChartContainer;

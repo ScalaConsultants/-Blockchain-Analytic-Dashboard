@@ -6,13 +6,14 @@ import { State, Customization } from './types';
 import { Wallets } from '../../types';
 import { getBlockchainByDatasource } from '../../store/reducers/blockchainSelectors';
 import { getWalletByDatasource } from '../../store/actions/blockchainSelectors';
+import { withRouter } from 'react-router-dom';
 
 const BarChartRedux = (props: Customization) => {
-  const blockchain = 'ETHEREUM'
+  const { walletSource, match }  = props;
 
   const mapState = (state: State): Wallets => ({
-    status: getBlockchainByDatasource(state, blockchain).status,
-    wallets: getBlockchainByDatasource(state, blockchain).wallets
+    status: getBlockchainByDatasource(state, walletSource || match.params.walletSource).status,
+    wallets: getBlockchainByDatasource(state, walletSource || match.params.walletSource).wallets
   });
   const dispatch = useDispatch();
 
@@ -35,10 +36,9 @@ const BarChartRedux = (props: Customization) => {
       status={status}
       wallets={wallets}
       override={{ ...props }}
-      blockchain={blockchain}
     />
   )
 
 };
 
-export default BarChartRedux;
+export default withRouter(BarChartRedux);

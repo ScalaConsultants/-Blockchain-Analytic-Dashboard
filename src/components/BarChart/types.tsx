@@ -27,12 +27,11 @@ export interface WalletHash {
   to: string
 }
 
-export interface BarChartProps extends RouteComponentProps<WalletHash> {
+export interface BarChartProps {
   wallets: Wallet[],
   actions: BarChartActions,
   status: StatusRedux,
   override: Customization,
-  blockchain: string
 }
 
 export interface State {
@@ -40,7 +39,7 @@ export interface State {
   notifications: NotificationTypes
 }
 
-export interface Customization {
+export interface Customization extends RouteComponentProps<WalletHash> {
   walletSource?: string,
   minPercentage?: number,
   restLabel?: boolean,
