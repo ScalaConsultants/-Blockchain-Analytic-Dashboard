@@ -69,14 +69,14 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
 
   // on handleScroll fetch next page of transactions
   useEffect((): void => {
-    checkWalletHashAndFetchTransactions(walletHash, pageNumber);
+    // checkWalletHashAndFetchTransactions(walletHash, pageNumber);
   }, [pageNumber]);
 
   // on route change (when user clicked on bar-chart) - cleared transactions list and download the first page
   useEffect((): void => {
-    actions.flushTransactions();
+    // actions.flushTransactions();
     setPageNumber(1);
-    checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber);
+    // checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber);
   }, [match.params.walletHash]);
 
   return (

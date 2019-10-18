@@ -9,26 +9,23 @@ import TransactionListContainer from './TransactionsList-container';
 import { State, TransactionsListPropsRedux } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
-const TransactionListRedux = (props: any) => {
+const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
+  
   const mapState = (state: State): Transactions => ({
     status: getBlockchainByDatasource(state, blockchain).status,
     transactions: getBlockchainByDatasource(state, blockchain).transactionsSummed
-    });
-
-  const blockchain = props.match.params.walletSource;
-  const description = props.description;
-
+  });
 
   const dispatch = useDispatch();
 
-  const fetchTransactions = (transactionsData: TransactionsData): void => {
+  const fetchTransactions = (transactionsData: TransactionsData, blockchain: string): void => {
     dispatch({
       type: fetchTransactionsByDatasource(blockchain),
       transactionsData
     });
   };
 
-  const flushTransactions = (): void => {
+  const flushTransactions = (blockchain: string): void => {
     dispatch({
       type: flushTransactionstByDatasource(blockchain),
     });
@@ -47,9 +44,8 @@ const TransactionListRedux = (props: any) => {
       description={description}
       status={status}
       transactions={transactions}
-      params={props.match.params}
     />
   );
 };
 
-export default withRouter(TransactionListRedux);
+export default TransactionListRedux;
