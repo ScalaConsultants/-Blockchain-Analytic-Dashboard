@@ -19,7 +19,6 @@ const DashboardTabs = (props: any) => {
     setActive(index);
     
     history.replace(`/${tabsList[index]}/${match.params.blockchains}/${match.params.limit}/${match.params.from}/${match.params.to}/`);
-    // actions.fetchEthereumWallets({groupBy: tabsList[index].toLowerCase()});
   };
 
   const tabs = tabsList.map((name, index) => {
