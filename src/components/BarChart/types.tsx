@@ -14,7 +14,7 @@ export interface Accumulator {
 }
 
 export interface BarChartActions {
-  fetchWalletsByDataSource: Function,
+  fetchWalletsByBlockchain: Function,
 }
 
 export interface WalletHash {
@@ -26,7 +26,7 @@ export interface BarChartProps extends RouteComponentProps<WalletHash> {
   actions: BarChartActions,
   status: StatusRedux,
   override: Customization,
-  dataSource: string
+  blockchain: string
 }
 
 export interface State {

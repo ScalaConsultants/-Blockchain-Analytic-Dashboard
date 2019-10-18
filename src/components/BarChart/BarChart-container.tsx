@@ -11,7 +11,7 @@ import { Wallet } from '../../types';
 import { useBarChartSegmentStyles } from './BarChart-styles';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { wallets = [], actions, match, status: { walletsIsFetching }, override, dataSource } = props;
+  const { wallets = [], actions, match, status: { walletsIsFetching }, override, blockchain } = props;
 
   const segmentsContainer: React.MutableRefObject<any> = useRef();
 
@@ -119,7 +119,7 @@ const BarChartContainer = (props: BarChartProps) => {
   }, [walletHash]);
 
   useEffect((): void => {
-    actions.fetchWalletsByDataSource(dataSource);
+    actions.fetchWalletsByBlockchain(blockchain);
   }, []);
 
   segments = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
