@@ -35,6 +35,7 @@ const DetailsView = (props: DetailsViewProps) => {
                 blockchain="Ethereum"
                 updateDescription={update}
                 activeFilters={activeFilters}
+                params={props.match.params}
             />
             <Grid container justify="flex-start" alignItems="center">
                 <Grid item xs={1} className={classes.label}>

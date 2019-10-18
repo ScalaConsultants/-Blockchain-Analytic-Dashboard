@@ -7,17 +7,18 @@ import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 import ButtonBack from '../ButtonBack';
 
-const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain, activeFilters }: ViewProps) => {
+const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain, activeFilters, params }: ViewProps) => {
   const { tab, zoom, top } = activeFilters;
   const classes = DetailsMenuStyles();
   const classesRoot = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
   const classesInfo = clsx([classes.margin, classes.white]);
   const classesFilters = clsx([classes.margin, classes.grey, classes.fontWeightNormal]);
+  const { groupBy, blockchains, limit, from, to } = params;
 
   return (
     <Grid container direction="row" alignItems="center" className={classesRoot}>
       <Grid item xs={1}>
-        <ButtonBack/>
+        <ButtonBack customBackLink={`/${groupBy}/${blockchains}/${limit}/${from}/${to}`}/>
       </Grid>
       <Grid item xs={8}>
         <Grid container alignItems="center" className={classesInfo}>
