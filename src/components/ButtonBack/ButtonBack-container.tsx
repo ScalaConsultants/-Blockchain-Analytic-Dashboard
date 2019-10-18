@@ -8,11 +8,7 @@ const ButtonBack = () => {
   const history = useHistory();
   const { back } = useButtonBackStyles();
 
-  const customGoBack = () => {
-    if(history.location.key) {
-      return history.goBack();
-    }
-    return history.push('/') };
+  const customGoBack = () => history.location.key ? history.goBack() : history.push('/');
 
   return (
     <Button
