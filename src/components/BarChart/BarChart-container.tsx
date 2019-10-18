@@ -8,6 +8,7 @@ import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
 
 import { useBarChartSegmentStyles } from './BarChart-styles';
+import { Blockchains } from '../../types';
 
 const BarChartContainer = (props: BarChartProps) => {
   const { wallets = [], actions, status: { walletsIsFetching }, override } = props;

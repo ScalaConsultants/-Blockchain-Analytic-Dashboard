@@ -99,8 +99,7 @@ export interface ExtendedTheme extends Theme {
   }
 }
 
-
 export enum Blockchains {
-  ETH = 'ethereum',
-  XTZ = 'tezos'
+  ETH = 'ETH',
+  XTZ = 'XTZ'
 }

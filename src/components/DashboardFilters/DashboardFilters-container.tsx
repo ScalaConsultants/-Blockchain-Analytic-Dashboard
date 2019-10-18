@@ -150,8 +150,7 @@ const Filters = (props: any) => {
 
   const fetchNewData = (activeBlockchains: string[]) => {
     activeBlockchains.forEach((blockchain: string) => {
-      blockchain === 'ETH' && actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, Blockchains.ETH);
-      blockchain === 'XTZ' && actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, Blockchains.XTZ);
+      actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, blockchain);
     })
   }
 
