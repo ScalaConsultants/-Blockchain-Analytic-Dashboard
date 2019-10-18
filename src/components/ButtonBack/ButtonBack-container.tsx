@@ -8,10 +8,16 @@ const ButtonBack = () => {
   const history = useHistory();
   const { back } = useButtonBackStyles();
 
+  const customGoBack = () => {
+    if(history.location.key) {
+      return history.goBack();
+    }
+    return history.push('/') };
+
   return (
     <Button
       className={back}
-      onClick={() => history.goBack()}
+      onClick={() => customGoBack()}
       startIcon={
         <ArrowBackIosIcon fontSize="inherit" />
       }
