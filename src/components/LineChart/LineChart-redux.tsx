@@ -1,23 +1,29 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
-
-import * as EthereumTransactions from '../../store/actions/ethereum/transactions-summed';
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 import LineChartContainer from './LineChart-container';
 import { State } from './types';
 import { TransactionsSummed, TransactionsSummedData } from '../../types';
+import { fetchTransactionsSummedByBlockchain } from '../../store/actions/blockchainSelectors';
+import { getBlockchainByDatasource } from '../../store/reducers/blockchainSelectors';
+import { LineChartReduxProps } from './types';
 
-const LineChartRedux = () => {
+const LineChartRedux = (props:LineChartReduxProps) => {
+
+    const blockchain = props.match.params.walletSource;
+
     const mapState = (state: State): TransactionsSummed => ({
-        status: state.ethereum.status,
-        transactionsSummed: state.ethereum.transactionsSummed
+        status: getBlockchainByDatasource(state, blockchain).status,
+        transactionsSummed: getBlockchainByDatasource(state, blockchain).transactionsSummed
     });
 
     const dispatch = useDispatch();
 
-    const fetchEthereumTransactionsSummed = (transactionsSummedData: TransactionsSummedData): void => {
+    const fetchTransactionsSummed = (blockchain:string, transactionsSummedData: TransactionsSummedData): void => {
         dispatch({
-            type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED,
+            type: fetchTransactionsSummedByBlockchain(blockchain),
             transactionsSummedData: transactionsSummedData
         });
     };
@@ -25,7 +31,7 @@ const LineChartRedux = () => {
     const { status, transactionsSummed } = useMappedState(mapState);
 
     const actions = {
-        fetchEthereumTransactionsSummed
+        fetchTransactionsSummed
     };
 
     return (
@@ -33,8 +39,9 @@ const LineChartRedux = () => {
           actions={actions}
           status={status}
           transactionsSummed={transactionsSummed}
+          params={props.match.params}
         />
     );
 };
 
-export default LineChartRedux;
+export default withRouter(LineChartRedux);

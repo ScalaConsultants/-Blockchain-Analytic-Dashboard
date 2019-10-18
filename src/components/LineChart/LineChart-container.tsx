@@ -12,22 +12,20 @@ import { convertTimeStampToHours } from './helpers';
 const LineCharts = (props: LineChartProps): React.ReactElement => {
   const {
     actions,
-    match,
+    params,
     status: { transactionsSummedIsFetching },
     transactionsSummed = []
   } = props;
-  const walletHash = match.params.walletHash;
+
+  const walletHash = params.walletHash;
+  const walletSource = params.walletSource;
+
   const classes = lineChartContainerStyle();
   const [labels, setLabels] = useState([
     '19-04-2019'
   ]);
   const [data, setData] = useState([10, 20, 30, 40]);
 
-  const checkWalletHashAndFetchTransactions = () => {
-    if (walletHash) {
-      actions.fetchEthereumTransactionsSummed({ walletHash:walletHash });
-    }
-  };
 
   const filterChart = (): void => {
     const labels: string[] = [];
@@ -46,8 +44,8 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   }, [transactionsSummed]);
 
   useEffect((): void => {
-    checkWalletHashAndFetchTransactions();
-  }, [match.params.walletHash]);
+    actions.fetchTransactionsSummed(walletSource, { walletHash:walletHash });
+  }, [params.walletHash]);
 
   return (
     <div className={classes.lineChartContainer}>
@@ -61,4 +59,4 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   );
 };
 
-export default withRouter(LineCharts);
+export default LineCharts;
