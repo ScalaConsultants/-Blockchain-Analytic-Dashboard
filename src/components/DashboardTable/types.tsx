@@ -1,6 +1,7 @@
 export interface BlockchainCell {
   name: string,
-  icon: string
+  icon: string,
+  fullName: string
 };
 
 export interface Row {
