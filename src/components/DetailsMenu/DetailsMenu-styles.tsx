@@ -26,6 +26,11 @@ const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
   margin: {
     marginTop: '20px',
     marginBottom: '5px'
+  },
+  firstLetterUppercase: {
+    '&::first-letter': {
+      textTransform: 'uppercase'
+    }
   }
 }));
 

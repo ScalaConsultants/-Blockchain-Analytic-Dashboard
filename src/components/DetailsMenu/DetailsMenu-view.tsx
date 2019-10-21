@@ -48,7 +48,7 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
         <Grid item xs={1}>
           FILTERS
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={1} className={classes.firstLetterUppercase}>
           {tab}
         </Grid>
         <Grid item xs={1}>

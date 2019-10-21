@@ -13,12 +13,22 @@ import View from '../View';
 const DetailsView = (props: DetailsViewProps) => {
     const classes = useDetailsMenuStyles();
     const address = props.match.params.walletHash || '';
+    const wallet = props.match.params.walletSource;
+    const limit = props.match.params.limit;
+    const groupBy = props.match.params.groupBy;
     const id: string = address && `${Math.floor(Math.random() * (30 - 1) + 1)}`;
+    
     const [description, updateDescription] = React.useState("This wallet belongs to market");
+
+    const namesMap: Record<string, string> = {
+        'XTZ': 'Tezos',
+        'ETH': 'Ethereum'
+    };
+    
     const activeFilters = { //TODO: pass filters from dashboard
-        tab: 'Buying',
-        zoom: '10 days',
-        top: '100'
+        tab: groupBy,
+        zoom: '7 days',
+        top: limit
     }
 
     const update = (value: string): void => {
@@ -32,14 +42,14 @@ const DetailsView = (props: DetailsViewProps) => {
                 address={address}
                 description={description}
                 type="market"
-                blockchain="Ethereum"
+                blockchain={namesMap[wallet]}
                 updateDescription={update}
                 activeFilters={activeFilters}
                 params={props.match.params}
             />
             <Grid container justify="flex-start" alignItems="center">
                 <Grid item xs={1} className={classes.label}>
-                    ETH
+                    {wallet}
                 </Grid>
                 <Grid item xs={10} className={classes.barchart}>
                     <BarChart minPercentage={0.5} increaseSegmentSize={2}/>
