@@ -142,7 +142,7 @@ const Filters = (props: any) => {
 
   const fetchNewData = (activeBlockchains: string[]) => {
     activeBlockchains.forEach((blockchain: string) => {
-      actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to}, blockchain);
+      actions.fetchWalletsByBlockchain({limit: filters.limit, from: filters.from, to: filters.to, groupBy: urlParams.groupBy}, blockchain);
     })
   }
 
