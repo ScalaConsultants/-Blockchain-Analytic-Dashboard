@@ -9,10 +9,21 @@ export type WalletHash = {
     walletHash: string
 }
 
-export interface DetailsViewActions {
-    fetchEthereumTransactionsSummed: Function
+export type WalletSource = {
+    walletSource: string
 }
 
-export interface LineChartProps extends TransactionsSummed, RouteComponentProps<WalletHash> {
-    actions:DetailsViewActions
+export interface LineChartReduxProps extends RouteComponentProps<RouteProps>{
+}
+
+
+interface RouteProps extends WalletHash, WalletSource {}
+
+export interface DetailsViewActions {
+    fetchTransactionsSummed: Function
+}
+
+export interface LineChartProps extends TransactionsSummed {
+    actions:DetailsViewActions,
+    params:RouteProps
 }

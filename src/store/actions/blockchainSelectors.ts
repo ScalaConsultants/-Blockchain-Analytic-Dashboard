@@ -2,6 +2,9 @@ import * as ethereumWalletActions from './ethereum/wallets';
 import * as tezosWalletActions from './tezos/wallets';
 import * as ethereumTransactionsActions from './ethereum/transactions';
 import * as tezosTransactionsActions from './tezos/transactions';
+import * as ethereumTransactionsSummedActions from './ethereum/transactions-summed';
+import * as tezosTransactionsSummedActions from './tezos/transactions-summed';
+
 
 import { Blockchains } from '../../types';
 
@@ -16,6 +19,17 @@ export const getWalletByDatasource = (dataSource: string): any => {
     }
    };
 
+   export const fetchTransactionsSummedByBlockchain = (dataSource: string): any => {
+    switch (dataSource) {
+      case Blockchains.ETH:
+        return ethereumTransactionsSummedActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED;
+      case Blockchains.XTZ:
+        return tezosTransactionsSummedActions.TEZOS_FETCH_TRANSACTIONS_SUMMED;
+      default:
+        return ethereumTransactionsSummedActions.ETHEREUM_FETCH_TRANSACTIONS_SUMMED;
+    }
+   };
+
    export const fetchTransactionsByDatasource = (dataSource: string): any => {
     switch (dataSource) {
       case Blockchains.XTZ:
@@ -26,7 +40,7 @@ export const getWalletByDatasource = (dataSource: string): any => {
         return ethereumTransactionsActions.ETHEREUM_FETCH_TRANSACTIONS;
     }
    };
-   
+
    export const flushTransactionstByDatasource = (dataSource: string): any => {
     switch (dataSource) {
       case Blockchains.XTZ:
@@ -37,4 +51,3 @@ export const getWalletByDatasource = (dataSource: string): any => {
         return ethereumTransactionsActions.ETHEREUM_FLUSH_TRANSACTIONS;
     }
    };
-   

@@ -26,6 +26,7 @@ const BarChartRedux = (props: Customization) => {
     });
   };
 
+
   const actions = {
     fetchWalletsByBlockchain
   };
