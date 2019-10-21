@@ -6,10 +6,10 @@ import { fetchTransactionsByDatasource, flushTransactionstByDatasource } from '.
 import { getBlockchainByDatasource } from '../../store/reducers/blockchainSelectors';
 
 import TransactionListContainer from './TransactionsList-container';
-import { State, TransactionsListPropsRedux } from './types';
+import { State } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
-const TransactionListRedux = (props: TransactionsListPropsRedux) => {
+const TransactionListRedux = (props: any) => {
   const blockchain = props.match.params.walletSource;
 
   const mapState = (state: State): Transactions => ({
@@ -32,7 +32,7 @@ const TransactionListRedux = (props: TransactionsListPropsRedux) => {
     });
   };
 
-   const { status, transactions} = useMappedState(mapState);
+   const { status, transactions } = useMappedState(mapState);
 
   const actions = {
     fetchTransactions,

@@ -59,7 +59,7 @@ const DetailsView = (props: DetailsViewProps) => {
             <Grid container justify="flex-end" className={classes.marginTop}>
                 <Legend />
             </Grid>
-            <TransactionsList />
+            <TransactionsList description={description} />
         </View>
     );
 };

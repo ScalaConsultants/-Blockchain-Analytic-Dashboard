@@ -39,7 +39,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   const renderTransactionListHeader = (headerColumns: HeaderColsInterface[]) =>
     headerColumns.map((row: HeaderColsInterface) => (
       <TableCell
-        key={row.id + row.label}
+        key={`${row.id}${row.label}`}
         align={row.numeric ? 'right' : 'left'}
         padding={row.disablePadding ? 'none' : 'default'}
         className={classes.td}
@@ -48,16 +48,18 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       </TableCell>
     ));
 
-  const renderTransactionListRows = (transactionsList: Transaction[]) =>
-    transactionsList.length && transactionsList.map((row: Transaction, index: number) => (
-      <TableRow key={row.timestamp + index}>
+  const renderTransactionListRows = (transactionsList: Transaction[]) => {
+    if (!transactionsList.length) return 
+    return transactionsList.map((row: Transaction, index: number) => (
+      <TableRow key={`${row.timestamp}${index}`}>
         <TableCell className={classes.td}>{row.value}</TableCell>
         <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
         <TableCell className={classes.td}>{row.gasPrice || 'no info'}</TableCell>
         <TableCell className={classes.td}>{description || 'no description'}</TableCell>
       </TableRow>
     ));
-
+  }
+    
   const handleScroll = (target: HTMLBodyElement) => {
     if (target.scrollTop + target.clientHeight >= target.scrollHeight - 30) {
       setPageNumber(pageNumber++);
@@ -95,10 +97,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
             <TableBody
               onScroll={(e: any) => handleScroll(e.target)}
               id="transactionsListTableBody"
-              className={classes.tbody}
-            >
-              {renderTransactionListRows(transactions)}
-            </TableBody>
+              className={classes.tbody}>{renderTransactionListRows(transactions)}</TableBody>
           </Table>
           <Loader isLoading={transactionsIsFetching} fullPage={false} />
         </Grid>
