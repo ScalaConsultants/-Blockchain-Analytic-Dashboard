@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
-import { Blockchains } from '../../types';
  
 import useFiltersStyles from './DashboardFilters-styles';
 import { FiltersProps } from './types'
@@ -17,14 +16,16 @@ const Filters = (props: any) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
+  const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) =>  !!filterObj[item]);
+
   const checkActiveBlockchains = (label:string) => {
     const activeBlockchains = urlParams.blockchains.split(',');
     return activeBlockchains.indexOf(label) !== -1;
   }
 
   const checkActiveZoom = (label: string) => {
-    const zoom = urlParams.to - urlParams.from;
-    return (label === '1 day' && zoom === 86400) ? true : (label === '7 days' && zoom !== 86400);
+    const zoom = parseInt(urlParams.to) - parseInt(urlParams.from);
+    return (label === '1 day' && zoom === 86400000) ? true : (label === '7 days' && zoom !== 86400000);
   };
 
   const checkActiveTopList = (label: string) => label === urlParams.limit;
@@ -38,17 +39,13 @@ const Filters = (props: any) => {
     'XTZ': checkActiveBlockchains('XTZ'),
     'ADA': checkActiveBlockchains('ADA'),
     'EOS': checkActiveBlockchains('EOS'),
-    'XLM': checkActiveBlockchains('XLM'),
+    'XLM': checkActiveBlockchains('XLM')
   });
 
 
   const [activeZoomButtons, setZoomButtons]: [Record<string, boolean>, Function] = useState({
     '1 day': checkActiveZoom('1 day'),
     '7 days': checkActiveZoom('7 days'),
-    // '1 month': false,
-    // '3 months': false,
-    // '1 year': false,
-    // 'All': false
   });
 
   const [activeTopListButtons, setTopListButtons]: [Record<string, boolean>, Function] = useState({
@@ -64,7 +61,15 @@ const Filters = (props: any) => {
   const classes = useFiltersStyles();
 
   const blockchainFilterHandler = (buttonLabel: string) => {
+    const active = activeFilters(activeBlockchainButtons);
     if (buttonLabel === 'ETH' || buttonLabel === 'XTZ') {
+      if (active.length === 1 && active.includes(buttonLabel)) {
+      enqueueSnackbar('At least one blockchain required', {
+        variant: 'info',
+        persist: false,
+      });
+        return;
+      }
       const buttons = { ...activeBlockchainButtons };
       buttons[buttonLabel] = !buttons[buttonLabel];
       setBlockchainButtons({ ...buttons });
@@ -78,9 +83,7 @@ const Filters = (props: any) => {
     setZoomButtons({ ...buttons });
   };
 
-  const zoomTopListHandler = (buttonLabel: string) => {
-    if (buttonLabel !== '10') return;
-    
+  const zoomTopListHandler = (buttonLabel: string) => {    
     const buttons = { ...activeTopListButtons };
     Object.keys(buttons).map((label: string) => (buttons[label] = false));
     buttons[buttonLabel] = true;
@@ -93,7 +96,6 @@ const Filters = (props: any) => {
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
   };
 
-  const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) =>  !!filterObj[item]);
 
   const renderButtons = (buttonLabels: Record<string, boolean>) =>
     Object.keys(buttonLabels).map((buttonLabel: string) => {
@@ -115,14 +117,10 @@ const Filters = (props: any) => {
     });
 
   const setZoomFilter = (dateFilter: string[]) => {
-    const oneDay = [1567296000, 1567382400];
-    const week = [1567296000, 1567814400];
+    const oneDay = [new Date('2019-10-14T14:00').getTime(), new Date('2019-10-15T14:00').getTime()];
+    const week = [new Date('2019-10-10T14:00').getTime(), new Date('2019-10-15T14:00').getTime()]
 
-    if (dateFilter[0] === '1 day') {
-      return oneDay;
-    }
-    
-    return week;
+    return dateFilter[0] === '1 day'? oneDay : week;
   }
 
   const handleRefresh = (isDataFetched: boolean) => {
@@ -130,14 +128,6 @@ const Filters = (props: any) => {
     const activeZoom = activeFilters(activeZoomButtons);
     const activeTopList = activeFilters(activeTopListButtons);
     const dates: number[] = setZoomFilter(activeZoom); 
-
-    if (!activeBlockchain.length) {
-      enqueueSnackbar('At least one blockchain required', {
-        variant: 'info',
-        persist: false,
-      });
-      return;
-    } 
 
     newFilters = {
       limit: Number(activeTopList[0]),

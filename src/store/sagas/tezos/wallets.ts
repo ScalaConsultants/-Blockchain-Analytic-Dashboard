@@ -10,6 +10,7 @@ async function fetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, 
   } else {
     res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/tezos/wallets?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);
   }
+
   return res.json();
 }
 

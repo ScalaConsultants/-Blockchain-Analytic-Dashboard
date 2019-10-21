@@ -4,7 +4,9 @@ export interface DetailsViewProps {
       walletHash: string,
       walletSource: string,
       limit: string,
-      groupBy: string
+      groupBy: string,
+      to: string,
+      from: string
     }
   }
 }
