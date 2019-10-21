@@ -17,14 +17,14 @@ const DetailsView = (props: DetailsViewProps) => {
     const limit = props.match.params.limit;
     const groupBy = props.match.params.groupBy;
     const id: string = address && `${Math.floor(Math.random() * (30 - 1) + 1)}`;
-    
+
     const [description, updateDescription] = React.useState("This wallet belongs to market");
 
     const namesMap: Record<string, string> = {
         'XTZ': 'Tezos',
         'ETH': 'Ethereum'
     };
-    
+
     const activeFilters = { //TODO: pass filters from dashboard
         tab: groupBy,
         zoom: '7 days',

@@ -1,47 +1,54 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
+import { withRouter } from 'react-router-dom';
 
-import * as EthereumTransactions from '../../store/actions/ethereum/transactions';
+import { fetchTransactionsByDatasource, flushTransactionstByDatasource } from '../../store/actions/blockchainSelectors';
+import { getBlockchainByDatasource } from '../../store/reducers/blockchainSelectors';
+
 import TransactionListContainer from './TransactionsList-container';
-import { State, TransactionsListPropsRedux } from './types';
+import { State } from './types';
 import { Transactions, TransactionsData } from '../../types';
 
-const TransactionListRedux = ({ description }: TransactionsListPropsRedux) => {
+const TransactionListRedux = (props: any) => {
+  const blockchain = props.match.params.walletSource;
+
   const mapState = (state: State): Transactions => ({
-    status: state.ethereum.status,
-    transactions: state.ethereum.transactions
+    status: getBlockchainByDatasource(state, blockchain).status,
+    transactions: getBlockchainByDatasource(state, blockchain).transactions
   });
 
   const dispatch = useDispatch();
 
-  const fetchEthereumTransactions = (transactionsData: TransactionsData): void => {
+  const fetchTransactions = (transactionsData: TransactionsData): void => {
     dispatch({
-      type: EthereumTransactions.ETHEREUM_FETCH_TRANSACTIONS,
+      type: fetchTransactionsByDatasource(transactionsData.dataSource),
       transactionsData
     });
   };
 
-  const flushEthereumTransactions = (): void => {
+  const flushTransactions = (blockchain: string): void => {
     dispatch({
-      type: EthereumTransactions.ETHEREUM_FLUSH_TRANSACTIONS
+      type: flushTransactionstByDatasource(blockchain),
     });
   };
 
-  const { status, transactions } = useMappedState(mapState);
+   const { status, transactions } = useMappedState(mapState);
 
   const actions = {
-    fetchEthereumTransactions,
-    flushEthereumTransactions
+    fetchTransactions,
+    flushTransactions
   };
 
   return (
     <TransactionListContainer
       actions={actions}
-      description={description}
+      description={props.description}
       status={status}
       transactions={transactions}
+      page={1}
+      params={props.match.params}
     />
   );
 };
 
-export default TransactionListRedux;
+export default withRouter(TransactionListRedux);

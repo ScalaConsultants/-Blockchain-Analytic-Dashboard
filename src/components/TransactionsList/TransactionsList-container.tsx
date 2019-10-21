@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,18 +26,20 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
     actions,
     match,
     status: { transactionsIsFetching },
-    transactions
+    transactions,
+    description
   } = props;
-  const [walletHash] = React.useState(match.params.walletHash);
+
+  const [walletHash] = useState(match.params.walletHash);
+  const [dataSource] = useState(match.params.walletSource);
   const classes = useTransactionsListTableStyles();
 
-  /* eslint-disable-next-line prefer-const */
-  let [pageNumber, setPageNumber] = React.useState(1);
+  let [pageNumber, setPageNumber] = useState(1);
 
   const renderTransactionListHeader = (headerColumns: HeaderColsInterface[]) =>
     headerColumns.map((row: HeaderColsInterface) => (
       <TableCell
-        key={row.id}
+        key={`${row.id}${row.label}`}
         align={row.numeric ? 'right' : 'left'}
         padding={row.disablePadding ? 'none' : 'default'}
         className={classes.td}
@@ -46,38 +48,38 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
       </TableCell>
     ));
 
-  const renderTransactionListRows = (transactionsList: Transaction[]) =>
-    transactionsList.map((row: Transaction) => (
-      <TableRow key={row.timestamp}>
+  const renderTransactionListRows = (transactionsList: Transaction[]) => {
+    if (!transactionsList.length) return 
+    return transactionsList.map((row: Transaction, index: number) => (
+      <TableRow key={`${row.timestamp}${index}`}>
         <TableCell className={classes.td}>{row.value}</TableCell>
-        <TableCell className={classes.td} scope="row">
-          {timestampToDate(row.timestamp)}
-        </TableCell>
+        <TableCell className={classes.td} scope="row">{timestampToDate(row.timestamp)}</TableCell>
         <TableCell className={classes.td}>{row.gasPrice || 'no info'}</TableCell>
-        <TableCell className={classes.td}>{props.description}</TableCell>
+        <TableCell className={classes.td}>{description || 'no description'}</TableCell>
       </TableRow>
     ));
-
+  }
+    
   const handleScroll = (target: HTMLBodyElement) => {
     if (target.scrollTop + target.clientHeight >= target.scrollHeight - 30) {
       setPageNumber(pageNumber++);
     }
   };
 
-  const checkWalletHashAndFetchTransactions = (wallet: string, page: number) =>
-    wallet && actions.fetchEthereumTransactions({ wallet, page });
+  const checkWalletHashAndFetchTransactions = (walletHash: string, page: number, dataSource: string) =>
+    walletHash && actions.fetchTransactions({ walletHash, page, dataSource});
 
-  // on handleScroll fetch next page of transactions
+  // on route change (when user clicked on bar-chart) - cleared transactions list and download the first page 
+  // and on handleScroll fetch next page of transactions
   useEffect((): void => {
-    checkWalletHashAndFetchTransactions(walletHash, pageNumber);
-  }, [pageNumber]);
-
-  // on route change (when user clicked on bar-chart) - cleared transactions list and download the first page
-  useEffect((): void => {
-    actions.flushEthereumTransactions();
-    setPageNumber(1);
-    checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber);
-  }, [match.params.walletHash]);
+    if (match.params.walletHash === walletHash) {
+      checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber, dataSource);
+    } else {
+      actions.flushTransactions();
+      setPageNumber(1);
+      checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber, dataSource);
+    }
+   }, [match.params.walletHash, pageNumber]);
 
   return (
     <Grid container className="Container">
@@ -95,10 +97,7 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
             <TableBody
               onScroll={(e: any) => handleScroll(e.target)}
               id="transactionsListTableBody"
-              className={classes.tbody}
-            >
-              {renderTransactionListRows(transactions)}
-            </TableBody>
+              className={classes.tbody}>{renderTransactionListRows(transactions)}</TableBody>
           </Table>
           <Loader isLoading={transactionsIsFetching} fullPage={false} />
         </Grid>
