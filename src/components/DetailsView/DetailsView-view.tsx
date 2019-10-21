@@ -17,6 +17,7 @@ const DetailsView = (props: DetailsViewProps) => {
     const limit = props.match.params.limit;
     const groupBy = props.match.params.groupBy;
     const id: string = address && `${Math.floor(Math.random() * (30 - 1) + 1)}`;
+    const days = (parseInt(props.match.params.to) - parseInt(props.match.params.from)) / (1000*60*60*24);
 
     const [description, updateDescription] = React.useState("This wallet belongs to market");
 
@@ -25,9 +26,9 @@ const DetailsView = (props: DetailsViewProps) => {
         'ETH': 'Ethereum'
     };
 
-    const activeFilters = { //TODO: pass filters from dashboard
+    const activeFilters = {
         tab: groupBy,
-        zoom: '7 days',
+        zoom: days > 1 ? '7 days' : '1 day',
         top: limit
     }
 

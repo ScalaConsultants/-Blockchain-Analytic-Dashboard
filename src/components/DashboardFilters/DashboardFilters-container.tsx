@@ -24,8 +24,8 @@ const Filters = (props: any) => {
   }
 
   const checkActiveZoom = (label: string) => {
-    const zoom = urlParams.to - urlParams.from;
-    return (label === '1 day' && zoom === 86400) ? true : (label === '7 days' && zoom !== 86400);
+    const zoom = parseInt(urlParams.to) - parseInt(urlParams.from);
+    return (label === '1 day' && zoom === 86400000) ? true : (label === '7 days' && zoom !== 86400000);
   };
 
   const checkActiveTopList = (label: string) => label === urlParams.limit;
