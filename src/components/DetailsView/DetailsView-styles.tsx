@@ -11,6 +11,9 @@ const useDetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
     fontSize: '0.75rem',
     lineHeight: '0.75rem',
     color: theme.palette.grey[400]
+  },
+  marginTop: {
+    margin: '10px 0 0 0'
   }
 }));
 

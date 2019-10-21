@@ -46,7 +46,9 @@ const DetailsView = (props: DetailsViewProps) => {
                 </Grid>
             </Grid>
             <LineChart />
-            <Legend />
+            <Grid container justify="flex-end" className={classes.marginTop}>
+                <Legend />
+            </Grid>
             <TransactionsList description={description} />
         </View>
     );
