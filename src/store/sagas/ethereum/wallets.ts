@@ -2,9 +2,13 @@ import { put, takeEvery } from 'redux-saga/effects';
 import * as ethereumActions from '../../actions/ethereum/wallets';
 import { Wallets } from '../../../types';
 
-
 async function fetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
-  const res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/cache?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);
+  let res = null;
+  if(groupBy == 'data') {
+    res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/data-wallets/cache?limit=${limit}&from=${from}&to=${to}`);
+  } else {
+    res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/cache?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);
+  }
 
   return res.json();
 }
@@ -23,7 +27,7 @@ function* doFetchWallets(action: any) {
   const wallets = yield fetchWallets(payload);
 
   try {
-    if (wallets.length > 0) {
+    if (wallets.length >= 0) {
       yield put({
         type: ETHEREUM_SET_WALLETS,
         wallets
