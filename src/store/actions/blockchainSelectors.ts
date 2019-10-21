@@ -5,9 +5,7 @@ import * as tezosTransactionsActions from './tezos/transactions';
 
 import { Blockchains } from '../../types';
 
-export const getWalletByDatasource = (
-    dataSource: string
-   ): any => {
+export const getWalletByDatasource = (dataSource: string): any => {
     switch (dataSource) {
       case Blockchains.XTZ:
         return tezosWalletActions.TEZOS_FETCH_WALLETS;
@@ -18,9 +16,7 @@ export const getWalletByDatasource = (
     }
    };
 
-   export const fetchTransactionsByDatasource = (
-    dataSource: string
-   ): any => {
+   export const fetchTransactionsByDatasource = (dataSource: string): any => {
     switch (dataSource) {
       case Blockchains.XTZ:
         return tezosTransactionsActions.TEZOS_FETCH_TRANSACTIONS;
@@ -31,9 +27,7 @@ export const getWalletByDatasource = (
     }
    };
    
-   export const flushTransactionstByDatasource = (
-    dataSource: string
-   ): any => {
+   export const flushTransactionstByDatasource = (dataSource: string): any => {
     switch (dataSource) {
       case Blockchains.XTZ:
         return tezosTransactionsActions.TEZOS_FLUSH_TRANSACTIONS;

@@ -14,6 +14,7 @@ export interface State {
 
 export interface WalletHash {
   walletHash: string;
+  walletSource: string;
 }
 
 export interface TransactionsListActions {
@@ -21,12 +22,20 @@ export interface TransactionsListActions {
   flushTransactions: Function;
 }
 
+export type WalletSource = {
+  walletSource: string
+}
+
+interface RouteProps extends WalletHash, WalletSource {}
+
 export interface TransactionsListProps extends Transactions, RouteComponentProps<WalletHash> {
   actions: TransactionsListActions;
   description: string;
+  page: number;
+  params:RouteProps;
 }
 
-export interface TransactionsListPropsRedux {
-  description: string;
-  params: any;
+export interface TransactionsListPropsRedux{
+  match: any;
+  description?: any
 }

@@ -47,7 +47,7 @@ const DetailsView = (props: DetailsViewProps) => {
             </Grid>
             <LineChart />
             <Legend />
-            <TransactionsList description={description} />
+            <TransactionsList />
         </View>
     );
 };

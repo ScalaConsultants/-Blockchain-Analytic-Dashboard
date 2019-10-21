@@ -77,7 +77,8 @@ export interface Block {
 export interface TransactionsData {
   page:number,
   walletHash: string,
-  resultsPerPage?:number
+  resultsPerPage?:number,
+  dataSource?: any
 }
 
 export interface TransactionsSummedData {
