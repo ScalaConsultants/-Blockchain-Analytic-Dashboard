@@ -130,9 +130,9 @@ const BarChartContainer = (props: BarChartProps) => {
   }, [wallets])
 
   useEffect(() => {
-    const { groupBy } = match.params;
+    const { groupBy, limit, from, to } = match.params;
     if (groupBy === 'buyer' || groupBy === 'seller') {
-      actions.fetchWalletsByBlockchain(groupBy, walletSource);
+      actions.fetchWalletsByBlockchain(limit, from, to, groupBy, walletSource);
     }
   }, [match.params.groupBy])
 
