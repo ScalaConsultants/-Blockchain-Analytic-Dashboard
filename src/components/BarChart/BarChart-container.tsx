@@ -41,7 +41,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
   const classes = useBarChartSegmentStyles();
 
-  const lastSegmentClasses = clsx([classes.color, classes.center])
+  const lastSegmentClasses = clsx([classes.color, classes.center, classes.rest])
 
   const [activeSegment, updateActiveSegment] = useState({ isActive: false, index: 0 });
 
@@ -89,7 +89,7 @@ const BarChartContainer = (props: BarChartProps) => {
       <div key="last-segment-label" className={lastSegmentClasses} style={{
         ...defaultSegmentStyles,
         left: posX,
-        width: (width * increaseSegmentSize) - posX
+        width: width - posX
       }}>
           {/* TODO: assign real percentage from BE*/}
           5%

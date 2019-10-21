@@ -21,7 +21,7 @@ export const useBarChartContainer = makeStyles((theme: ExtendedTheme) => ({
 
 export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
   color: {
-    color: theme.palette.grey[400],
+    color: theme.palette.common.white,
   },
   center: {
     display: 'flex',
@@ -53,6 +53,9 @@ export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   fraud: {
     background: theme.constants.FRAUD_COLOR
+  },
+  rest: {
+    background: theme.constants.REST_COLOR
   },
   shadow: {
     background: 'rgba(0, 0, 0, .6)'
