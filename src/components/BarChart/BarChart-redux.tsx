@@ -19,10 +19,15 @@ const BarChartRedux = (props: Customization) => {
 
   const { status, wallets } = useMappedState(mapState);
 
-  const fetchWalletsByBlockchain = (groupBy: string, blockchain: string): void => {
+  const fetchWalletsByBlockchain = (limit: string, from: string, to: string, groupBy: string, blockchain: string): void => {
     dispatch({
       type: getWalletByDatasource(blockchain),
-      payload: { limit: 10, groupBy }
+      payload: { 
+        limit,
+        from,
+        to,
+        groupBy
+      }
     });
   };
 
