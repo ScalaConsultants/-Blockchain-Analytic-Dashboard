@@ -12,3 +12,4 @@ export const MARKET_COLOR = 'linear-gradient(90deg, #6B5EE9 0%, #8765EF 100%)';
 export const PRIVATE_COLOR = 'linear-gradient(90deg, #5975FF 0%, #569AF5 100%)';
 export const DAPP_COLOR = 'linear-gradient(90deg, #74798C 0%, #A9B0CC 100%)';
 export const FRAUD_COLOR = 'linear-gradient(90deg, #2A2D3A 0%, #34363F 100%)';
+export const REST_COLOR = 'linear-gradient(90deg, #B38D1B 0%, #FFD659 100%)';

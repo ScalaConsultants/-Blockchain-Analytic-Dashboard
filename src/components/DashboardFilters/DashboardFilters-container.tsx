@@ -79,6 +79,8 @@ const Filters = (props: any) => {
   };
 
   const zoomTopListHandler = (buttonLabel: string) => {
+    if (buttonLabel !== '10') return;
+    
     const buttons = { ...activeTopListButtons };
     Object.keys(buttons).map((label: string) => (buttons[label] = false));
     buttons[buttonLabel] = true;
