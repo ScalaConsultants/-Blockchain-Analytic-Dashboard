@@ -2,7 +2,7 @@ import React from 'react';
 import { LegendList } from './Legend-styles';
 
 const LegendView = () => {
-  const list = ['Market', 'Private', 'DAAP', 'Fraud'];
+  const list = ['Market', 'Private', 'DAAP', 'Fraud', 'Rest'];
   const classes = LegendList();
 
   const items = list.map(item => (

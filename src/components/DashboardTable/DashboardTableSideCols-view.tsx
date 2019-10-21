@@ -10,7 +10,7 @@ const DashboardTableSideCols = (props: Row) => {
   return (
     <Grid container alignItems="center">
       <Grid item xs={6}>
-        <DashboardTableBlockchainCell name={props.row.name} icon={props.row.icon}/>
+        <DashboardTableBlockchainCell {...props.row} />
       </Grid>
       <Grid item xs={6}>
         <DashboardTableConditionCell />

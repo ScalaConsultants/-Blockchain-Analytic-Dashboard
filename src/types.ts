@@ -91,6 +91,7 @@ export interface ExtendedTheme extends Theme {
     PRIVATE_COLOR: string,
     DAPP_COLOR: string,
     FRAUD_COLOR: string,
+    REST_COLOR: string,
     DEFAULT_FONT_FAMILY: string,
     DEFAULT_FONT_STYLE: string,
     DEFAULT_FONT_WEIGHT: any,

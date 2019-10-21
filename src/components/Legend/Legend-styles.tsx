@@ -56,6 +56,9 @@ export const LegendList = makeStyles((theme: ExtendedTheme) => ({
     },
     '&:nth-child(4)::before': {
       background: theme.constants.FRAUD_COLOR
+    },
+    '&:nth-child(5)::before': {
+      background: theme.constants.REST_COLOR
     }
   }
 }));

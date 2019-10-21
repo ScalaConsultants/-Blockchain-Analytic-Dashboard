@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { useDashboardTableStyles } from './DashboardTable-styles';
 import { BlockchainCell } from './types'
 
-const DashboardTableBlockchainCell = ({ name, icon }: BlockchainCell) => {
+const DashboardTableBlockchainCell = ({ icon, fullName }: BlockchainCell) => {
   const { PUBLIC_URL } = process.env;
   const classes = useDashboardTableStyles();
   return (
@@ -12,7 +12,7 @@ const DashboardTableBlockchainCell = ({ name, icon }: BlockchainCell) => {
         <img src={`${PUBLIC_URL}/icons/${icon}.png`} className={classes.img} />
       </Grid>
       <Grid item xs={9} className={classes.name}>
-        {name}
+        {fullName}
       </Grid>
     </Grid>
   )

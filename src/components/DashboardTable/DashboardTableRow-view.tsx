@@ -15,7 +15,7 @@ const DashboardTableRow = (props: Row) => {
       </Grid>
       <Grid item xs={9} className={classes.barchart}>
         <BarChart 
-          restLabel={false}
+          restLabel={true}
           shadowSegment={false}
           activeSegmentZoom={false}
           minPercentage={0.5}
