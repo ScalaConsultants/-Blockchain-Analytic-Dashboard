@@ -102,7 +102,8 @@ const BarChartContainer = (props: BarChartProps) => {
           ...defaultSegmentStyles,
           left: posX,
           width: width - posX
-        }}>
+        }}
+        >
         {/* TODO: assign real percentage from BE*/}
         {`${num}%`}
       </div>
@@ -146,8 +147,8 @@ const BarChartContainer = (props: BarChartProps) => {
   }, [match.params.groupBy]);
 
   segments = wallets.reduce(
-    (acc: Accumulator, object: Wallet, index: number) => {
-      const { walletHash, percentage } = object;
+    (acc: Accumulator, obj: Wallet, index: number) => {
+      const { walletHash, percentage } = obj;
       const { position } = acc;
       const { restLabel, minPercentage, width, increaseSegmentSize } = customization;
 
