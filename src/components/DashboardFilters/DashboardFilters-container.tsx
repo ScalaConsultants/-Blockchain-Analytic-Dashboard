@@ -117,8 +117,8 @@ const Filters = (props: any) => {
     });
 
   const setZoomFilter = (dateFilter: string[]) => {
-    const oneDay = [new Date('2019-10-14T14:00').getTime(), new Date('2019-10-15T14:00').getTime()];
-    const week = [new Date('2019-10-10T14:00').getTime(), new Date('2019-10-15T14:00').getTime()]
+    const oneDay = [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()];
+    const week = [new Date().getTime() - 1000 * 3600 * 24 * 7, new Date().getTime()];
 
     return dateFilter[0] === '1 day'? oneDay : week;
   }
