@@ -6,7 +6,7 @@ import * as tezosActions from '../../actions/tezos/transactions-summed';
 
 async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
   const res = await fetch(
-    `${process.env.REACT_APP_HOST}/api/v1/tezos/wallets/linechart?limit=100&walletHash=${walletHash}`
+    `${process.env.REACT_APP_HOST}/api/v1/tezos/wallets/linechart/cache?limit=100&walletHash=${walletHash}`
   );
   return res.json();
 }
