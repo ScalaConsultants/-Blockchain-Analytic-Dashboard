@@ -92,7 +92,7 @@ const BarChartContainer = (props: BarChartProps) => {
   const createLastSegment = (pos: number, percentage: number) => {
     const { width, increaseSegmentSize } = customization;
     const posX = pos + (width * increaseSegmentSize * percentage) / 100;
-    const num = Math.floor((width - posX) / 100);
+    const num = Math.round(((width - posX) * 100) / width);
 
     return (
       <div
