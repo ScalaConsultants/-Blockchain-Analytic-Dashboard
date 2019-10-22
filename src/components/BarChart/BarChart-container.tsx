@@ -11,8 +11,13 @@ import { useBarChartSegmentStyles } from './BarChart-styles';
 import { Blockchains } from '../../types';
 
 const BarChartContainer = (props: BarChartProps) => {
-  const { wallets = [], actions, status: { walletsIsFetching }, override } = props;
-  const {match} = override;
+  const {
+    wallets = [],
+    actions,
+    status: { walletsIsFetching },
+    override
+  } = props;
+  const { match } = override;
   const walletSource = override.walletSource || match.params.walletSource;
 
   const segmentsContainer: React.MutableRefObject<any> = useRef();
@@ -26,22 +31,25 @@ const BarChartContainer = (props: BarChartProps) => {
     autoSegmentSize: false,
     activeSegmentZoom: true,
     shadowSegment: true,
-    width: segmentsContainer.current && parseFloat(getComputedStyle(segmentsContainer.current).width || '2000') || 2000
+    width:
+      (segmentsContainer.current && parseFloat(getComputedStyle(segmentsContainer.current).width || '2000')) || 2000
   };
 
-  const customization = Object.keys(override).length ? {...defaultCustomization, ...override} : {...defaultCustomization};
+  const customization = Object.keys(override).length
+    ? { ...defaultCustomization, ...override }
+    : { ...defaultCustomization };
 
   const defaultSegmentStyles: Record<string, string | number> = {
     position: 'absolute',
     height: '100%',
-    top: 0,
+    top: 0
   };
 
   const walletHash = match.params.walletHash;
 
   const classes = useBarChartSegmentStyles();
 
-  const lastSegmentClasses = clsx([classes.color, classes.center, classes.rest])
+  const lastSegmentClasses = clsx([classes.color, classes.center, classes.rest]);
 
   const [activeSegment, updateActiveSegment] = useState({ isActive: false, index: 0 });
 
@@ -52,8 +60,8 @@ const BarChartContainer = (props: BarChartProps) => {
     return {
       ...defaultSegmentStyles,
       left: position,
-      width: (width * increaseSegmentSize) * percentage / 100
-    }
+      width: (width * increaseSegmentSize * percentage) / 100
+    };
   };
 
   const getOuterClasses = (index: number): string => {
@@ -78,87 +86,105 @@ const BarChartContainer = (props: BarChartProps) => {
 
     return clsx(classes.color, classes.center, classes.fullSize, {
       [classes.shadow]: shadowSegment && !active
-    })
+    });
   };
 
   const createLastSegment = (pos: number, percentage: number) => {
     const { width, increaseSegmentSize } = customization;
-    const posX = pos + ((width * increaseSegmentSize) * percentage / 100);
+    const posX = pos + (width * increaseSegmentSize * percentage) / 100;
+    const num = Math.round(((width - posX) * 100) / width);
 
     return (
-      <div key="last-segment-label" className={lastSegmentClasses} style={{
-        ...defaultSegmentStyles,
-        left: posX,
-        width: width - posX
-      }}>
-          {/* TODO: assign real percentage from BE*/}
-          5%
+      <div
+        key="last-segment-label"
+        className={lastSegmentClasses}
+        style={{
+          ...defaultSegmentStyles,
+          left: posX,
+          width: width - posX
+        }}
+        >
+        {/* TODO: assign real percentage from BE*/}
+        {`${num}%`}
       </div>
-    )
-  }
+    );
+  };
 
-  const createSegment = (walletHash: string, percentage: number, position: number, index: number) => {
+  const createSegment = (walletHash: string, percentage: number, text: number, position: number, index: number) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
-      <Link to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`} key={walletHash}>
-        <div
-          className={getOuterClasses(index)}
-          style={getStyle(position, percentage)}
-        >
-          <div
-            className={getInnerClasses(index)}
-          >
-            {(index < 10 && percentage >= 1) ? <div>{`${Math.floor(percentage)}%`}</div> : null}
+      <Link
+        to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
+        key={walletHash}>
+        <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
+          <div className={getInnerClasses(index)}>
+            {index < 10 && percentage >= 1 ? <div>{`${Math.floor(text)}%`}</div> : null}
           </div>
         </div>
       </Link>
     );
-  }
+  };
 
   useEffect((): void => {
     updateActiveSegment({
       isActive: true,
       index: wallets.findIndex(val => val.walletHash === walletHash)
-    })
+    });
   }, [walletHash]);
 
   useEffect(() => {
     updateActiveSegment({
       isActive: true,
       index: wallets.findIndex(val => val.walletHash === walletHash)
-    })
-  }, [wallets])
+    });
+  }, [wallets]);
 
   useEffect(() => {
-
     const { groupBy, limit, from, to } = match.params;
     if (groupBy === 'buyer' || groupBy === 'seller' || groupBy === 'data') {
       actions.fetchWalletsByBlockchain(limit, from, to, groupBy, walletSource);
     }
-  }, [match.params.groupBy])
+  }, [match.params.groupBy]);
 
-  segments = wallets.reduce((acc: Accumulator, object: Wallet, index: number) => {
-    const { walletHash, percentage } = object;
-    const { position } = acc;
-    const { restLabel, minPercentage, width, increaseSegmentSize } = customization;
+  segments = wallets.reduce(
+    (acc: Accumulator, obj: Wallet, index: number) => {
+      const { walletHash, percentage } = obj;
+      const { position } = acc;
+      const { restLabel, minPercentage, width, increaseSegmentSize } = customization;
 
-    // Render segments higher then min percentage
-    if (object.percentage > minPercentage) {
-      acc.elements.push(createSegment(walletHash, percentage, position, index));
+      const percentageChanged = percentage > 40 ? percentage / 2 : percentage;
+
+      // Render segments higher then min percentage
+      if (percentageChanged > minPercentage && acc.total < 40) {
+        acc.elements.push(createSegment(walletHash, percentageChanged, percentage, position, index));
+        acc.elems.push({
+          percentageChanged,
+          position,
+          total: acc.total
+        });
+      }
 
       // Last Segment
-      if (restLabel && index === wallets.length - 1 && segmentsContainer.current) {  
-        acc.elements.push(createLastSegment(position, percentage))
+      if (restLabel && index === wallets.length - 1 && segmentsContainer.current) {
+        acc.elements.push(
+          createLastSegment(
+            acc.elems[acc.elems.length - 1].position, 
+            acc.elems[acc.elems.length - 1].percentageChanged
+          )
+        );
       }
-    }
 
-    return {
-      position: acc.position + (width * increaseSegmentSize) * object.percentage / 100,
-      elements: acc.elements
-    };
-  }, { position: 0, elements: [] }).elements;
+      return {
+        position: acc.position + (width * increaseSegmentSize * percentageChanged) / 100,
+        total: acc.total + percentageChanged,
+        elements: acc.elements,
+        elems: acc.elems
+      };
+    },
+    { position: 0, total: 0, elements: [], elems: [] }
+  ).elements;
 
-  return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />
+  return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />;
 };
 
 export default BarChartContainer;
