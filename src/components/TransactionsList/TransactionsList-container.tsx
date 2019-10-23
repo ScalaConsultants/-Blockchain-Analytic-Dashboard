@@ -16,7 +16,7 @@ import Loader from '../loader';
 
 const headerCols: HeaderColsInterface[] = [
   { id: 'amount', numeric: false, disablePadding: false, label: 'Amount' },
-  { id: 'timestamp', numeric: false, disablePadding: true, label: 'Timestamp' },
+  { id: 'timestamp', numeric: false, disablePadding: false, label: 'Timestamp' },
   { id: 'exchange', numeric: false, disablePadding: false, label: 'Exchange rate' },
   { id: 'description', numeric: false, disablePadding: false, label: 'Description' }
 ];
