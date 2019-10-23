@@ -50,8 +50,7 @@ const Filters = (props: any) => {
 
   const [activeTopListButtons, setTopListButtons]: [Record<string, boolean>, Function] = useState({
     '10': checkActiveTopList('10'),
-    '100': checkActiveTopList('100'),
-    '1000': checkActiveTopList('1000')
+    '100': checkActiveTopList('100')
   });
 
   const [filters, setFilters]:[FiltersProps, Function] = useState({});
