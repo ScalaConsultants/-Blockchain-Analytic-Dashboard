@@ -53,10 +53,17 @@ const WalletsList = (props: any): React.ReactElement => {
     return (
         <View>
             <Grid container className="Container">
-                <Grid item xs={12} lg={12}>
+                <Grid item xs={3} lg={3}>
                     <Typography variant="h2" gutterBottom>
-                        Public wallets
+                        Favourite wallet
                      </Typography>
+                     
+                </Grid>
+                <Grid item xs={6} lg={6}>
+                    <Typography variant="h2" gutterBottom>
+                        Public wallet
+                     </Typography>
+                     
                 </Grid>
             </Grid>
             <Grid container spacing={9} className="Container">
