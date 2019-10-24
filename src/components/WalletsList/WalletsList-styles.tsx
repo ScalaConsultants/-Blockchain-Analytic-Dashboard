@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ExtendedTheme } from '../../types';
 
-const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
+const useWalletsListTableStyles = makeStyles(() => ({
   thead: {
     display: 'block'
   },
@@ -20,35 +19,6 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
 
   grid: {
     position: 'relative'
-  },
-  rowEl: {
-    color: '#A3A7B0',
-    fontWeight: 'bold'
-  }, 
-  walletTypeIcon: {
-    width: '12px',
-    height: '12px',
-    borderRadius: '50%',
-    marginRight: '10px'
-  },
-  restColor: {
-    background: theme.constants.REST_COLOR,
-  },
-  privateColor: {
-    background: theme.constants.PRIVATE_COLOR,
-  }, 
-  dappColor: {
-    background: theme.constants.DAPP_COLOR,
-  }, 
-  fraudColor: {
-    background: theme.constants.FRAUD_COLOR,
-  }, 
-  marketColor: {
-    background: theme.constants.MARKET_COLOR,
-  },
-  verticalAlign: {
-    display: 'flex',
-    alignItems: 'center'
   }
 }));
 

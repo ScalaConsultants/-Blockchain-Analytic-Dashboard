@@ -1,37 +1,79 @@
 
 export const walletsList = [
     {
-        ID: '12345',
-        walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'Ethereum',
-        market: 'Fraud'
-    },{
-        ID: '12345',
-        walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        wallet_type: 'Market'
+
+    },
+    {
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
-        blockchain: 'Tezos',
-        market: 'DAPP'
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
     },{
-        ID: '12345',
-        walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
-        blockchain: 'Tezos',
-        market: 'Private'
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
     },{
-        ID: '12345',
-        walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
-        blockchain: 'Tezos',
-        market: 'Market'
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
     },{
-        ID: '12345',
-        walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
-        blockchain: 'Tezos',
-        market: 'Market'
-    }
-    
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },{
+        ID: '0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
+        title: 'Title of this wallet',
+        blockchain: 'Ethereum',
+        wallet_type: 'Market'
+
+    },
 
 
 
