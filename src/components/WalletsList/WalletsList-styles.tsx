@@ -24,38 +24,31 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   rowEl: {
     color: '#A3A7B0',
     fontWeight: 'bold'
-  }, market: {
+  }, 
+  walletTypeIcon: {
     width: '12px',
     height: '12px',
-    background: theme.constants.MARKET_COLOR,
     borderRadius: '50%',
     marginRight: '10px'
   },
-  rest: {
-    width: '12px',
-    height: '12px',
+  restColor: {
     background: theme.constants.REST_COLOR,
-    borderRadius: '50%',
-    marginRight: '10px'
   },
-  private: {
-    width: '12px',
-    height: '12px',
+  privateColor: {
     background: theme.constants.PRIVATE_COLOR,
-    borderRadius: '50%',
-    marginRight: '10px'
-  }, dapp: {
-    width: '12px',
-    height: '12px',
+  }, 
+  dappColor: {
     background: theme.constants.DAPP_COLOR,
-    borderRadius: '50%',
-    marginRight: '10px'
-  }, fraud: {
-    width: '12px',
-    height: '12px',
+  }, 
+  fraudColor: {
     background: theme.constants.FRAUD_COLOR,
-    borderRadius: '50%',
-    marginRight: '10px'
+  }, 
+  marketColor: {
+    background: theme.constants.MARKET_COLOR,
+  },
+  verticalAlign: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
