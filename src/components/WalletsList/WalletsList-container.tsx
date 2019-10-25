@@ -9,6 +9,9 @@ import Table from '@material-ui/core/Table';
 import View from '../View';
 import useWalletsListTableStyles from './WalletsList-styles';
 import {walletsList } from './wallets';
+// import ethIcon from '../../public/eth.png'
+
+const { PUBLIC_URL } = process.env;
 
 const headerCols: any[] = [
     { id: 'id', numeric: false, disablePadding: false, label: 'ID' },
@@ -34,16 +37,32 @@ const WalletsList = (props: any): React.ReactElement => {
             </TableCell>
         ));
 
+    const selectIcon  = (blockchain:string) => {
+
+        switch(blockchain) {
+            case 'Tezos':
+                return 'tezos';
+            case 'Ethereum':
+                return 'eth';
+            default:
+                return 'eth'
+        }
+    }
+
     const renderWalletsListRows = (walletsList: any[]) => {
         if (!walletsList.length) return
         return walletsList.map((row: any, index: number) => (
             <TableRow key={`${index}`}>
-                <TableCell  scope="row">{row.ID}</TableCell>
-                <TableCell   >{row.title}</TableCell>
-                <TableCell  >{row.blockchain}</TableCell>
-                <TableCell  >{row.wallet_type}</TableCell>
-                <TableCell >{row.wallet_type}</TableCell>
-
+                <TableCell  scope="row"><b>{row.ID}</b>&nbsp; &nbsp;<b style={{color:'#4C5367'}}>{row.walletHash}</b></TableCell>
+                <TableCell className={classes.rowEl}>{row.title}</TableCell>
+                <TableCell className={classes.rowEl}>
+                <div style={{display:'flex',alignItems: 'center'}}>
+                    <img src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{width:'15px', marginRight:'5px'}}/>
+                    {row.blockchain}
+                </div>
+                </TableCell>
+                <TableCell className={classes.rowEl}>{row.wallet_type}</TableCell>
+                <TableCell className={classes.rowEl}>{row.wallet_type}</TableCell>
             </TableRow>
         ));
     }
