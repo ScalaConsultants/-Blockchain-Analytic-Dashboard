@@ -38,7 +38,6 @@ const WalletsList = (props: any): React.ReactElement => {
         ));
 
     const selectIcon  = (blockchain:string) => {
-
         switch(blockchain) {
             case 'Tezos':
                 return 'tezos';
@@ -46,6 +45,17 @@ const WalletsList = (props: any): React.ReactElement => {
                 return 'eth';
             default:
                 return 'eth'
+        }
+    }
+
+    const selectMarket = (market:string) => {
+        switch(market) {
+            case 'Market':
+                return classes.market;
+            case 'Private':
+                return classes.private;
+            default:
+                return classes.market
         }
     }
 
@@ -61,7 +71,12 @@ const WalletsList = (props: any): React.ReactElement => {
                     {row.blockchain}
                 </div>
                 </TableCell>
-                <TableCell className={classes.rowEl}>{row.wallet_type}</TableCell>
+                <TableCell className={classes.rowEl}>
+                    <div style={{display:'flex',alignItems: 'center'}}>
+                        <div className={selectMarket(row.market)}></div>
+                            {row.market}
+                    </div>
+                </TableCell>
                 <TableCell className={classes.rowEl}>{row.wallet_type}</TableCell>
             </TableRow>
         ));
