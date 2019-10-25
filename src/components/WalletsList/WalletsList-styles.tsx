@@ -19,6 +19,10 @@ const useWalletsListTableStyles = makeStyles(() => ({
 
   grid: {
     position: 'relative'
+  },
+  rowEl: {
+    color: '#A3A7B0',
+    fontWeight:'bold'
   }
 }));
 
