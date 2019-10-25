@@ -1,7 +1,7 @@
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
 
-const UseSwitchButtonStyles = withStyles({
+const DashboardSwitchButtonStyles = withStyles({
   switchBase: {
     color:  '#9EE32D',
     '&$checked': {
@@ -15,4 +15,4 @@ const UseSwitchButtonStyles = withStyles({
   track: {},
 })(Switch);
 
-export default UseSwitchButtonStyles;
+export default DashboardSwitchButtonStyles;
