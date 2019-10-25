@@ -1,27 +1,27 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import Switch from '@material-ui/core/Switch';
+import { withStyles } from '@material-ui/core/styles';
 
-import DashboardSwitchButtonStyles from './SwitchButton-styles';
+import {switchStyles} from './SwitchButton-styles';
 
 const SwitchButton = () => {
-  const [state, setState] = React.useState({
-    checkedPercenge: true,
-  });
 
-  const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [name]: event.target.checked });
-  };
+  const [switchState, setSwitchState] = React.useState(true);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setSwitchState(event.target.checked);
+
+  const DashboardSwitch = withStyles(switchStyles)(Switch);
 
   return (
     <Typography component="div">
         <Grid component="label" container alignItems="center" spacing={1}>
           <Grid item>$</Grid>
           <Grid item>
-            <DashboardSwitchButtonStyles
-              checked={state.checkedPercenge}
-              onChange={handleChange('checkedPercenge')}
-              value="checkedPercenge"
+            <DashboardSwitch
+              checked={switchState}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item>%</Grid>
