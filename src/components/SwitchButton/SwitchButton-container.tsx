@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 
-import UseSwitchButton from './SwitchButton-styles';
+import UseSwitchButtonStyles from './SwitchButton-styles';
 
 const SwitchButton = () => {
   const [state, setState] = React.useState({
@@ -18,7 +18,7 @@ const SwitchButton = () => {
         <Grid component="label" container alignItems="center" spacing={1}>
           <Grid item>$</Grid>
           <Grid item>
-            <UseSwitchButton
+            <UseSwitchButtonStyles
               checked={state.checkedPercenge}
               onChange={handleChange('checkedPercenge')}
               value="checkedPercenge"
