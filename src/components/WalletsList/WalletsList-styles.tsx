@@ -49,7 +49,12 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   verticalAlign: {
     display: 'flex',
     alignItems: 'center'
-  }
+  },
+  underline: {
+    width: '100%',
+    height: '2px',
+    background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)'
+  },
 }));
 
 export default useWalletsListTableStyles;
