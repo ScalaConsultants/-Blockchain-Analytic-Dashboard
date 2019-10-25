@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Legend from '../Legend';
 import { useDashboardTableStyles } from './DashboardTable-styles';
 
-import SwitchButtonComponent from '../SwitchButton';
+import SwitchButton from '../SwitchButton';
  
 const DashboardTableHeader = () => {
   const classes = useDashboardTableStyles();
@@ -25,7 +25,7 @@ const DashboardTableHeader = () => {
           Value
         </Grid>
         <Grid item xs={3}>
-          <SwitchButtonComponent />
+          <SwitchButton />
         </Grid>
         <Grid item xs={8}>
           <Legend />
