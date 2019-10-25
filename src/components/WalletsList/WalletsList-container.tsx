@@ -12,10 +12,10 @@ import {walletsList } from './wallets';
 
 const headerCols: any[] = [
     { id: 'id', numeric: false, disablePadding: false, label: 'ID' },
-    { id: 'title', numeric: true, disablePadding: false, label: 'Title' },
-    { id: 'blockchain', numeric: true, disablePadding: false, label: 'Blockchain' },
-    { id: 'wallet_type', numeric: true, disablePadding: false, label: 'Wallet type' },
-    { id: 'wallet_type', numeric: true, disablePadding: false, label: 'Wallet type' },
+    { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
+    { id: 'blockchain', numeric: false, disablePadding: false, label: 'Blockchain' },
+    { id: 'wallet_type', numeric: false, disablePadding: false, label: 'Wallet type' },
+    { id: 'watched', numeric: false, disablePadding: false, label: 'Watched' },
 
 ];
 
@@ -28,7 +28,7 @@ const WalletsList = (props: any): React.ReactElement => {
                 key={`${row.id}${row.label}`}
                 align={row.numeric ? 'right' : 'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
-                className={classes.td}
+               
             >
                 {row.label}
             </TableCell>
@@ -38,11 +38,11 @@ const WalletsList = (props: any): React.ReactElement => {
         if (!walletsList.length) return
         return walletsList.map((row: any, index: number) => (
             <TableRow key={`${index}`}>
-                <TableCell className={classes.td} scope="row">{row.ID}</TableCell>
-                <TableCell align='right' className={classes.td} >{row.title}</TableCell>
-                <TableCell align='right' className={classes.td}>{row.blockchain}</TableCell>
-                <TableCell align='right' className={classes.td}>{row.wallet_type}</TableCell>
-                <TableCell align='right' className={classes.td}>{row.wallet_type}</TableCell>
+                <TableCell  scope="row">{row.ID}</TableCell>
+                <TableCell   >{row.title}</TableCell>
+                <TableCell  >{row.blockchain}</TableCell>
+                <TableCell  >{row.wallet_type}</TableCell>
+                <TableCell >{row.wallet_type}</TableCell>
 
             </TableRow>
         ));
@@ -65,21 +65,22 @@ const WalletsList = (props: any): React.ReactElement => {
                      </Typography>
                      
                 </Grid>
-            </Grid>
             <Grid container spacing={9} className="Container">
-                <Grid item xs={12} lg={12} className={classes.grid}>
+                <Grid item xs={12} lg={12} >
                     <Table>
-                        <TableHead className={classes.thead}>
+                        <TableHead >
                             <TableRow>{renderWalletsListHeader(headerCols)}</TableRow>
                         </TableHead>
                         <TableBody
                             // onScroll={(e: any) => handleScroll(e.target)}
                             id="walletsListTableBody"
-                            className={classes.tbody}>{renderWalletsListRows(walletsList)}</TableBody>
+                            >{renderWalletsListRows(walletsList)}</TableBody>
                     </Table>
                     {/* <Loader isLoading={walletsIsFetching} fullPage={false} /> */}
                 </Grid>
             </Grid>
+            </Grid>
+
         </View>
     );
 };
