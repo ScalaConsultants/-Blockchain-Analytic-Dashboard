@@ -1,13 +1,12 @@
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
+import Typography from '@material-ui/core/Typography';
+import { Grid } from '@material-ui/core';
 
-import './SwitchButton-styles.css';
+import UseSwitchButton from './SwitchButton-styles';
 
 const SwitchButton = () => {
- 
   const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+    checkedPercenge: true,
   });
 
   const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,14 +14,19 @@ const SwitchButton = () => {
   };
 
   return (
-    <div>
-      <Switch
-        checked={state.checkedA}
-        onChange={handleChange('checkedA')}
-        value="checkedA"
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
-      />
-    </div>
+    <Typography component="div">
+        <Grid component="label" container alignItems="center" spacing={1}>
+          <Grid item>$</Grid>
+          <Grid item>
+            <UseSwitchButton
+              checked={state.checkedPercenge}
+              onChange={handleChange('checkedPercenge')}
+              value="checkedPercenge"
+            />
+          </Grid>
+          <Grid item>%</Grid>
+        </Grid>
+      </Typography>
   );
 }
 
