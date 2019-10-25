@@ -48,14 +48,18 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const selectMarket = (market:string) => {
+    const selectWalletColor = (market:string) => {
         switch(market) {
             case 'Market':
-                return classes.market;
+                return classes.marketColor;
             case 'Private':
-                return classes.private;
+                return classes.privateColor;
+            case 'DAPP':
+                return classes.dappColor;
+            case 'Fraud':
+                return classes.fraudColor;
             default:
-                return classes.market
+                return classes.marketColor
         }
     }
 
@@ -66,14 +70,14 @@ const WalletsList = (props: any): React.ReactElement => {
                 <TableCell  scope="row"><b>{row.ID}</b>&nbsp; &nbsp;<b style={{color:'#4C5367'}}>{row.walletHash}</b></TableCell>
                 <TableCell className={classes.rowEl}>{row.title}</TableCell>
                 <TableCell className={classes.rowEl}>
-                <div style={{display:'flex',alignItems: 'center'}}>
+                <div className={classes.verticalAlign}>
                     <img src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{width:'15px', marginRight:'5px'}}/>
                     {row.blockchain}
                 </div>
                 </TableCell>
                 <TableCell className={classes.rowEl}>
-                    <div style={{display:'flex',alignItems: 'center'}}>
-                        <div className={selectMarket(row.market)}></div>
+                    <div className={classes.verticalAlign}>
+                        <div className={selectWalletColor(row.market) + ' ' + classes.walletTypeIcon}></div>
                             {row.market}
                     </div>
                 </TableCell>
