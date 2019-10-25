@@ -8,7 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import View from '../View';
 import useWalletsListTableStyles from './WalletsList-styles';
-import {walletsList } from './wallets';
+import { walletsListFavourite } from './wallets';
+import { walletsListPublic } from './wallets';
+
+import SwitchButton from '../SwitchButton';
 // import ethIcon from '../../public/eth.png'
 
 const { PUBLIC_URL } = process.env;
@@ -24,6 +27,7 @@ const headerCols: any[] = [
 
 
 const WalletsList = (props: any): React.ReactElement => {
+    const [switchWallet, setSwitchWallet] = React.useState('favourite');
 
     const renderWalletsListHeader = (headerColumns: any[]) =>
         headerColumns.map((row: any) => (
@@ -31,14 +35,14 @@ const WalletsList = (props: any): React.ReactElement => {
                 key={`${row.id}${row.label}`}
                 align={row.numeric ? 'right' : 'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
-               
+
             >
                 {row.label}
             </TableCell>
         ));
 
-    const selectIcon  = (blockchain:string) => {
-        switch(blockchain) {
+    const selectIcon = (blockchain: string) => {
+        switch (blockchain) {
             case 'Tezos':
                 return 'tezos';
             case 'Ethereum':
@@ -48,8 +52,8 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const selectWalletColor = (market:string) => {
-        switch(market) {
+    const selectWalletColor = (market: string) => {
+        switch (market) {
             case 'Market':
                 return classes.marketColor;
             case 'Private':
@@ -67,21 +71,21 @@ const WalletsList = (props: any): React.ReactElement => {
         if (!walletsList.length) return
         return walletsList.map((row: any, index: number) => (
             <TableRow key={`${index}`}>
-                <TableCell  scope="row"><b>{row.ID}</b>&nbsp; &nbsp;<b style={{color:'#4C5367'}}>{row.walletHash}</b></TableCell>
+                <TableCell scope="row"><b>{row.ID}</b>&nbsp; &nbsp;<b style={{ color: '#4C5367' }}>{row.walletHash}</b></TableCell>
                 <TableCell className={classes.rowEl}>{row.title}</TableCell>
                 <TableCell className={classes.rowEl}>
-                <div className={classes.verticalAlign}>
-                    <img src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{width:'15px', marginRight:'5px'}}/>
-                    {row.blockchain}
-                </div>
+                    <div className={classes.verticalAlign}>
+                        <img src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{ width: '15px', marginRight: '5px' }} />
+                        {row.blockchain}
+                    </div>
                 </TableCell>
                 <TableCell className={classes.rowEl}>
                     <div className={classes.verticalAlign}>
                         <div className={selectWalletColor(row.market) + ' ' + classes.walletTypeIcon}></div>
-                            {row.market}
+                        {row.market}
                     </div>
                 </TableCell>
-                <TableCell className={classes.rowEl}>{row.wallet_type}</TableCell>
+                <TableCell className={classes.rowEl}><SwitchButton /></TableCell>
             </TableRow>
         ));
     }
@@ -91,32 +95,33 @@ const WalletsList = (props: any): React.ReactElement => {
     return (
         <View>
             <Grid container className="Container">
-                <Grid item xs={3} lg={3}>
-                    <Typography variant="h2" gutterBottom>
-                        Favourite wallet
-                     </Typography>
-                     
+
+                <Grid item xs={1} style={{marginRight:'20px',zIndex:1000, cursor:'pointer'}}>
+                    <Grid container justify="center" onClick={() => setSwitchWallet('favourite')}>
+                        <Grid item>Favourite wallet</Grid>
+                        <Grid item className={classes.underline} />
+                    </Grid>
                 </Grid>
-                <Grid item xs={6} lg={6}>
-                    <Typography variant="h2" gutterBottom>
-                        Public wallet
-                     </Typography>
-                     
+                <Grid item xs={1} style={{zIndex:1000, cursor:'pointer'}}>
+                    <Grid container justify="center" >
+                        <Grid item><div onClick={() => setSwitchWallet('public')}>Public wallet</div></Grid>
+                        <Grid item className={classes.underline} />
+                    </Grid>
                 </Grid>
-            <Grid container spacing={9} className="Container">
-                <Grid item xs={12} lg={12} >
-                    <Table>
-                        <TableHead >
-                            <TableRow>{renderWalletsListHeader(headerCols)}</TableRow>
-                        </TableHead>
-                        <TableBody
-                            // onScroll={(e: any) => handleScroll(e.target)}
-                            id="walletsListTableBody"
-                            >{renderWalletsListRows(walletsList)}</TableBody>
-                    </Table>
-                    {/* <Loader isLoading={walletsIsFetching} fullPage={false} /> */}
+                <Grid container spacing={9} className="Container">
+                    <Grid item xs={12} lg={12} >
+                        <Table>
+                            <TableHead >
+                                <TableRow>{renderWalletsListHeader(headerCols)}</TableRow>
+                            </TableHead>
+                            <TableBody
+                                // onScroll={(e: any) => handleScroll(e.target)}
+                                id="walletsListTableBody"
+                            >{switchWallet == 'favourite' ? renderWalletsListRows(walletsListFavourite) : renderWalletsListRows(walletsListPublic)}</TableBody>
+                        </Table>
+                        {/* <Loader isLoading={walletsIsFetching} fullPage={false} /> */}
+                    </Grid>
                 </Grid>
-            </Grid>
             </Grid>
 
         </View>
