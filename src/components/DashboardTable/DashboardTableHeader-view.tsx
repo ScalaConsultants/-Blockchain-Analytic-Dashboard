@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Legend from '../Legend';
 import { useDashboardTableStyles } from './DashboardTable-styles';
+
+import SwitchButton from '../SwitchButton';
  
 const DashboardTableHeader = () => {
   const classes = useDashboardTableStyles();
@@ -22,7 +24,10 @@ const DashboardTableHeader = () => {
         <Grid item xs={1}>
           Value
         </Grid>
-        <Grid item xs={11}>
+        <Grid item xs={3}>
+          <SwitchButton />
+        </Grid>
+        <Grid item xs={8}>
           <Legend />
         </Grid>
         </Grid>
