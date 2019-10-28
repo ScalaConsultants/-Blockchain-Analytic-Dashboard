@@ -1,3 +1,3 @@
-import SwitchButton from './SwitchButton-container';
+import SwitchButton from './SwitchButton-view';
 
 export default SwitchButton;

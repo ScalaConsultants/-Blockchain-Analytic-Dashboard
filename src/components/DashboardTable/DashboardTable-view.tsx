@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import DashboardTableHeader from './DashboardTableHeader-view';
+import DashboardTableHeader from './DashboardTableHeader-container';
 import DashboardTableBody from './DashboardTableBody-view';
 import { useDashboardTableStyles } from './DashboardTable-styles';
 import { Table } from './types';
