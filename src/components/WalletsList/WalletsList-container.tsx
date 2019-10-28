@@ -20,6 +20,8 @@ const headerCols: any[] = [
     { id: 'blockchain', numeric: false, disablePadding: false, label: 'Blockchain' },
     { id: 'wallet_type', numeric: false, disablePadding: false, label: 'Wallet type' },
     { id: 'watched', numeric: false, disablePadding: false, label: 'Watched' },
+    { id: 'edit', numeric: false, disablePadding: false, label: '' },
+
 
 ];
 
@@ -94,6 +96,8 @@ const WalletsList = (props: any): React.ReactElement => {
                     </div>
                 </TableCell>
                 <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={()=>toggleSwitch(index)}/></TableCell>
+                <TableCell className={classes.rowEl}><button type="button" className={classes.button}>edit</button> </TableCell>
+
             </TableRow>
         ));
     }
