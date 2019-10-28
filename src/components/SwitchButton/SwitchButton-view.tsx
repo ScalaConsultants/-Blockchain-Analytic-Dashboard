@@ -9,7 +9,7 @@ import { SwitchButtonProps } from './types';
 
 const SwitchButton = (props: SwitchButtonProps) => {
 
-  const SwitchStyle = props.dashboaradSwitch ? withStyles(dashboardSwitchStyles)(Switch) :  withStyles(walletListSwitchStyles)(Switch);
+  const SwitchStyle = props.dashboaradSwitch ? withStyles(dashboardSwitchStyles)(Switch) : withStyles(walletListSwitchStyles)(Switch);
 
   return (
     <Typography component="div">
