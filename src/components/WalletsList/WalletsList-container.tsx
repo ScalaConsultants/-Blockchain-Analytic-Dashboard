@@ -5,13 +5,15 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
+
 import View from '../View';
 import useWalletsListTableStyles from './WalletsList-styles';
 import { walletsListFavourite } from './wallets';
 import { walletsListPublic } from './wallets';
 import EditWalletModal from '../EditWalletModal'
-
 import SwitchButton from '../SwitchButton';
+
+import { Markets, Blockchains } from '../../types';
 
 const { PUBLIC_URL } = process.env;
 
@@ -45,9 +47,9 @@ const WalletsList = (props: any): React.ReactElement => {
 
     const selectIcon = (blockchain: string) => {
         switch (blockchain) {
-            case 'Tezos':
+            case Blockchains.XTZ:
                 return 'tezos';
-            case 'Ethereum':
+            case  Blockchains.ETH:
                 return 'eth';
             default:
                 return 'eth'
@@ -70,15 +72,15 @@ const WalletsList = (props: any): React.ReactElement => {
 
     const selectWalletColor = (market: string) => {
         switch (market) {
-            case 'Market':
+            case Markets.MARKET:
                 return classes.marketColor;
-            case 'Private':
+            case Markets.PRIVATE:
                 return classes.privateColor;
-            case 'DAPP':
+            case Markets.DAPP:
                 return classes.dappColor;
-            case 'Fraud':
+            case Markets.FRAUD:
                 return classes.fraudColor;
-            case 'Unassigned':
+            case Markets.UNASSIGNED:
                 return classes.unassignedColor;
             default:
                 return classes.marketColor
@@ -100,7 +102,7 @@ const WalletsList = (props: any): React.ReactElement => {
                 <TableCell className={classes.rowEl}>
                     <div className={classes.verticalAlign}>
                         <div className={selectWalletColor(row.market) + ' ' + classes.walletTypeIcon}></div>
-                        {row.market}
+                        <span className={row.market == Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.market}</span>
                     </div>
                 </TableCell>
                 <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={()=>toggleSwitch(index)}/></TableCell>
