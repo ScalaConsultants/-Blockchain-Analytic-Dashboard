@@ -55,6 +55,9 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
     height: '2px',
     background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)'
   },
+  btnDisabled: {
+    color: '#A3A7B0'
+  }
 }));
 
 export default useWalletsListTableStyles;

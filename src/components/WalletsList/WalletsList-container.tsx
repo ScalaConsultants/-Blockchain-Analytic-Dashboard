@@ -105,15 +105,19 @@ const WalletsList = (props: any): React.ReactElement => {
             <Grid container className="Container">
 
                 <Grid item xs={1} style={{marginRight:'20px',zIndex:1000, cursor:'pointer'}}>
-                    <Grid container justify="center" onClick={() => setSwitchWallet('favourite')}>
-                        <Grid item>Favourite wallet</Grid>
-                        <Grid item className={classes.underline} />
+                    <Grid container justify="center">
+                        <Grid item className={switchWallet == 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet('favourite')}>
+                            Favourite wallet
+                        </Grid>
+                        {switchWallet == 'favourite' && <Grid item className={classes.underline} />}
                     </Grid>
                 </Grid>
                 <Grid item xs={1} style={{zIndex:1000, cursor:'pointer'}}>
                     <Grid container justify="center" >
-                        <Grid item><div onClick={() => setSwitchWallet('public')}>Public wallet</div></Grid>
-                        <Grid item className={classes.underline} />
+                        <Grid item onClick={() => setSwitchWallet('public')} className={switchWallet == 'favourite' ? classes.btnDisabled : ''}>
+                            Public wallet
+                        </Grid>
+                        {switchWallet == 'public' && <Grid item className={classes.underline} />}
                     </Grid>
                 </Grid>
                 <Grid container spacing={9} className="Container">
@@ -125,7 +129,8 @@ const WalletsList = (props: any): React.ReactElement => {
                             <TableBody
                                 // onScroll={(e: any) => handleScroll(e.target)}
                                 id="walletsListTableBody"
-                            >{switchWallet == 'favourite' ? renderWalletsListRows(walletsListFavourite) : renderWalletsListRows(walletsListPublic)}</TableBody>
+                            >
+                            {switchWallet == 'favourite' ? renderWalletsListRows(walletsListFavourite) : renderWalletsListRows(walletsListPublic)}</TableBody>
                         </Table>
                         {/* <Loader isLoading={walletsIsFetching} fullPage={false} /> */}
                     </Grid>
