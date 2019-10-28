@@ -85,7 +85,7 @@ const WalletsList = (props: any): React.ReactElement => {
                         {row.market}
                     </div>
                 </TableCell>
-                <TableCell className={classes.rowEl}><SwitchButton /></TableCell>
+                <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={false} handleChange={()=>{}}/></TableCell>
             </TableRow>
         ));
     }
