@@ -29,6 +29,7 @@ const EditWalletModalView = ({
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
   const classesFirstButton = clsx([classes.button, classes.fonts, classes.buttonFirst, classes.white]);
   const classesSecondButton = clsx([classes.button, classes.fonts]);
+  const { PUBLIC_URL } = process.env;
 
   return (
     <>
@@ -37,8 +38,8 @@ const EditWalletModalView = ({
         color="inherit"
         className={classesEditWalletButton}
         onClick={handleOpen}
-      >
-        Edit wallet
+      ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} />
+        edit
       </Button>
       <Modal
         aria-labelledby="edit-wallet-modal-title"
@@ -55,7 +56,9 @@ const EditWalletModalView = ({
         <Fade in={open}>
           <div className={classesPaper}>
             <Grid container alignItems="center">
-              <h4 id="edit-wallet-modal-title" className={classes.white}>Edit Wallet</h4>
+              <h4 id="edit-wallet-modal-title" className={classes.white}>
+                  Edit Wallet
+              </h4>
               <CloseIcon className={classes.close} viewBox="0 0 40 20" onClick={handleClose} />
             </Grid>
             <Divider
