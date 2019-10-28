@@ -7,6 +7,11 @@ import SwitchButton from '../SwitchButton';
  
 const DashboardTableHeader = () => {
   const classes = useDashboardTableStyles();
+
+  const [switchState, setSwitchState] = React.useState(true);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setSwitchState(event.target.checked);
+
   return (
     <Grid container alignItems="center" className={classes.header}>
       <Grid item xs={3}>
@@ -25,7 +30,12 @@ const DashboardTableHeader = () => {
           Value
         </Grid>
         <Grid item xs={3}>
-          <SwitchButton />
+          <SwitchButton 
+            labelLeft={'$'}
+            labelRight={'%'}
+            switchState={switchState}
+            handleChange={handleChange}
+          />
         </Grid>
         <Grid item xs={8}>
           <Legend />
