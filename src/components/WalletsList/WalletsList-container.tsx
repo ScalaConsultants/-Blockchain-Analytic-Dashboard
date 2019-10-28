@@ -9,6 +9,7 @@ import View from '../View';
 import useWalletsListTableStyles from './WalletsList-styles';
 import { walletsListFavourite } from './wallets';
 import { walletsListPublic } from './wallets';
+import EditWalletModal from '../EditWalletModal'
 
 import SwitchButton from '../SwitchButton';
 
@@ -28,6 +29,7 @@ const headerCols: any[] = [
 const WalletsList = (props: any): React.ReactElement => {
     const [switchWallet, setSwitchWallet] = React.useState('favourite');
     const [switchToggle, setSwitchToggle] = React.useState(false);
+    const [description, setDescription] = React.useState('Test title');
 
     const renderWalletsListHeader = (headerColumns: any[]) =>
         headerColumns.map((row: any) => (
@@ -60,6 +62,10 @@ const WalletsList = (props: any): React.ReactElement => {
             walletsListPublic[index].watched = !walletsListPublic[index].watched;
 
         }
+    }
+
+    const updateDescription = (value:string) => {
+        setDescription(value);
     }
 
     const selectWalletColor = (market: string) => {
@@ -96,8 +102,9 @@ const WalletsList = (props: any): React.ReactElement => {
                     </div>
                 </TableCell>
                 <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={()=>toggleSwitch(index)}/></TableCell>
-                <TableCell className={classes.rowEl}><button type="button" className={classes.button}>edit</button> </TableCell>
-
+                <TableCell className={classes.rowEl}>
+                    <EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription}/>
+                </TableCell>
             </TableRow>
         ));
     }
