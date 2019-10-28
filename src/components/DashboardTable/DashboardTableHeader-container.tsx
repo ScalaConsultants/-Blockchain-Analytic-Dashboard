@@ -35,6 +35,7 @@ const DashboardTableHeader = () => {
             labelRight={'%'}
             switchState={switchState}
             handleChange={handleChange}
+            dashboaradSwitch={true}
           />
         </Grid>
         <Grid item xs={8}>
