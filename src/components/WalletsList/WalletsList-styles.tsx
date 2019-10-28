@@ -45,6 +45,9 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   marketColor: {
     background: theme.constants.MARKET_COLOR,
+  },unassignedColor: {
+    border: '1px solid #4C5367',
+    background: 'transparent'
   },
   verticalAlign: {
     display: 'flex',

@@ -78,6 +78,8 @@ const WalletsList = (props: any): React.ReactElement => {
                 return classes.dappColor;
             case 'Fraud':
                 return classes.fraudColor;
+            case 'Unassigned':
+                return classes.unassignedColor;
             default:
                 return classes.marketColor
         }

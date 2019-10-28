@@ -13,7 +13,7 @@ export const walletsListFavourite = [
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'Tezos',
-        market: 'DAPP',
+        market: 'Unassigned',
         watched: true
 
     },{
