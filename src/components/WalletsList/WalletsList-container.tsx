@@ -4,7 +4,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import View from '../View';
 import useWalletsListTableStyles from './WalletsList-styles';
@@ -12,7 +11,6 @@ import { walletsListFavourite } from './wallets';
 import { walletsListPublic } from './wallets';
 
 import SwitchButton from '../SwitchButton';
-// import ethIcon from '../../public/eth.png'
 
 const { PUBLIC_URL } = process.env;
 
@@ -25,9 +23,9 @@ const headerCols: any[] = [
 
 ];
 
-
 const WalletsList = (props: any): React.ReactElement => {
     const [switchWallet, setSwitchWallet] = React.useState('favourite');
+    const [switchToggle, setSwitchToggle] = React.useState(false);
 
     const renderWalletsListHeader = (headerColumns: any[]) =>
         headerColumns.map((row: any) => (
@@ -49,6 +47,16 @@ const WalletsList = (props: any): React.ReactElement => {
                 return 'eth';
             default:
                 return 'eth'
+        }
+    }
+
+    const toggleSwitch = (index:number) => {
+        setSwitchToggle(!switchToggle);
+        if(switchWallet == 'favourite') {
+            walletsListFavourite[index].watched = !walletsListFavourite[index].watched;
+        } else {
+            walletsListPublic[index].watched = !walletsListPublic[index].watched;
+
         }
     }
 
@@ -85,7 +93,7 @@ const WalletsList = (props: any): React.ReactElement => {
                         {row.market}
                     </div>
                 </TableCell>
-                <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={false} handleChange={()=>{}}/></TableCell>
+                <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={()=>toggleSwitch(index)}/></TableCell>
             </TableRow>
         ));
     }
