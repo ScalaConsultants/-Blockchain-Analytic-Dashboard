@@ -70,7 +70,10 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
     fontSize: '0.65rem',
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
     margin: '4px',
-  },
+  }, labelDisabled: {
+    color: '#4C5367'
+  }
+
 }));
 
 export default useWalletsListTableStyles;

@@ -39,7 +39,7 @@ const WalletsList = (props: any): React.ReactElement => {
                 padding={row.disablePadding ? 'none' : 'default'}
 
             >
-                {row.label}
+                <span className={row.id=='watched' ? classes.labelDisabled : ''}>{row.label}</span>
             </TableCell>
         ));
 
