@@ -12,7 +12,7 @@ export const dashboardSwitchStyles = {
   track: {},
 }
 
-export const WojtekSwitchStyles = {
+export const wojtekZMalejSwitchStyles = {
   switchBase: {
     color: '#9EE32D',
     '&$checked': {
