@@ -4,12 +4,12 @@ import { Grid } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
 
-import { dashboardSwitchStyles, wojtekZMalejSwitchStyles } from './SwitchButton-styles';
+import { dashboardSwitchStyles, walletListSwitchStyles } from './SwitchButton-styles';
 import { SwitchButtonProps } from './types';
 
 const SwitchButton = (props: SwitchButtonProps) => {
 
-  const SwitchStyle = props.dashboaradSwitch ? withStyles(dashboardSwitchStyles)(Switch) :  withStyles(wojtekZMalejSwitchStyles)(Switch);
+  const SwitchStyle = props.dashboaradSwitch ? withStyles(dashboardSwitchStyles)(Switch) :  withStyles(walletListSwitchStyles)(Switch);
 
   return (
     <Typography component="div">
