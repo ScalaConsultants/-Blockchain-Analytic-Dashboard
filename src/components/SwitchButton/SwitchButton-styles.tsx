@@ -14,17 +14,29 @@ export const dashboardSwitchStyles = {
 
 export const walletListSwitchStyles = {
   switchBase: {
+    top: '3px',
     color: '#4C5367',
     '&$checked': {
       color: '#9EE32D'
     },
     '&$checked + $track': {
-      background: "black"
+      background: "#253152",
+      border: '1px solid #2A3450',
+      boxShadow: 'inset 0px 4px 10px #0F1935'
     },
   },switchThumb:{
     width:"8px",
     height:"8px",
+  },thumb:{
+    width: '12px',
+    height: '12px',
   },
   checked: {},
-  track: {},
+  track: {
+    height: '13px',
+    width: '65%',
+    background: "#253152",
+    border: '1px solid #2A3450',
+    boxShadow: 'inset 0px 4px 10px #0F1935'
+  },
 }
