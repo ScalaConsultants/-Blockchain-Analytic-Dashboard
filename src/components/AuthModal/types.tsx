@@ -1,16 +1,20 @@
 export interface AuthModalViewProps {
-  open: boolean;
-  handleOpen: () => void;
-  handleClose: () => void;
-  handleUpdate: () => void;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleLogin: () => void;
-  handleRegister: () => void;
-  handleSwitchForms: () => void;
-  handleRememberMe: () => void;
-  forgetPassword: boolean;
-  rememberMe: boolean;
-  user: Record<string, string>;
+  open?: boolean;
+  handleOpen?: () => void;
+  handleClose?: () => void;
+  handleUpdate?: () => void;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLogin?: () => void;
+  handleRegister?: () => void;
+  handleSwitchForms?: () => void;
+  handleRememberMe?: () => void;
+  forgetPassword?: boolean;
+  rememberMe?: boolean;
+  user?: Record<string, string>;
+}
+
+export interface AuthModalFormProps {
+  props: AuthModalViewProps;
 }
 
 export interface AuthModalProps {

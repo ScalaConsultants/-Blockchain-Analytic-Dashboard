@@ -13,9 +13,7 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
     password: ''
   });
 
-  const handleOpen = () => {
-    setOpen(prevState => !prevState);
-  };
+  const handleOpen = () => setOpen(prevState => !prevState);
 
   const handleClose = () => {
     setOpen(prevState => !prevState);
@@ -27,13 +25,9 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
     });
   };
 
-  const handleSwitchForms = () => {
-    setForgetPassword(prevState => !prevState);
-  };
+  const handleSwitchForms = () => setForgetPassword(prevState => !prevState);
 
-  const handleRememberMe = () => {
-    setRememberMe(prevState => !prevState);
-  };
+  const handleRememberMe = () => setRememberMe(prevState => !prevState);
 
   const handleChange = (event: any) => {
     event.persist();
@@ -49,9 +43,7 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
     );
   };
 
-  const handleLogin = () => {
-    initLogin(user.email, user.password);
-  };
+  const handleLogin = () => initLogin(user.email, user.password);
 
   const handleUpdate = () => {};
   const handleRegister = () => {};

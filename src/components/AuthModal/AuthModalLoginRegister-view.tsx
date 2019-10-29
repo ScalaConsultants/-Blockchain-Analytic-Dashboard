@@ -5,8 +5,17 @@ import Button from '@material-ui/core/Button';
 import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styles';
 import clsx from 'clsx';
 
-const AuthModalLoginRegister = (props: any) => {
-  const { handleChange, handleLogin, handleSwitchForms, handleRememberMe, rememberMe, user } = props;
+import { AuthModalViewProps } from './types';
+
+const AuthModalLoginRegister = (props: AuthModalViewProps) => {
+  const {
+      handleChange,
+      handleLogin,
+      handleSwitchForms,
+      handleRememberMe,
+      rememberMe,
+      user = { email: '', password: ''}
+  } = props;
 
   const classesModal = useModalStyles();
   const classesInput = useInputStyles();
