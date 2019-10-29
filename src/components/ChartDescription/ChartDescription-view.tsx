@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import ChartDescriptionStyles from './ChartDescription-styles';
 import { ViewProps } from './types';
 
-const ChartDescriptionView = ({ type, blockchain }: ViewProps) => {
+const ChartDescriptionView = ({ type }: ViewProps) => {
   const classes: any = ChartDescriptionStyles();
   const classesDot = clsx([classes.dot, classes[type]]);
 

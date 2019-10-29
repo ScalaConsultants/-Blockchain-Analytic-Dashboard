@@ -41,7 +41,7 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
         <EditWalletModal id={id} address={address} description={description} update={updateDescription} />
       </Grid>
       <Grid item xs={1}>
-        <ChartDescription type={type} blockchain={blockchain} />
+        <ChartDescription type={type} />
       </Grid>
       <Grid container direction="row" justify="flex-start" alignItems="center" className={classesInfo}>
         <Grid item xs={1}>
