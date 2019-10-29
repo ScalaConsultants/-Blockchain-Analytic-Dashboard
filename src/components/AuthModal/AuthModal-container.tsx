@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import AuthModalView from './AuthModal-view';
 
-import { AuthModalProps, User } from './types'
+import { AuthModalProps, User } from './types';
 
 const AuthModal = ({ initLogin }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
@@ -14,23 +14,23 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
   });
 
   const handleOpen = () => {
-    setOpen((prevState => !prevState));
+    setOpen(prevState => !prevState);
   };
 
   const handleClose = () => {
-    setOpen((prevState => !prevState));
+    setOpen(prevState => !prevState);
     setForgetPassword(false);
     setRememberMe(true);
     setUser({
       email: '',
       password: ''
-    })
+    });
   };
 
-  const handleSwitchForms = () =>  {
+  const handleSwitchForms = () => {
     setForgetPassword(prevState => !prevState);
   };
-  
+
   const handleRememberMe = () => {
     setRememberMe(prevState => !prevState);
   };
@@ -39,12 +39,14 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
     event.persist();
     const type = event.target.type;
     const value = event.target.value;
-    
-    setUser((prevState: User): User => {
-      const user: any = prevState;
-      user[type] = value;
-      return { ...user };
-    });
+
+    setUser(
+      (prevState: User): User => {
+        const user: any = prevState;
+        user[type] = value;
+        return { ...user };
+      }
+    );
   };
 
   const handleLogin = () => {

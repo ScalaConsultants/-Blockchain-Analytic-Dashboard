@@ -7,5 +7,5 @@ export const initAuthLogin = (email: string, password: string) => {
       email,
       password
     }
-  }
+  };
 };

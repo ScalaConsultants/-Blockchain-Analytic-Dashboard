@@ -14,13 +14,7 @@ import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const {
-    open,
-    handleOpen,
-    handleClose,
-    forgetPassword
-  } = props;
-
+  const { open, handleOpen, handleClose, forgetPassword } = props;
 
   const classesModal = useModalStyles();
   const classesPaper = clsx([classesModal.paper, classesModal.grey]);
@@ -29,17 +23,9 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const classesTitle = clsx([classesModal.title, classesModal.flex]);
   const { PUBLIC_URL } = process.env;
 
-  const text = (
-      forgetPassword ?
-          'Recovery your password' :
-          'Login into your account'
-  );
+  const text = forgetPassword ? 'Recovery your password' : 'Login into your account';
 
-  const form = (
-      forgetPassword ?
-          <AuthModalForgetPassword {...props} /> :
-          <AuthModalLoginRegister {...props} />
-  );
+  const form = forgetPassword ? <AuthModalForgetPassword {...props} /> : <AuthModalLoginRegister {...props} />;
 
   return (
     <>

@@ -7,7 +7,7 @@ import AuthModal from './AuthModal-container';
 
 const AuthModalRedux = () => {
   const dispatch = useDispatch();
-  const onAuth = (email: string, password: string) => dispatch(initAuthLogin(email, password))
+  const onAuth = (email: string, password: string) => dispatch(initAuthLogin(email, password));
 
   return <AuthModal initLogin={onAuth} />;
 };

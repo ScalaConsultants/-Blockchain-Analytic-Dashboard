@@ -10,14 +10,14 @@ export interface AuthModalViewProps {
   handleRememberMe: () => void;
   forgetPassword: boolean;
   rememberMe: boolean;
-  user: Record<string, string>
-};
+  user: Record<string, string>;
+}
 
 export interface AuthModalProps {
   initLogin: (email: string, password: string) => void;
 }
 
 export interface User {
-  email: string,
-  password: string
+  email: string;
+  password: string;
 }

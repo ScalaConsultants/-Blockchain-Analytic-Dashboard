@@ -41,7 +41,7 @@ export const useModalStyles = makeStyles((theme: ExtendedTheme) => ({
       '&:last-child': {
         marginBottom: '0',
         border: '1px solid #5699F6',
-        background: '#253152',
+        background: '#253152'
       }
     }
   },
@@ -86,7 +86,7 @@ export const useModalStyles = makeStyles((theme: ExtendedTheme) => ({
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
-    fontSize: '0.75rem',
+    fontSize: '0.75rem'
   },
   circle: {
     width: '8px',
@@ -134,17 +134,17 @@ export const useInputStyles = makeStyles((theme: ExtendedTheme) =>
 );
 
 export const useLabelStyles = makeStyles((theme: ExtendedTheme) =>
-    createStyles({
-      root: {
-        fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
-        fontStyle: theme.constants.DEFAULT_FONT_STYLE,
-        lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
-        fontSize: '0.75rem',
-        color: theme.palette.grey[600],
-        '&$focused': {
-          color: theme.palette.grey[600]
-        }
-      },
-      focused: {}
-    })
+  createStyles({
+    root: {
+      fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
+      fontStyle: theme.constants.DEFAULT_FONT_STYLE,
+      lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
+      fontSize: '0.75rem',
+      color: theme.palette.grey[600],
+      '&$focused': {
+        color: theme.palette.grey[600]
+      }
+    },
+    focused: {}
+  })
 );
