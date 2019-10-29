@@ -2,19 +2,19 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styles';
 import clsx from 'clsx';
+import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styles';
 
 import { AuthModalViewProps } from './types';
 
 const AuthModalLoginRegister = (props: AuthModalViewProps) => {
   const {
-      handleChange,
-      handleLogin,
-      handleSwitchForms,
-      handleRememberMe,
-      rememberMe,
-      user = { email: '', password: ''}
+    handleChange,
+    handleLogin,
+    handleSwitchForms,
+    handleRememberMe,
+    rememberMe,
+    user = { email: '', password: '' }
   } = props;
 
   const classesModal = useModalStyles();

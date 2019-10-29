@@ -1,17 +1,13 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styles';
 import clsx from 'clsx';
+import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styles';
 
 import { AuthModalViewProps } from './types';
 
 const AuthModalForgetPassword = (props: AuthModalViewProps) => {
-  const {
-      handleSwitchForms,
-      handleChange,
-      user = { email: '' }
-  } = props;
+  const { handleSwitchForms, handleChange, user = { email: '' } } = props;
 
   const classesModal = useModalStyles();
   const classesInput = useInputStyles();

@@ -31,14 +31,14 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
 
   const handleChange = (event: any) => {
     event.persist();
-    const type = event.target.type;
-    const value = event.target.value;
+    const { type } = event.target;
+    const { value } = event.target;
 
     setUser(
       (prevState: User): User => {
-        const user: any = prevState;
-        user[type] = value;
-        return { ...user };
+        const userState: any = prevState;
+        userState[type] = value;
+        return { ...userState };
       }
     );
   };

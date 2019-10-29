@@ -14,7 +14,7 @@ import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const { open, handleOpen, handleClose, forgetPassword } = props;
+  const { open = false, handleOpen, handleClose, forgetPassword } = props;
 
   const classesModal = useModalStyles();
   const classesPaper = clsx([classesModal.paper, classesModal.grey]);
@@ -45,7 +45,8 @@ const AuthModalView = (props: AuthModalViewProps) => {
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500
-        }}>
+        }}
+      >
         <Fade in={open}>
           <div className={classesPaper}>
             <Grid container justify="flex-start" direction="column" alignItems="stretch">

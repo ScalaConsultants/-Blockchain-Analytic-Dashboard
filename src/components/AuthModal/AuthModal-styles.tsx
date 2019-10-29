@@ -130,8 +130,7 @@ export const useInputStyles = makeStyles((theme: ExtendedTheme) =>
       }
     },
     focused: {}
-  })
-);
+  }));
 
 export const useLabelStyles = makeStyles((theme: ExtendedTheme) =>
   createStyles({
