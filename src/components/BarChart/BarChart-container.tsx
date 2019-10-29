@@ -117,7 +117,7 @@ const BarChartContainer = (props: BarChartProps) => {
         <Link
           to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
           key={walletHash}>
-            <Tooltip title={percentage.toFixed(4)} placement="bottom" >
+            <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
             <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
               <div className={getInnerClasses(index)}>
                 {index < 10 && percentage >= 1 ? <div>{`${Math.floor(text)}%`}</div> : null}
