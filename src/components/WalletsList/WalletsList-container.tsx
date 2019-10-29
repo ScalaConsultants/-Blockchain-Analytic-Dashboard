@@ -5,7 +5,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
-import TableSortLabel from "@material-ui/core/TableSortLabel/TableSortLabel";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
@@ -28,8 +27,6 @@ const headerCols: any[] = [
     { id: 'wallet_type', numeric: false, disablePadding: false, label: 'Wallet type', sort: true },
     { id: 'watched', numeric: false, disablePadding: false, label: 'Watched', sort: false },
     { id: 'edit', numeric: false, disablePadding: false, label: '', sort: false },
-
-
 ];
 
 const WalletsList = (props: any): React.ReactElement => {
@@ -42,7 +39,7 @@ const WalletsList = (props: any): React.ReactElement => {
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<OrderBy>("id");
 
-    
+
     const handleRequestSort = (property: any) => {
         if (order === "desc") {
             setOrder("asc");
@@ -59,26 +56,27 @@ const WalletsList = (props: any): React.ReactElement => {
                 align={row.numeric ? 'right' : 'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
             > {row.sort ?
-                <div style={{ display: 'flex', alignItems: 'center', cursor:'pointer' }} onClick={()=>handleRequestSort(row.id)}>
+                <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => handleRequestSort(row.id)}>
                     <span className={row.id == 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
                     {row.sort &&
                         <div>
                             <ArrowDropUpIcon
                                 fontSize='small'
                                 style={{ display: 'block', marginBottom: '-12px' }}
+                                className={(orderBy == row.id && order) == 'asc' ? classes.labelDisabled : ''}
                             />
 
                             <ArrowDropDownIcon
                                 fontSize='small'
                                 style={{ display: 'block' }}
+                                className={(orderBy == row.id && order) == 'desc' ? classes.labelDisabled : ''}
                             />
-
                         </div>
                     }
                 </div>
                 :
                 <span className={row.id == 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
-            }
+                }
 
             </TableCell>
         ));
