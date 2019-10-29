@@ -1,5 +1,5 @@
 
-export const walletsListFavourite = [
+export const walletsListPrivate = [
     {
         id: '1',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',

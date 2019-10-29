@@ -9,38 +9,36 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 import { stableSort, getSorting } from "../../helpers/helpers";
+import { Order, OrderBy, HeaderColsInterface } from './types';
 import View from '../View';
 import useWalletsListTableStyles from './WalletsList-styles';
-import { walletsListFavourite } from './wallets';
+import { walletsListPrivate } from './wallets';
 import { walletsListPublic } from './wallets';
 import EditWalletModal from '../EditWalletModal'
 import SwitchButton from '../SwitchButton';
 
-import { Markets, Blockchains } from '../../types';
+import { Markets, Blockchains, WalletType } from '../../types';
 
 const { PUBLIC_URL } = process.env;
 
-const headerCols: any[] = [
+const headerCols: HeaderColsInterface[] = [
     { id: 'id', numeric: false, disablePadding: false, label: 'ID', sort: true },
     { id: 'title', numeric: false, disablePadding: false, label: 'Title', sort: true },
     { id: 'blockchain', numeric: false, disablePadding: false, label: 'Blockchain', sort: true },
-    { id: 'wallet_type', numeric: false, disablePadding: false, label: 'Wallet type', sort: true },
+    { id: 'market', numeric: false, disablePadding: false, label: 'Wallet type', sort: true },
     { id: 'watched', numeric: false, disablePadding: false, label: 'Watched', sort: false },
     { id: 'edit', numeric: false, disablePadding: false, label: '', sort: false },
 ];
 
 const WalletsList = (props: any): React.ReactElement => {
-    type Order = "asc" | "desc";
-    type OrderBy = string;
 
-    const [switchWallet, setSwitchWallet] = React.useState('favourite');
+    const [switchWallet, setSwitchWallet] = React.useState(WalletType.PRIVATE);
     const [switchToggle, setSwitchToggle] = React.useState(false);
     const [description, setDescription] = React.useState('Test title');
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<OrderBy>("id");
 
-
-    const handleRequestSort = (property: any) => {
+    const handleRequestSort = (property: string) => {
         if (order === "desc") {
             setOrder("asc");
         } else if (order === "asc") {
@@ -49,7 +47,7 @@ const WalletsList = (props: any): React.ReactElement => {
         setOrderBy(property);
     };
 
-    const renderWalletsListHeader = (headerColumns: any[]) =>
+    const renderWalletsListHeader = (headerColumns: HeaderColsInterface[]) =>
         headerColumns.map((row: any) => (
             <TableCell
                 key={`${row.id}${row.label}`}
@@ -94,11 +92,10 @@ const WalletsList = (props: any): React.ReactElement => {
 
     const toggleSwitch = (index: number) => {
         setSwitchToggle(!switchToggle);
-        if (switchWallet == 'favourite') {
-            walletsListFavourite[index].watched = !walletsListFavourite[index].watched;
+        if (switchWallet == WalletType.PRIVATE) {
+            walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
         } else {
             walletsListPublic[index].watched = !walletsListPublic[index].watched;
-
         }
     }
 
@@ -160,15 +157,15 @@ const WalletsList = (props: any): React.ReactElement => {
 
                 <Grid item xs={1} style={{ marginRight: '20px', zIndex: 1000, cursor: 'pointer' }}>
                     <Grid container justify="center">
-                        <Grid item className={switchWallet == 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet('favourite')}>
+                        <Grid item className={switchWallet == 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet(WalletType.PRIVATE)}>
                             Favourite wallet
                         </Grid>
-                        {switchWallet == 'favourite' && <Grid item className={classes.underline} />}
+                        {switchWallet == WalletType.PRIVATE && <Grid item className={classes.underline} />}
                     </Grid>
                 </Grid>
                 <Grid item xs={1} style={{ zIndex: 1000, cursor: 'pointer' }}>
                     <Grid container justify="center" >
-                        <Grid item onClick={() => setSwitchWallet('public')} className={switchWallet == 'favourite' ? classes.btnDisabled : ''}>
+                        <Grid item onClick={() => setSwitchWallet(WalletType.PUBLIC)} className={switchWallet == WalletType.PRIVATE ? classes.btnDisabled : ''}>
                             Public wallet
                         </Grid>
                         {switchWallet == 'public' && <Grid item className={classes.underline} />}
@@ -184,7 +181,7 @@ const WalletsList = (props: any): React.ReactElement => {
                                 // onScroll={(e: any) => handleScroll(e.target)}
                                 id="walletsListTableBody"
                             >
-                                {switchWallet == 'favourite' ? renderWalletsListRows(walletsListFavourite) : renderWalletsListRows(walletsListPublic)}</TableBody>
+                                {switchWallet == WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(walletsListPublic)}</TableBody>
                         </Table>
                         {/* <Loader isLoading={walletsIsFetching} fullPage={false} /> */}
                     </Grid>

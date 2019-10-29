@@ -1,3 +1,3 @@
-import TransactionListRedux from './WalletsList-container';
+import WalletsList from './WalletsList-container';
 
-export default TransactionListRedux;
+export default WalletsList;

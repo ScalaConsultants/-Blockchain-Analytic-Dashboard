@@ -106,6 +106,11 @@ export enum Blockchains {
   XTZ = 'XTZ'
 }
 
+export enum WalletType {
+  PUBLIC = 'public',
+  PRIVATE = 'private'
+}
+
 export enum Markets {
   MARKET = 'Market',
   DAPP = 'DAPP',
