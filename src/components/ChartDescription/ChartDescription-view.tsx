@@ -12,7 +12,6 @@ const ChartDescriptionView = ({ type, blockchain }: ViewProps) => {
       <Grid container spacing={1} alignItems="center" className={classes.root}>
         <Grid item xs={1}><div className={classesDot}/></Grid>
         <Grid item xs={11} className={classes.type}>{`${type} volume`}</Grid>
-        <Grid item xs={12} className={classes.block}>{blockchain}</Grid>
       </Grid>
   );
 };

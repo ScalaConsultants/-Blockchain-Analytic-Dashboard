@@ -12,7 +12,6 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
   const classes = DetailsMenuStyles();
   const classesRoot = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
   const classesInfo = clsx([classes.margin, classes.white]);
-  const classesFilters = clsx([classes.margin, classes.grey, classes.fontWeightNormal]);
   const { groupBy, blockchains, limit, from, to } = params;
 
   return (
@@ -44,9 +43,12 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
       <Grid item xs={1}>
         <ChartDescription type={type} blockchain={blockchain} />
       </Grid>
-      <Grid container direction="row" justify="flex-start" alignItems="center" className={classesFilters}>
+      <Grid container direction="row" justify="flex-start" alignItems="center" className={classesInfo}>
         <Grid item xs={1}>
           FILTERS
+        </Grid>
+        <Grid item xs={1}>
+          {blockchain}
         </Grid>
         <Grid item xs={1} className={classes.firstLetterUppercase}>
           {tab}
