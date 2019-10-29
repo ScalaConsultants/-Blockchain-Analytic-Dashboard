@@ -25,12 +25,6 @@ const ChartDescriptionStyles = makeStyles((theme: ExtendedTheme) => ({
       textTransform: 'uppercase'
     }
   },
-  block: {
-    color: theme.palette.grey['800'],
-    '&::first-letter': {
-      textTransform: 'uppercase'
-    }
-  },
   market: {
     background: theme.constants.MARKET_COLOR
   },
