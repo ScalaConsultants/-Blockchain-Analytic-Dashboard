@@ -2,8 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import AuthModal from '../AuthModal';
 
 import { useTopBarStyles } from './TopBar-styles';
 
@@ -15,15 +14,12 @@ const TopBar = () => {
     <AppBar className={classes.appBar}>
       <Toolbar className={classes.toolBar}>
         <div className={classesLogo}>
-          <img src={`${PUBLIC_URL}/icons/logo.png`} className={classes.img} />
+          <img src={`${PUBLIC_URL}/icons/logo.png`} alt="logo" className={classes.img} />
         </div>
-        <Typography variant="body1" color="secondary">
-            Log in
-          </Typography>
-          <ArrowDropDownIcon color="secondary"/>
+        <AuthModal />
       </Toolbar>
-  </AppBar>
-  )
-}
+    </AppBar>
+  );
+};
 
 export default TopBar;
