@@ -18,7 +18,7 @@ const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
     }
   },
   background: {
-    background: theme.constants.BG_COLOR
+    background: theme.constants.SECONDARY_BG_COLOR
   },
   chip: {
     padding: '4px 6px',

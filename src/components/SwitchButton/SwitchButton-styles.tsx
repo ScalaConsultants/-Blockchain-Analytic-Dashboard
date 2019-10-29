@@ -1,4 +1,4 @@
-import { BG_COLOR } from '../../theme/constants';
+import { SECONDARY_BG_COLOR } from '../../theme/constants';
 
 export const dashboardSwitchStyles = {
   switchBase: {
@@ -7,11 +7,13 @@ export const dashboardSwitchStyles = {
       color: '#9EE32D'
     },
     '&$checked + $track': {
-      background: BG_COLOR
+      background: SECONDARY_BG_COLOR
     },
   },
   checked: {},
-  track: {},
+  track: {
+    background: SECONDARY_BG_COLOR
+  },
 }
 
 export const walletListSwitchStyles = {
@@ -21,7 +23,7 @@ export const walletListSwitchStyles = {
       color: '#9EE32D'
     },
     '&$checked + $track': {
-      background: BG_COLOR
+      background: SECONDARY_BG_COLOR
     },
   },
   checked: {},

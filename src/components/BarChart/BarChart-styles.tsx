@@ -3,7 +3,7 @@ import { ExtendedTheme } from '../../types';
 
 export const useBarChartContainer = makeStyles((theme: ExtendedTheme) => ({
   root: {
-    background: theme.constants.BG_COLOR,
+    background: theme.constants.SECONDARY_BG_COLOR,
     color: theme.palette.grey[400],
     height: '100%',
     borderRadius: '2px',

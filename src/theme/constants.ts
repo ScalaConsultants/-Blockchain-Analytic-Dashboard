@@ -7,7 +7,7 @@ export const DEFAULT_BG_COLOR = '#161B32';
 
 export const PRIMARY_MAIN_COLOR = '#252D48';
 export const SECONDARY_MAIN_COLOR = '#bdbdbd';
-export const BG_COLOR = '#253152';
+export const SECONDARY_BG_COLOR = '#253152';
 
 export const MARKET_COLOR = 'linear-gradient(90deg, #6B5EE9 0%, #8765EF 100%)';
 export const PRIVATE_COLOR = 'linear-gradient(90deg, #5975FF 0%, #569AF5 100%)';

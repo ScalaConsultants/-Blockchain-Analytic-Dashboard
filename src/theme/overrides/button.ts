@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_FAMILY, DEFAULT_FONT_STYLE, BG_COLOR} from '../constants';
+import { DEFAULT_FONT_FAMILY, DEFAULT_FONT_STYLE, SECONDARY_BG_COLOR} from '../constants';
 
 const MuiButton = {
   root: {
@@ -7,7 +7,7 @@ const MuiButton = {
     fontWeight: 900,
     fontSize: '0.75rem',
     lineHeight: '0.75rem',
-    background: BG_COLOR,
+    background: SECONDARY_BG_COLOR,
     height: '28px',
     borderRadius: '4px',
     border: 'none'
