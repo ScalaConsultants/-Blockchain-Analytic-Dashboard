@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 import clsx from 'clsx';
 
 import BarChartView from './BarChart-view';
@@ -8,7 +9,6 @@ import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
 
 import { useBarChartSegmentStyles } from './BarChart-styles';
-import { Blockchains } from '../../types';
 
 const BarChartContainer = (props: BarChartProps) => {
   const {
@@ -113,15 +113,18 @@ const BarChartContainer = (props: BarChartProps) => {
   const createSegment = (walletHash: string, percentage: number, text: number, position: number, index: number) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
-      <Link
-        to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
-        key={walletHash}>
-        <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
-          <div className={getInnerClasses(index)}>
-            {index < 10 && percentage >= 1 ? <div>{`${Math.floor(text)}%`}</div> : null}
-          </div>
-        </div>
-      </Link>
+      
+        <Link
+          to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
+          key={walletHash}>
+            <Tooltip title={percentage.toFixed(4)} placement="bottom" >
+            <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
+              <div className={getInnerClasses(index)}>
+                {index < 10 && percentage >= 1 ? <div>{`${Math.floor(text)}%`}</div> : null}
+              </div>
+            </div>
+          </Tooltip>
+        </Link>
     );
   };
 
