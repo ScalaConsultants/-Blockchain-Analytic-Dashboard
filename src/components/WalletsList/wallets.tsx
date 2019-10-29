@@ -1,7 +1,7 @@
 
 export const walletsListFavourite = [
     {
-        ID: '12345',
+        id: '1',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'ETH',
@@ -9,7 +9,7 @@ export const walletsListFavourite = [
         watched: true
 
     },{
-        ID: '12345',
+        id: '2',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'XTZ',
@@ -17,15 +17,15 @@ export const walletsListFavourite = [
         watched: true
 
     },{
-        ID: '12345',
+        id: '3',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
-        title: 'Title of this wallet',
+        title: 'Abcd',
         blockchain: 'ETH',
         market: 'Private',
         watched: false
 
     },{
-        ID: '12345',
+        id: '4',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'XTZ',
@@ -33,7 +33,7 @@ export const walletsListFavourite = [
         watched: true
 
     },{
-        ID: '12345',
+        id: '5',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'XTZ',
@@ -45,14 +45,14 @@ export const walletsListFavourite = [
 
 export const walletsListPublic = [
     {
-        ID: '12345',
+        id: '12345',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'ETH',
         market: 'Fraud',
         watched: true
     },{
-        ID: '12345',
+        id: '12345',
         walletHash:'0xEEF8Ca40c5666e8c6645360C6A253Cb72507367F',
         title: 'Title of this wallet',
         blockchain: 'XTZ',
