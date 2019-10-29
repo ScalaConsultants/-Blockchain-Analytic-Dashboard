@@ -61,13 +61,13 @@ const WalletsList = (props: any): React.ReactElement => {
                             <ArrowDropUpIcon
                                 fontSize='small'
                                 style={{ display: 'block', marginBottom: '-12px' }}
-                                className={(orderBy == row.id && order) == 'asc' ? classes.labelDisabled : ''}
+                                className={(orderBy == row.id && order) == 'desc' ? classes.labelDisabled : ''}
                             />
 
                             <ArrowDropDownIcon
                                 fontSize='small'
                                 style={{ display: 'block' }}
-                                className={(orderBy == row.id && order) == 'desc' ? classes.labelDisabled : ''}
+                                className={(orderBy == row.id && order) == 'asc' ? classes.labelDisabled : ''}
                             />
                         </div>
                     }
