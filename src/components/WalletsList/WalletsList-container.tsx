@@ -8,16 +8,18 @@ import Table from '@material-ui/core/Table';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
-import { stableSort, getSorting } from "../../helpers/helpers";
-import { Order, OrderBy, HeaderColsInterface } from './types';
-import View from '../View';
+import { Markets, Blockchains, WalletType } from '../../types';
+import { Order, OrderBy, HeaderColsInterface, Wallet } from './types';
 import useWalletsListTableStyles from './WalletsList-styles';
+
+import View from '../View';
 import { walletsListPrivate } from './wallets';
 import { walletsListPublic } from './wallets';
 import EditWalletModal from '../EditWalletModal'
 import SwitchButton from '../SwitchButton';
 
-import { Markets, Blockchains, WalletType } from '../../types';
+import { stableSort, getSorting } from "../../helpers/helpers";
+
 
 const { PUBLIC_URL } = process.env;
 
@@ -30,7 +32,7 @@ const headerCols: HeaderColsInterface[] = [
     { id: 'edit', numeric: false, disablePadding: false, label: '', sort: false },
 ];
 
-const WalletsList = (props: any): React.ReactElement => {
+const WalletsList = (): React.ReactElement => {
 
     const [switchWallet, setSwitchWallet] = React.useState(WalletType.PRIVATE);
     const [switchToggle, setSwitchToggle] = React.useState(false);
@@ -48,7 +50,7 @@ const WalletsList = (props: any): React.ReactElement => {
     };
 
     const renderWalletsListHeader = (headerColumns: HeaderColsInterface[]) =>
-        headerColumns.map((row: any) => (
+        headerColumns.map((row: HeaderColsInterface) => (
             <TableCell
                 key={`${row.id}${row.label}`}
                 align={row.numeric ? 'right' : 'left'}
@@ -63,7 +65,6 @@ const WalletsList = (props: any): React.ReactElement => {
                                 style={{ display: 'block', marginBottom: '-12px' }}
                                 className={(orderBy == row.id && order) == 'desc' ? classes.labelDisabled : ''}
                             />
-
                             <ArrowDropDownIcon
                                 fontSize='small'
                                 style={{ display: 'block' }}
@@ -75,7 +76,6 @@ const WalletsList = (props: any): React.ReactElement => {
                 :
                 <span className={row.id == 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
                 }
-
             </TableCell>
         ));
 
@@ -99,9 +99,7 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const updateDescription = (value: string) => {
-        setDescription(value);
-    }
+    const updateDescription = (value: string) => setDescription(value);
 
     const selectWalletColor = (market: string) => {
         switch (market) {
@@ -120,18 +118,18 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const renderWalletsListRows = (walletsList: any[]) => {
+    const renderWalletsListRows = (walletsList: Wallet[]) => {
         if (!walletsList.length) return
         return (stableSort(
             walletsList,
             getSorting(order, orderBy)
-        )).map((row: any, index: number) => (
+        )).map((row: Wallet, index: number) => (
             <TableRow key={`${index}`}>
                 <TableCell scope="row"><b>{row.id}</b>&nbsp; &nbsp;<b style={{ color: '#4C5367' }}>{row.walletHash}</b></TableCell>
                 <TableCell className={classes.rowEl}>{row.title}</TableCell>
                 <TableCell className={classes.rowEl}>
                     <div className={classes.verticalAlign}>
-                        <img src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{ width: '15px', marginRight: '5px' }} />
+                        <img alt="Blockchain icon" src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{ width: '15px', marginRight: '5px' }} />
                         {row.blockchain}
                     </div>
                 </TableCell>
@@ -178,12 +176,10 @@ const WalletsList = (props: any): React.ReactElement => {
                                 <TableRow>{renderWalletsListHeader(headerCols)}</TableRow>
                             </TableHead>
                             <TableBody
-                                // onScroll={(e: any) => handleScroll(e.target)}
                                 id="walletsListTableBody"
                             >
                                 {switchWallet == WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(walletsListPublic)}</TableBody>
                         </Table>
-                        {/* <Loader isLoading={walletsIsFetching} fullPage={false} /> */}
                     </Grid>
                 </Grid>
             </Grid>

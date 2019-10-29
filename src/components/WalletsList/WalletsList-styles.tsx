@@ -2,25 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
 const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
-  thead: {
-    display: 'block'
-  },
-
-  tbody: {
-    display: 'block',
-    height: '800px',
-    overflowY: 'auto',
-    overflowX: 'hidden',
-    marginTop: '10px'
-  },
-
-  td: {
-    width: '24vw'
-  },
-
-  grid: {
-    position: 'relative'
-  },
   rowEl: {
     color: '#A3A7B0',
     fontWeight: 'bold'
@@ -60,7 +41,8 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   btnDisabled: {
     color: '#A3A7B0'
-  }, button: {
+  },
+  button: {
     color: '#A3A7B0',
     background: '#253152',
     borderRadius: '4px',
@@ -73,7 +55,8 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
     fontSize: '0.65rem',
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
     margin: '4px',
-  }, labelDisabled: {
+  }, 
+  labelDisabled: {
     color: '#4C5367'
   }
 
