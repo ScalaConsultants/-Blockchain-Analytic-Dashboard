@@ -4,11 +4,13 @@ import { Container } from '@material-ui/core';
 import DashboardView from '../components/DashboardView';
 import DetailsView from '../components/DetailsView';
 import TopBar from '../components/TopBar';
+import TooltipComp from '../components/Tooltip'
 
 export default (): React.ReactElement => {
   const routes = (
     <Container>
       <TopBar />
+      <Route exact path="/dupa/dupa" component={TooltipComp} />
       <Route exact path="/wallet/:walletSource/:walletHash/:groupBy/:blockchains/:limit/:from/:to" component={DetailsView} />
       <Route exact path="/:groupBy/:blockchains/:limit/:from/:to" component={DashboardView} />
       <Route exact path="/">

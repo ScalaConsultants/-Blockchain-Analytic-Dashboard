@@ -26,7 +26,7 @@ export const useDashboardTableStyles = makeStyles((theme: ExtendedTheme) => ({
     borderRadius: '50%'
   },
   header: {
-    borderBottom: '2px solid #253152',
+    borderBottom: '2px solid' + theme.constants.BG_COLOR,
     paddingBottom: '5px',
     margin: '0 0 25px 0'
   },
