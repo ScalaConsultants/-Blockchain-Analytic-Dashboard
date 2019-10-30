@@ -1,5 +1,8 @@
 import authActions from '../actions/auth';
 
+import { AuthState } from '../../types';
+import { AuthUserResponse } from '../actions/auth/types';
+
 const initState = {
   token: null,
   email: null,
@@ -9,18 +12,18 @@ const initState = {
   error: null
 }
 
-const authUserStart = (state: any) => ({
+const authUserStart = (state: AuthState): AuthState => ({
   ...state,
   loading: true
 });
 
-const authUserSignUpSuccess = (state: any, action: any) => ({
+const authUserSignUpSuccess = (state: AuthState): AuthState => ({
   ...state,
   loading: false,
   error: null
 });
 
-const authUserLoginSuccess = (state: any, action: any) => {
+const authUserLoginSuccess = (state: AuthState, action: AuthUserResponse): AuthState => {
   const { token, user, isAuthenticated } = action.data;
   return {
     ...state,
@@ -33,7 +36,7 @@ const authUserLoginSuccess = (state: any, action: any) => {
   }
 };
 
-const authUserLoginFail = (state: any, action: any) => {
+const authUserLoginFail = (state: AuthState, action: AuthUserResponse): AuthState => {
   const { error } = action;
   return {
     ...state,
@@ -42,7 +45,7 @@ const authUserLoginFail = (state: any, action: any) => {
   }
 };
 
-const authUserSignUpFail = (state: any, action: any) => {
+const authUserSignUpFail = (state: AuthState, action: AuthUserResponse): AuthState => {
   const { error } = action;
   return {
     ...state,
@@ -51,12 +54,12 @@ const authUserSignUpFail = (state: any, action: any) => {
   }
 };
 
-export default (state = initState, action: any): any => {
+export default (state = initState, action: AuthUserResponse): AuthState => {
   switch (action.type) {
     case authActions.AUTH_USER_START: return authUserStart(state);
     case authActions.AUTH_USER_LOGIN_SUCCESS: return authUserLoginSuccess(state, action);
     case authActions.AUTH_USER_LOGIN_FAIL: return authUserLoginFail(state, action);
-    case authActions.AUTH_USER_SIGNUP_SUCCESS: return authUserSignUpSuccess(state, action);
+    case authActions.AUTH_USER_SIGNUP_SUCCESS: return authUserSignUpSuccess(state);
     case authActions.AUTH_USER_SIGNUP_FAIL: return authUserSignUpFail(state, action);
     default: return state;
   }
