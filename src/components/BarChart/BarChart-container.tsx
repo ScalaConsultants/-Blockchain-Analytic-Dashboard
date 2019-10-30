@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import clsx from 'clsx';
@@ -25,14 +25,11 @@ const BarChartContainer = (props: BarChartProps) => {
   const defaultCustomization = {
     maxActiveSegments: 10,
     maxInactiveSegments: 40,
-    minPercentage: 0.1,
     restLabel: true,
     increaseSegmentSize: 1,
     autoSegmentSize: false,
     activeSegmentZoom: true,
-    shadowSegment: true,
-    width:
-      (segmentsContainer.current && parseFloat(getComputedStyle(segmentsContainer.current).width || '2000')) || 2000
+    shadowSegment: true
   };
 
   const customization = Object.keys(override).length
@@ -40,7 +37,6 @@ const BarChartContainer = (props: BarChartProps) => {
     : { ...defaultCustomization };
 
   const defaultSegmentStyles: Record<string, string | number> = {
-    position: 'absolute',
     height: '100%',
     top: 0
   };
@@ -54,15 +50,6 @@ const BarChartContainer = (props: BarChartProps) => {
   const [activeSegment, updateActiveSegment] = useState({ isActive: false, index: 0 });
 
   let segments: React.ReactElement<'div'>[] = [];
-
-  const getStyle: any = (position: number, percentage: number) => {
-    const { width, increaseSegmentSize } = customization;
-    return {
-      ...defaultSegmentStyles,
-      left: position,
-      width: (width * increaseSegmentSize * percentage) / 100
-    };
-  };
 
   const getOuterClasses = (index: number): string => {
     const { activeSegmentZoom } = customization;
@@ -89,10 +76,8 @@ const BarChartContainer = (props: BarChartProps) => {
     });
   };
 
-  const createLastSegment = (pos: number, percentage: number) => {
-    const { width, increaseSegmentSize } = customization;
-    const posX = pos + (width * increaseSegmentSize * percentage) / 100;
-    const num = Math.round(((width - posX) * 100) / width);
+  const createLastSegment = (total: number) => {
+    const num = Math.floor(100 - total);
 
     return (
       <div
@@ -100,32 +85,50 @@ const BarChartContainer = (props: BarChartProps) => {
         className={lastSegmentClasses}
         style={{
           ...defaultSegmentStyles,
-          left: posX,
-          width: width - posX
+          flexGrow: 1
         }}
-        >
-        {/* TODO: assign real percentage from BE*/}
+      >
         {`${num}%`}
       </div>
     );
   };
 
-  const createSegment = (walletHash: string, percentage: number, text: number, position: number, index: number) => {
+  const createSegment = (walletHash: string, percentage: number, text: number, index: number) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
-        key={walletHash}>
-          <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
-            <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
-              <div className={getInnerClasses(index)}>
-                {index < 10 && percentage >= 1 ? 
-                  <div>{`${Math.floor(text)}%`}</div> : null}
-              </div>
-            </div>
+        key={walletHash} style={{ width: percentage + '%' }} className={getOuterClasses(index)}>
+        <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
+          <div className={getInnerClasses(index)}>
+            {index < 10 && percentage >= 1 ?
+              <div>{`${Math.floor(text)}%`}</div> : null}
+          </div>
         </Tooltip>
       </Link>
     );
+  };
+
+  const createSegments = () => {
+    return wallets.reduce(
+      (acc: Accumulator, obj: Wallet, index: number) => {
+        const { walletHash, percentage } = obj;
+        const percentageChanged = percentage;
+
+        acc.elements.push(createSegment(walletHash, percentageChanged, percentage, index));
+        acc.elems.push({ percentageChanged, total: acc.total });
+
+        // Last Segment
+        acc.total < 100 && index === wallets.length - 1 && acc.elements.push(createLastSegment(acc.total));
+
+        return {
+          total: acc.total + percentageChanged,
+          elements: acc.elements,
+          elems: acc.elems
+        };
+      },
+      { total: 0, elements: [], elems: [] }
+    ).elements;
   };
 
   useEffect((): void => {
@@ -133,14 +136,8 @@ const BarChartContainer = (props: BarChartProps) => {
       isActive: true,
       index: wallets.findIndex(val => val.walletHash === walletHash)
     });
-  }, [walletHash]);
 
-  useEffect(() => {
-    updateActiveSegment({
-      isActive: true,
-      index: wallets.findIndex(val => val.walletHash === walletHash)
-    });
-  }, [wallets]);
+  }, [walletHash, wallets, match.params.groupBy]);
 
   useEffect(() => {
     const { groupBy, limit, from, to } = match.params;
@@ -149,43 +146,7 @@ const BarChartContainer = (props: BarChartProps) => {
     }
   }, [match.params.groupBy]);
 
-  segments = wallets.reduce(
-    (acc: Accumulator, obj: Wallet, index: number) => {
-      const { walletHash, percentage } = obj;
-      const { position } = acc;
-      const { restLabel, minPercentage, width, increaseSegmentSize } = customization;
-
-      const percentageChanged = percentage > 40 ? percentage / 2 : percentage;
-
-      // Render segments higher then min percentage
-      if (percentageChanged > minPercentage && acc.total < 40) {
-        acc.elements.push(createSegment(walletHash, percentageChanged, percentage, position, index));
-        acc.elems.push({
-          percentageChanged,
-          position,
-          total: acc.total
-        });
-      }
-
-      // Last Segment
-      if (restLabel && index === wallets.length - 1 && segmentsContainer.current) {
-        acc.elements.push(
-          createLastSegment(
-            acc.elems[acc.elems.length - 1].position, 
-            acc.elems[acc.elems.length - 1].percentageChanged
-          )
-        );
-      }
-
-      return {
-        position: acc.position + (width * increaseSegmentSize * percentageChanged) / 100,
-        total: acc.total + percentageChanged,
-        elements: acc.elements,
-        elems: acc.elems
-      };
-    },
-    { position: 0, total: 0, elements: [], elems: [] }
-  ).elements;
+  segments = createSegments();
 
   return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />;
 };
