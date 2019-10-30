@@ -23,11 +23,6 @@ const BarChartContainer = (props: BarChartProps) => {
   const segmentsContainer: React.MutableRefObject<any> = useRef();
 
   const defaultCustomization = {
-    maxActiveSegments: 10,
-    maxInactiveSegments: 40,
-    restLabel: true,
-    increaseSegmentSize: 1,
-    autoSegmentSize: false,
     activeSegmentZoom: true,
     shadowSegment: true
   };
