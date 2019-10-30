@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_FAMILY, DEFAULT_FONT_STYLE, SECONDARY_BG_COLOR} from '../constants';
+import { DEFAULT_FONT_FAMILY, DEFAULT_FONT_STYLE, SECONDARY_BG_COLOR } from '../constants';
 
 const MuiButton = {
   root: {

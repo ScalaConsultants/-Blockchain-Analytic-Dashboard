@@ -15,7 +15,7 @@ export const MuiTooltip = {
       position: 'absolute' as 'absolute',
       borderLeft: '6px solid transparent',
       borderRight: '6px solid transparent',
-      borderBottom: '6px solid' + SECONDARY_BG_COLOR,
+      borderBottom: '6px solid ' + SECONDARY_BG_COLOR,
       left: 'calc(50% - 6px)',
       top: '-6px'
     }
