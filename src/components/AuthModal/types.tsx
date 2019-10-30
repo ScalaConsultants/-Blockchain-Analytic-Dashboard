@@ -13,16 +13,15 @@ export interface AuthModalViewProps extends AuthState {
   open?: boolean;
   handleOpen?: () => void;
   handleClose?: () => void;
-  handleUpdate?: () => void;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleLogin?: () => void;
   handleSignUp?: () => void;
-  handleRegister?: () => void;
   handleSwitchForms?: () => void;
   handleRememberMe?: () => void;
   forgetPassword?: boolean;
   rememberMe?: boolean;
   user?: Record<string, string>;
+  shouldSignUp?: boolean;
 }
 
 export interface AuthModalFormProps {

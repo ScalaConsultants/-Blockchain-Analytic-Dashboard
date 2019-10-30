@@ -14,8 +14,9 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
     handleSignUp,
     handleSwitchForms,
     handleRememberMe,
-    rememberMe,
-    user = { email: '', password: '' }
+    rememberMe = true,
+    user = { email: '', password: '' },
+    shouldSignUp = false
   } = props;
 
   const classesModal = useModalStyles();
@@ -32,6 +33,13 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
   const classesCircle = clsx(classesModal.circle, {
     [classesModal.circleActive]: rememberMe
   });
+
+  const buttons = [
+    <Button onClick={handleLogin} key="login">Login</Button>,
+    <Button onClick={handleSignUp} key="signup">Sign up</Button>
+  ];
+
+  if (shouldSignUp) buttons.reverse();
 
   return (
     <form noValidate className={classesModal.form}>
@@ -57,7 +65,7 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
         value={user.password}
         onChange={handleChange}
       />
-      <Grid container className={classesModal.options}>
+      {!shouldSignUp && <Grid container className={classesModal.options}>
         <Grid item className={classesRememberMe} onClick={handleRememberMe}>
           <div className={classesCircle} />
           Remember me
@@ -65,10 +73,9 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
         <Grid item className={classesForgetPassword} onClick={handleSwitchForms}>
           Forget password?
         </Grid>
-      </Grid>
+      </Grid>}
       <div className={classesButtons}>
-        <Button onClick={handleLogin}>Login</Button>
-        <Button onClick={handleSignUp}>Sign up</Button>
+        {buttons}
       </div>
     </form>
   );

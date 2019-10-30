@@ -8,6 +8,7 @@ const AuthModal = ({ onAuthUser, auth }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [shouldSignUp, setShouldSignUp] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -48,11 +49,14 @@ const AuthModal = ({ onAuthUser, auth }: AuthModalProps) => {
     );
   };
 
-  const handleLogin = () => onAuthUser(user.email, user.password, false);
-  const handleSignUp = () => onAuthUser(user.email, user.password, true);
+  const handleBtnClick = (btn: boolean) => {
+    if (btn && shouldSignUp || !btn && !shouldSignUp) return onAuthUser(user.email, user.password, btn);
 
-  const handleUpdate = () => {};
-  const handleRegister = () => {};
+    setShouldSignUp(prevState => !prevState);
+  };
+
+  const handleLogin = () => handleBtnClick(false);
+  const handleSignUp = () => handleBtnClick(true);
 
   return (
     <AuthModalView
@@ -60,16 +64,15 @@ const AuthModal = ({ onAuthUser, auth }: AuthModalProps) => {
       open={open}
       handleOpen={handleOpen}
       handleChange={handleChange}
-      handleUpdate={handleUpdate}
       handleClose={handleClose}
       handleLogin={handleLogin}
       handleSignUp={handleSignUp}
-      handleRegister={handleRegister}
       handleRememberMe={handleRememberMe}
       handleSwitchForms={handleSwitchForms}
       rememberMe={rememberMe}
       forgetPassword={forgetPassword}
       user={user}
+      shouldSignUp={shouldSignUp}
     />
   );
 };

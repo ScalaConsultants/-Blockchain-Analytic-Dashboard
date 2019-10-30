@@ -16,7 +16,7 @@ import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const { open = false, handleOpen, handleClose, forgetPassword, auth } = props;
+  const { open = false, handleOpen, handleClose, forgetPassword, auth, shouldSignUp } = props;
 
   const loading = auth && auth.loading || false;
   const btn = auth && auth.isAuth ? auth.username : 'Log in';
@@ -29,7 +29,11 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const classesTitle = clsx([classesModal.title, classesModal.flex]);
   const { PUBLIC_URL } = process.env;
 
-  const text = forgetPassword ? 'Recovery your password' : 'Login into your account';
+  const text = forgetPassword
+      ? 'Recovery your password'
+      : !shouldSignUp
+      ? 'Login into your account'
+      : 'Create new account';
 
   const form = forgetPassword ? <AuthModalForgetPassword {...props} /> : <AuthModalLoginRegister {...props} />;
 
