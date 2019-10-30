@@ -11,6 +11,7 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
   const {
     handleChange,
     handleLogin,
+    handleSignUp,
     handleSwitchForms,
     handleRememberMe,
     rememberMe,
@@ -67,7 +68,7 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
       </Grid>
       <div className={classesButtons}>
         <Button onClick={handleLogin}>Login</Button>
-        <Button>Sign up</Button>
+        <Button onClick={handleSignUp}>Sign up</Button>
       </div>
     </form>
   );

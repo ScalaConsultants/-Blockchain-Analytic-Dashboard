@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
+import Loader from '../loader';
+
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
 import AuthModalForgetPassword from './AuthModalForgetPassword-view';
 
@@ -14,7 +16,11 @@ import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const { open = false, handleOpen, handleClose, forgetPassword } = props;
+  const { open = false, handleOpen, handleClose, forgetPassword, auth } = props;
+
+  const loading = auth && auth.loading || false;
+  const btn = auth && auth.isAuth ? auth.username : 'Log in';
+  const btnHandler = (auth && auth.isAuth) ? undefined : handleOpen;
 
   const classesModal = useModalStyles();
   const classesPaper = clsx([classesModal.paper, classesModal.grey]);
@@ -29,9 +35,9 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   return (
     <>
-      <div className={classesLogin} onClick={handleOpen}>
+      <div className={classesLogin} onClick={btnHandler}>
         <Typography variant="body1" color="secondary">
-          Log in
+          {btn}
         </Typography>
         <ArrowDropDownIcon color="secondary" />
       </div>
@@ -58,6 +64,11 @@ const AuthModalView = (props: AuthModalViewProps) => {
                   <span>Blockchain analytic </span>
                   dashboard
                 </Typography>
+              </Grid>
+              <Grid item>
+                <Loader 
+                  isLoading={loading} 
+                />
               </Grid>
               <Grid item>
                 <Typography className={classesModal.marginTop28} color="textPrimary" align="center">
