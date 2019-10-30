@@ -1,3 +1,5 @@
+import { SECONDARY_BG_COLOR } from '../../theme/constants';
+
 export const dashboardSwitchStyles = {
   switchBase: {
     color: 'radial-gradient(50% 1368.05% at 50% 48.72%, rgba(169, 176, 204, 0.5) 0%, rgba(116, 121, 140, 0.5) 100%)',
@@ -5,11 +7,13 @@ export const dashboardSwitchStyles = {
       color: '#9EE32D'
     },
     '&$checked + $track': {
-      background: '#253152'
+      background: SECONDARY_BG_COLOR
     },
   },
   checked: {},
-  track: {},
+  track: {
+    background: SECONDARY_BG_COLOR
+  },
 }
 
 export const walletListSwitchStyles = {
@@ -20,9 +24,9 @@ export const walletListSwitchStyles = {
       color: '#9EE32D'
     },
     '&$checked + $track': {
-      background: "#253152",
       border: '1px solid #2A3450',
-      boxShadow: 'inset 0px 4px 10px #0F1935'
+      boxShadow: 'inset 0px 4px 10px #0F1935',
+      background: SECONDARY_BG_COLOR
     },
   },switchThumb:{
     width:"8px",
