@@ -9,6 +9,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
 import AuthModalForgetPassword from './AuthModalForgetPassword-view';
+import UserMenu from '../UserMenu';
 
 import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
@@ -29,12 +30,16 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   return (
     <>
+    <div>
       <div className={classesLogin} onClick={handleOpen}>
         <Typography variant="body1" color="secondary">
           Log in
         </Typography>
         <ArrowDropDownIcon color="secondary" />
       </div>
+      <UserMenu/>
+    </div>
+
       <Modal
         aria-labelledby="edit-wallet-modal-title"
         aria-describedby="edit-wallet-modal-description"
