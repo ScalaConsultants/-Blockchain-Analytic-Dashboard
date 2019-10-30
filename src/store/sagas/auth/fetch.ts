@@ -1,4 +1,6 @@
-export async function auth(data: any): Promise<any> {
+import { AuthUserData } from '../../actions/types'
+
+export async function auth(data: AuthUserData): Promise<any> {
     const { shouldSignUp } = data;
     let url = 'api/v1/auth/login';
 
@@ -24,6 +26,20 @@ export async function authToken(token: string) {
     const url = 'api/v1/auth/token';
 
     const data = { token };
+
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options);
+
+    return await response.json();
+}
+
+export async function authForgetPassword(data: AuthUserData) {
+    const url = 'api/v1/auth/forgetpassword';
 
     const options = {
         method: 'POST',

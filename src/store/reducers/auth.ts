@@ -9,7 +9,8 @@ const initState = {
   username: null,
   isAuth: false,
   loading: false,
-  error: null
+  error: null,
+  message: null
 };
 
 const authUserStart = (state: AuthState) => ({
@@ -58,6 +59,14 @@ const authUserLogout = () => ({
   ...initState
 });
 
+const authUserForgetPasswordSuccess = (state: AuthState, action: AuthUserResponse) => {
+  const { message } = action;
+  return {
+    ...state,
+    message
+  }
+};
+
 export default (state: AuthState = initState, action: AuthUserResponse) => {
   switch (action.type) {
     case authActions.AUTH_USER_START: return authUserStart(state);
@@ -66,6 +75,8 @@ export default (state: AuthState = initState, action: AuthUserResponse) => {
     case authActions.AUTH_USER_SIGNUP_SUCCESS: return authUserSignUpSuccess(state);
     case authActions.AUTH_USER_SIGNUP_FAIL: return authUserSignUpFail(state, action);
     case authActions.AUTH_USER_LOGOUT: return authUserLogout();
+    case authActions.AUTH_USER_FORGET_PASSWORD: return authUserStart(state);
+    case authActions.AUTH_USER_FORGET_PASSWORD_SUCCESS: return authUserForgetPasswordSuccess(state, action);
     default: return state;
   }
 };

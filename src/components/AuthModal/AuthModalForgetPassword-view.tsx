@@ -7,7 +7,7 @@ import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styl
 import { AuthModalViewProps } from './types';
 
 const AuthModalForgetPassword = (props: AuthModalViewProps) => {
-  const { handleSwitchForms, handleChange, user = { email: '' } } = props;
+  const { handleSwitchForms, handleChange, handleForgetPassword, user = { email: '' } } = props;
 
   const classesModal = useModalStyles();
   const classesInput = useInputStyles();
@@ -28,7 +28,7 @@ const AuthModalForgetPassword = (props: AuthModalViewProps) => {
         onChange={handleChange}
       />
       <div className={classesButtons}>
-        <Button>Send</Button>
+        <Button onClick={handleForgetPassword}>Send</Button>
         <Button onClick={handleSwitchForms}>Back to login</Button>
       </div>
     </form>

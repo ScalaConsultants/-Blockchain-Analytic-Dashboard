@@ -29,8 +29,9 @@ export interface FetchTransactionsSummedAction extends ActionType {
 
 export interface AuthUserData {
   email: string;
-  password: string;
-  shouldSignUp: boolean
+  password?: string;
+  shouldSignUp?: boolean;
+  username?: string;
 }
 
 export interface AuthUser extends ActionType {

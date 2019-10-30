@@ -9,6 +9,8 @@ export const AUTH_USER_LOGIN_SUCCESS = 'AUTH_USER_LOGIN_SUCCESS';
 export const AUTH_USER_LOGIN_FAIL = 'AUTH_USER_LOGIN_FAIL';
 export const AUTH_USER_FAIL = 'AUTH_USER_FAIL';
 export const AUTH_USER_LOGOUT = 'AUTH_USER_LOGOUT';
+export const AUTH_USER_FORGET_PASSWORD = 'AUTH_USER_FORGET_PASSWORD';
+export const AUTH_USER_FORGET_PASSWORD_SUCCESS = 'AUTH_USER_FORGET_PASSWORD_SUCCESS';
 
 export const authUser = (data: AuthUserData): AuthUser => ({
   type: AUTH_USER,
@@ -23,8 +25,14 @@ export const authUserAutoLogin = () => ({
   type: AUTH_USER_AUTO_LOGIN
 });
 
-export const authUserLogout = () => ({
-  type: AUTH_USER_LOGOUT
+export const authUserLoginSuccess = (data: AuthUserData) => ({
+  type: AUTH_USER_LOGIN_SUCCESS,
+  data
+});
+
+export const authUserLoginFail = (error: AuthUser) => ({
+  type: AUTH_USER_LOGIN_FAIL,
+  error
 });
 
 export const authUserSignUpSuccess = (data: AuthUserData) => {
@@ -39,14 +47,18 @@ export const authUserSignUpFail = (error: AuthUser) => ({
   error
 });
 
-export const authUserLoginSuccess = (data: AuthUserData) => ({
-  type: AUTH_USER_LOGIN_SUCCESS,
+export const authUserLogout = () => ({
+  type: AUTH_USER_LOGOUT
+});
+
+export const authUserForgetPassword = (data: AuthUserData) => ({
+  type: AUTH_USER_FORGET_PASSWORD,
   data
 });
 
-export const authUserLoginFail = (error: AuthUser) => ({
-  type: AUTH_USER_LOGIN_FAIL,
-  error
+export const authUserForgetPasswordSuccess = (data: AuthUserData) => ({
+  type: AUTH_USER_FORGET_PASSWORD_SUCCESS,
+  data
 });
 
 export const authUserFail = (error: AuthUser) => ({

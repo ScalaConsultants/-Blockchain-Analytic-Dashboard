@@ -26,6 +26,7 @@ export interface AuthUserResponse extends ActionType {
       username: string;
     }
   },
+  message?: null | string;
   error: null | {
     code: string,
     msg: string

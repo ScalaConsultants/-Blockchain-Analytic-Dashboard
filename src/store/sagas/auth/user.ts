@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 
 import authActions from '../../actions/auth';
-import { auth, authToken } from "./fetch";
+import { auth, authToken, authForgetPassword } from "./fetch";
 
 import { AuthUser } from '../../actions/types'
 
@@ -62,6 +62,22 @@ export function* doAuthUserAuto() {
         }
     } else {
         yield put(authActions.authUserLogout());
+    }
+}
+
+export function* doAuthUserForgetPassword(action: AuthUser) {
+    yield console.log('forget_password'); //TODO remove
+    yield put(authActions.authUserStart());
+
+    try {
+        const response = yield authForgetPassword({...action.data});
+        const {code} = response;
+
+        if (code && code === 'email_invalid') return yield put(authActions.authUserFail({...response}));
+
+        yield put(authActions.authUserForgetPasswordSuccess({ ...response }))
+    } catch (error) {
+        yield put(authActions.authUserFail({ ...error }))
     }
 }
  

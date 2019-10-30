@@ -4,14 +4,19 @@ import AuthModalView from './AuthModal-view';
 
 import { AuthModalProps, User } from './types';
 
-const AuthModal = ({ onAuthAuto, onAuthUser, auth }: AuthModalProps) => {
+const AuthModal = ({
+  onAuthUserAutoLogin,
+  onAuthUser,
+  onAuthUserForgetPassword,
+  auth
+}: AuthModalProps) => {
   const [open, setOpen] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [shouldSignUp, setShouldSignUp] = useState(false);
   const [user, setUser] = useState({
-    email: '',
-    password: ''
+    email: 'admin',
+    password: 'admin'
   });
 
   useEffect(() => {
@@ -20,7 +25,7 @@ const AuthModal = ({ onAuthAuto, onAuthUser, auth }: AuthModalProps) => {
 
   useEffect(() => {
     // Auto login registered user
-    onAuthAuto();
+    onAuthUserAutoLogin();
   }, []);
 
   const handleOpen = () => setOpen(prevState => !prevState);
@@ -62,6 +67,7 @@ const AuthModal = ({ onAuthAuto, onAuthUser, auth }: AuthModalProps) => {
 
   const handleLogin = () => handleBtnClick(false);
   const handleSignUp = () => handleBtnClick(true);
+  const handleForgetPassword = () => onAuthUserForgetPassword(user.email);
 
   return (
     <AuthModalView
@@ -74,6 +80,7 @@ const AuthModal = ({ onAuthAuto, onAuthUser, auth }: AuthModalProps) => {
       handleSignUp={handleSignUp}
       handleRememberMe={handleRememberMe}
       handleSwitchForms={handleSwitchForms}
+      handleForgetPassword={handleForgetPassword}
       rememberMe={rememberMe}
       forgetPassword={forgetPassword}
       user={user}
