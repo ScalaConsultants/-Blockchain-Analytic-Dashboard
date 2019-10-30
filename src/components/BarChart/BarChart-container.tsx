@@ -24,7 +24,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
   const defaultCustomization = {
     activeSegmentZoom: true,
-    shadowSegment: true
+    shadowSegment: false
   };
 
   const customization = Object.keys(override).length
