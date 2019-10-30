@@ -1,7 +1,7 @@
 import authActions from '../actions/auth';
 
-import { AuthState } from '../../types';
-import { AuthUserResponse } from '../actions/auth/types';
+import { AuthState } from './types';
+import { AuthUserResponse } from './types';
 
 const initState = {
   token: null,
@@ -10,20 +10,20 @@ const initState = {
   isAuth: false,
   loading: false,
   error: null
-}
+};
 
-const authUserStart = (state: AuthState): AuthState => ({
+const authUserStart = (state: AuthState) => ({
   ...state,
   loading: true
 });
 
-const authUserSignUpSuccess = (state: AuthState): AuthState => ({
+const authUserSignUpSuccess = (state: AuthState) => ({
   ...state,
   loading: false,
   error: null
 });
 
-const authUserLoginSuccess = (state: AuthState, action: AuthUserResponse): AuthState => {
+const authUserLoginSuccess = (state: AuthState, action: AuthUserResponse) => {
   const { token, user, isAuthenticated } = action.data;
   return {
     ...state,
@@ -36,7 +36,7 @@ const authUserLoginSuccess = (state: AuthState, action: AuthUserResponse): AuthS
   }
 };
 
-const authUserLoginFail = (state: AuthState, action: AuthUserResponse): AuthState => {
+const authUserLoginFail = (state: AuthState, action: AuthUserResponse) => {
   const { error } = action;
   return {
     ...state,
@@ -45,7 +45,7 @@ const authUserLoginFail = (state: AuthState, action: AuthUserResponse): AuthStat
   }
 };
 
-const authUserSignUpFail = (state: AuthState, action: AuthUserResponse): AuthState => {
+const authUserSignUpFail = (state: AuthState, action: AuthUserResponse) => {
   const { error } = action;
   return {
     ...state,
@@ -54,7 +54,7 @@ const authUserSignUpFail = (state: AuthState, action: AuthUserResponse): AuthSta
   }
 };
 
-export default (state = initState, action: AuthUserResponse): AuthState => {
+export default (state: AuthState = initState, action: AuthUserResponse) => {
   switch (action.type) {
     case authActions.AUTH_USER_START: return authUserStart(state);
     case authActions.AUTH_USER_LOGIN_SUCCESS: return authUserLoginSuccess(state, action);

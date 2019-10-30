@@ -2,7 +2,7 @@ import { put } from 'redux-saga/effects';
 
 import authActions from '../../actions/auth'; 
 
-import { AuthUser } from '../../actions/auth/types'
+import { AuthUser } from '../../actions/types'
 
 async function auth(data: any): Promise<any> {
     const { shouldSignUp } = data;
@@ -19,7 +19,7 @@ async function auth(data: any): Promise<any> {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-    }
+    };
 
     const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options)
   
@@ -37,7 +37,7 @@ export function* doAuthUser(action: AuthUser) {
             const actionData = { ...action.data };
             actionData.shouldSignUp = false;
             return yield put(authActions.authUserSignUpSuccess(actionData));
-        };
+        }
         if (code && code === 'user_exists') 
             return yield put(authActions.authUserSignUpFail({ ...response }));
         if (code && code === 'login_error') 

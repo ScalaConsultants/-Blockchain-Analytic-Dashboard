@@ -107,15 +107,6 @@ export enum Blockchains {
   XTZ = 'XTZ'
 }
 
-export interface AuthState {
-  token: null | string,
-  email: null | string,
-  username: null | string,
-  isAuth: boolean,
-  loading: boolean,
-  error: null | string
-}
-
 export enum WalletType {
   PUBLIC = 'public',
   PRIVATE = 'private'

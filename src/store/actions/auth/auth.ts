@@ -1,4 +1,4 @@
-import { AuthUser, AuthUserData } from './types';
+import { AuthUser, AuthUserData } from '../types';
 
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_USER_START = 'AUTH_USER_START';
