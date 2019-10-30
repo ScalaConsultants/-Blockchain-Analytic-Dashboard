@@ -27,6 +27,12 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const classesLogin = clsx([classesModal.cursor, classesModal.flex]);
   const classesLogo = clsx([classesModal.marginTop40, classesModal.flex]);
   const classesTitle = clsx([classesModal.title, classesModal.flex]);
+  const loaderContainerClass = {
+    'position': 'relative',
+    'padding': '0',
+    'backgroundColor': '#161B32',
+  };
+
   const { PUBLIC_URL } = process.env;
 
   const text = forgetPassword
@@ -71,7 +77,9 @@ const AuthModalView = (props: AuthModalViewProps) => {
               </Grid>
               <Grid item>
                 <Loader 
-                  isLoading={loading} 
+                  isLoading={loading}
+                  loaderSize={20}
+                  containerClass={loaderContainerClass}
                 />
               </Grid>
               <Grid item>
