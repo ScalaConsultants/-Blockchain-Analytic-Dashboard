@@ -114,7 +114,6 @@ const BarChartContainer = (props: BarChartProps) => {
       (acc: Accumulator, obj: Wallet, index: number) => {
         const { walletHash, percentage } = obj;
         acc.elements.push(createSegment(walletHash, percentage, index));
-        acc.elems.push({ percentage, total: acc.total });
 
         // Last Segment
         acc.total < 100 && index === wallets.length - 1 && acc.elements.push(createLastSegment(acc.total));
@@ -122,10 +121,9 @@ const BarChartContainer = (props: BarChartProps) => {
         return {
           total: acc.total + percentage,
           elements: acc.elements,
-          elems: acc.elems
         };
       },
-      { total: 0, elements: [], elems: [] }
+      { total: 0, elements: [] }
     ).elements;
   };
 
