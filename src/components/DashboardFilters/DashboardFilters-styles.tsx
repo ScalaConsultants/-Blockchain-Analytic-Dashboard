@@ -5,9 +5,9 @@ import { ExtendedTheme } from '../../types';
   
   button: {
     color: '#A3A7B0',
-    background: '#253152',
+    background: theme.constants.SECONDARY_BG_COLOR,
     borderRadius: '4px',
-    borderColor: '#253152',
+    borderColor: theme.constants.SECONDARY_BG_COLOR,
     minWidth: '38px',
     height: '23px',
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,

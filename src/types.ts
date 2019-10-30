@@ -97,7 +97,8 @@ export interface ExtendedTheme extends Theme {
     DEFAULT_FONT_STYLE: string,
     DEFAULT_FONT_WEIGHT: any,
     DEFAULT_FONT_SIZE: string,
-    DEFAULT_LINE_HEIGHT: string
+    DEFAULT_LINE_HEIGHT: string,
+    SECONDARY_BG_COLOR: string
   }
 }
 
@@ -113,4 +114,17 @@ export interface AuthState {
   isAuth: boolean,
   loading: boolean,
   error: null | string
-};
+}
+
+export enum WalletType {
+  PUBLIC = 'public',
+  PRIVATE = 'private'
+}
+
+export enum Markets {
+  MARKET = 'Market',
+  DAPP = 'DAPP',
+  FRAUD = 'Fraud',
+  PRIVATE = 'Private',
+  UNASSIGNED = 'Unassigned'
+}
