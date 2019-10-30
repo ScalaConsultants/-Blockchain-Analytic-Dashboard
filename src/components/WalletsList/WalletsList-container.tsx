@@ -89,11 +89,14 @@ const WalletsList = (): React.ReactElement => {
         }
     }
 
-    const toggleSwitch = (index: number) => {
+    const toggleSwitch = (id: string) => {
         setSwitchToggle(!switchToggle);
+        let index = 0;
         if (switchWallet === WalletType.PRIVATE) {
+            index = walletsListPrivate.findIndex(( wallet:Wallet) => wallet.id === id);
             walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
         } else {
+            index = walletsListPublic.findIndex(( wallet:Wallet ) => wallet.id === id);
             walletsListPublic[index].watched = !walletsListPublic[index].watched;
         }
     }
@@ -138,7 +141,7 @@ const WalletsList = (): React.ReactElement => {
                         <span className={row.market === Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.market}</span>
                     </div>
                 </TableCell>
-                <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(index)} /></TableCell>
+                <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(row.id)} /></TableCell>
                 <TableCell className={classes.rowEl}>
                     <EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription} />
                 </TableCell>
@@ -155,7 +158,7 @@ const WalletsList = (): React.ReactElement => {
                 <Grid item xs={1} className={classes.privateWallets}>
                     <Grid container justify="center">
                         <Grid item className={switchWallet === 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet(WalletType.PRIVATE)}>
-                            Favourite wallet
+                            Favorite wallet
                         </Grid>
                         {switchWallet === WalletType.PRIVATE && <Grid item className={classes.underline} />}
                     </Grid>
