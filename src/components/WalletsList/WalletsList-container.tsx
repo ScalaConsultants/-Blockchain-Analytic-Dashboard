@@ -97,7 +97,7 @@ const WalletsList = (): React.ReactElement => {
             walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
         } else {
             index = walletsListPublic.findIndex(( wallet:Wallet ) => wallet.id === id);
-            walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
+            walletsListPublic[index].watched = !walletsListPublic[index].watched;
         }
     }
 
