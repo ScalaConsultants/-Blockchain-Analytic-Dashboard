@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 import clsx from 'clsx';
 
 import BarChartView from './BarChart-view';
@@ -8,7 +9,6 @@ import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
 
 import { useBarChartSegmentStyles } from './BarChart-styles';
-import { Blockchains } from '../../types';
 
 const BarChartContainer = (props: BarChartProps) => {
   const {
@@ -116,11 +116,14 @@ const BarChartContainer = (props: BarChartProps) => {
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
         key={walletHash}>
-        <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
-          <div className={getInnerClasses(index)}>
-            {index < 10 && percentage >= 1 ? <div>{`${Math.floor(text)}%`}</div> : null}
-          </div>
-        </div>
+          <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
+            <div className={getOuterClasses(index)} style={getStyle(position, percentage)}>
+              <div className={getInnerClasses(index)}>
+                {index < 10 && percentage >= 1 ? 
+                  <div>{`${Math.floor(text)}%`}</div> : null}
+              </div>
+            </div>
+        </Tooltip>
       </Link>
     );
   };
