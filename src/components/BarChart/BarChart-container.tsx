@@ -133,7 +133,7 @@ const BarChartContainer = (props: BarChartProps) => {
       index: wallets.findIndex(val => val.walletHash === walletHash)
     });
 
-  }, [walletHash, wallets, match.params.groupBy]);
+  }, [walletHash, wallets]);
 
   useEffect(() => {
     const { groupBy, limit, from, to } = match.params;
