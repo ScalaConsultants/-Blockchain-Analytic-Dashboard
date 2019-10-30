@@ -93,7 +93,7 @@ const BarChartContainer = (props: BarChartProps) => {
     );
   };
 
-  const createSegment = (walletHash: string, percentage: number, text: number, index: number) => {
+  const createSegment = (walletHash: string, percentage: number, index: number) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
       <Link
@@ -102,7 +102,7 @@ const BarChartContainer = (props: BarChartProps) => {
         <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
-              <div>{`${Math.floor(text)}%`}</div> : null}
+              <div>{`${Math.floor(percentage)}%`}</div> : null}
           </div>
         </Tooltip>
       </Link>
@@ -113,16 +113,14 @@ const BarChartContainer = (props: BarChartProps) => {
     return wallets.reduce(
       (acc: Accumulator, obj: Wallet, index: number) => {
         const { walletHash, percentage } = obj;
-        const percentageChanged = percentage;
-
-        acc.elements.push(createSegment(walletHash, percentageChanged, percentage, index));
-        acc.elems.push({ percentageChanged, total: acc.total });
+        acc.elements.push(createSegment(walletHash, percentage, index));
+        acc.elems.push({ percentage, total: acc.total });
 
         // Last Segment
         acc.total < 100 && index === wallets.length - 1 && acc.elements.push(createLastSegment(acc.total));
 
         return {
-          total: acc.total + percentageChanged,
+          total: acc.total + percentage,
           elements: acc.elements,
           elems: acc.elems
         };
