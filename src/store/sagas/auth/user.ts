@@ -1,36 +1,16 @@
 import { put } from 'redux-saga/effects';
 
-import authActions from '../../actions/auth'; 
+import authActions from '../../actions/auth';
+import { auth, authToken } from "./fetch";
 
 import { AuthUser } from '../../actions/types'
-
-async function auth(data: any): Promise<any> {
-    const { shouldSignUp } = data;
-    let url = 'api/v1/auth/login';
-
-    if (shouldSignUp) {
-        url = 'api/v1/auth/signup';
-        data.username = 'Test'
-    }
-
-    delete data.shouldSignUp;
-
-    const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    };
-
-    const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options)
-  
-    return await response.json();
-}
 
 export function* doAuthUser(action: AuthUser) {
     yield put(authActions.authUserStart()); 
 
     try {
         const response = yield auth({ ...action.data });
+        console.log('res', response); //TODO: remove
         const { code } = response;
 
         if (code && code === 'user_added') {
@@ -48,7 +28,40 @@ export function* doAuthUser(action: AuthUser) {
         yield put(authActions.authUserLoginSuccess({ ...response }))
         
     } catch(error) {
+        console.log('auth_error', error); //TODO: remove
         yield put(authActions.authUserFail(error))
+    }
+}
+
+export function* doAuthUserLogout() {
+    yield console.log('logout'); //TODO: remove
+    const token = yield localStorage.getItem('token');
+    const isAuth = yield localStorage.getItem('isAuth');
+
+    if (token) yield localStorage.removeItem('token');
+    if (isAuth) yield localStorage.removeItem('isAuth');
+}
+
+export function* doAuthUserAuto() {
+    yield console.log('auto'); //TODO: remove
+    const token = yield localStorage.getItem('token');
+    const isAuth = yield localStorage.getItem('isAuth');
+    if (token && isAuth) {
+        //TODO: req to BE to authenticate
+        try {
+            const response = yield authToken(token);
+            const { code } = response;
+
+            if (code && code === 'token_invalid')
+                return yield put(authActions.authUserLogout());
+
+            yield put(authActions.authUserLoginSuccess({ ...response }))
+        } catch(error) {
+            console.log('auto_error'); //TODO: remove
+            yield put(authActions.authUserLogout());
+        }
+    } else {
+        yield put(authActions.authUserLogout());
     }
 }
  

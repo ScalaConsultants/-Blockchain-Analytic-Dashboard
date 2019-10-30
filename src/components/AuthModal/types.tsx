@@ -30,6 +30,7 @@ export interface AuthModalFormProps {
 
 export interface AuthModalProps extends AuthState {
   onAuthUser: (email: string, password: string, shouldSignUp: boolean) => void;
+  onAuthAuto: () => void;
 }
 
 export interface User {

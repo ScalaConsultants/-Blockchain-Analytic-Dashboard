@@ -4,7 +4,7 @@ import AuthModalView from './AuthModal-view';
 
 import { AuthModalProps, User } from './types';
 
-const AuthModal = ({ onAuthUser, auth }: AuthModalProps) => {
+const AuthModal = ({ onAuthAuto, onAuthUser, auth }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
@@ -17,6 +17,11 @@ const AuthModal = ({ onAuthUser, auth }: AuthModalProps) => {
   useEffect(() => {
     setOpen(!auth.isAuth);
   }, [auth.isAuth]);
+
+  useEffect(() => {
+    // Auto login registered user
+    onAuthAuto();
+  }, []);
 
   const handleOpen = () => setOpen(prevState => !prevState);
 
