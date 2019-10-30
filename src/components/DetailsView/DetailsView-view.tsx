@@ -27,6 +27,7 @@ const DetailsView = (props: DetailsViewProps) => {
     };
 
     const activeFilters = {
+        blockchain: wallet,
         tab: groupBy,
         zoom: days > 1 ? '7 days' : '1 day',
         top: limit
