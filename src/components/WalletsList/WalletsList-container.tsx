@@ -58,22 +58,22 @@ const WalletsList = (): React.ReactElement => {
                 padding={row.disablePadding ? 'none' : 'default'}
             > {row.sort ?
                 <div className={classes.headerWithSort} onClick={() => handleRequestSort(row.id)}>
-                    <span className={row.id == 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
+                    <span className={row.id === 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
                     {row.sort &&
                         <div>
                             <ArrowDropUpIcon
                                 fontSize='small'
-                                className={(orderBy == row.id && order == 'asc')  ? classes.arrowUp :  clsx([classes.labelDisabled,classes.arrowUp])}
+                                className={(orderBy === row.id && order === 'asc')  ? classes.arrowUp :  clsx([classes.labelDisabled,classes.arrowUp])}
                             />
                             <ArrowDropDownIcon
                                 fontSize='small'
-                                className={(orderBy == row.id && order  == 'desc') ?  classes.arrowDown :  clsx([classes.labelDisabled,classes.arrowDown])}
+                                className={(orderBy === row.id && order  === 'desc') ?  classes.arrowDown :  clsx([classes.labelDisabled,classes.arrowDown])}
                             />
                         </div>
                     }
                 </div>
                 :
-                <span className={row.id == 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
+                <span className={row.id === 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
                 }
             </TableCell>
         ));
@@ -91,7 +91,7 @@ const WalletsList = (): React.ReactElement => {
 
     const toggleSwitch = (index: number) => {
         setSwitchToggle(!switchToggle);
-        if (switchWallet == WalletType.PRIVATE) {
+        if (switchWallet === WalletType.PRIVATE) {
             walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
         } else {
             walletsListPublic[index].watched = !walletsListPublic[index].watched;
@@ -135,7 +135,7 @@ const WalletsList = (): React.ReactElement => {
                 <TableCell className={classes.rowEl}>
                     <div className={classes.verticalAlign}>
                         <div className={ clsx([selectWalletColor(row.market),classes.walletTypeIcon])}></div>
-                        <span className={row.market == Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.market}</span>
+                        <span className={row.market === Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.market}</span>
                     </div>
                 </TableCell>
                 <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(index)} /></TableCell>
@@ -154,10 +154,10 @@ const WalletsList = (): React.ReactElement => {
 
                 <Grid item xs={1} className={classes.privateWallets}>
                     <Grid container justify="center">
-                        <Grid item className={switchWallet == 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet(WalletType.PRIVATE)}>
+                        <Grid item className={switchWallet === 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet(WalletType.PRIVATE)}>
                             Favourite wallet
                         </Grid>
-                        {switchWallet == WalletType.PRIVATE && <Grid item className={classes.underline} />}
+                        {switchWallet === WalletType.PRIVATE && <Grid item className={classes.underline} />}
                     </Grid>
                 </Grid>
                 <Grid item xs={1} className={classes.publicWallets}>
@@ -165,7 +165,7 @@ const WalletsList = (): React.ReactElement => {
                         <Grid item onClick={() => setSwitchWallet(WalletType.PUBLIC)} className={switchWallet == WalletType.PRIVATE ? classes.btnDisabled : ''}>
                             Public wallet
                         </Grid>
-                        {switchWallet == 'public' && <Grid item className={classes.underline} />}
+                        {switchWallet === 'public' && <Grid item className={classes.underline} />}
                     </Grid>
                 </Grid>
                 <Grid container spacing={9} className="Container">
@@ -177,7 +177,7 @@ const WalletsList = (): React.ReactElement => {
                             <TableBody
                                 id="walletsListTableBody"
                             >
-                                {switchWallet == WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(walletsListPublic)}</TableBody>
+                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(walletsListPublic)}</TableBody>
                         </Table>
                     </Grid>
                 </Grid>
