@@ -147,3 +147,9 @@ export const useLabelStyles = makeStyles((theme: ExtendedTheme) =>
     focused: {}
   })
 );
+
+export const loaderContainerStyles = {
+  'position': 'relative',
+  'padding': '0',
+  'backgroundColor': '#161B32',
+};

@@ -12,7 +12,7 @@ import Loader from '../loader';
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
 import AuthModalForgetPassword from './AuthModalForgetPassword-view';
 
-import { useModalStyles } from './AuthModal-styles';
+import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
@@ -27,11 +27,6 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const classesLogin = clsx([classesModal.cursor, classesModal.flex]);
   const classesLogo = clsx([classesModal.marginTop40, classesModal.flex]);
   const classesTitle = clsx([classesModal.title, classesModal.flex]);
-  const loaderContainerClass = {
-    'position': 'relative',
-    'padding': '0',
-    'backgroundColor': '#161B32',
-  };
 
   const { PUBLIC_URL } = process.env;
 
@@ -79,7 +74,7 @@ const AuthModalView = (props: AuthModalViewProps) => {
                 <Loader 
                   isLoading={loading}
                   loaderSize={20}
-                  containerClass={loaderContainerClass}
+                  containerClass={loaderContainerStyles}
                 />
               </Grid>
               <Grid item>
