@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import clsx from 'clsx';
 
 import { Markets, Blockchains, WalletType } from '../../types';
 import { Order, OrderBy, HeaderColsInterface, Wallet } from './types';
@@ -62,11 +63,11 @@ const WalletsList = (): React.ReactElement => {
                         <div>
                             <ArrowDropUpIcon
                                 fontSize='small'
-                                className={(orderBy == row.id && order == 'asc')  ? classes.arrowUp : classes.labelDisabled + ' ' + classes.arrowUp}
+                                className={(orderBy == row.id && order == 'asc')  ? classes.arrowUp :  clsx([classes.labelDisabled,classes.arrowUp])}
                             />
                             <ArrowDropDownIcon
                                 fontSize='small'
-                                className={(orderBy == row.id && order  == 'desc') ?  classes.arrowDown : classes.labelDisabled + ' ' + classes.arrowDown}
+                                className={(orderBy == row.id && order  == 'desc') ?  classes.arrowDown :  clsx([classes.labelDisabled,classes.arrowDown])}
                             />
                         </div>
                     }
@@ -133,7 +134,7 @@ const WalletsList = (): React.ReactElement => {
                 </TableCell>
                 <TableCell className={classes.rowEl}>
                     <div className={classes.verticalAlign}>
-                        <div className={selectWalletColor(row.market) + ' ' + classes.walletTypeIcon}></div>
+                        <div className={ clsx([selectWalletColor(row.market),classes.walletTypeIcon])}></div>
                         <span className={row.market == Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.market}</span>
                     </div>
                 </TableCell>
