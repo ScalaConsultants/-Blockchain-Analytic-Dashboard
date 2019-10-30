@@ -106,3 +106,16 @@ export enum Blockchains {
   ETH = 'ETH',
   XTZ = 'XTZ'
 }
+
+export enum WalletType {
+  PUBLIC = 'public',
+  PRIVATE = 'private'
+}
+
+export enum Markets {
+  MARKET = 'Market',
+  DAPP = 'DAPP',
+  FRAUD = 'Fraud',
+  PRIVATE = 'Private',
+  UNASSIGNED = 'Unassigned'
+}
