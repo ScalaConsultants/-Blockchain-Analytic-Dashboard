@@ -117,8 +117,8 @@ const WalletsList = (): React.ReactElement => {
     }
 
     const renderWalletsListRows = (walletsList: Wallet[]) => {
-        if (!walletsList.length) return
-        return (stableSort(
+        return walletsList.length &&
+        (stableSort(
             walletsList,
             getSorting(order, orderBy)
         )).map((row: Wallet, index: number) => (
