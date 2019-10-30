@@ -56,19 +56,17 @@ const WalletsList = (): React.ReactElement => {
                 align={row.numeric ? 'right' : 'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
             > {row.sort ?
-                <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => handleRequestSort(row.id)}>
+                <div className={classes.headerWithSort} onClick={() => handleRequestSort(row.id)}>
                     <span className={row.id == 'watched' ? classes.labelDisabled : ''}>{row.label}</span>
                     {row.sort &&
                         <div>
                             <ArrowDropUpIcon
                                 fontSize='small'
-                                style={{ display: 'block', marginBottom: '-12px' }}
-                                className={(orderBy == row.id && order) == 'desc' ? classes.labelDisabled : ''}
+                                className={(orderBy == row.id && order) == 'desc' ? classes.labelDisabled + ' ' + classes.arrowUp : classes.arrowUp}
                             />
                             <ArrowDropDownIcon
                                 fontSize='small'
-                                style={{ display: 'block' }}
-                                className={(orderBy == row.id && order) == 'asc' ? classes.labelDisabled : ''}
+                                className={(orderBy == row.id && order) == 'asc' ? classes.labelDisabled + ' ' + classes.arrowDown : classes.arrowDown}
                             />
                         </div>
                     }
@@ -125,11 +123,11 @@ const WalletsList = (): React.ReactElement => {
             getSorting(order, orderBy)
         )).map((row: Wallet, index: number) => (
             <TableRow key={`${index}`}>
-                <TableCell scope="row"><b>{row.id}</b>&nbsp; &nbsp;<b style={{ color: '#4C5367' }}>{row.walletHash}</b></TableCell>
+                <TableCell scope="row"><b>{row.id}</b>&nbsp; &nbsp;<b className={classes.labelDisabled}>{row.walletHash}</b></TableCell>
                 <TableCell className={classes.rowEl}>{row.title}</TableCell>
                 <TableCell className={classes.rowEl}>
                     <div className={classes.verticalAlign}>
-                        <img alt="Blockchain icon" src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} style={{ width: '15px', marginRight: '5px' }} />
+                        <img alt="Blockchain icon" src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} className={classes.blockchainIcon} />
                         {row.blockchain}
                     </div>
                 </TableCell>
@@ -153,7 +151,7 @@ const WalletsList = (): React.ReactElement => {
         <View>
             <Grid container className="Container">
 
-                <Grid item xs={1} style={{ marginRight: '20px', zIndex: 1000, cursor: 'pointer' }}>
+                <Grid item xs={1} className={classes.privateWallets}>
                     <Grid container justify="center">
                         <Grid item className={switchWallet == 'public' ? classes.btnDisabled : ''} onClick={() => setSwitchWallet(WalletType.PRIVATE)}>
                             Favourite wallet
@@ -161,7 +159,7 @@ const WalletsList = (): React.ReactElement => {
                         {switchWallet == WalletType.PRIVATE && <Grid item className={classes.underline} />}
                     </Grid>
                 </Grid>
-                <Grid item xs={1} style={{ zIndex: 1000, cursor: 'pointer' }}>
+                <Grid item xs={1} className={classes.publicWallets}>
                     <Grid container justify="center" >
                         <Grid item onClick={() => setSwitchWallet(WalletType.PUBLIC)} className={switchWallet == WalletType.PRIVATE ? classes.btnDisabled : ''}>
                             Public wallet

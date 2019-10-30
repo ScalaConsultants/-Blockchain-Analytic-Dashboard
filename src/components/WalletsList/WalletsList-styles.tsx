@@ -1,16 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
+import { SECONDARY_BG_COLOR } from '../../theme/constants';
+
 const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   rowEl: {
     color: '#A3A7B0',
     fontWeight: 'bold'
   },
   walletTypeIcon: {
-    width: '12px',
-    height: '12px',
+    width: 12,
+    height: 12,
     borderRadius: '50%',
-    marginRight: '10px'
+    marginRight: 10
   },
   restColor: {
     background: theme.constants.REST_COLOR,
@@ -36,7 +38,7 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   underline: {
     width: '100%',
-    height: '2px',
+    height: 2,
     background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)'
   },
   btnDisabled: {
@@ -44,20 +46,39 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   },
   button: {
     color: '#A3A7B0',
-    background: '#253152',
-    borderRadius: '4px',
-    borderColor: '#253152',
-    minWidth: '38px',
-    height: '23px',
+    background: SECONDARY_BG_COLOR,
+    borderRadius: 4,
+    borderColor: SECONDARY_BG_COLOR,
+    minWidth: 38,
+    height: 23,
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
     fontStyle: theme.constants.DEFAULT_FONT_STYLE,
     fontWeight: theme.constants.DEFAULT_FONT_WEIGHT,
     fontSize: '0.65rem',
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
-    margin: '4px',
+    margin: 4,
   }, 
   labelDisabled: {
     color: '#4C5367'
+  },
+  headerWithSort: {
+    display: 'flex', alignItems: 'center', cursor: 'pointer' 
+  },
+  arrowUp: {
+    display: 'block', marginBottom: -12 
+  },
+  arrowDown: {
+    display: 'block'
+  },
+  blockchainIcon: {
+    width: 15, 
+    marginRight: 5
+  },
+  privateWallets: { 
+    marginRight: '20px', zIndex: 1000, cursor: 'pointer' 
+  },
+  publicWallets: {
+    zIndex: 1000, cursor: 'pointer' 
   }
 
 }));
