@@ -5,8 +5,8 @@ import notifications from './notifications';
 import auth from './auth';
 
 export default combineReducers({
+    auth,
     notifications,
     ethereum,
-    tezos,
-    auth
+    tezos
 });

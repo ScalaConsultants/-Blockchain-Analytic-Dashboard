@@ -48,7 +48,6 @@ export function* doAuthUser(action: AuthUser) {
         yield put(authActions.authUserLoginSuccess({ ...response }))
         
     } catch(error) {
-        console.log('error')
         yield put(authActions.authUserFail(error))
     }
 }

@@ -5,12 +5,12 @@ import watchAuth from './auth';
 
 export default function* root(): any {
   yield all([
+    watchAuth(),
     ethereumSagas.watchDoFetchWallets(),
     ethereumSagas.watchDoFetchTransactionsSummed(),
     ethereumSagas.watchDoFetchTransactions(),
     tezosSagas.watchDoFetchWallets(),
     tezosSagas.watchDoFetchTransactionsSummed(),
-    tezosSagas.watchDoFetchTransactions(),
-    watchAuth()
+    tezosSagas.watchDoFetchTransactions()
   ]);
 }
