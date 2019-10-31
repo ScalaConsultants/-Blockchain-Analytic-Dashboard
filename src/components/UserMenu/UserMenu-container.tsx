@@ -21,7 +21,7 @@ const UserMenu = (): React.ReactElement => {
     const node = useRef<HTMLDivElement>(null);
 
     const handleMenuState = () => {
-        setMenuVisibility(!menuVisibility)
+        setMenuVisibility(prevState => !prevState)
     };
 
     const handleOutsideClick = (e: MouseEvent) => {
