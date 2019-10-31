@@ -10,7 +10,6 @@ export function* doAuthUser(action: AuthUser) {
 
     try {
         const response = yield auth({ ...action.data });
-        console.log('res', response); //TODO: remove
         const { code } = response;
 
         if (code && code === 'user_added') {
@@ -28,13 +27,11 @@ export function* doAuthUser(action: AuthUser) {
         yield put(authActions.authUserLoginSuccess({ ...response }))
         
     } catch(error) {
-        console.log('auth_error', error); //TODO: remove
         yield put(authActions.authUserFail(error))
     }
 }
 
 export function* doAuthUserLogout() {
-    yield console.log('logout'); //TODO: remove
     const token = yield localStorage.getItem('token');
     const isAuth = yield localStorage.getItem('isAuth');
 
@@ -43,7 +40,6 @@ export function* doAuthUserLogout() {
 }
 
 export function* doAuthCheck() {
-    yield console.log('auto'); //TODO: remove
     const token = yield localStorage.getItem('token');
     const isAuth = yield localStorage.getItem('isAuth');
     if (token && isAuth) {
@@ -57,7 +53,6 @@ export function* doAuthCheck() {
 
             yield put(authActions.authUserLoginSuccess({ ...response }))
         } catch(error) {
-            console.log('auto_error'); //TODO: remove
             yield put(authActions.authUserLogout());
         }
     } else {
@@ -66,7 +61,6 @@ export function* doAuthCheck() {
 }
 
 export function* doAuthUserForgotPassword(action: AuthUser) {
-    yield console.log('forgot_password'); //TODO remove
     yield put(authActions.authUserStart());
 
     try {
