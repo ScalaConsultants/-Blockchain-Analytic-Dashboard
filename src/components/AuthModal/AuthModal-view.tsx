@@ -5,14 +5,11 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 import Loader from '../loader';
 
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
 import AuthModalForgotPassword from './AuthModalForgotPassword-view';
-import UserMenu from '../UserMenu';
 
 import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
@@ -22,11 +19,9 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const {
     open = false,
     handleClose,
-    menuVisibility,
     forgotPassword,
     auth,
-    shouldSignUp, 
-    handleMenuState,
+    shouldSignUp,
     handleOpen,
     formValidation = {
       email: {
@@ -58,38 +53,30 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const { PUBLIC_URL } = process.env;
 
   const text = forgotPassword
-      ? 'Recovery your password'
-      : !shouldSignUp
+    ? 'Recovery your password'
+    : !shouldSignUp
       ? 'Login into your account'
       : 'Create new account';
 
   const form = forgotPassword ? <AuthModalForgotPassword {...props} /> : <AuthModalLoginRegister {...props} />;
 
   const info = (!formValidation.email.isValid || !formValidation.password.isValid)
-      ? <div>
-          <div>{formValidation.email.msg}</div>
-          <div>{formValidation.password.msg}</div>
-        </div>
-      : <Loader
+    ? <div>
+      <div>{formValidation.email.msg}</div>
+      <div>{formValidation.password.msg}</div>
+    </div>
+    : <Loader
       isLoading={loading}
       loaderSize={20}
       containerClass={loaderContainerStyles}
-  />;
+    />;
 
   return (
     <>
-      <div>
       <div className={classesLogin} >
         <Typography variant="body1" color="secondary" onClick={btnHandler}>
           {btn}
         </Typography>
-          {menuVisibility ?
-            <ArrowDropUpIcon color="secondary" onClick={handleMenuState}/>
-            :
-            <ArrowDropDownIcon color="secondary" onClick={handleMenuState}/>
-          }
-        </div>
-        {menuVisibility && <UserMenu handleMenuState={handleMenuState} isUserAuth={true}/>}
       </div>
 
       <Modal

@@ -38,6 +38,9 @@ const useUserMenuStyles = makeStyles((theme: ExtendedTheme) => ({
     },
     link: {
         textDecoration: 'none'
+    },
+    pointer: {
+        cursor: 'pointer',
     }
 
 }));

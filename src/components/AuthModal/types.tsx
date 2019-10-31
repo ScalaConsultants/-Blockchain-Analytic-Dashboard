@@ -41,8 +41,6 @@ export interface AuthModalViewProps extends AuthState {
   forgotPassword?: boolean;
   rememberMe?: boolean;
   user?: Record<string, string>;
-  menuVisibility:boolean;
-  handleMenuState: () => void;
   shouldSignUp?: boolean;
   formValidation?: FormValidation;
 }

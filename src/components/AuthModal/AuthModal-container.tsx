@@ -16,7 +16,6 @@ const AuthModal = ({
   const [forgotPassword, setForgotPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [shouldSignUp, setShouldSignUp] = useState(false);
-  const [menuVisibility, setMenuVisibility] = React.useState(false);
 
   const [user, setUser] = useState({
     email: '',
@@ -40,19 +39,6 @@ const AuthModal = ({
   useEffect(() => {
     setOpen(prevState => prevState && !auth.isAuth);
   }, [auth.isAuth]);
-
-  const node = useRef<HTMLDivElement>(null);
-
-  const handleMenuState = () => {
-    setMenuVisibility(!menuVisibility)
-  }
-  
-  const handleOutsideClick = (e: MouseEvent) => {
-    if(node.current != null)
-      if (node.current.contains(e.target as HTMLInputElement) )
-        return;
-    setMenuVisibility(false)
-  };
 
   const handleOpen = () => setOpen(prevState => !prevState);
 
@@ -143,15 +129,8 @@ const AuthModal = ({
   const handleSignUp = () => btnClick(true);
   const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, []);
-
   return (
-    <div ref={node}>
+    <div>
       <AuthModalView
         auth={auth}
         open={open}
@@ -172,8 +151,6 @@ const AuthModal = ({
         user={user}
         shouldSignUp={shouldSignUp}
         formValidation={formValidation}
-        handleMenuState={handleMenuState}
-        menuVisibility={menuVisibility}
       />
 </div>
   );
