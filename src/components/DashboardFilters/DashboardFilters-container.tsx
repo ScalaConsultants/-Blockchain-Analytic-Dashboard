@@ -23,11 +23,6 @@ const Filters = (props: any) => {
     return activeBlockchains.indexOf(label) !== -1;
   }
 
-  const checkActiveZoom = (label: string) => {
-    const zoom = parseInt(urlParams.to) - parseInt(urlParams.from);
-    return (label === '1 day' && zoom === 86400000) ? true : (label === '7 days' && zoom !== 86400000);
-  };
-
   const checkActiveTopList = (label: string) => label === urlParams.limit;
 
   const [activeBlockchainButtons, setBlockchainButtons]: [Record<string, boolean>, Function] = useState({
@@ -40,12 +35,6 @@ const Filters = (props: any) => {
     'ADA': checkActiveBlockchains('ADA'),
     'EOS': checkActiveBlockchains('EOS'),
     'XLM': checkActiveBlockchains('XLM')
-  });
-
-
-  const [activeZoomButtons, setZoomButtons]: [Record<string, boolean>, Function] = useState({
-    '1 day': checkActiveZoom('1 day'),
-    '7 days': checkActiveZoom('7 days'),
   });
 
   const [activeTopListButtons, setTopListButtons]: [Record<string, boolean>, Function] = useState({
@@ -75,13 +64,6 @@ const Filters = (props: any) => {
     }
   };
 
-  const zoomFilterHandler = (buttonLabel: string) => {
-    const buttons = { ...activeZoomButtons };
-    Object.keys(buttons).filter((label: string) => (buttons[label] = false));
-    buttons[buttonLabel] = true;
-    setZoomButtons({ ...buttons });
-  };
-
   const zoomTopListHandler = (buttonLabel: string) => {    
     const buttons = { ...activeTopListButtons };
     Object.keys(buttons).map((label: string) => (buttons[label] = false));
@@ -91,7 +73,6 @@ const Filters = (props: any) => {
 
   const filterHandler = (buttonLabel: string, filterType: Record<string, boolean>) => {
     filterType === activeBlockchainButtons && blockchainFilterHandler(buttonLabel);
-    filterType === activeZoomButtons && zoomFilterHandler(buttonLabel);
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
   };
 
@@ -115,18 +96,12 @@ const Filters = (props: any) => {
       );
     });
 
-  const setZoomFilter = (dateFilter: string[]) => {
-    const oneDay = [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()];
-    const week = [new Date().getTime() - 1000 * 3600 * 24 * 7, new Date().getTime()];
-
-    return dateFilter[0] === '1 day'? oneDay : week;
-  }
+  const setZoomFilter = () => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()]
 
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
-    const activeZoom = activeFilters(activeZoomButtons);
     const activeTopList = activeFilters(activeTopListButtons);
-    const dates: number[] = setZoomFilter(activeZoom); 
+    const dates: number[] = setZoomFilter(); 
 
     newFilters = {
       limit: Number(activeTopList[0]),
@@ -147,7 +122,7 @@ const Filters = (props: any) => {
 
   useEffect((): void => {
     handleRefresh(false);
-  }, [activeBlockchainButtons, activeTopListButtons, activeZoomButtons]);
+  }, [activeBlockchainButtons, activeTopListButtons]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
@@ -156,14 +131,16 @@ const Filters = (props: any) => {
         {renderButtons(activeBlockchainButtons)}
       </Grid>
       <Grid item xs={3}>
-        <Typography variant="h3">Zoom</Typography>
-        {renderButtons(activeZoomButtons)}
+        <Typography variant="h3">Watch list</Typography>
       </Grid>
       <Grid item xs={3}>
+        <Typography variant="h3">24h history</Typography>
+      </Grid>
+      <Grid item xs={2}>
         <Typography variant="h3">Top list</Typography>
         {renderButtons(activeTopListButtons)}
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={1}>
         <Typography variant="h3">Refresh</Typography>
         <Link replace={true} to={`/${match.params.groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
           <AutorenewIcon className={classes.refresh} onClick={ () => handleRefresh(true) }/>
