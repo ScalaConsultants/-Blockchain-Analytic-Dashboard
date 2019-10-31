@@ -9,9 +9,7 @@ export interface ViewProps {
 }
 
 export interface Accumulator {
-  position: number,
   total: number,
-  elems: any,
   elements: React.ReactElement<'div'>[]
 }
 

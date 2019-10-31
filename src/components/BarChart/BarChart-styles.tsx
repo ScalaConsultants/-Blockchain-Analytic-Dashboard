@@ -12,7 +12,10 @@ export const useBarChartContainer = makeStyles((theme: ExtendedTheme) => ({
     fontFamily: 'Quicksand, sans-serif',
     fontSize: '0.675rem',
     fontWeight: 'bold',
-    fontStyle: 'normal'
+    fontStyle: 'normal',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    flexDirection: 'row'
   },
   loader: {
     padding: 0

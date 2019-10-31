@@ -4,4 +4,5 @@ export interface LoaderProps {
   loaderClass?: string;
   loaderContainerClass?: string;
   loaderSize?: number | string;
+  containerClass?: Record<string, string>
 }
