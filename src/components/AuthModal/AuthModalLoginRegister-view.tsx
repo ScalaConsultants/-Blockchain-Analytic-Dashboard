@@ -14,9 +14,21 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
     handleSignUp,
     handleSwitchForms,
     handleRememberMe,
+    handleEmailFocus,
+    handleEmailBlur,
+    handlePasswordFocus,
+    handlePasswordBlur,
     rememberMe = true,
     user = { email: '', password: '' },
-    shouldSignUp = false
+    shouldSignUp = false,
+    formValidation = {
+      email: {
+        isValid: true
+      },
+      password: {
+        isValid: true
+      }
+    }
   } = props;
 
   const classesModal = useModalStyles();
@@ -47,23 +59,29 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
         InputProps={{ classes: classesInput, disableUnderline: true }}
         InputLabelProps={{ classes: classesLabel }}
         className={classesModal.textField}
+        error={!formValidation.email.isValid}
         variant="filled"
         label="Email"
         id="auth-email"
         type="email"
         value={user.email}
         onChange={handleChange}
+        onFocus={handleEmailFocus}
+        onBlur={handleEmailBlur}
       />
       <TextField
         InputProps={{ classes: classesInput, disableUnderline: true }}
         InputLabelProps={{ classes: classesLabel }}
         className={classesModal.textField}
+        error={!formValidation.password.isValid}
         variant="filled"
         label="Password"
         id="auth-password"
         type="password"
         value={user.password}
         onChange={handleChange}
+        onFocus={handlePasswordFocus}
+        onBlur={handlePasswordBlur}
       />
       {!shouldSignUp && <Grid container className={classesModal.options}>
         <Grid item className={classesRememberMe} onClick={handleRememberMe}>

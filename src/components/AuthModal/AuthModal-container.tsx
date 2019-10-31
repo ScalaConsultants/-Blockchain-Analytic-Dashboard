@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import AuthModalView from './AuthModal-view';
 
+import { validation, rules } from './helpers';
+
 import { AuthModalProps, User } from './types';
 
 const AuthModal = ({
@@ -14,8 +16,22 @@ const AuthModal = ({
   const [rememberMe, setRememberMe] = useState(true);
   const [shouldSignUp, setShouldSignUp] = useState(false);
   const [user, setUser] = useState({
-    email: 'admin',
-    password: 'admin'
+    email: '',
+    password: ''
+  });
+  const [formValidation, setFormValidation] = useState({
+    email: {
+      isValid: true,
+      msg: '',
+    },
+    password: {
+      isValid: true,
+      msg: '',
+    },
+    touched: {
+      email: false,
+      password: false
+    }
   });
 
   useEffect(() => {
@@ -32,6 +48,20 @@ const AuthModal = ({
       email: '',
       password: ''
     });
+    setFormValidation({
+      email: {
+        isValid: true,
+        msg: '',
+      },
+      password: {
+        isValid: true,
+        msg: '',
+      },
+      touched: {
+        email: false,
+        password: false
+      }
+    })
   };
 
   const handleSwitchForms = () => setForgotPassword(prevState => !prevState);
@@ -45,22 +75,56 @@ const AuthModal = ({
 
     setUser(
       (prevState: User): User => {
-        const userState = prevState;
+        const userState = { ...prevState };
         //@ts-ignore
         userState[type] = value;
-        return { ...userState };
+        return userState;
       }
     );
   };
 
-  const handleBtnClick = (btn: boolean) => {
-    if (btn && shouldSignUp || !btn && !shouldSignUp) return onAuthUser(user.email, user.password, btn);
+  const onFocus = (type: string) => {
+    const { email, password } = formValidation.touched;
+    if (!email || !password) {
+      setFormValidation(prevState => {
+        const formState = { ...prevState };
+        //@ts-ignore
+        formState.touched[type] = true;
+        return formState
+      })
+    }
+  };
+
+  const onBlur = (type: string) => {
+    const { email, password } = formValidation.touched;
+    if (email || password) {
+      // @ts-ignore
+      const validationData = validation(user[type], rules[type], type);
+
+      setFormValidation(prevState => {
+        const formState = { ...prevState };
+        //@ts-ignore
+        formState[type] = validationData;
+        return formState;
+      })
+    }
+  };
+
+  const btnClick = (btn: boolean) => {
+    const { email, password } = formValidation;
+    if (email.isValid && password.isValid) {
+      if (btn && shouldSignUp || !btn && !shouldSignUp) return onAuthUser(user.email, user.password, btn);
+    }
 
     setShouldSignUp(prevState => !prevState);
   };
 
-  const handleLogin = () => handleBtnClick(false);
-  const handleSignUp = () => handleBtnClick(true);
+  const handleEmailFocus = () => onFocus('email');
+  const handleEmailBlur = () => onBlur('email');
+  const handlePasswordFocus = () => onFocus('password');
+  const handlePasswordBlur = () => onBlur('password');
+  const handleLogin = () => btnClick(false);
+  const handleSignUp = () => btnClick(true);
   const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
 
   return (
@@ -75,10 +139,15 @@ const AuthModal = ({
       handleRememberMe={handleRememberMe}
       handleSwitchForms={handleSwitchForms}
       handleForgotPassword={handleForgotPassword}
+      handleEmailFocus={handleEmailFocus}
+      handleEmailBlur={handleEmailBlur}
+      handlePasswordFocus={handlePasswordFocus}
+      handlePasswordBlur={handlePasswordBlur}
       rememberMe={rememberMe}
       forgotPassword={forgotPassword}
       user={user}
       shouldSignUp={shouldSignUp}
+      formValidation={formValidation}
     />
   );
 };

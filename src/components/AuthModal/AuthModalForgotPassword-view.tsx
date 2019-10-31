@@ -7,7 +7,21 @@ import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styl
 import { AuthModalViewProps } from './types';
 
 const AuthModalForgotPassword = (props: AuthModalViewProps) => {
-  const { handleSwitchForms, handleChange, handleForgotPassword, user = { email: '' } } = props;
+  const {
+    handleSwitchForms,
+    handleChange,
+    handleForgotPassword,
+    handleEmailFocus,
+    handleEmailBlur,
+    user = {
+    email: ''
+    },
+    formValidation = {
+      email: {
+        isValid: true,
+      }
+    }
+  } = props;
 
   const classesModal = useModalStyles();
   const classesInput = useInputStyles();
@@ -20,12 +34,15 @@ const AuthModalForgotPassword = (props: AuthModalViewProps) => {
         InputProps={{ classes: classesInput, disableUnderline: true }}
         InputLabelProps={{ classes: classesLabel }}
         className={classesModal.textField}
+        error={!formValidation.email.isValid}
         variant="filled"
         label="Email"
         value={user.email}
         id="auth-email"
         type="email"
         onChange={handleChange}
+        onFocus={handleEmailFocus}
+        onBlur={handleEmailBlur}
       />
       <div className={classesButtons}>
         <Button onClick={handleForgotPassword}>Send</Button>

@@ -16,7 +16,28 @@ import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const { open = false, handleOpen, handleClose, forgotPassword, auth, shouldSignUp } = props;
+  const {
+    open = false,
+    handleOpen,
+    handleClose,
+    forgotPassword,
+    auth,
+    shouldSignUp,
+    formValidation = {
+      email: {
+        isValid: true,
+        msg: '',
+      },
+      password: {
+        isValid: true,
+        msg: '',
+      },
+      touched: {
+        email: false,
+        password: false
+      }
+    }
+  } = props;
 
   const loading = auth && auth.loading || false;
   const btn = auth && auth.isAuth ? auth.username : 'Log in';
@@ -27,6 +48,7 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const classesLogin = clsx([classesModal.cursor, classesModal.flex]);
   const classesLogo = clsx([classesModal.marginTop40, classesModal.flex]);
   const classesTitle = clsx([classesModal.title, classesModal.flex]);
+  const classesInfo = clsx([classesModal.flex, classesModal.info]);
 
   const { PUBLIC_URL } = process.env;
 
@@ -37,6 +59,17 @@ const AuthModalView = (props: AuthModalViewProps) => {
       : 'Create new account';
 
   const form = forgotPassword ? <AuthModalForgotPassword {...props} /> : <AuthModalLoginRegister {...props} />;
+
+  const info = (!formValidation.email.isValid || !formValidation.password.isValid)
+      ? <div>
+          <div>{formValidation.email.msg}</div>
+          <div>{formValidation.password.msg}</div>
+        </div>
+      : <Loader
+      isLoading={loading}
+      loaderSize={20}
+      containerClass={loaderContainerStyles}
+  />;
 
   return (
     <>
@@ -70,12 +103,8 @@ const AuthModalView = (props: AuthModalViewProps) => {
                   dashboard
                 </Typography>
               </Grid>
-              <Grid item>
-                <Loader 
-                  isLoading={loading}
-                  loaderSize={20}
-                  containerClass={loaderContainerStyles}
-                />
+              <Grid item className={classesInfo}>
+                {info}
               </Grid>
               <Grid item>
                 <Typography className={classesModal.marginTop28} color="textPrimary" align="center">

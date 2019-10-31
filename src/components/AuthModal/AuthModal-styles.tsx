@@ -27,6 +27,10 @@ export const useModalStyles = makeStyles((theme: ExtendedTheme) => ({
     display: 'flex',
     alignItems: 'center'
   },
+  info: {
+    justifyContent: 'center',
+    color: theme.palette.error.main
+  },
   buttons: {
     margin: '15px 0 50px 0',
     flexDirection: 'column',

@@ -9,6 +9,21 @@ export interface AuthState {
   }
 }
 
+export interface FormValidation {
+  email: {
+    isValid: boolean;
+    msg: string,
+  },
+  password: {
+    isValid: boolean,
+    msg: string,
+  },
+  touched: {
+    email: boolean,
+    password: boolean
+  }
+}
+
 export interface AuthModalViewProps extends AuthState {
   open?: boolean;
   handleOpen?: () => void;
@@ -19,10 +34,15 @@ export interface AuthModalViewProps extends AuthState {
   handleSwitchForms?: () => void;
   handleRememberMe?: () => void;
   handleForgotPassword?: () => void;
+  handleEmailFocus?: () => void;
+  handleEmailBlur?: () => void;
+  handlePasswordFocus?: () => void;
+  handlePasswordBlur?: () => void;
   forgotPassword?: boolean;
   rememberMe?: boolean;
   user?: Record<string, string>;
   shouldSignUp?: boolean;
+  formValidation?: FormValidation;
 }
 
 export interface AuthModalFormProps {
@@ -38,3 +58,11 @@ export interface User {
   email: string;
   password: string;
 }
+
+export interface AuthValidationRules {
+  required?: boolean;
+  isEmail?: boolean;
+  minLength?: number;
+  maxLength?: number;
+}
+
