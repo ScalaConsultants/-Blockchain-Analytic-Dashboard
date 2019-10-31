@@ -46,7 +46,7 @@ const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
     textTransform: 'none'
   },
   buttonFirst: {
-    background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)',
+    background: theme.constants.DECOR_COLOR,
     border: 'none'
   },
   close: {

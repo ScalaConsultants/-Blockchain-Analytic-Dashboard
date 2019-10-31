@@ -40,7 +40,7 @@ export const useModalStyles = makeStyles((theme: ExtendedTheme) => ({
       margin: '5px 0',
       borderRadius: '4px',
       '&:first-child': {
-        background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)'
+        background: theme.constants.DECOR_COLOR
       },
       '&:last-child': {
         marginBottom: '0',

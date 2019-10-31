@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { SECONDARY_BG_COLOR } from '../../theme/constants';
+import { SECONDARY_BG_COLOR, DECOR_COLOR } from '../../theme/constants';
 import { ExtendedTheme } from '../../types';
 
  export const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
@@ -23,7 +23,7 @@ import { ExtendedTheme } from '../../types';
 
   active: {
     color: theme.palette.common.white,
-    background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)'
+    background: theme.constants.DECOR_COLOR
   },
 
   refresh: {
@@ -36,13 +36,14 @@ export const TimePeriodStyles = {
   root: {
     color: SECONDARY_BG_COLOR,
     height: 5,
+    width: '90%'
   },
   thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: '#fff',
+    height: 15,
+    width: 15,
+    background: DECOR_COLOR,
     border: '2px solid currentColor',
-    marginTop: -8,
+    marginTop: -4,
     marginLeft: -12,
     '&:focus,&:hover,&$active': {
       boxShadow: 'inherit',

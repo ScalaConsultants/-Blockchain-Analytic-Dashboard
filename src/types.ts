@@ -98,7 +98,8 @@ export interface ExtendedTheme extends Theme {
     DEFAULT_FONT_WEIGHT: any,
     DEFAULT_FONT_SIZE: string,
     DEFAULT_LINE_HEIGHT: string,
-    SECONDARY_BG_COLOR: string
+    SECONDARY_BG_COLOR: string,
+    DECOR_COLOR: string
   }
 }
 
