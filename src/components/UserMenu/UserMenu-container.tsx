@@ -1,21 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import useUserMenuStyles from './UserMenu-styles';
 
-
 const UserMenu = (): React.ReactElement => {
 
-    const menuItemsTop = [
-        { title: "wallet list" },
-        { title: "top list" },
+    const menuItems = [
+        { title: "wallet list", link: '/wallets-list', handleClick: () => console.log('Menu item clicked'), position: 'top' },
+        { title: "top list", link: '/wallets-list', handleClick: () => console.log('Menu item clicked'), position: 'top' },
+        { title: "settings", link: '/wallets-list', handleClick: () => console.log('Menu item clicked'), position: 'bottom' },
+        { title: "account", link: '/wallets-list', handleClick: () => console.log('Menu item clicked'), position: 'bottom' },
+        { title: "log out", link: '/wallets-list', handleClick: () => console.log('Menu item clicked'), position: 'bottom' },
     ];
-
-    const menuItemsDown = [
-        { title: "settings" },
-        { title: "account" },
-        { title: "log out" },
-    ]
-
 
     const classes = useUserMenuStyles();
 
@@ -27,11 +23,15 @@ const UserMenu = (): React.ReactElement => {
                 </span>
             </div>
             <hr className={classes.hr}></hr>
-            {menuItemsTop.map((item) =>
-                <div className={classes.menuItemContainer}>
-                    <span className={classes.menuItem}>
-                        {item.title}
-                    </span>
+            {menuItems.map((item, index: number) =>
+                item.position == 'top'
+                &&
+                <div className={classes.menuItemContainer} key={index}>
+                    <Link to={item.link}>
+                        <span className={classes.menuItem} onClick={item.handleClick}>
+                            {item.title}
+                        </span>
+                    </Link>
                 </div>
             )}
             <div className={classes.menuItemContainer}>
@@ -40,9 +40,11 @@ const UserMenu = (): React.ReactElement => {
                 </span>
             </div>
             <hr className={classes.hr}></hr>
-            {menuItemsDown.map((item) =>
-                <div className={classes.menuItemContainer}>
-                    <span className={classes.menuItem}>
+            {menuItems.map((item, index: number) =>
+                item.position == 'bottom'
+                &&
+                <div className={classes.menuItemContainer} key={index}>
+                    <span className={classes.menuItem} onClick={item.handleClick}>
                         {item.title}
                     </span>
                 </div>
