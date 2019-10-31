@@ -42,7 +42,7 @@ export function* doAuthUserLogout() {
     if (isAuth) yield localStorage.removeItem('isAuth');
 }
 
-export function* doAuthUserAuto() {
+export function* doAuthCheck() {
     yield console.log('auto'); //TODO: remove
     const token = yield localStorage.getItem('token');
     const isAuth = yield localStorage.getItem('isAuth');

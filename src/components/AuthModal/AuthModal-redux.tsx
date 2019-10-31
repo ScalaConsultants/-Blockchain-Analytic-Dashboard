@@ -26,14 +26,12 @@ const AuthModalRedux = () => {
     // switch to stable db
     dispatch(authActions.authUser({ email, password, shouldSignUp }));
   };
-  const onAuthUserAutoLogin = () => dispatch(authActions.authUserAutoLogin());
   const onAuthUserForgotPassword = (email: string) => dispatch(authActions.authUserForgotPassword({email}));
 
   return (
       <AuthModal
           {...props}
           onAuthUser={onAuthUser}
-          onAuthUserAutoLogin={onAuthUserAutoLogin}
           onAuthUserForgotPassword={onAuthUserForgotPassword}
       />
   )

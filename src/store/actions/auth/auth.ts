@@ -2,7 +2,6 @@ import { AuthUser, AuthUserData } from '../types';
 
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_USER_START = 'AUTH_USER_START';
-export const AUTH_USER_AUTO_LOGIN = 'AUTH_USER_AUTO_LOGIN';
 export const AUTH_USER_SIGNUP_SUCCESS = 'AUTH_USER_SIGNUP_SUCCESS';
 export const AUTH_USER_SIGNUP_FAIL = 'AUTH_USER_SIGNUP_FAIL';
 export const AUTH_USER_LOGIN_SUCCESS = 'AUTH_USER_LOGIN_SUCCESS';
@@ -11,6 +10,7 @@ export const AUTH_USER_FAIL = 'AUTH_USER_FAIL';
 export const AUTH_USER_LOGOUT = 'AUTH_USER_LOGOUT';
 export const AUTH_USER_FORGOT_PASSWORD = 'AUTH_USER_FORGOT_PASSWORD';
 export const AUTH_USER_FORGOT_PASSWORD_SUCCESS = 'AUTH_USER_FORGOT_PASSWORD_SUCCESS';
+export const AUTH_CHECK = 'AUTH_CHECK';
 
 export const authUser = (data: AuthUserData): AuthUser => ({
   type: AUTH_USER,
@@ -21,8 +21,8 @@ export const authUserStart = () => ({
   type: AUTH_USER_START
 });
 
-export const authUserAutoLogin = () => ({
-  type: AUTH_USER_AUTO_LOGIN
+export const authCheck = () => ({
+  type: AUTH_CHECK
 });
 
 export const authUserLoginSuccess = (data: AuthUserData) => ({

@@ -5,7 +5,6 @@ import AuthModalView from './AuthModal-view';
 import { AuthModalProps, User } from './types';
 
 const AuthModal = ({
-  onAuthUserAutoLogin,
   onAuthUser,
   onAuthUserForgotPassword,
   auth
@@ -22,11 +21,6 @@ const AuthModal = ({
   useEffect(() => {
     setOpen(prevState => prevState && !auth.isAuth);
   }, [auth.isAuth]);
-
-  useEffect(() => {
-    // Auto login registered user
-    onAuthUserAutoLogin();
-  }, []);
 
   const handleOpen = () => setOpen(prevState => !prevState);
 
