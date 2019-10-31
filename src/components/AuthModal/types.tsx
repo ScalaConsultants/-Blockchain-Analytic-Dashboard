@@ -11,6 +11,8 @@ export interface AuthModalViewProps {
   forgetPassword?: boolean;
   rememberMe?: boolean;
   user?: Record<string, string>;
+  menuVisibility:boolean;
+  handleMenuState: () => void;
 }
 
 export interface AuthModalFormProps {

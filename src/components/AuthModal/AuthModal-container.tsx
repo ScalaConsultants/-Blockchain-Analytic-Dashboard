@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import AuthModalView from './AuthModal-view';
 
@@ -8,10 +8,25 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [menuVisibility, setMenuVisibility] = React.useState(false);
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
+
+  const node= useRef<HTMLDivElement>(null);
+
+  const handleMenuState = () => {
+    setMenuVisibility(!menuVisibility)
+  }
+  
+  const handleOutsideClick = (e:any) => {
+    if(node.current != null)
+      if (node.current.contains(e.target) )
+        return;
+    setMenuVisibility(false)
+
+  };
 
   const handleOpen = () => setOpen(prevState => !prevState);
 
@@ -44,9 +59,15 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
   };
 
   const handleLogin = () => initLogin(user.email, user.password);
-
   const handleUpdate = () => {};
   const handleRegister = () => {};
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <AuthModalView
@@ -61,6 +82,8 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
       handleSwitchForms={handleSwitchForms}
       rememberMe={rememberMe}
       forgetPassword={forgetPassword}
+      handleMenuState={handleMenuState}
+      menuVisibility={menuVisibility}
       user={user}
     />
   );

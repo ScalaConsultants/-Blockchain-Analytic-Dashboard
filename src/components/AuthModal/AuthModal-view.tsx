@@ -16,13 +16,8 @@ import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const [menuVisibility, setMenuVisibility] = React.useState(false);
-
-  const handleMenuState = () => {
-    setMenuVisibility(!menuVisibility)
-  }
-
-  const { open = false, handleOpen, handleClose, forgetPassword } = props;
+  
+  const { open = false, handleClose, forgetPassword, menuVisibility, handleMenuState, handleOpen } = props;
 
   const classesModal = useModalStyles();
   const classesPaper = clsx([classesModal.paper, classesModal.grey]);
@@ -37,17 +32,16 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   return (
     <>
-      <div>
-        <div className={classesLogin} onClick={handleMenuState}>
-          <Typography variant="body1" color="secondary">
+      <div >
+        <div className={classesLogin} >
+          <Typography variant="body1" color="secondary" onClick={handleOpen}>
             Log in
         </Typography>
           {menuVisibility ?
-            <ArrowDropUpIcon color="secondary" />
+            <ArrowDropUpIcon color="secondary" onClick={handleMenuState}/>
             :
-            <ArrowDropDownIcon color="secondary" />
+            <ArrowDropDownIcon color="secondary" onClick={handleMenuState}/>
           }
-
         </div>
         {menuVisibility && <UserMenu />}
       </div>
