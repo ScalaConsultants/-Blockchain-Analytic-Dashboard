@@ -6,7 +6,7 @@ import {
   doAuthUser,
   doAuthUserAuto,
   doAuthUserLogout,
-  doAuthUserForgetPassword
+  doAuthUserForgotPassword
 } from './user';
 
 export default function* watchAuth() {
@@ -14,5 +14,5 @@ export default function* watchAuth() {
   yield takeEvery(authActions.AUTH_USER_SIGNUP_SUCCESS, doAuthUser);
   yield takeEvery(authActions.AUTH_USER_AUTO_LOGIN, doAuthUserAuto);
   yield takeEvery(authActions.AUTH_USER_LOGOUT, doAuthUserLogout);
-  yield takeEvery(authActions.AUTH_USER_FORGET_PASSWORD, doAuthUserForgetPassword)
+  yield takeEvery(authActions.AUTH_USER_FORGOT_PASSWORD, doAuthUserForgotPassword)
 }

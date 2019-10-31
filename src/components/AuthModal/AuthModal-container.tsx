@@ -7,11 +7,11 @@ import { AuthModalProps, User } from './types';
 const AuthModal = ({
   onAuthUserAutoLogin,
   onAuthUser,
-  onAuthUserForgetPassword,
+  onAuthUserForgotPassword,
   auth
 }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
-  const [forgetPassword, setForgetPassword] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [shouldSignUp, setShouldSignUp] = useState(false);
   const [user, setUser] = useState({
@@ -32,7 +32,7 @@ const AuthModal = ({
 
   const handleClose = () => {
     setOpen(prevState => !prevState);
-    setForgetPassword(false);
+    setForgotPassword(false);
     setRememberMe(true);
     setUser({
       email: '',
@@ -40,7 +40,7 @@ const AuthModal = ({
     });
   };
 
-  const handleSwitchForms = () => setForgetPassword(prevState => !prevState);
+  const handleSwitchForms = () => setForgotPassword(prevState => !prevState);
 
   const handleRememberMe = () => setRememberMe(prevState => !prevState);
 
@@ -67,7 +67,7 @@ const AuthModal = ({
 
   const handleLogin = () => handleBtnClick(false);
   const handleSignUp = () => handleBtnClick(true);
-  const handleForgetPassword = () => onAuthUserForgetPassword(user.email);
+  const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
 
   return (
     <AuthModalView
@@ -80,9 +80,9 @@ const AuthModal = ({
       handleSignUp={handleSignUp}
       handleRememberMe={handleRememberMe}
       handleSwitchForms={handleSwitchForms}
-      handleForgetPassword={handleForgetPassword}
+      handleForgotPassword={handleForgotPassword}
       rememberMe={rememberMe}
-      forgetPassword={forgetPassword}
+      forgotPassword={forgotPassword}
       user={user}
       shouldSignUp={shouldSignUp}
     />

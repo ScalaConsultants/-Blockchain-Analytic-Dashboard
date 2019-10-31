@@ -8,6 +8,8 @@ const initState = {
   email: null,
   username: null,
   isAuth: false,
+  isUser: false,
+  isAdmin: false,
   loading: false,
   error: null,
   message: null
@@ -59,7 +61,7 @@ const authUserLogout = () => ({
   ...initState
 });
 
-const authUserForgetPasswordSuccess = (state: AuthState, action: AuthUserResponse) => {
+const authUserForgotPasswordSuccess = (state: AuthState, action: AuthUserResponse) => {
   const { message } = action;
   return {
     ...state,
@@ -75,8 +77,8 @@ export default (state: AuthState = initState, action: AuthUserResponse) => {
     case authActions.AUTH_USER_SIGNUP_SUCCESS: return authUserSignUpSuccess(state);
     case authActions.AUTH_USER_SIGNUP_FAIL: return authUserSignUpFail(state, action);
     case authActions.AUTH_USER_LOGOUT: return authUserLogout();
-    case authActions.AUTH_USER_FORGET_PASSWORD: return authUserStart(state);
-    case authActions.AUTH_USER_FORGET_PASSWORD_SUCCESS: return authUserForgetPasswordSuccess(state, action);
+    case authActions.AUTH_USER_FORGOT_PASSWORD: return authUserStart(state);
+    case authActions.AUTH_USER_FORGOT_PASSWORD_SUCCESS: return authUserForgotPasswordSuccess(state, action);
     default: return state;
   }
 };

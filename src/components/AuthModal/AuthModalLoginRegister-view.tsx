@@ -29,7 +29,7 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
     classesModal.flex,
     classesModal.font
   ]);
-  const classesForgetPassword = clsx([classesModal.cursor, classesModal.font, classesModal.marginLeftAuto]);
+  const classesForgotPassword = clsx([classesModal.cursor, classesModal.font, classesModal.marginLeftAuto]);
   const classesCircle = clsx(classesModal.circle, {
     [classesModal.circleActive]: rememberMe
   });
@@ -70,8 +70,8 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
           <div className={classesCircle} />
           Remember me
         </Grid>
-        <Grid item className={classesForgetPassword} onClick={handleSwitchForms}>
-          Forget password?
+        <Grid item className={classesForgotPassword} onClick={handleSwitchForms}>
+          Forgot password?
         </Grid>
       </Grid>}
       <div className={classesButtons}>

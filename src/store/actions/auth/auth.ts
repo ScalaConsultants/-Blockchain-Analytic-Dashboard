@@ -9,8 +9,8 @@ export const AUTH_USER_LOGIN_SUCCESS = 'AUTH_USER_LOGIN_SUCCESS';
 export const AUTH_USER_LOGIN_FAIL = 'AUTH_USER_LOGIN_FAIL';
 export const AUTH_USER_FAIL = 'AUTH_USER_FAIL';
 export const AUTH_USER_LOGOUT = 'AUTH_USER_LOGOUT';
-export const AUTH_USER_FORGET_PASSWORD = 'AUTH_USER_FORGET_PASSWORD';
-export const AUTH_USER_FORGET_PASSWORD_SUCCESS = 'AUTH_USER_FORGET_PASSWORD_SUCCESS';
+export const AUTH_USER_FORGOT_PASSWORD = 'AUTH_USER_FORGOT_PASSWORD';
+export const AUTH_USER_FORGOT_PASSWORD_SUCCESS = 'AUTH_USER_FORGOT_PASSWORD_SUCCESS';
 
 export const authUser = (data: AuthUserData): AuthUser => ({
   type: AUTH_USER,
@@ -51,13 +51,13 @@ export const authUserLogout = () => ({
   type: AUTH_USER_LOGOUT
 });
 
-export const authUserForgetPassword = (data: AuthUserData) => ({
-  type: AUTH_USER_FORGET_PASSWORD,
+export const authUserForgotPassword = (data: AuthUserData) => ({
+  type: AUTH_USER_FORGOT_PASSWORD,
   data
 });
 
-export const authUserForgetPasswordSuccess = (data: AuthUserData) => ({
-  type: AUTH_USER_FORGET_PASSWORD_SUCCESS,
+export const authUserForgotPasswordSuccess = (data: AuthUserData) => ({
+  type: AUTH_USER_FORGOT_PASSWORD_SUCCESS,
   data
 });
 

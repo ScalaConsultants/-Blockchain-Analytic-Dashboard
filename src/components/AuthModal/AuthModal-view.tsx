@@ -10,13 +10,13 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Loader from '../loader';
 
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
-import AuthModalForgetPassword from './AuthModalForgetPassword-view';
+import AuthModalForgotPassword from './AuthModalForgotPassword-view';
 
 import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const { open = false, handleOpen, handleClose, forgetPassword, auth, shouldSignUp } = props;
+  const { open = false, handleOpen, handleClose, forgotPassword, auth, shouldSignUp } = props;
 
   const loading = auth && auth.loading || false;
   const btn = auth && auth.isAuth ? auth.username : 'Log in';
@@ -30,13 +30,13 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   const { PUBLIC_URL } = process.env;
 
-  const text = forgetPassword
+  const text = forgotPassword
       ? 'Recovery your password'
       : !shouldSignUp
       ? 'Login into your account'
       : 'Create new account';
 
-  const form = forgetPassword ? <AuthModalForgetPassword {...props} /> : <AuthModalLoginRegister {...props} />;
+  const form = forgotPassword ? <AuthModalForgotPassword {...props} /> : <AuthModalLoginRegister {...props} />;
 
   return (
     <>

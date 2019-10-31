@@ -18,8 +18,8 @@ export interface AuthModalViewProps extends AuthState {
   handleSignUp?: () => void;
   handleSwitchForms?: () => void;
   handleRememberMe?: () => void;
-  handleForgetPassword?: () => void;
-  forgetPassword?: boolean;
+  handleForgotPassword?: () => void;
+  forgotPassword?: boolean;
   rememberMe?: boolean;
   user?: Record<string, string>;
   shouldSignUp?: boolean;
@@ -32,7 +32,7 @@ export interface AuthModalFormProps {
 export interface AuthModalProps extends AuthState {
   onAuthUser: (email: string, password: string, shouldSignUp: boolean) => void;
   onAuthUserAutoLogin: () => void;
-  onAuthUserForgetPassword: (email: string) => void;
+  onAuthUserForgotPassword: (email: string) => void;
 }
 
 export interface User {

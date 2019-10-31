@@ -38,8 +38,8 @@ export async function authToken(token: string) {
     return await response.json();
 }
 
-export async function authForgetPassword(data: AuthUserData) {
-    const url = 'api/v1/auth/forgetpassword';
+export async function authForgotPassword(data: AuthUserData) {
+    const url = 'api/v1/auth/forgotpassword';
 
     const options = {
         method: 'POST',

@@ -10,6 +10,8 @@ export interface AuthState {
   email: null | string,
   username: null | string,
   isAuth: boolean,
+  isUser: boolean
+  isAdmin: boolean,
   loading: boolean,
   error: null | {
     code?: string,
