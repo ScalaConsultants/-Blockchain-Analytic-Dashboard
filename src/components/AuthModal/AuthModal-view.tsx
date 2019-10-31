@@ -11,7 +11,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Loader from '../loader';
 
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
-import AuthModalForgetPassword from './AuthModalForgetPassword-view';
+import AuthModalForgotPassword from './AuthModalForgotPassword-view';
 import UserMenu from '../UserMenu';
 
 import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
@@ -21,8 +21,8 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   const {
     open = false,
-    handleOpen,
     handleClose,
+    menuVisibility,
     forgotPassword,
     auth,
     shouldSignUp, 
