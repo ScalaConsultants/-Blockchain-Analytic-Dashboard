@@ -6,6 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 import AuthModalLoginRegister from './AuthModalLoginRegister-view';
 import AuthModalForgetPassword from './AuthModalForgetPassword-view';
@@ -15,6 +16,12 @@ import { useModalStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
+  const [menuVisibility, setMenuVisibility] = React.useState(false);
+
+  const handleMenuState = () => {
+    setMenuVisibility(!menuVisibility)
+  }
+
   const { open = false, handleOpen, handleClose, forgetPassword } = props;
 
   const classesModal = useModalStyles();
@@ -30,15 +37,20 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   return (
     <>
-    <div>
-      <div className={classesLogin} onClick={handleOpen}>
-        <Typography variant="body1" color="secondary">
-          Log in
+      <div>
+        <div className={classesLogin} onClick={handleMenuState}>
+          <Typography variant="body1" color="secondary">
+            Log in
         </Typography>
-        <ArrowDropDownIcon color="secondary" />
+          {menuVisibility ?
+            <ArrowDropUpIcon color="secondary" />
+            :
+            <ArrowDropDownIcon color="secondary" />
+          }
+
+        </div>
+        {menuVisibility && <UserMenu />}
       </div>
-      <UserMenu/>
-    </div>
 
       <Modal
         aria-labelledby="edit-wallet-modal-title"
