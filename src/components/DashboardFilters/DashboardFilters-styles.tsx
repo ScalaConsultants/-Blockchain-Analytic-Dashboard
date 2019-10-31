@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { SECONDARY_BG_COLOR } from '../../theme/constants';
 import { ExtendedTheme } from '../../types';
 
  export const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
@@ -31,4 +32,32 @@ import { ExtendedTheme } from '../../types';
 
 }));
 
-export default useFiltersStyles;
+export const TimePeriodStyles = {
+  root: {
+    color: SECONDARY_BG_COLOR,
+    height: 5,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    marginTop: -8,
+    marginLeft: -12,
+    '&:focus,&:hover,&$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: 'calc(-50% + 4px)',
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  }
+}
