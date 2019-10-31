@@ -34,7 +34,7 @@ const useUserMenuStyles = makeStyles((theme: ExtendedTheme) => ({
         color: '#A3A7B0'
     }, 
     hr: {
-        border: '1px solid #253152',
+        border: '1px solid ' + theme.constants.SECONDARY_BG_COLOR,
     },
     link: {
         textDecoration: 'none'

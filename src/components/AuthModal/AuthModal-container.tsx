@@ -47,12 +47,11 @@ const AuthModal = ({
     setMenuVisibility(!menuVisibility)
   }
   
-  const handleOutsideClick = (e:any) => {
+  const handleOutsideClick = (e: MouseEvent) => {
     if(node.current != null)
-      if (node.current.contains(e.target) )
+      if (node.current.contains(e.target as HTMLInputElement) )
         return;
     setMenuVisibility(false)
-
   };
 
   const handleOpen = () => setOpen(prevState => !prevState);
