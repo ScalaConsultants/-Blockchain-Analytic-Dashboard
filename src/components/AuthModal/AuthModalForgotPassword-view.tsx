@@ -6,8 +6,22 @@ import { useInputStyles, useLabelStyles, useModalStyles } from './AuthModal-styl
 
 import { AuthModalViewProps } from './types';
 
-const AuthModalForgetPassword = (props: AuthModalViewProps) => {
-  const { handleSwitchForms, handleChange, user = { email: '' } } = props;
+const AuthModalForgotPassword = (props: AuthModalViewProps) => {
+  const {
+    handleSwitchForms,
+    handleChange,
+    handleForgotPassword,
+    handleEmailFocus,
+    handleEmailBlur,
+    user = {
+    email: ''
+    },
+    formValidation = {
+      email: {
+        isValid: true,
+      }
+    }
+  } = props;
 
   const classesModal = useModalStyles();
   const classesInput = useInputStyles();
@@ -20,19 +34,22 @@ const AuthModalForgetPassword = (props: AuthModalViewProps) => {
         InputProps={{ classes: classesInput, disableUnderline: true }}
         InputLabelProps={{ classes: classesLabel }}
         className={classesModal.textField}
+        error={!formValidation.email.isValid}
         variant="filled"
         label="Email"
         value={user.email}
         id="auth-email"
         type="email"
         onChange={handleChange}
+        onFocus={handleEmailFocus}
+        onBlur={handleEmailBlur}
       />
       <div className={classesButtons}>
-        <Button>Send</Button>
-        <Button onClick={handleSwitchForms}>Back to login</Button>
+        <Button onClick={handleForgotPassword}>Send</Button>
+        <Button onClick={handleSwitchForms}>Login</Button>
       </div>
     </form>
   );
 };
 
-export default AuthModalForgetPassword;
+export default AuthModalForgotPassword;

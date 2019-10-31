@@ -7,31 +7,75 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import AuthModalLoginRegister from './AuthModalLoginRegister-view';
-import AuthModalForgetPassword from './AuthModalForgetPassword-view';
+import Loader from '../loader';
 
-import { useModalStyles } from './AuthModal-styles';
+import AuthModalLoginRegister from './AuthModalLoginRegister-view';
+import AuthModalForgotPassword from './AuthModalForgotPassword-view';
+
+import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
-  const { open = false, handleOpen, handleClose, forgetPassword } = props;
+  const {
+    open = false,
+    handleOpen,
+    handleClose,
+    forgotPassword,
+    auth,
+    shouldSignUp,
+    formValidation = {
+      email: {
+        isValid: true,
+        msg: '',
+      },
+      password: {
+        isValid: true,
+        msg: '',
+      },
+      touched: {
+        email: false,
+        password: false
+      }
+    }
+  } = props;
+
+  const loading = auth && auth.loading || false;
+  const btn = auth && auth.isAuth ? auth.username : 'Log in';
+  const btnHandler = (auth && auth.isAuth) ? undefined : handleOpen;
 
   const classesModal = useModalStyles();
   const classesPaper = clsx([classesModal.paper, classesModal.grey]);
   const classesLogin = clsx([classesModal.cursor, classesModal.flex]);
   const classesLogo = clsx([classesModal.marginTop40, classesModal.flex]);
   const classesTitle = clsx([classesModal.title, classesModal.flex]);
+  const classesInfo = clsx([classesModal.flex, classesModal.info]);
+
   const { PUBLIC_URL } = process.env;
 
-  const text = forgetPassword ? 'Recovery your password' : 'Login into your account';
+  const text = forgotPassword
+      ? 'Recovery your password'
+      : !shouldSignUp
+      ? 'Login into your account'
+      : 'Create new account';
 
-  const form = forgetPassword ? <AuthModalForgetPassword {...props} /> : <AuthModalLoginRegister {...props} />;
+  const form = forgotPassword ? <AuthModalForgotPassword {...props} /> : <AuthModalLoginRegister {...props} />;
+
+  const info = (!formValidation.email.isValid || !formValidation.password.isValid)
+      ? <div>
+          <div>{formValidation.email.msg}</div>
+          <div>{formValidation.password.msg}</div>
+        </div>
+      : <Loader
+      isLoading={loading}
+      loaderSize={20}
+      containerClass={loaderContainerStyles}
+  />;
 
   return (
     <>
-      <div className={classesLogin} onClick={handleOpen}>
+      <div className={classesLogin} onClick={btnHandler}>
         <Typography variant="body1" color="secondary">
-          Log in
+          {btn}
         </Typography>
         <ArrowDropDownIcon color="secondary" />
       </div>
@@ -58,6 +102,9 @@ const AuthModalView = (props: AuthModalViewProps) => {
                   <span>Blockchain analytic </span>
                   dashboard
                 </Typography>
+              </Grid>
+              <Grid item className={classesInfo}>
+                {info}
               </Grid>
               <Grid item>
                 <Typography className={classesModal.marginTop28} color="textPrimary" align="center">

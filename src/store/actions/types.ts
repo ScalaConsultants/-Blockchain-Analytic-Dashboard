@@ -26,3 +26,15 @@ export interface SetTransactionsSummedAction extends ActionType {
 export interface FetchTransactionsSummedAction extends ActionType {
   transactionsSummedData: TransactionsSummedData;
 }
+
+export interface AuthUserData {
+  email: string;
+  password?: string;
+  shouldSignUp?: boolean;
+  username?: string;
+}
+
+export interface AuthUser extends ActionType {
+  data: AuthUserData;
+}
+

@@ -11,10 +11,24 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
   const {
     handleChange,
     handleLogin,
+    handleSignUp,
     handleSwitchForms,
     handleRememberMe,
-    rememberMe,
-    user = { email: '', password: '' }
+    handleEmailFocus,
+    handleEmailBlur,
+    handlePasswordFocus,
+    handlePasswordBlur,
+    rememberMe = true,
+    user = { email: '', password: '' },
+    shouldSignUp = false,
+    formValidation = {
+      email: {
+        isValid: true
+      },
+      password: {
+        isValid: true
+      }
+    }
   } = props;
 
   const classesModal = useModalStyles();
@@ -27,10 +41,17 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
     classesModal.flex,
     classesModal.font
   ]);
-  const classesForgetPassword = clsx([classesModal.cursor, classesModal.font, classesModal.marginLeftAuto]);
+  const classesForgotPassword = clsx([classesModal.cursor, classesModal.font, classesModal.marginLeftAuto]);
   const classesCircle = clsx(classesModal.circle, {
     [classesModal.circleActive]: rememberMe
   });
+
+  const buttons = [
+    <Button onClick={handleLogin} key="login">Login</Button>,
+    <Button onClick={handleSignUp} key="signup">Sign up</Button>
+  ];
+
+  if (shouldSignUp) buttons.reverse();
 
   return (
     <form noValidate className={classesModal.form}>
@@ -38,36 +59,41 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
         InputProps={{ classes: classesInput, disableUnderline: true }}
         InputLabelProps={{ classes: classesLabel }}
         className={classesModal.textField}
+        error={!formValidation.email.isValid}
         variant="filled"
         label="Email"
         id="auth-email"
         type="email"
         value={user.email}
         onChange={handleChange}
+        onFocus={handleEmailFocus}
+        onBlur={handleEmailBlur}
       />
       <TextField
         InputProps={{ classes: classesInput, disableUnderline: true }}
         InputLabelProps={{ classes: classesLabel }}
         className={classesModal.textField}
+        error={!formValidation.password.isValid}
         variant="filled"
         label="Password"
         id="auth-password"
         type="password"
         value={user.password}
         onChange={handleChange}
+        onFocus={handlePasswordFocus}
+        onBlur={handlePasswordBlur}
       />
-      <Grid container className={classesModal.options}>
+      {!shouldSignUp && <Grid container className={classesModal.options}>
         <Grid item className={classesRememberMe} onClick={handleRememberMe}>
           <div className={classesCircle} />
           Remember me
         </Grid>
-        <Grid item className={classesForgetPassword} onClick={handleSwitchForms}>
-          Forget password?
+        <Grid item className={classesForgotPassword} onClick={handleSwitchForms}>
+          Forgot password?
         </Grid>
-      </Grid>
+      </Grid>}
       <div className={classesButtons}>
-        <Button onClick={handleLogin}>Login</Button>
-        <Button>Sign up</Button>
+        {buttons}
       </div>
     </form>
   );

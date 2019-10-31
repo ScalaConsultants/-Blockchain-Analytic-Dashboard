@@ -8,9 +8,10 @@ const Loader = ({
   fullPage,
   loaderClass,
   loaderContainerClass,
-  loaderSize
+  loaderSize,
+  containerClass
 }: LoaderProps) => {
-  const { containerAdditional, containerBase, root } = useLoaderDefaultStyles(fullPage);
+  const { containerAdditional, containerBase, root } = useLoaderDefaultStyles(fullPage, containerClass);
 
   return (
     <>
