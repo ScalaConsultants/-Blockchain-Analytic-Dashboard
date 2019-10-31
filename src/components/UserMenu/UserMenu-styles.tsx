@@ -35,6 +35,9 @@ const useUserMenuStyles = makeStyles((theme: ExtendedTheme) => ({
     }, 
     hr: {
         border: '1px solid #253152',
+    },
+    link: {
+        textDecoration: 'none'
     }
 
 }));

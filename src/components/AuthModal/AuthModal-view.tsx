@@ -32,7 +32,7 @@ const AuthModalView = (props: AuthModalViewProps) => {
 
   return (
     <>
-      <div >
+      <div>
         <div className={classesLogin} >
           <Typography variant="body1" color="secondary" onClick={handleOpen}>
             Log in
@@ -43,7 +43,7 @@ const AuthModalView = (props: AuthModalViewProps) => {
             <ArrowDropDownIcon color="secondary" onClick={handleMenuState}/>
           }
         </div>
-        {menuVisibility && <UserMenu />}
+        {menuVisibility && <UserMenu handleMenuState={handleMenuState} isUserAuth={true}/>}
       </div>
 
       <Modal

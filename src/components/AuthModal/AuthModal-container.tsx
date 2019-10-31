@@ -14,7 +14,7 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
     password: ''
   });
 
-  const node= useRef<HTMLDivElement>(null);
+  const node = useRef<HTMLDivElement>(null);
 
   const handleMenuState = () => {
     setMenuVisibility(!menuVisibility)
@@ -70,22 +70,24 @@ const AuthModal = ({ initLogin }: AuthModalProps) => {
   }, []);
 
   return (
-    <AuthModalView
-      open={open}
-      handleOpen={handleOpen}
-      handleChange={handleChange}
-      handleUpdate={handleUpdate}
-      handleClose={handleClose}
-      handleLogin={handleLogin}
-      handleRegister={handleRegister}
-      handleRememberMe={handleRememberMe}
-      handleSwitchForms={handleSwitchForms}
-      rememberMe={rememberMe}
-      forgetPassword={forgetPassword}
-      handleMenuState={handleMenuState}
-      menuVisibility={menuVisibility}
-      user={user}
-    />
+    <div ref={node}>
+      <AuthModalView
+        open={open}
+        handleOpen={handleOpen}
+        handleChange={handleChange}
+        handleUpdate={handleUpdate}
+        handleClose={handleClose}
+        handleLogin={handleLogin}
+        handleRegister={handleRegister}
+        handleRememberMe={handleRememberMe}
+        handleSwitchForms={handleSwitchForms}
+        rememberMe={rememberMe}
+        forgetPassword={forgetPassword}
+        handleMenuState={handleMenuState}
+        menuVisibility={menuVisibility}
+        user={user}
+      />
+    </div>
   );
 };
 
