@@ -20,7 +20,7 @@ const AuthModal = ({
   });
 
   useEffect(() => {
-    setOpen(!auth.isAuth);
+    setOpen(prevState => prevState && !auth.isAuth);
   }, [auth.isAuth]);
 
   useEffect(() => {
