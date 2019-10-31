@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+
 
 import AuthModalView from './AuthModal-view';
 
@@ -15,6 +16,7 @@ const AuthModal = ({
   const [forgotPassword, setForgotPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [shouldSignUp, setShouldSignUp] = useState(false);
+
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -128,27 +130,29 @@ const AuthModal = ({
   const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
 
   return (
-    <AuthModalView
-      auth={auth}
-      open={open}
-      handleOpen={handleOpen}
-      handleChange={handleChange}
-      handleClose={handleClose}
-      handleLogin={handleLogin}
-      handleSignUp={handleSignUp}
-      handleRememberMe={handleRememberMe}
-      handleSwitchForms={handleSwitchForms}
-      handleForgotPassword={handleForgotPassword}
-      handleEmailFocus={handleEmailFocus}
-      handleEmailBlur={handleEmailBlur}
-      handlePasswordFocus={handlePasswordFocus}
-      handlePasswordBlur={handlePasswordBlur}
-      rememberMe={rememberMe}
-      forgotPassword={forgotPassword}
-      user={user}
-      shouldSignUp={shouldSignUp}
-      formValidation={formValidation}
-    />
+    <div>
+      <AuthModalView
+        auth={auth}
+        open={open}
+        handleOpen={handleOpen}
+        handleChange={handleChange}
+        handleClose={handleClose}
+        handleLogin={handleLogin}
+        handleSignUp={handleSignUp}
+        handleRememberMe={handleRememberMe}
+        handleSwitchForms={handleSwitchForms}
+        handleForgotPassword={handleForgotPassword}
+        handleEmailFocus={handleEmailFocus}
+        handleEmailBlur={handleEmailBlur}
+        handlePasswordFocus={handlePasswordFocus}
+        handlePasswordBlur={handlePasswordBlur}
+        rememberMe={rememberMe}
+        forgotPassword={forgotPassword}
+        user={user}
+        shouldSignUp={shouldSignUp}
+        formValidation={formValidation}
+      />
+</div>
   );
 };
 
