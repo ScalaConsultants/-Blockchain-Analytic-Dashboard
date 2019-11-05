@@ -1,34 +1,34 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router';
-import { Container } from '@material-ui/core';
+import { Redirect, Route, Switch } from 'react-router';
+import {Container} from '@material-ui/core';
 import DashboardView from '../components/DashboardView';
 import DetailsView from '../components/DetailsView';
 import WalletsList from '../components/WalletsList';
 import TopBar from '../components/TopBar';
 import Auth from '../components/Auth';
+import AuthResetPassword from "../components/AuthResetPassword";
 
 export default (): React.ReactElement => {
-  const routes = (
-    <Auth>
+  return (
+      <Auth>
         <Container>
-          <TopBar />
+          <TopBar/>
           <Switch>
             <Route
-              exact
-              path="/wallet/:walletSource/:walletHash/:groupBy/:blockchains/:limit/:from/:to"
-              component={DetailsView}
+                exact
+                path="/wallet/:walletSource/:walletHash/:groupBy/:blockchains/:limit/:from/:to"
+                component={DetailsView}
             />
-            <Route exact path="/:groupBy/:blockchains/:limit/:from/:to" component={DashboardView} />
-            <Route exact path="/wallets-list" component={WalletsList} />
-
-            <Route exact path="/">
-              <Redirect to="/buyer/ETH,XTZ/10/1571054400000/1571140800000" />
+            <Route exact path="/:groupBy/:blockchains/:limit/:from/:to" component={DashboardView}/>
+            <Route exact path="/password/reset/:id/:token" component={AuthResetPassword}>
             </Route>
-            <Redirect to="/" />
+            <Route exact path="/wallets-list" component={WalletsList}/>
+            <Route exact path="/">
+              <Redirect to="/buyer/ETH,XTZ/10/1571054400000/1571140800000"/>
+            </Route>
+            <Redirect to="/"/>
           </Switch>
         </Container>
-    </Auth>
+      </Auth>
   );
-
-  return routes;
 };

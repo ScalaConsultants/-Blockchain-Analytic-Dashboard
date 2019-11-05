@@ -1,15 +1,14 @@
 import authActions from '../actions/auth';
 
-import { AuthState } from './types';
-import { AuthUserResponse } from './types';
+import { AuthState, AuthUserResponse } from './types';
 
 const initState = {
   token: null,
   email: null,
   username: null,
+  id: null,
   isAuth: false,
-  isUser: false,
-  isAdmin: false,
+  isResetPassword: false,
   loading: false,
   error: null,
   message: null
@@ -69,6 +68,21 @@ const authUserForgotPasswordSuccess = (state: AuthState, action: AuthUserRespons
   }
 };
 
+const authUserResetPasswordMount = (state: AuthState, action: AuthUserResponse) => {
+  const { id, token } = action.data;
+  return {
+    ...state,
+    id,
+    token
+  }
+};
+
+const authUserResetPasswordUnmount = (state: AuthState) => ({
+  ...state,
+  id: null,
+  token: null
+});
+
 export default (state: AuthState = initState, action: AuthUserResponse) => {
   switch (action.type) {
     case authActions.AUTH_USER_START: return authUserStart(state);
@@ -79,6 +93,8 @@ export default (state: AuthState = initState, action: AuthUserResponse) => {
     case authActions.AUTH_USER_LOGOUT: return authUserLogout();
     case authActions.AUTH_USER_FORGOT_PASSWORD: return authUserStart(state);
     case authActions.AUTH_USER_FORGOT_PASSWORD_SUCCESS: return authUserForgotPasswordSuccess(state, action);
+    case authActions.AUTH_USER_RESET_PASSWORD_MOUNT: return authUserResetPasswordMount(state, action);
+    case authActions.AUTH_USER_RESET_PASSWORD_UNMOUNT: return authUserResetPasswordUnmount(state);
     default: return state;
   }
 };

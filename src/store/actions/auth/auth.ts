@@ -10,6 +10,8 @@ export const AUTH_USER_FAIL = 'AUTH_USER_FAIL';
 export const AUTH_USER_LOGOUT = 'AUTH_USER_LOGOUT';
 export const AUTH_USER_FORGOT_PASSWORD = 'AUTH_USER_FORGOT_PASSWORD';
 export const AUTH_USER_FORGOT_PASSWORD_SUCCESS = 'AUTH_USER_FORGOT_PASSWORD_SUCCESS';
+export const AUTH_USER_RESET_PASSWORD_MOUNT = 'AUTH_USER_RESET_PASSWORD_MOUNT';
+export const AUTH_USER_RESET_PASSWORD_UNMOUNT = 'AUTH_USER_RESET_PASSWORD_UNMOUNT';
 export const AUTH_CHECK = 'AUTH_CHECK';
 
 export const authUser = (data: AuthUserData): AuthUser => ({
@@ -59,6 +61,15 @@ export const authUserForgotPassword = (data: AuthUserData) => ({
 export const authUserForgotPasswordSuccess = (data: AuthUserData) => ({
   type: AUTH_USER_FORGOT_PASSWORD_SUCCESS,
   data
+});
+
+export const authUserResetPasswordMount = (data: any) => ({
+  type: AUTH_USER_RESET_PASSWORD_MOUNT,
+  data
+});
+
+export const authUserResetPasswordUnmount = () => ({
+  type: AUTH_USER_RESET_PASSWORD_UNMOUNT
 });
 
 export const authUserFail = (error: AuthUser) => ({
