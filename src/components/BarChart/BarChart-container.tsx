@@ -46,9 +46,10 @@ const BarChartContainer = (props: BarChartProps) => {
 
   let segments: React.ReactElement<'div'>[] = [];
 
-  const getOuterClasses = (index: number): string => {
+  const getOuterClasses = (index: number, type = 'market'): string => {
     const { activeSegmentZoom } = customization;
-    const num = Math.round(Math.random() * 3);
+    const types = ['market', 'private', 'dapp', 'fraud'];
+    const num = types.findIndex((value) => value === type);
     const active = activeSegment.isActive && index < 10 && index === activeSegment.index;
     const firstSegmentInactive = activeSegment.isActive && index !== activeSegment.index && index === 0;
 
