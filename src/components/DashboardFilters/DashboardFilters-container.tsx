@@ -3,33 +3,21 @@ import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
-import Slider from '@material-ui/core/Slider';
-import { withStyles } from '@material-ui/core/styles';
-import { MenuItem, FormControl, InputLabel } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 
-import { setDateToday, setDateYesterday } from './helpers';
-import { useFiltersStyles, TimePeriodStyles, useTimeFilterStyles } from './DashboardFilters-styles';
+import TimePeriodFilter from './TimePeriodFilter';
+import WatchListFilter from './WatchListFilter';
+import { useFiltersStyles } from './DashboardFilters-styles';
 import { FiltersProps } from './types'
-import SwitchButton from '../SwitchButton';
-import EditWalletModal from '../EditWalletModal';
-
-
 
 const Filters = (props: any) => {
-
-  const TimePeriodSlider = withStyles(TimePeriodStyles)(Slider);
 
   const { actions, match } = props;
 
   const urlParams = match.params;
 
   const { enqueueSnackbar } = useSnackbar();
-
-  const today = setDateToday();
-  const yesterday = setDateYesterday();
 
   const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) => !!filterObj[item]);
 
@@ -62,11 +50,11 @@ const Filters = (props: any) => {
     '10': checkActiveTopList('10'),
     '100': checkActiveTopList('100')
   });
-
+  
   const [filters, setFilters]: [FiltersProps, Function] = useState({});
-
+  
   let newFilters: FiltersProps = {};
-
+  
   const classes = useFiltersStyles();
 
   const blockchainFilterHandler = (buttonLabel: string) => {
@@ -152,9 +140,6 @@ const Filters = (props: any) => {
     handleRefresh(false);
   }, [activeBlockchainButtons, activeTopListButtons, activePeriodTimeButtons]);
 
-
-  const timeFilterClasses = useTimeFilterStyles();
-
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
       <Grid item xs={3}>
@@ -163,29 +148,7 @@ const Filters = (props: any) => {
       </Grid>
       <Grid item xs={3}>
         <Typography variant="h3">Watch List</Typography>
-        {/* <Grid container justify="flex-start" alignItems="flex-start" className="Container">
-          <Grid item xs={10}>
-              Show watched only 
-          </Grid>
-          <Grid item xs={1}>
-            <SwitchButton dashboaradSwitch={false} switchState={true} handleChange={() => console.log('switch')} />
-          </Grid>
-        </Grid>
-        <Grid container justify="flex-start" alignItems="flex-start" className="Container">
-          <Grid item xs={8}>
-            <FormControl>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
-              <Select>
-                <MenuItem value={1}>Blockchain List 1</MenuItem>
-                <MenuItem value={2}>Blockchain List 2</MenuItem>
-                <MenuItem value={3}>Blockchain List 3</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <EditWalletModal id={"1"} address={"1"} description={"1"} update={() => (console.log('e'))}/>          
-          </Grid>
-        </Grid> */}
+        <WatchListFilter />
       </Grid>
       <Grid item xs={3}>
         <Typography variant="h3">24 history</Typography>
@@ -193,30 +156,7 @@ const Filters = (props: any) => {
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
-          <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
-            <Grid container className={timeFilterClasses.header}>
-              <Grid item xs={2}>
-                {yesterday}
-              </Grid>
-              <Grid item xs={8} className={timeFilterClasses.timeField}>
-                Time
-            </Grid>
-              <Grid item xs={2} className={timeFilterClasses.right}>
-                {today}
-              </Grid>
-            </Grid>
-            <Grid container className={timeFilterClasses.body}>
-              <Grid item xs={1}>
-                5
-              </Grid>
-              <Grid item xs={10}>
-                <TimePeriodSlider defaultValue={20} />
-              </Grid>
-              <Grid item xs={1} className={timeFilterClasses.right}>
-                4
-              </Grid>
-            </Grid>
-          </Grid>
+          <TimePeriodFilter />
         </Grid>
       </Grid>
       <Grid item xs={2}>
