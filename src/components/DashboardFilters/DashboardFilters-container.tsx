@@ -5,11 +5,17 @@ import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
+import { MenuItem, FormControl, InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 
-import { useFiltersStyles, TimePeriodStyles } from './DashboardFilters-styles';
+import { setDateToday, setDateYesterday } from './helpers';
+import { useFiltersStyles, TimePeriodStyles, useTimeFilterStyles } from './DashboardFilters-styles';
 import { FiltersProps } from './types'
+import SwitchButton from '../SwitchButton';
+import EditWalletModal from '../EditWalletModal';
+
 
 
 const Filters = (props: any) => {
@@ -21,6 +27,9 @@ const Filters = (props: any) => {
   const urlParams = match.params;
 
   const { enqueueSnackbar } = useSnackbar();
+
+  const today = setDateToday();
+  const yesterday = setDateYesterday();
 
   const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) => !!filterObj[item]);
 
@@ -42,8 +51,6 @@ const Filters = (props: any) => {
     'EOS': checkActiveBlockchains('EOS'),
     'XLM': checkActiveBlockchains('XLM')
   });
-
-  const [activeDateButtons, setDateButtons]: [Record<string, boolean>, Function] = useState({ 'Last day': true });
 
   const [activePeriodTimeButtons, setPeriodTimeButtons]: [Record<string, boolean>, Function] = useState({
     'By hour': false,
@@ -86,10 +93,10 @@ const Filters = (props: any) => {
   };
 
   const timePeriodHandler = (buttonLabel: string) => {
-      const buttons = { ...activePeriodTimeButtons };
-      Object.keys(buttons).map((label: string) => (buttons[label] = false));
-      buttons[buttonLabel] = true;
-      setPeriodTimeButtons({ ...buttons });
+    const buttons = { ...activePeriodTimeButtons };
+    Object.keys(buttons).map((label: string) => (buttons[label] = false));
+    buttons[buttonLabel] = true;
+    setPeriodTimeButtons({ ...buttons });
   };
 
   const filterHandler = (buttonLabel: string, filterType: Record<string, boolean>) => {
@@ -145,6 +152,9 @@ const Filters = (props: any) => {
     handleRefresh(false);
   }, [activeBlockchainButtons, activeTopListButtons, activePeriodTimeButtons]);
 
+
+  const timeFilterClasses = useTimeFilterStyles();
+
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
       <Grid item xs={3}>
@@ -152,21 +162,62 @@ const Filters = (props: any) => {
         {renderButtons(activeBlockchainButtons)}
       </Grid>
       <Grid item xs={3}>
-        <Typography variant="h3">Date</Typography>
-        <Grid container justify="flex-start" alignItems="flex-start" className="Container">
-          <Grid item xs={12}>
-            {renderButtons(activeDateButtons)}
+        <Typography variant="h3">Watch List</Typography>
+        {/* <Grid container justify="flex-start" alignItems="flex-start" className="Container">
+          <Grid item xs={10}>
+              Show watched only 
           </Grid>
+          <Grid item xs={1}>
+            <SwitchButton dashboaradSwitch={false} switchState={true} handleChange={() => console.log('switch')} />
+          </Grid>
+        </Grid>
+        <Grid container justify="flex-start" alignItems="flex-start" className="Container">
+          <Grid item xs={8}>
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select>
+                <MenuItem value={1}>Blockchain List 1</MenuItem>
+                <MenuItem value={2}>Blockchain List 2</MenuItem>
+                <MenuItem value={3}>Blockchain List 3</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={4}>
+            <EditWalletModal id={"1"} address={"1"} description={"1"} update={() => (console.log('e'))}/>          
+          </Grid>
+        </Grid> */}
+      </Grid>
+      <Grid item xs={3}>
+        <Typography variant="h3">24 history</Typography>
+        <Grid container justify="flex-start" alignItems="flex-start" >
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
+          <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
+            <Grid container className={timeFilterClasses.header}>
+              <Grid item xs={2}>
+                {yesterday}
+              </Grid>
+              <Grid item xs={8} className={timeFilterClasses.timeField}>
+                Time
+            </Grid>
+              <Grid item xs={2} className={timeFilterClasses.right}>
+                {today}
+              </Grid>
+            </Grid>
+            <Grid container className={timeFilterClasses.body}>
+              <Grid item xs={1}>
+                5
+              </Grid>
+              <Grid item xs={10}>
+                <TimePeriodSlider defaultValue={20} />
+              </Grid>
+              <Grid item xs={1} className={timeFilterClasses.right}>
+                4
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={3}>
-        <Typography variant="h3">By </Typography>
-        <TimePeriodSlider
-          defaultValue={20}
-        />
       </Grid>
       <Grid item xs={2}>
         <Typography variant="h3">Top list</Typography>

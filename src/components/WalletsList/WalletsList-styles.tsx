@@ -5,7 +5,7 @@ import { SECONDARY_BG_COLOR } from '../../theme/constants';
 
 const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
   rowEl: {
-    color: '#A3A7B0',
+    color: theme.constants.GREY_TEXT_COLOR,
     fontWeight: 'bold'
   },
   walletTypeIcon: {
@@ -42,10 +42,10 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
     background: 'linear-gradient(90deg, #78CC33 0%, #9EE32D 100%)'
   },
   btnDisabled: {
-    color: '#A3A7B0'
+    color: theme.constants.GREY_TEXT_COLOR,
   },
   button: {
-    color: '#A3A7B0',
+    color: theme.constants.GREY_TEXT_COLOR,
     background: SECONDARY_BG_COLOR,
     borderRadius: 4,
     borderColor: SECONDARY_BG_COLOR,
