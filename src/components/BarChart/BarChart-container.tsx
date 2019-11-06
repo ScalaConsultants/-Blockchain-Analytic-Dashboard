@@ -46,7 +46,7 @@ const BarChartContainer = (props: BarChartProps) => {
 
   let segments: React.ReactElement<'div'>[] = [];
 
-  const getOuterClasses = (index: number, type = 'market'): string => {
+  const getOuterClasses = (index: number, type: string | null = 'market'): string => {
     const { activeSegmentZoom } = customization;
     const types = ['market', 'private', 'dapp', 'fraud'];
     const num = types.findIndex((value) => value === type);
@@ -89,12 +89,12 @@ const BarChartContainer = (props: BarChartProps) => {
     );
   };
 
-  const createSegment = (walletHash: string, percentage: number, index: number) => {
+  const createSegment = (walletHash: string, percentage: number, index: number, type: string | null = null) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
-        key={walletHash} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index)}>
+        key={walletHash} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
         <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
@@ -108,8 +108,8 @@ const BarChartContainer = (props: BarChartProps) => {
   const createSegments = () => {
     return wallets.reduce(
       (acc: Accumulator, obj: Wallet, index: number) => {
-        const { walletHash, percentage } = obj;
-        acc.elements.push(createSegment(walletHash, percentage, index));
+        const { walletHash, percentage, type } = obj;
+        acc.elements.push(createSegment(walletHash, percentage, index, type));
 
         // Last Segment
         acc.total < 100 && index === wallets.length - 1 && acc.elements.push(createLastSegment(acc.total));

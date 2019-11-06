@@ -23,7 +23,8 @@ export interface State {
 export interface Wallet {
   walletHash: string,
   totalValue: number,
-  percentage: number
+  percentage: number,
+  type?: string
 }
 
 export interface Wallets {
