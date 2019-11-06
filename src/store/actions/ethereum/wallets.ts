@@ -17,3 +17,4 @@ export const ethereumFetchWallets = (payload: any = {limit: 10, groupBy: 'buyer'
   type: ETHEREUM_FETCH_WALLETS,
   payload: payload
 });
+

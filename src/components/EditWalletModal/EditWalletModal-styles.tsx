@@ -71,10 +71,22 @@ const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
   grey: {
     color: theme.palette.grey[400]
   },
-  types: {
-    '& div:nth-child(2)': {
-      background: theme.constants.MARKET_COLOR
-    }
+  // types: {
+  //   '& div:nth-child(2)': {
+  //     background: theme.constants.MARKET_COLOR
+  //   }
+  // },
+  market: {
+    background: theme.constants.MARKET_COLOR
+  },
+  private: {
+    background: theme.constants.PRIVATE_COLOR
+  },
+  dapp: {
+    background: theme.constants.DAPP_COLOR
+  },
+  fraud: {
+    background: theme.constants.FRAUD_COLOR
   },
   editButton: {
     height: '28px',

@@ -7,12 +7,25 @@ import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 import ButtonBack from '../ButtonBack';
 
-const DetailsMenu = ({ id, address, description, updateDescription, type, blockchain, activeFilters, params }: ViewProps) => {
-  const { tab, zoom, top } = activeFilters;
+const DetailsMenu = (props: any) => {
+  const {
+      id,
+      zoom,
+      groupBy,
+      limit,
+      from,
+      to,
+      type,
+      walletHash,
+      blockchains,
+      blockchain,
+      description,
+      update
+  } = props;
+
   const classes = DetailsMenuStyles();
   const classesRoot = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
   const classesInfo = clsx([classes.margin, classes.white]);
-  const { groupBy, blockchains, limit, from, to } = params;
 
   return (
     <Grid container direction="row" alignItems="center" className={classesRoot}>
@@ -33,12 +46,18 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
             Address
           </Grid>
           <Grid item xs={10}>
-            {address}
+            {walletHash}
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={2}>
-        <EditWalletModal id={id} address={address} description={description} update={updateDescription} />
+        <EditWalletModal
+            id={id}
+            address={walletHash}
+            type={type}
+            description={description}
+            blockchain={blockchain}
+            update={update} />
       </Grid>
       <Grid item xs={1}>
         <ChartDescription type={type} />
@@ -51,13 +70,13 @@ const DetailsMenu = ({ id, address, description, updateDescription, type, blockc
           {blockchain}
         </Grid>
         <Grid item xs={1} className={classes.firstLetterUppercase}>
-          {tab}
+          {groupBy}
         </Grid>
         <Grid item xs={1}>
           {zoom}
         </Grid>
         <Grid item xs={1}>
-          {`Top ${top}`}
+          {`Top ${limit}`}
         </Grid>
       </Grid>
     </Grid>
