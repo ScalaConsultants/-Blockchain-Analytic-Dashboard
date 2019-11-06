@@ -27,8 +27,7 @@ const EditWalletModal = ({ id, address, type, description, blockchain, update }:
     };
 
     update(data);
-    // TODO: close modal when success
-    // handleClose();
+      handleClose();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
