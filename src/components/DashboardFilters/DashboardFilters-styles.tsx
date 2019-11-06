@@ -26,5 +26,14 @@ import { ExtendedTheme } from '../../types';
 
   refresh: {
     color: '#597CFD'
+  },
+
+  disabled: {
+    cursor: 'not-allowed'
+  },
+
+  noClick: {
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
   }
 }));

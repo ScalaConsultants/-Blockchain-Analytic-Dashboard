@@ -146,13 +146,13 @@ const Filters = (props: any) => {
         <Typography variant="h3">Blockchain</Typography>
         {renderButtons(activeBlockchainButtons)}
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={3} >
         <Typography variant="h3">Watch List</Typography>
         <WatchListFilter />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={3} className={classes.disabled}>
         <Typography variant="h3">24 history</Typography>
-        <Grid container justify="flex-start" alignItems="flex-start" >
+        <Grid container justify="flex-start" alignItems="flex-start" className={classes.noClick}>
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>

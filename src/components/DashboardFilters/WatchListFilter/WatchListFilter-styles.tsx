@@ -24,7 +24,8 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
     fontSize: '0.8rem',
     paddingLeft: '10px',
     '& > ul': {
-      padding: '0'
+      padding: '0',
+      background: theme.constants.SECONDARY_BG_COLOR,
     },
     '& > svg': {
       color: theme.constants.GREY_TEXT_COLOR,
@@ -38,10 +39,13 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
   },
 
   listItems: {
-    background: theme.constants.SECONDARY_BG_COLOR,
+    background: theme.constants.SECONDARY_BG_COLOR + '!important',
     color: theme.constants.GREY_TEXT_COLOR,
     fontSize: '0.8rem',
-    fontFamily: theme.constants.DEFAULT_FONT_FAMILY
+    fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
+    '&:hover': {
+      background: theme.constants.SECONDARY_BG_COLOR,
+      color: '#5975FF'
+    }
   }
-
 }));

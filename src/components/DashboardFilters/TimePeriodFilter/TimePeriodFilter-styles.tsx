@@ -9,7 +9,8 @@ export const TimePeriodStyles = {
     width: '90%',
     padding: '6px 0',
     display: 'block',
-    margin: '0 auto'
+    margin: '0 auto', 
+    cursor: 'not-allowed'
   },
 
   thumb: {
@@ -48,6 +49,7 @@ export const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
     maxWidth: '230px',
     margin: '10px 4px',
     borderRadius: '4px',
+    pointerEvents: 'none'
   },
 
   header: {
@@ -71,5 +73,6 @@ export const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
     padding: '5px 9px',
     fontSize: '0.7rem',
     color: '#5975FF'
-  }
+  },
+
 }));
