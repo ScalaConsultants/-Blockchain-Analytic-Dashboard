@@ -10,7 +10,8 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
     color: theme.constants.GREY_TEXT_COLOR,
     fontSize: '0.8rem',
     letterSpacing: '0.8px',
-    paddingTop: '5px'
+    paddingTop: '5px',
+    fontFamily: theme.constants.DEFAULT_FONT_FAMILY
   },
 
   select: {
