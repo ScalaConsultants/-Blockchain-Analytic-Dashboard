@@ -5,7 +5,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import Loader from '../loader';
 
@@ -16,13 +15,14 @@ import { useModalStyles, loaderContainerStyles } from './AuthModal-styles';
 import { AuthModalViewProps } from './types';
 
 const AuthModalView = (props: AuthModalViewProps) => {
+
   const {
     open = false,
-    handleOpen,
     handleClose,
     forgotPassword,
     auth,
     shouldSignUp,
+    handleOpen,
     formValidation = {
       email: {
         isValid: true,
@@ -53,32 +53,32 @@ const AuthModalView = (props: AuthModalViewProps) => {
   const { PUBLIC_URL } = process.env;
 
   const text = forgotPassword
-      ? 'Recovery your password'
-      : !shouldSignUp
+    ? 'Recovery your password'
+    : !shouldSignUp
       ? 'Login into your account'
       : 'Create new account';
 
   const form = forgotPassword ? <AuthModalForgotPassword {...props} /> : <AuthModalLoginRegister {...props} />;
 
   const info = (!formValidation.email.isValid || !formValidation.password.isValid)
-      ? <div>
-          <div>{formValidation.email.msg}</div>
-          <div>{formValidation.password.msg}</div>
-        </div>
-      : <Loader
+    ? <div>
+      <div>{formValidation.email.msg}</div>
+      <div>{formValidation.password.msg}</div>
+    </div>
+    : <Loader
       isLoading={loading}
       loaderSize={20}
       containerClass={loaderContainerStyles}
-  />;
+    />;
 
   return (
     <>
-      <div className={classesLogin} onClick={btnHandler}>
-        <Typography variant="body1" color="secondary">
+      <div className={classesLogin} >
+        <Typography variant="body1" color="secondary" onClick={btnHandler}>
           {btn}
         </Typography>
-        <ArrowDropDownIcon color="secondary" />
       </div>
+
       <Modal
         aria-labelledby="edit-wallet-modal-title"
         aria-describedby="edit-wallet-modal-description"
