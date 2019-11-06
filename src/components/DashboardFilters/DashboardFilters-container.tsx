@@ -57,16 +57,20 @@ const Filters = (props: any) => {
   
   const classes = useFiltersStyles();
 
+  const allert = () => {
+    enqueueSnackbar('At least one blockchain required', {
+      variant: 'info',
+      persist: false,
+    });
+  }
+
   const blockchainFilterHandler = (buttonLabel: string) => {
     const active = activeFilters(activeBlockchainButtons);
-    if (buttonLabel === 'ETH' || buttonLabel === 'XTZ') {
-      if (active.length === 1 && active.includes(buttonLabel)) {
-        enqueueSnackbar('At least one blockchain required', {
-          variant: 'info',
-          persist: false,
-        });
-        return;
-      }
+    if (active.length === 1 && active.includes(buttonLabel)) {
+      allert();
+      return;
+    } 
+    if ((buttonLabel === 'ETH' || buttonLabel === 'XTZ')) {
       const buttons = { ...activeBlockchainButtons };
       buttons[buttonLabel] = !buttons[buttonLabel];
       setBlockchainButtons({ ...buttons });
@@ -113,7 +117,13 @@ const Filters = (props: any) => {
     });
 
   const setZoomFilter = () => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()]
-
+  
+  const fetchNewData = (activeBlockchains: string[]) => {
+    activeBlockchains.forEach((blockchain: string) => {
+      actions.fetchWalletsByBlockchain({ limit: filters.limit, from: filters.from, to: filters.to, groupBy: urlParams.groupBy }, blockchain);
+    })
+  }
+  
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeTopList = activeFilters(activeTopListButtons);
@@ -128,12 +138,6 @@ const Filters = (props: any) => {
 
     setFilters({ ...newFilters });
     isDataFetched && fetchNewData(activeBlockchain);
-  }
-
-  const fetchNewData = (activeBlockchains: string[]) => {
-    activeBlockchains.forEach((blockchain: string) => {
-      actions.fetchWalletsByBlockchain({ limit: filters.limit, from: filters.from, to: filters.to, groupBy: urlParams.groupBy }, blockchain);
-    })
   }
 
   useEffect((): void => {
