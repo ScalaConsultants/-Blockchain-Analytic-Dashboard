@@ -1,10 +1,15 @@
 export interface ViewProps {
   id: string;
-  address: string;
+  address?: string | any;
   description: string;
-  type: string;
-  blockchain: string;
-  activeFilters: Record<string, string>;
-  updateDescription: (val: string) => void;
-  params?: any;
+  type?: string | any;
+  blockchain?: string;
+  blockchains?: string;
+  from?: string;
+  groupBy?: string;
+  limit?: string;
+  to?: string;
+  walletHash?: string;
+  zoom: string;
+  update: (data: string) => void ;
 }

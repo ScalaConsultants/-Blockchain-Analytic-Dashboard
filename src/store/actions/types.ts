@@ -38,3 +38,7 @@ export interface AuthUser extends ActionType {
   data: AuthUserData;
 }
 
+export interface AuthUserResetPassword {
+  id: string,
+  token: string
+}

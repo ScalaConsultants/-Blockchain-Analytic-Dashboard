@@ -5,11 +5,12 @@ import TransactionsList from '../TransactionsList';
 import LineChart from '../LineChart';
 import Legend from '../Legend';
 import DetailsMenu from '../DetailsMenu';
-import { DetailsViewProps } from './types';
 import useDetailsMenuStyles from './DetailsView-styles';
 import View from '../View';
 
-const DetailsView = (props: any) => {
+import { DetailsViewProps } from './types';
+
+const DetailsView = (props: DetailsViewProps) => {
     const classes = useDetailsMenuStyles();
     const { description, walletSource } = props;
 

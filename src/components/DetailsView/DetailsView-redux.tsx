@@ -5,18 +5,19 @@ import { withRouter } from 'react-router-dom';
 import DetailsViewContainer from './DetailsView-container';
 
 import * as actions from '../../store/actions/common/editWallet';
+import { DetailsViewReduxProps, State } from './types';
 
-const DetailsViewRedux = (props: any) => {
-    const mapState = (state: any) => ({
+const DetailsViewRedux = (props: DetailsViewReduxProps) => {
+    const mapState = (state: State) => ({
         ETH: state.ethereum.wallets,
         XTZ: state.tezos.wallets
     });
-
+    
     const wallets = useMappedState(mapState);
-
+    
     const dispatch = useDispatch();
-
-    const update = (data: any) => dispatch(actions.editWallet(data));
+        
+    const update = (data: string | undefined = '') => dispatch(actions.editWallet(data));
 
     const toProps = {
         ...props.match.params,
