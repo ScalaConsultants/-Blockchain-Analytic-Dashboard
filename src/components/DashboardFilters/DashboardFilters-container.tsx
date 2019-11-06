@@ -57,7 +57,7 @@ const Filters = (props: any) => {
   
   const classes = useFiltersStyles();
 
-  const allert = () => {
+  const alert = () => {
     enqueueSnackbar('At least one blockchain required', {
       variant: 'info',
       persist: false,
@@ -67,7 +67,7 @@ const Filters = (props: any) => {
   const blockchainFilterHandler = (buttonLabel: string) => {
     const active = activeFilters(activeBlockchainButtons);
     if (active.length === 1 && active.includes(buttonLabel)) {
-      allert();
+      alert();
       return;
     } 
     if ((buttonLabel === 'ETH' || buttonLabel === 'XTZ')) {
