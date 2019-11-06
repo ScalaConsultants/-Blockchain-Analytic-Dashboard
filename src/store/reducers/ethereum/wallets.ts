@@ -14,7 +14,8 @@ export default (state = initState, action: SetWalletsActionReducer): Wallet[] =>
   switch (action.type) {
     case ETHEREUM_SET_WALLETS:
       return [...action.wallets];
-    case ETH_EDIT_WALLET: return ethEditWallet(state, action);
+    case ETH_EDIT_WALLET:
+      return ethEditWallet(state, action);
     default:
       return state;
   }

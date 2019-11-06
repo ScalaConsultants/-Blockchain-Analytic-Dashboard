@@ -14,7 +14,8 @@ export default (state = initState, action: SetWalletsActionReducer): Wallet[] =>
   switch (action.type) {
     case TEZOS_SET_WALLETS:
       return [...action.wallets];
-    case XTZ_EDIT_WALLET: return xtzEditWallet(state, action);
+    case XTZ_EDIT_WALLET:
+      return xtzEditWallet(state, action);
     default:
       return state;
   }
