@@ -1,4 +1,4 @@
-import { AuthUser, AuthUserData } from '../types';
+import { AuthUser, AuthUserData, AuthUserResetPassword } from '../types';
 
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_USER_START = 'AUTH_USER_START';
@@ -63,7 +63,7 @@ export const authUserForgotPasswordSuccess = (data: AuthUserData) => ({
   data
 });
 
-export const authUserResetPasswordMount = (data: any) => ({
+export const authUserResetPasswordMount = (data: AuthUserResetPassword) => ({
   type: AUTH_USER_RESET_PASSWORD_MOUNT,
   data
 });

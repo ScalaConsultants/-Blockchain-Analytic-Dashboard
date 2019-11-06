@@ -7,7 +7,7 @@ import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 import ButtonBack from '../ButtonBack';
 
-const DetailsMenu = (props: any) => {
+const DetailsMenu = (props: ViewProps) => {
   const {
       id,
       zoom,
