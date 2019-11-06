@@ -5,3 +5,15 @@ export const MuiOutlinedInput = {
     }
   }
 }
+
+export const MuiInput = {
+  underline: {
+    '&:before': {
+      borderBottom: 'none'
+    },
+
+    '&:hover:not(.Mui-disabled):before': {
+      borderBottom: 'none'
+    }
+  }
+}
