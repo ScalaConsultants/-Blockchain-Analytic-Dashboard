@@ -11,10 +11,6 @@ export const dashboardSwitchStyles = {
       background: SECONDARY_BG_COLOR
     },
   },
-  switchThumb:{
-    width: 8,
-    height: 8,
-  },
   thumb:{
     width: 12,
     height: 12,
@@ -39,10 +35,8 @@ export const walletListSwitchStyles = {
       boxShadow: 'inset 0px 4px 10px #0F1935',
       background: SECONDARY_BG_COLOR
     },
-  },switchThumb:{
-    width: 8,
-    height: 8,
-  },thumb:{
+  },
+  thumb:{
     width: 12,
     height: 12,
   },
