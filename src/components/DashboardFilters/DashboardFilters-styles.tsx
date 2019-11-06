@@ -15,6 +15,7 @@ import { ExtendedTheme } from '../../types';
     fontSize: '0.65rem',
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
     margin: '4px',
+    paddingTop: '2px',
 
     '&:hover': useFiltersStyles.active
   },

@@ -15,7 +15,7 @@ const WatchListFilter = () => {
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
   const { PUBLIC_URL } = process.env;
 
-  const [list, setList] = React.useState(' ');
+  const [list, setList] = React.useState('public');
   const handleSwitchChange = (event: React.ChangeEvent<{ value: unknown }>) => setList(event.target.value as string);
 
   const [watchedList, setWatchedList] = React.useState(false);
@@ -48,7 +48,7 @@ const WatchListFilter = () => {
           </FormControl>
         </Grid>
         <Grid item xs={4} className={classesWatchListFilter.button}>
-          <Link to={'/wallets-list'}>
+          <Link to={'/wallets-list'} className={classesWatchListFilter.link}>
             <Button
               variant="outlined"
               color="inherit"

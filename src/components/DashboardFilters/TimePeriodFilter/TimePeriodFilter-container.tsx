@@ -21,15 +21,9 @@ const TimePeriodFilter = () => {
 
   const [timeValue, setTimeValue] = React.useState([]);
 
-  const handleChangeCommitted = (event: any, latestValue: any) => {
-    console.log("end now");
-    console.log(latestValue);
-  };
+  const handleChangeCommitted = (event: any, latestValue: any) => { };
 
-  const handleChange = (event: any, newValue: any) => {
-    console.log(newValue);
-    setTimeValue(newValue);
-  };
+  const handleChange = (event: any, newValue: any) => { setTimeValue(newValue) };
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
@@ -60,7 +54,7 @@ const TimePeriodFilter = () => {
         </Grid>
         <Grid item xs={1} className={timeFilterClasses.right}>
           4
-              </Grid>
+       </Grid>
       </Grid>
     </Grid>
   )

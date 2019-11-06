@@ -48,5 +48,9 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
       background: theme.constants.SECONDARY_BG_COLOR,
       color: '#5975FF'
     }
+  },
+
+  link: {
+    textDecoration: 'none'
   }
 }));
