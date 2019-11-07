@@ -143,7 +143,7 @@ const WalletsList = (): React.ReactElement => {
                 </TableCell>
                 <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(row.id)} /></TableCell>
                 <TableCell className={classes.rowEl}>
-                    <EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription} />
+                    {/*<EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription} />*/}
                 </TableCell>
             </TableRow>
         ));

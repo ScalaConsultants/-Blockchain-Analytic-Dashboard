@@ -12,24 +12,38 @@ import EditWalletModalStyles from './EditWalletModal-styles';
 import { ViewProps } from './types';
 
 const EditWalletModalView = ({
-                               open,
-                               handleOpen,
-                               handleClose,
-                               handleUpdate,
-                               handleChange,
-                               id,
-                               address,
-                               description
+   open,
+   handleOpen,
+   handleClose,
+   handleUpdate,
+   handleChange,
+   changeType,
+   id,
+   address,
+   description,
+   type
 }: ViewProps) => {
+  const { PUBLIC_URL } = process.env;
+
   const classes = EditWalletModalStyles();
   const classesPaper = clsx([classes.paper, classes.fonts, classes.grey]);
-  const classesChip = clsx([classes.chip, classes.background]);
   const classesTextarea = clsx([classes.textarea, classes.fonts, classes.white]);
-  const classesWalletType = clsx([classes.marginTop30, classes.types]);
+  const classesChip = clsx([classes.chip, classes.background]);
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
   const classesFirstButton = clsx([classes.button, classes.fonts, classes.buttonFirst, classes.white]);
   const classesSecondButton = clsx([classes.button, classes.fonts]);
-  const { PUBLIC_URL } = process.env;
+  const classesMarket = clsx(classesChip, {
+      [classes.market]: type === 'market'
+  });
+  const classesPrivate = clsx(classesChip, {
+      [classes.private]: type === 'private'
+  });
+  const classesDapp = clsx(classesChip, {
+      [classes.dapp]: type === 'dapp'
+  });
+  const classesFraud = clsx(classesChip, {
+      [classes.fraud]: type === 'fraud'
+  });
 
   return (
     <>
@@ -74,12 +88,12 @@ const EditWalletModalView = ({
               <Grid item xs={3}>Address</Grid>
               <Grid item xs={9} className={classes.white}>{address}</Grid>
             </Grid>
-            <Grid container className={classesWalletType}>
+            <Grid container className={classes.marginTop30}>
               <Grid item xs={12}>Select wallet type:</Grid>
-              <Grid item className={classesChip}>Market</Grid>
-              <Grid item className={classesChip}>Private</Grid>
-              <Grid item className={classesChip}>DAPP</Grid>
-              <Grid item className={classesChip}>Fraud</Grid>
+              <Grid item className={classesMarket} onClick={changeType} data-name="market">Market</Grid>
+              <Grid item className={classesPrivate} onClick={changeType} data-name="private">Private</Grid>
+              <Grid item className={classesDapp} onClick={changeType} data-name="dapp">DAPP</Grid>
+              <Grid item className={classesFraud} onClick={changeType} data-name="fraud">Fraud</Grid>
             </Grid>
             <Grid container className={classes.marginTop30}>
               <Grid item xs={12}>Description</Grid>

@@ -18,7 +18,7 @@ const TopBar = () => {
           <img src={`${PUBLIC_URL}/icons/logo.png`} alt="logo" className={classes.img} />
         </div>
         <AuthModal />
-        <UserMenu/>
+        <UserMenu />
       </Toolbar>
     </AppBar>
   );

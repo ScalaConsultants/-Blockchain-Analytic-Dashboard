@@ -2,35 +2,36 @@ import {ActionType, Wallet} from '../../types';
 
 export interface SetWalletsActionReducer {
   type: string;
-  wallets: Wallet[];
+  wallets: Wallet[]
 }
 
 export interface AuthState {
-  token: null | string,
-  email: null | string,
-  username: null | string,
+  token: null | string
+  email: null | string
+  username: null | string
+  id: null | string
   isAuth: boolean,
-  isUser: boolean
-  isAdmin: boolean,
-  loading: boolean,
+  isResetPassword: boolean
+  loading: boolean
   error: null | {
-    code?: string,
+    code?: string
     msg?: string
   }
 }
 
 export interface AuthUserResponse extends ActionType {
   data: {
-    token: null | string,
+    token: null | string
+    id: null | string
     isAuthenticated: boolean
     user: {
-      email: string;
-      username: string;
+      email: string
+      username: string
     }
   },
-  message?: null | string;
+  message?: null | string
   error: null | {
-    code: string,
+    code: string
     msg: string
   }
 }
