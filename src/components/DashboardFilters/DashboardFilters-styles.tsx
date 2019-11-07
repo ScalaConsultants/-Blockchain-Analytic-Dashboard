@@ -2,9 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
  export const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
-  
   button: {
-    color: '#A3A7B0',
+    color: theme.constants.GREY_TEXT_COLOR,
     background: theme.constants.SECONDARY_BG_COLOR,
     borderRadius: '4px',
     borderColor: theme.constants.SECONDARY_BG_COLOR,
@@ -16,19 +15,26 @@ import { ExtendedTheme } from '../../types';
     fontSize: '0.65rem',
     lineHeight: theme.constants.DEFAULT_LINE_HEIGHT,
     margin: '4px',
+    paddingTop: '2px',
 
     '&:hover': useFiltersStyles.active
   },
 
   active: {
     color: theme.palette.common.white,
-    background: 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)'
+    background: theme.constants.DECOR_COLOR
   },
 
   refresh: {
     color: '#597CFD'
+  },
+
+  disabled: {
+    cursor: 'not-allowed'
+  },
+
+  noClick: {
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
   }
-
 }));
-
-export default useFiltersStyles;

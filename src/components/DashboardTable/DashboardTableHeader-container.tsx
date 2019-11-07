@@ -29,7 +29,7 @@ const DashboardTableHeader = () => {
         <Grid item xs={1}>
           Value
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <SwitchButton 
             labelLeft={'$'}
             labelRight={'%'}
