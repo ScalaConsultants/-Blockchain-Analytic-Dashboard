@@ -20,5 +20,8 @@ export const useTopBarStyles = makeStyles((theme: ExtendedTheme) => ({
   flex: {
     display: 'flex',
     alignItems: 'center'
+  },  
+  link: {
+    textDecoration: 'none'
   }
 }));
