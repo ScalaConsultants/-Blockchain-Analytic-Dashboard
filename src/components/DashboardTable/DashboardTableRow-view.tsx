@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import DashboardTableSideCols from './DashboardTableSideCols-view';
 import BarChart from '../BarChart';
+import VolumeBar from '../VolumeBar';
 import { useDashboardTableStyles } from './DashboardTable-styles';
 import { Row } from './types';
 
@@ -22,6 +23,7 @@ const DashboardTableRow = (props: Row) => {
           increaseSegmentSize={2}
           walletSource={props.row.name}
         />
+        <VolumeBar/>
       </Grid>
     </Grid>
   );
