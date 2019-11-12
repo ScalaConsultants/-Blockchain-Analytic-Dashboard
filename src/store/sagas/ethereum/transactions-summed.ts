@@ -6,7 +6,7 @@ import * as ethereumActions from '../../actions/ethereum/transactions-summed';
 
 async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
   const res = await fetch(
-    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/linechart/cache?limit=100&walletHash=${walletHash}`
+    `${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets/linechart?limit=100&walletHash=${walletHash}`
   );
   return res.json();
 }
