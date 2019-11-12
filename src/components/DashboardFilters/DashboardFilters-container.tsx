@@ -127,13 +127,15 @@ const Filters = (props: any) => {
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeTopList = activeFilters(activeTopListButtons);
+    const activeTimePeriod = activeFilters(activePeriodTimeButtons);
     const dates: number[] = setZoomFilter();
 
     newFilters = {
       limit: Number(activeTopList[0]),
       type: activeBlockchain,
       from: dates[0],
-      to: dates[1]
+      to: dates[1],
+      timeStep: activeTimePeriod
     }
 
     setFilters({ ...newFilters });
@@ -154,13 +156,13 @@ const Filters = (props: any) => {
         <Typography variant="h3">Watch List</Typography>
         <WatchListFilter />
       </Grid>
-      <Grid item xs={3} className={classes.disabled}>
+      <Grid item xs={3} >
         <Typography variant="h3">24 history</Typography>
-        <Grid container justify="flex-start" alignItems="flex-start" className={classes.noClick}>
+        <Grid container justify="flex-start" alignItems="flex-start">
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
-          <TimePeriodFilter />
+          <TimePeriodFilter useTimeStep={filters.timeStep}/>
         </Grid>
       </Grid>
       <Grid item xs={2}>
