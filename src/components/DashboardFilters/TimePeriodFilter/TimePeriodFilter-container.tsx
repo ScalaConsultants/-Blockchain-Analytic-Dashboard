@@ -39,13 +39,13 @@ const TimePeriodFilter = (props: any) => {
     return today.getHours() + ":" + today.getMinutes();
   }
 
-  const [timeValue, setTimeValue] = React.useState([]);
+  const [timeValue, setTimeValue] = React.useState([setTimeFilter()]);
 
-  const handleChangeCommitted = (event: any, latestValue: any) => { };
+  const handleChangeCommitted = (event: any, latestValue: any) => { 
+    setTimeValue(latestValue);
+  };
 
-  const handleChange = (event: any, newValue: any) => { setTimeValue(newValue) };
-
-  useEffect((): void => setStep(props.useTimeStep), [props.useTimeStep]);
+  useEffect((): void => setStep(props.useTimeStep), [props.useTimeStep, timeValue]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
@@ -54,7 +54,7 @@ const TimePeriodFilter = (props: any) => {
           {yesterday}
         </Grid>
         <Grid item xs={8} className={timeFilterClasses.timeField}>
-          {setTimeFilter()}
+          {timeValue}
         </Grid>
         <Grid item xs={2} className={timeFilterClasses.right}>
           {today}
@@ -63,14 +63,13 @@ const TimePeriodFilter = (props: any) => {
       <Grid container className={timeFilterClasses.body}>
         <Grid item xs={1}>
           5
-              </Grid>
+        </Grid>
         <Grid item xs={10}>
           <TimePeriodSlider
             defaultValue={24}
             step={timeStep}
             min={0}
             max={24}
-            onChange={handleChange}
             onChangeCommitted={handleChangeCommitted}
             valueLabelDisplay="on"
           />
