@@ -8,12 +8,14 @@ const volumeBarStyles = makeStyles((theme: ExtendedTheme) => ({
         height: 12,
         background: '#253152',
         position: 'relative'
-    }, containerInside: {
+    },
+    containerInside: {
         width: '50%',
         height: 12,
         background: 'linear-gradient(90deg, #74798C 0%, #A9B0CC 100%)',
         position: 'relative'
-    }, totalVolume: {
+    },
+    totalVolume: {
         float: 'left',
         color: '#A3A7B0',
         fontSize: 10,
@@ -21,14 +23,15 @@ const volumeBarStyles = makeStyles((theme: ExtendedTheme) => ({
         zIndex: 1000,
         bottom: 3,
         left: 3
-    }, blokchain: {
+    },
+    blokchain: {
         float: 'right',
         color: 'white',
         fontSize: 10,
         position: 'relative',
         zIndex: 1000,
-        bottom: 3, 
-        right: 3 
+        bottom: 3,
+        right: 3
     }
 }));
 
