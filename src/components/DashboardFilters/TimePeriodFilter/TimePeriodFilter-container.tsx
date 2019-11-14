@@ -14,35 +14,40 @@ const TimePeriodFilter = (props: any) => {
   const today = setDateToday();
   const yesterday = setDateYesterday();
   
-  const [timeStep, setTimeStep] : [number, Function] = useState(0.01)
-
+  const [timeStep, setTimeStep] : [number, Function] = useState(60000);
+  
   const setStep = (timeStepString: string[] | undefined = ['By minutes']) => {
-    const convertedDataToString = timeStepString[0].toString();
-    switch(convertedDataToString) {
+    switch(timeStepString[0].toString()) {
       case('By hour'): 
-        setTimeStep(1); 
-        break;
+      setTimeStep(3600000); 
+      break;
       case('By 10 minutes'): 
-        setTimeStep(0.1);
-        break;
+      setTimeStep(600000);
+      break;
       case('By minutes'): 
-        setTimeStep(0.01);
-        break;
+      setTimeStep(60000);
+      break;
       default: 
-        setTimeStep(0.01); 
-        break;
+      setTimeStep(60000); 
+      break;
     }
   }
-
-  const setTimeFilter = () => {
-    const today = new Date();
-    return today.getHours() + ":" + today.getMinutes();
-  }
-
-  const [timeValue, setTimeValue] = React.useState([setTimeFilter()]);
+  
+  const setTimeNow = () =>  new Date().getTime();
+  
+  const setMinValue = () =>  Number(setTimeNow() - 24*60*60*1000);
+  
+  const convertTimestampToTime = (timestamp: number) => new Date(timestamp).toISOString().substr(0, 19).slice(11, -3);
+    
+  const [timeValue, setTimeValue] = useState(convertTimestampToTime(setTimeNow()));
 
   const handleChangeCommitted = (event: any, latestValue: any) => { 
-    setTimeValue(latestValue);
+    console.log('[HANDLE CHANGE COMMITTED]', latestValue, event);
+    setTimeValue(convertTimestampToTime(latestValue));
+  };
+  
+  const handleChange = (event: any, newValue: any) => { 
+    console.log('[HANDLE CHANGE]', newValue);
   };
 
   useEffect((): void => setStep(props.useTimeStep), [props.useTimeStep, timeValue]);
@@ -66,12 +71,13 @@ const TimePeriodFilter = (props: any) => {
         </Grid>
         <Grid item xs={10}>
           <TimePeriodSlider
-            defaultValue={24}
+            defaultValue={setTimeNow()}
             step={timeStep}
-            min={0}
-            max={24}
+            min={setMinValue()}
+            max={setTimeNow()}
+            onChange={handleChange}
             onChangeCommitted={handleChangeCommitted}
-            valueLabelDisplay="on"
+            // valueLabelDisplay="on"
           />
         </Grid>
         <Grid item xs={1} className={timeFilterClasses.right}>
