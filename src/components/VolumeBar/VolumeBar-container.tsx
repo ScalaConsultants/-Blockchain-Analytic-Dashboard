@@ -1,13 +1,15 @@
 import React from 'react';
+import volumeBarStyles from './VolumeBar-style';
 
 const VolumeBar = (): React.ReactElement => {
+    const classes = volumeBarStyles();
 
     return (
         <>
-            <div style={{ width: '100%', height: 12, background: '#253152', position: 'relative' }}>
-                <div style={{ width: '50%', height: 12, background: 'linear-gradient(90deg, #74798C 0%, #A9B0CC 100%)', position: 'relative' }}>
-                    <div style={{ float: 'left', color: '#A3A7B0', fontSize: 10, position: 'relative', zIndex: 1000, bottom: 3, left: 3 }}>total volume</div>
-                    <div style={{ float: 'right', color: 'white', fontSize: 10, position: 'relative', zIndex: 1000, bottom: 3, right: 3 }}>25,94011 ETH</div>
+            <div className={classes.containerOutside}>
+                <div className={classes.containerInside}>
+                    <div className={classes.totalVolume}>total volume</div>
+                    <div className={classes.blokchain}>25,94011 ETH</div>
                 </div>
             </div>
         </>
