@@ -11,6 +11,7 @@ import EditWalletModalStyles from '../../EditWalletModal/EditWalletModal-styles'
 import { useWatchListFilterStyles } from './WatchListFilter-styles';
 
 const WatchListFilter = (props:any) => {
+  const { actions } = props;
   const classes = EditWalletModalStyles();
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
   const { PUBLIC_URL } = process.env;
@@ -19,7 +20,10 @@ const WatchListFilter = (props:any) => {
   const handleSwitchChange = (event: React.ChangeEvent<{ value: unknown }>) => setList(event.target.value as string);
 
   const [watchedList, setWatchedList] = React.useState(false);
-  const handleWatchedListChange = () => setWatchedList(!watchedList);
+  const handleWatchedListChange = () => {
+    actions.toggleWatchedOnly();
+    setWatchedList(!watchedList);
+  }
 
   const classesWatchListFilter = useWatchListFilterStyles();
 

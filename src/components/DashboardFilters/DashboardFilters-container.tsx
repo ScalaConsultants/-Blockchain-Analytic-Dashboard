@@ -13,7 +13,7 @@ import { FiltersProps } from './types'
 
 const Filters = (props: any) => {
 
-  const { actions, match } = props;
+  const { actions, match, showWatchedOnly } = props;
 
   const urlParams = match.params;
 
@@ -154,9 +154,9 @@ const Filters = (props: any) => {
         <Typography variant="h3">Watch List</Typography>
         <WatchListFilter />
       </Grid>
-      <Grid item xs={3} className={classes.disabled}>
+      <Grid item xs={3} className={!showWatchedOnly ? classes.disabled : ''}>
         <Typography variant="h3">24 history</Typography>
-        <Grid container justify="flex-start" alignItems="flex-start" className={classes.noClick}>
+        <Grid container justify="flex-start" alignItems="flex-start" className={!showWatchedOnly ? classes.noClick : ''}>
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>

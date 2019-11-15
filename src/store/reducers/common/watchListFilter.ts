@@ -1,4 +1,4 @@
-const TOGGLE_WATCHED_ONLY = 'SHOW_WATCHED_ONLY';
+const TOGGLE_WATCHED_ONLY = 'TOGGLE_WATCHED_ONLY';
 
 const initState = false;
 

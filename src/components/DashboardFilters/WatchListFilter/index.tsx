@@ -1,3 +1,3 @@
-import WatchListFilter from './WatchListFilter-container';
+import WatchListFilter from './WatchListFilter-redux';
 
 export default WatchListFilter;
