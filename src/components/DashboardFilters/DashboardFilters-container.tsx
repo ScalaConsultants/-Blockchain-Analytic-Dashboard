@@ -127,7 +127,7 @@ const Filters = (props: any) => {
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeTopList = activeFilters(activeTopListButtons);
-    const activeTimePeriod = activeFilters(activePeriodTimeButtons);
+    let activeTimePeriod = activeFilters(activePeriodTimeButtons);
     const dates: number[] = setZoomFilter();
 
     newFilters = {

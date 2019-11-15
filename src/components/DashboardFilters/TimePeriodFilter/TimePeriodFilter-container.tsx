@@ -16,7 +16,7 @@ const TimePeriodFilter = (props: any) => {
   
   const [timeStep, setTimeStep] : [number, Function] = useState(60000);
   
-  const setStep = (timeStepString: string[] | undefined = ['By minutes']) => {
+  const setStep = (timeStepString: string[]) => {
     switch(timeStepString[0].toString()) {
       case('By hour'): 
       setTimeStep(3600000); 
@@ -33,7 +33,7 @@ const TimePeriodFilter = (props: any) => {
     }
   }
   
-  const setTimeNow = () =>  new Date().getTime();
+  const setTimeNow = () =>  Number(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000);
   
   const setMinValue = () =>  Number(setTimeNow() - 24*60*60*1000);
   
@@ -43,16 +43,19 @@ const TimePeriodFilter = (props: any) => {
   const [timeValueFrom, setTimeValueFrom] = useState(setTimeNow() - timeStep);
 
   const handleChangeCommitted = (event: any, latestValue: any) => { 
-    console.log('[HANDLE CHANGE COMMITTED]', latestValue, event);
-    setTimeValueTo(latestValue);
-    setTimeValueFrom(latestValue - timeStep)
+    //TODO: REFRESH DATA FOR DARECKI BAR CHART
   };
   
   const handleChange = (event: any, newValue: any) => { 
-    console.log('[HANDLE CHANGE]', newValue);
+    setTimeValueTo(newValue);
+    setTimeValueFrom(newValue - timeStep);
   };
 
-  useEffect((): void => setStep(props.useTimeStep), [props.useTimeStep, timeValueTo]);
+  useEffect((): void => {
+    const step = props.useTimeStep === undefined ? ['By minutes'] : props.useTimeStep ;
+    setStep(step);
+
+  }, [props.useTimeStep, timeValueTo]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
@@ -79,7 +82,7 @@ const TimePeriodFilter = (props: any) => {
             max={setTimeNow()}
             onChange={handleChange}
             onChangeCommitted={handleChangeCommitted}
-            // valueLabelDisplay="on"
+            value={timeValueTo}
           />
         </Grid>
         <Grid item xs={1} className={timeFilterClasses.right}>
