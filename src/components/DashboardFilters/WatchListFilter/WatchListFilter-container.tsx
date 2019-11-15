@@ -10,7 +10,7 @@ import SwitchButton from '../../SwitchButton';
 import EditWalletModalStyles from '../../EditWalletModal/EditWalletModal-styles';
 import { useWatchListFilterStyles } from './WatchListFilter-styles';
 
-const WatchListFilter = () => {
+const WatchListFilter = (props:any) => {
   const classes = EditWalletModalStyles();
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
   const { PUBLIC_URL } = process.env;
