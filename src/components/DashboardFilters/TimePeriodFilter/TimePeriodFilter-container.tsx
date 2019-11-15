@@ -39,18 +39,20 @@ const TimePeriodFilter = (props: any) => {
   
   const convertTimestampToTime = (timestamp: number) => new Date(timestamp).toISOString().substr(0, 19).slice(11, -3);
     
-  const [timeValue, setTimeValue] = useState(convertTimestampToTime(setTimeNow()));
+  const [timeValueTo, setTimeValueTo] = useState(setTimeNow());
+  const [timeValueFrom, setTimeValueFrom] = useState(setTimeNow() - timeStep);
 
   const handleChangeCommitted = (event: any, latestValue: any) => { 
     console.log('[HANDLE CHANGE COMMITTED]', latestValue, event);
-    setTimeValue(convertTimestampToTime(latestValue));
+    setTimeValueTo(latestValue);
+    setTimeValueFrom(latestValue - timeStep)
   };
   
   const handleChange = (event: any, newValue: any) => { 
     console.log('[HANDLE CHANGE]', newValue);
   };
 
-  useEffect((): void => setStep(props.useTimeStep), [props.useTimeStep, timeValue]);
+  useEffect((): void => setStep(props.useTimeStep), [props.useTimeStep, timeValueTo]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
@@ -59,7 +61,7 @@ const TimePeriodFilter = (props: any) => {
           {yesterday}
         </Grid>
         <Grid item xs={8} className={timeFilterClasses.timeField}>
-          {timeValue}
+          {convertTimestampToTime(timeValueFrom) + '-' + convertTimestampToTime(timeValueTo)}
         </Grid>
         <Grid item xs={2} className={timeFilterClasses.right}>
           {today}
@@ -73,7 +75,7 @@ const TimePeriodFilter = (props: any) => {
           <TimePeriodSlider
             defaultValue={setTimeNow()}
             step={timeStep}
-            min={setMinValue()}
+            min={setMinValue() + timeStep}
             max={setTimeNow()}
             onChange={handleChange}
             onChangeCommitted={handleChangeCommitted}
