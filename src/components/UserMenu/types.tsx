@@ -4,3 +4,7 @@ export interface menuItem {
     position: string;
     handleClick: () => void;
 }
+
+export interface UserMenuContainerProps {
+    logout: () => void;
+}

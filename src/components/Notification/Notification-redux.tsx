@@ -30,7 +30,7 @@ const NotificationRedux = () => {
           enqueueSnackbar(msg.description, {
             variant: msg.type,
             persist: false,
-            onClose: () => clearNotification(msg.id, msg.type) })
+            onClose: () => clearNotification(msg.id, msg.name) })
         ))}
     </>
   );

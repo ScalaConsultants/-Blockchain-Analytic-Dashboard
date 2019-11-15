@@ -1,33 +1,46 @@
-import { put } from 'redux-saga/effects';
+import { put, delay } from 'redux-saga/effects';
 
 import authActions from '../../actions/auth';
-import { auth, authToken, authForgotPassword } from "./fetch";
+import { authLogin, authSign, authToken, authForgotPassword } from "./fetch";
 
 import { AuthUser } from '../../actions/types'
 
 export function* doAuthUser(action: AuthUser) {
-    yield put(authActions.authUserStart()); 
+    yield put(authActions.authUserStart());
 
     try {
-        const response = yield auth({ ...action.data });
-        const { code } = response;
+        const { shouldSignUp } = action.data;
+        const data = { ...action.data };
+        let response = null;
 
-        if (code && code === 'user_added') {
-            const actionData = { ...action.data };
-            actionData.shouldSignUp = false;
-            return yield put(authActions.authUserSignUpSuccess(actionData));
-        }
-        if (code && code === 'user_exists') 
-            return yield put(authActions.authUserSignUpFail({ ...response }));
-        if (code && code === 'login_error') 
-            return yield put(authActions.authUserLoginFail({ ...response }));
+        delete data.shouldSignUp;
+        
+        if (shouldSignUp) {
+            response = yield authSign(data);
+            yield put(authActions.authUserSignUpSuccess());
+            yield put(authActions.authUserSignUpSuccessNotification(response));
+            
+            yield delay(1000);
+            yield put(authActions.authUserLoginAuto());
+            
+            response = yield authLogin(data);
+            yield localStorage.setItem('token', response.token);
+            yield localStorage.setItem('isAuth', response.isAuthenticated);
+            yield put(authActions.authUserLoginSuccess(response));
+            yield put(authActions.authUserLoginSuccessNotification(response.msg));
+            
+            return;
+        };
 
+        response = yield authLogin(data);
         yield localStorage.setItem('token', response.token);
         yield localStorage.setItem('isAuth', response.isAuthenticated);
-        yield put(authActions.authUserLoginSuccess({ ...response }))
+        yield put(authActions.authUserLoginSuccess(response));
+        yield put(authActions.authUserLoginSuccessNotification(response.msg));
         
     } catch(error) {
-        yield put(authActions.authUserFail(error))
+        yield put(authActions.authUserFail());
+        yield put(authActions.authUserFailNotification(error.message));
     }
 }
 
@@ -44,17 +57,17 @@ export function* doAuthCheck() {
     const isAuth = yield localStorage.getItem('isAuth');
     if (token && isAuth) {
         //TODO: req to BE to authenticate
-        try {
-            const response = yield authToken(token);
-            const { code } = response;
+        // try {
+        //     const response = yield authToken(token);
+        //     const { code } = response;
 
-            if (code && code === 'token_invalid')
-                return yield put(authActions.authUserLogout());
+        //     if (code && code === 'token_invalid')
+        //         return yield put(authActions.authUserLogout());
 
-            yield put(authActions.authUserLoginSuccess({ ...response }))
-        } catch(error) {
-            yield put(authActions.authUserLogout());
-        }
+        //     yield put(authActions.authUserLoginSuccess({ ...response }))
+        // } catch(error) {
+        //     yield put(authActions.authUserLogout());
+        // }
     } else {
         yield put(authActions.authUserLogout());
     }
@@ -63,15 +76,15 @@ export function* doAuthCheck() {
 export function* doAuthUserForgotPassword(action: AuthUser) {
     yield put(authActions.authUserStart());
 
-    try {
-        const response = yield authForgotPassword({...action.data});
-        const {code} = response;
+    // try {
+    //     const response = yield authForgotPassword({...action.data});
+    //     const {code} = response;
 
-        if (code && code === 'email_invalid') return yield put(authActions.authUserFail({...response}));
+    //     // if (code && code === 'email_invalid') return yield put(authActions.authUserFail({...response}));
 
-        yield put(authActions.authUserForgotPasswordSuccess({ ...response }))
-    } catch (error) {
-        yield put(authActions.authUserFail({ ...error }))
-    }
+    //     yield put(authActions.authUserForgotPasswordSuccess({ ...response }))
+    // } catch (error) {
+    //     // yield put(authActions.authUserFail({ ...error }))
+    // }
 }
  

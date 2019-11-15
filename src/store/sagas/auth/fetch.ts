@@ -1,15 +1,32 @@
 import { AuthUserData } from '../../actions/types'
 
-export async function auth(data: AuthUserData): Promise<any> {
-    const { shouldSignUp } = data;
-    let url = 'api/v1/auth/login';
+// TODO: refactor all fetches to common method
 
-    if (shouldSignUp) {
-        url = 'api/v1/auth/signup';
-        data.username = 'Test'
+export async function authSign(data: AuthUserData): Promise<any> {
+    const url = 'api/v1/auth/signup';
+    const toSend = { 
+        ...data,
+        username: 'Test' 
+    };
+
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(toSend)
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options);
+
+    if (!response.ok) {
+        const msg = await response.text();
+        throw new Error(msg);
     }
+ 
+    return await response.text();
+}
 
-    delete data.shouldSignUp;
+export async function authLogin(data: AuthUserData): Promise<any> {
+    const url = 'api/v1/auth/login';
 
     const options = {
         method: 'POST',
@@ -19,6 +36,11 @@ export async function auth(data: AuthUserData): Promise<any> {
 
     const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options);
 
+    if (!response.ok) {
+        const msg = await response.text();
+        throw new Error(msg);
+    }
+ 
     return await response.json();
 }
 

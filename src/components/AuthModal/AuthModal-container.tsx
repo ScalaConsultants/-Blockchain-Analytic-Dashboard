@@ -35,16 +35,10 @@ const AuthModal = ({
     }
   });
 
-  useEffect(() => {
-    setOpen(prevState => prevState && !auth.isAuth);
-  }, [auth.isAuth]);
-
-  const handleOpen = () => setOpen(prevState => !prevState);
-
-  const handleClose = () => {
-    setOpen(prevState => !prevState);
+  const setInitialState = () => {
     setForgotPassword(false);
     setRememberMe(true);
+    setShouldSignUp(false);
     setUser({
       email: '',
       password: ''
@@ -63,6 +57,13 @@ const AuthModal = ({
         password: false
       }
     })
+  }
+
+  const handleOpen = () => setOpen(prevState => !prevState);
+
+  const handleClose = () => {
+    setOpen(prevState => !prevState);
+    setInitialState();
   };
 
   const handleSwitchForms = () => setForgotPassword(prevState => !prevState);
@@ -127,6 +128,11 @@ const AuthModal = ({
   const handleLogin = () => btnClick(false);
   const handleSignUp = () => btnClick(true);
   const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
+
+  useEffect(() => {
+    setOpen(prevState => prevState && !auth.isAuth);
+    setInitialState();
+  }, [auth.isAuth]);
 
   return (
     <div>

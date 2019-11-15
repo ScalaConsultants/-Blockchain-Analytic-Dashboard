@@ -2,20 +2,26 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import useUserMenuStyles from './UserMenu-styles';
-import { menuItem } from './types';
+import { menuItem, UserMenuContainerProps } from './types';
 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
-const UserMenu = (): React.ReactElement => {
+const UserMenu = ({ logout }: UserMenuContainerProps): React.ReactElement => {
     const [menuVisibility, setMenuVisibility] = React.useState(false);
+
+
+    const logoutUser = () => {
+        logout();
+        handleMenuState();
+    }
 
     const menuItems: menuItem[] = [
         { title: "wallet list", link: '/wallets-list', handleClick: () => handleMenuState(), position: 'top' },
         { title: "top list", link: '/top-list', handleClick: () => handleMenuState(), position: 'top' },
         { title: "settings", link: '/settings', handleClick: () => handleMenuState(), position: 'bottom' },
         { title: "account", link: '/account', handleClick: () => handleMenuState(), position: 'bottom' },
-        { title: "log out", link: '/logout', handleClick: () => handleMenuState(), position: 'bottom' },
+        { title: "log out", link: '/logout', handleClick: () => logoutUser(), position: 'bottom' },
     ];
 
     const node = useRef<HTMLDivElement>(null);

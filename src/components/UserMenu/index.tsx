@@ -1,3 +1,3 @@
-import UserMenu from './UserMenu-container';
+import UserMenuRedux from './UserMenu-redux';
 
-export default UserMenu;
+export default UserMenuRedux;

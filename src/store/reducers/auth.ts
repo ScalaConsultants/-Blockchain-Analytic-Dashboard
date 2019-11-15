@@ -19,6 +19,13 @@ const authUserStart = (state: AuthState) => ({
   loading: true
 });
 
+const authUserFail = (state: AuthState) => {
+  return {
+    ...state,
+    loading: false
+  }
+};
+
 const authUserSignUpSuccess = (state: AuthState) => ({
   ...state,
   loading: false,
@@ -95,6 +102,7 @@ export default (state: AuthState = initState, action: AuthUserResponse) => {
     case authActions.AUTH_USER_FORGOT_PASSWORD_SUCCESS: return authUserForgotPasswordSuccess(state, action);
     case authActions.AUTH_USER_RESET_PASSWORD_MOUNT: return authUserResetPasswordMount(state, action);
     case authActions.AUTH_USER_RESET_PASSWORD_UNMOUNT: return authUserResetPasswordUnmount(state);
+    case authActions.AUTH_USER_FAIL: return authUserFail(state);
     default: return state;
   }
 };
