@@ -45,9 +45,10 @@ const TimePeriodFilter = (props: any) => {
     //TODO: REFRESH DATA FOR DARECKI BAR CHART
   };
   
-  const handleChange = (event: any, newValue: any) => { 
-    setTimeValueTo(newValue);
-    setTimeValueFrom(newValue - timeStep);
+  const handleChange = (event: any, newValue: number | number[]) => { 
+    const value:number = typeof newValue !== 'number' ? newValue[0] : newValue;
+    setTimeValueTo(value);
+    setTimeValueFrom(value - timeStep);
   };
 
   const timePeriodSliderComponent = () => 
