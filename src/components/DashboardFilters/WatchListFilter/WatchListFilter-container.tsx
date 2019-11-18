@@ -9,8 +9,9 @@ import Button from '@material-ui/core/Button';
 import SwitchButton from '../../SwitchButton';
 import EditWalletModalStyles from '../../EditWalletModal/EditWalletModal-styles';
 import { useWatchListFilterStyles } from './WatchListFilter-styles';
+import { WatchListFilterProps } from './types';
 
-const WatchListFilter = (props:any) => {
+const WatchListFilter = (props: WatchListFilterProps) => {
   const { actions } = props;
   const classes = EditWalletModalStyles();
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);

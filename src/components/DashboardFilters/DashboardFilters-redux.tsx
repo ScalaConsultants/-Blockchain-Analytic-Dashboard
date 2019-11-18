@@ -4,10 +4,11 @@ import { useMappedState, useDispatch } from 'redux-react-hook';
 import { getWalletByDatasource } from '../../store/actions/blockchainSelectors';
 
 import FiltersContainer from './DashboardFilters-container';
+import { ShowWatchedOnly, State } from './types';
 
 const FiltersRedux = () => {
 
-  const mapState = (state: any): any => ({
+  const mapState = (state: State): ShowWatchedOnly => ({
     showWatchedOnly: state.common.watchListFilter
   });
 
