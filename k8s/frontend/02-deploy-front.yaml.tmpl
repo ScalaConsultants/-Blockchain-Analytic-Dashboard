@@ -1,0 +1,70 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: blockchain-dashboard
+  namespace: blockchain-dev
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      namespace: blockchain-dev
+      labels:
+        app: blockchain-dashboard
+    spec:
+      nodeSelector:
+        scalac.io/blockchain: generaluse
+      imagePullSecrets:
+      - name: docker.io
+      containers:
+      - name: blockchain-dashboard
+        image: scalaconsultants/blockchain-analytic-dashboard:${IMAGE_VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 200m
+            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: blockchain-dashboard
+  name: blockchain-dashboard
+  namespace: blockchain-dev
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: blockchain-dashboard
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blockchain-dashboard
+  namespace: blockchain-dev
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: dashboard.blockchain-dev.scalac.io
+    http:
+      paths:
+      - backend:
+          serviceName: blockchain-dashboard
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - dashboard.blockchain-dev.scalac.io
+    secretName: tls-dashboard.blockchain-dev.scalac.io
