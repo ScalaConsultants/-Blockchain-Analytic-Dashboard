@@ -21,7 +21,7 @@ const WatchListFilter = (props:any) => {
 
   const [watchedList, setWatchedList] = React.useState(false);
   const handleWatchedListChange = () => {
-    actions.toggleWatchedOnly();
+    actions.toggleWatchedList();
     setWatchedList(!watchedList);
   }
 

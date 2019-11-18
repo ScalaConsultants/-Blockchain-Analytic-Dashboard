@@ -6,14 +6,14 @@ import * as watchListFilter from '../../../store/actions/common/watchListFilter'
 const WatchListFilterRedux = () => {
   const dispatch = useDispatch();
 
-  const toggleWatchedOnly = (): void => {
+  const toggleWatchedList = (): void => {
     dispatch({
-      type: watchListFilter.TOGGLE_WATCHED_ONLY,
+      type: watchListFilter.TOGGLE_WATCHED_LIST,
     });
   };
 
   const actions = {
-    toggleWatchedOnly
+    toggleWatchedList
   };
 
   return (
