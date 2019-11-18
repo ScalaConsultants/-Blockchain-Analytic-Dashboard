@@ -9,6 +9,7 @@ import { useSnackbar } from 'notistack';
 import TimePeriodFilter from './TimePeriodFilter';
 import WatchListFilter from './WatchListFilter';
 import { useFiltersStyles } from './DashboardFilters-styles';
+import { translateTimePeriod } from './helpers';
 import { FiltersProps } from './types'
 
 const Filters = (props: any) => {
@@ -129,13 +130,14 @@ const Filters = (props: any) => {
     const activeTopList = activeFilters(activeTopListButtons);
     const activeTimePeriod = activeFilters(activePeriodTimeButtons);
     const dates: number[] = setZoomFilter();
+    const translatedActiveTimePeriod = translateTimePeriod(activeTimePeriod);
 
     newFilters = {
       limit: Number(activeTopList[0]),
       type: activeBlockchain,
       from: dates[0],
       to: dates[1],
-      timeStep: activeTimePeriod
+      timeStep: translatedActiveTimePeriod
     }
 
     setFilters({ ...newFilters });
@@ -162,7 +164,7 @@ const Filters = (props: any) => {
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
-          <TimePeriodFilter useTimeStep={filters.timeStep}/>
+          <TimePeriodFilter activeTimeStep={filters.timeStep}/>
         </Grid>
       </Grid>
       <Grid item xs={2}>

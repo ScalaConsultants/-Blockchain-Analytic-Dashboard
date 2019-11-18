@@ -3,5 +3,9 @@ export interface FiltersProps {
   type?: string[],
   from?: number, 
   to?: number,
-  timeStep?: string[]
+  timeStep?: string
+}
+
+export interface TimePeriodFilterProps {
+  activeTimeStep?: string 
 }
