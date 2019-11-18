@@ -3,6 +3,7 @@ import { MuiTable, MuiTableCell, MuiTableRow, MuiTableSortLabel, MuiTableHead } 
 import { MuiOutlinedInput, MuiInput } from './input';
 import { MuiTooltip } from './tooltip';
 import { MuiList } from './select';
+import { MuiSlider } from './slider'
 import MuiTypography from './typography';
 
 
@@ -17,7 +18,8 @@ const overrides = {
   MuiOutlinedInput,
   MuiTooltip,
   MuiInput,
-  MuiList
+  MuiList,
+  MuiSlider
 };
 
 export default overrides;

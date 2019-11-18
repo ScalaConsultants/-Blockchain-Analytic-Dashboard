@@ -9,6 +9,7 @@ import { useSnackbar } from 'notistack';
 import TimePeriodFilter from './TimePeriodFilter';
 import WatchListFilter from './WatchListFilter';
 import { useFiltersStyles } from './DashboardFilters-styles';
+import { translateTimePeriod } from './helpers';
 import { FiltersProps } from './types'
 
 const Filters = (props: any) => {
@@ -127,13 +128,16 @@ const Filters = (props: any) => {
   const handleRefresh = (isDataFetched: boolean) => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeTopList = activeFilters(activeTopListButtons);
+    const activeTimePeriod = activeFilters(activePeriodTimeButtons);
     const dates: number[] = setZoomFilter();
+    const translatedActiveTimePeriod = translateTimePeriod(activeTimePeriod);
 
     newFilters = {
       limit: Number(activeTopList[0]),
       type: activeBlockchain,
       from: dates[0],
-      to: dates[1]
+      to: dates[1],
+      timeStep: translatedActiveTimePeriod
     }
 
     setFilters({ ...newFilters });
@@ -154,13 +158,13 @@ const Filters = (props: any) => {
         <Typography variant="h3">Watch List</Typography>
         <WatchListFilter />
       </Grid>
-      <Grid item xs={3} className={classes.disabled}>
+      <Grid item xs={3} >
         <Typography variant="h3">24 history</Typography>
-        <Grid container justify="flex-start" alignItems="flex-start" className={classes.noClick}>
+        <Grid container justify="flex-start" alignItems="flex-start">
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
-          <TimePeriodFilter />
+          <TimePeriodFilter activeTimeStep={filters.timeStep}/>
         </Grid>
       </Grid>
       <Grid item xs={2}>

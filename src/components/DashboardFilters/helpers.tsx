@@ -35,3 +35,29 @@ export const setDateYesterday = () => {
 
   return formatDate(day) + '.' + formatDate(month);
 }
+
+export const translateTimePeriod = (activeLabel: string[]) => {
+  switch(activeLabel[0].toString()) {
+    case('By hour'): 
+    return 'BY_1_HOUR';
+    case('By 10 minutes'): 
+    return 'BY_10_MINUTES';
+    case('By minutes'): 
+    return 'BY_1_MINUTE';
+    default: 
+    return 'BY_1_MINUTE'
+  }
+}
+
+export const setMinValue = () =>  Number(setTimeNow() - 24*60*60*1000);
+export const setTimeNow = () =>  Number(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000);
+export const convertTimestampToTime = (timestamp: number) => new Date(timestamp).toISOString().substr(0, 19).slice(11, -3);
+
+export const setStep = (timeStepString: string | undefined = 'BY_1_MINUTE') => {
+  switch(timeStepString) {
+    case('BY_1_HOUR'): return 3600000;
+    case('BY_10_MINUTES'): return 600000;
+    case('BY_1_MINUTE'): return 60000;
+    default: return 60000;
+  }
+}

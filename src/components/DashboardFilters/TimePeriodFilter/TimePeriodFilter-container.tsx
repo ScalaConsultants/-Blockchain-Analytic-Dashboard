@@ -1,29 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import { withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 
-import { setDateToday, setDateYesterday } from '../helpers';
-import { TimePeriodStyles, useTimeFilterStyles } from './TimePeriodFilter-styles';
+import { useTimeFilterStyles } from './TimePeriodFilter-styles';
+import { setDateToday, setDateYesterday, setTimeNow, setMinValue, convertTimestampToTime, setStep } from '../helpers';
+import { TimePeriodFilterProps } from '../types';
 
-const TimePeriodFilter = () => {
 
-  const TimePeriodSlider = withStyles(TimePeriodStyles)(Slider);
+const TimePeriodFilter = (props: TimePeriodFilterProps) => {
+
   const timeFilterClasses = useTimeFilterStyles();
 
   const today = setDateToday();
   const yesterday = setDateYesterday();
+  
+  const [timeStep, setTimeStep] : [number, Function] = useState(60000);
+  
+  const [timeValueTo, setTimeValueTo] : [number, Function] = useState(setTimeNow());
+  const [timeValueFrom, setTimeValueFrom] : [number, Function] = useState(setTimeNow() - timeStep);
 
-  const setTimeFilter = () => {
-    const today = new Date();
-    return today.getHours() + ":" + today.getMinutes();
-  }
+  const handleChangeCommitted = (event: any, latestValue: any) => { 
+    //TODO: REFRESH DATA FOR DARECKI BAR CHART
+  };
+  
+  const handleChange = (event: any, newValue: number | number[]) => { 
+    const value:number = typeof newValue !== 'number' ? newValue[0] : newValue;
+    setTimeValueTo(value);
+    setTimeValueFrom(value - timeStep);
+  };
 
-  const [timeValue, setTimeValue] = React.useState([]);
+  const timePeriodSliderComponent = () => 
+    <Slider
+      defaultValue={setTimeNow()}
+      min={setMinValue() + timeStep}
+      max={setTimeNow()}
+      onChange={handleChange}
+      // onChangeCommitted={handleChangeCommitted}
+    />
 
-  const handleChangeCommitted = (event: any, latestValue: any) => { };
-
-  const handleChange = (event: any, newValue: any) => { setTimeValue(newValue) };
+  useEffect((): void => setTimeStep(setStep(props.activeTimeStep)), [props.activeTimeStep, timeValueTo]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
@@ -32,7 +47,7 @@ const TimePeriodFilter = () => {
           {yesterday}
         </Grid>
         <Grid item xs={8} className={timeFilterClasses.timeField}>
-          {setTimeFilter()}
+          {convertTimestampToTime(timeValueFrom) + '-' + convertTimestampToTime(timeValueTo)}
         </Grid>
         <Grid item xs={2} className={timeFilterClasses.right}>
           {today}
@@ -41,16 +56,9 @@ const TimePeriodFilter = () => {
       <Grid container className={timeFilterClasses.body}>
         <Grid item xs={1}>
           5
-              </Grid>
+        </Grid>
         <Grid item xs={10}>
-          <TimePeriodSlider
-            defaultValue={0}
-            step={0.01}
-            min={12.00}
-            max={11.59}
-            onChange={handleChange}
-            onChangeCommitted={handleChangeCommitted}
-          />
+          {timePeriodSliderComponent()}
         </Grid>
         <Grid item xs={1} className={timeFilterClasses.right}>
           4
