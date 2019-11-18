@@ -1,7 +1,7 @@
 Blokchain Analytic Dashboard
 
 #### App is available here:
-[https://blockchain-ethereum-dashboard-dev.scalac.io/](https://blockchain-ethereum-dashboard-dev.scalac.io/)
+[https://https://dashboard.blockchain-dev.scalac.io/](https://dashboard.blockchain-dev.scalac.io/)
 
 ## Available Scripts
 
