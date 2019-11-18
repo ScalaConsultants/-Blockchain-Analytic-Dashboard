@@ -9,3 +9,15 @@ export interface FiltersProps {
 export interface TimePeriodFilterProps {
   activeTimeStep?: string 
 }
+
+export interface ShowWatchedOnly {
+  showWatchedOnly: boolean;
+}
+
+export interface WatchListFilter {
+  watchListFilter: boolean;
+}
+
+export interface State {
+  common: WatchListFilter;
+}

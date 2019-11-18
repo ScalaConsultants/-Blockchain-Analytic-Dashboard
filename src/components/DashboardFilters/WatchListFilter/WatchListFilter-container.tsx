@@ -9,8 +9,10 @@ import Button from '@material-ui/core/Button';
 import SwitchButton from '../../SwitchButton';
 import EditWalletModalStyles from '../../EditWalletModal/EditWalletModal-styles';
 import { useWatchListFilterStyles } from './WatchListFilter-styles';
+import { WatchListFilterProps } from './types';
 
-const WatchListFilter = () => {
+const WatchListFilter = (props: WatchListFilterProps) => {
+  const { actions } = props;
   const classes = EditWalletModalStyles();
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
   const { PUBLIC_URL } = process.env;
@@ -19,7 +21,10 @@ const WatchListFilter = () => {
   const handleSwitchChange = (event: React.ChangeEvent<{ value: unknown }>) => setList(event.target.value as string);
 
   const [watchedList, setWatchedList] = React.useState(false);
-  const handleWatchedListChange = () => setWatchedList(!watchedList);
+  const handleWatchedListChange = () => {
+    actions.toggleWatchedList();
+    setWatchedList(!watchedList);
+  }
 
   const classesWatchListFilter = useWatchListFilterStyles();
 
