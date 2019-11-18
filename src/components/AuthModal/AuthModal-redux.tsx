@@ -22,10 +22,10 @@ const AuthModalRedux = () => {
   const props = useMappedState(mapState);
 
   const dispatch = useDispatch();
-  const onAuthUser = (email: string, password: string, shouldSignUp: boolean) => {
-    // switch to stable db
-    // dispatch(authActions.authUser({ email, password, shouldSignUp }));
-  };
+
+  const onAuthUser = (email: string, password: string, shouldSignUp: boolean) => 
+    dispatch(authActions.authUser({ email, password, shouldSignUp }));
+    
   const onAuthUserForgotPassword = (email: string) => dispatch(authActions.authUserForgotPassword({email}));
 
   return (
