@@ -6,7 +6,6 @@ import { useTimeFilterStyles } from './TimePeriodFilter-styles';
 import { setDateToday, setDateYesterday, setTimeNow, setMinValue, convertTimestampToTime, setStep } from '../helpers';
 import { TimePeriodFilterProps } from '../types';
 
-
 const TimePeriodFilter = (props: TimePeriodFilterProps) => {
 
   const timeFilterClasses = useTimeFilterStyles();
@@ -18,10 +17,6 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   
   const [timeValueTo, setTimeValueTo] : [number, Function] = useState(setTimeNow());
   const [timeValueFrom, setTimeValueFrom] : [number, Function] = useState(setTimeNow() - timeStep);
-
-  const handleChangeCommitted = (event: any, latestValue: any) => { 
-    //TODO: REFRESH DATA FOR DARECKI BAR CHART
-  };
   
   const handleChange = (event: any, newValue: number | number[]) => { 
     const value:number = typeof newValue !== 'number' ? newValue[0] : newValue;

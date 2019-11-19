@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
 import { lineChartContainerStyle, chartLineOptions, chartLineData } from './LineChart-styles';
 import LineView from './Line-view';
 import Loader from '../loader';

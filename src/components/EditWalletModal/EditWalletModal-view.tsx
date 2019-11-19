@@ -52,7 +52,7 @@ const EditWalletModalView = ({
         color="inherit"
         className={classesEditWalletButton}
         onClick={handleOpen}
-      ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} />
+      ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} alt="Wallet icon"/>
         edit
       </Button>
       <Modal

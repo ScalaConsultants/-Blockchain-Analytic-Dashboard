@@ -1,5 +1,5 @@
 import { SetWalletsAction } from '../types';
-import { Wallets, ActionType } from '../../../types';
+import { Wallets } from '../../../types';
 
 export const TEZOS_FETCH_WALLETS = 'TEZOS_FETCH_WALLETS';
 export const TEZOS_FETCH_WALLETS_STARTED = 'TEZOS_FETCH_WALLETS_STARTED';

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
-import { RouteComponentProps } from 'react-router-dom';
 
 import LineChartContainer from './LineChart-container';
 import { State } from './types';

@@ -58,7 +58,7 @@ const WatchListFilter = (props: WatchListFilterProps) => {
               variant="outlined"
               color="inherit"
               className={classesEditWalletButton}
-            ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} />
+            ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} alt="Wallet icon"/>
               edit
         </Button>
           </Link>
