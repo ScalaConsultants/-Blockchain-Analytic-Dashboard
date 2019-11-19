@@ -9,7 +9,7 @@ const DashboardTableBlockchainCell = ({ icon, fullName }: BlockchainCell) => {
   return (
     <Grid container alignItems="center" justify="flex-start">
       <Grid item xs={3}>
-        <img src={`${PUBLIC_URL}/icons/${icon}.png`} className={classes.img} />
+        <img src={`${PUBLIC_URL}/icons/${icon}.png`} className={classes.img} alt="Blockchain cell icon"/>
       </Grid>
       <Grid item xs={9} className={classes.name}>
         {fullName}

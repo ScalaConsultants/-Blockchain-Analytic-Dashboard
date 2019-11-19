@@ -4,7 +4,7 @@ import { Wallets } from '../../../types';
 
 async function fetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
   let res = null;
-  if(groupBy == 'data') {
+  if(groupBy === 'data') {
     res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/data-wallets?limit=${limit}&from=${from}&to=${to}`);
   } else {
     res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/ethereum/wallets?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);

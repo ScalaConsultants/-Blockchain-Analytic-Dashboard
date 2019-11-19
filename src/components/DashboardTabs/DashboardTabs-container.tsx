@@ -7,7 +7,7 @@ import { useDashboardStyles } from './DashboardTabs-styles';
 
 const DashboardTabs = (props: any) => {
 
-  const { actions, match, history } = props;
+  const { match, history } = props;
 
   const classes = useDashboardStyles();
 

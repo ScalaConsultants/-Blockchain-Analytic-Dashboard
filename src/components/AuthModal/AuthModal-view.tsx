@@ -39,8 +39,8 @@ const AuthModalView = (props: AuthModalViewProps) => {
     }
   } = props;
 
-  const loading = auth && auth.loading || false;
-  const btn = auth && auth.isAuth ? auth.username : 'Log in';
+  const loading = (auth && auth.loading) || false;
+  const btn = (auth && auth.isAuth) ? auth.username : 'Log in';
   const btnHandler = (auth && auth.isAuth) ? undefined : handleOpen;
 
   const classesModal = useModalStyles();

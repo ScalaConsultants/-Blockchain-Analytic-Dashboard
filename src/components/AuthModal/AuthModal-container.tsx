@@ -115,7 +115,7 @@ const AuthModal = ({
   const btnClick = (btn: boolean) => {
     const { email, password } = formValidation;
     if (email.isValid && password.isValid) {
-      if (btn && shouldSignUp || !btn && !shouldSignUp) return onAuthUser(user.email, user.password, btn);
+      if ((btn && shouldSignUp) || (!btn && !shouldSignUp)) return onAuthUser(user.email, user.password, btn);
     }
 
     setShouldSignUp(prevState => !prevState);

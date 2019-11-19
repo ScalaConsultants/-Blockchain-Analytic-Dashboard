@@ -1,7 +1,7 @@
 import { put, delay } from 'redux-saga/effects';
 
 import authActions from '../../actions/auth';
-import { authLogin, authSign, authToken, authForgotPassword } from "./fetch";
+import { authLogin, authSign } from "./fetch";
 
 import { AuthUser } from '../../actions/types'
 

@@ -62,7 +62,7 @@ const UserMenu = ({ logout }: UserMenuContainerProps): React.ReactElement => {
                     </div>
                     <hr className={classes.hr}></hr>
                     {menuItems.map((item: menuItem, index: number) =>
-                        item.position == 'top'
+                        item.position === 'top'
                         &&
                         <div className={classes.menuItemContainer} key={index}>
                             <Link to={item.link} className={classes.link}>
@@ -79,7 +79,7 @@ const UserMenu = ({ logout }: UserMenuContainerProps): React.ReactElement => {
                     </div>
                     <hr className={classes.hr}></hr>
                     {menuItems.map((item, index: number) =>
-                        item.position == 'bottom'
+                        item.position === 'bottom'
                         &&
                         <div className={classes.menuItemContainer} key={index}>
                             <Link to={item.link} className={classes.link}>
