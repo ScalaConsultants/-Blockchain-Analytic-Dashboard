@@ -5,7 +5,11 @@ import { AuthPropsTypes } from './types'
 const Auth = ({ authCheck, children }: AuthPropsTypes) => {
 
     useEffect(() => {
-        authCheck();
+        const authCheckEffect = ()=> {
+            authCheck();
+        }
+
+        authCheckEffect();
     }, []);
 
     return children;

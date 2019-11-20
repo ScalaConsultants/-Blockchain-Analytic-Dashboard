@@ -25,20 +25,19 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   ]);
   const [data, setData] = useState([10, 20, 30, 40]);
 
-
-  const filterChart = (): void => {
-    const labels: string[] = [];
-    const elements: number[] = [];
-
-    transactionsSummed.forEach((item: TransactionSummed): void => {
-      elements.push(item.totalValue);
-      labels.push(convertTimeStampToHours(item.interval));
-    });
-    setLabels(labels);
-    setData(elements);
-  };
-
   useEffect((): void => {
+    const filterChart = (): void => {
+      const labels: string[] = [];
+      const elements: number[] = [];
+
+      transactionsSummed.forEach((item: TransactionSummed): void => {
+        elements.push(item.totalValue);
+        labels.push(convertTimeStampToHours(item.interval));
+      });
+      setLabels(labels);
+      setData(elements);
+    };
+
     filterChart();
   }, [transactionsSummed]);
 
