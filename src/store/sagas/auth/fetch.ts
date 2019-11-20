@@ -6,8 +6,8 @@ export async function authSign(data: AuthUserData): Promise<any> {
     const url = 'api/v1/auth/signup';
     const toSend = { 
         ...data,
-        username: 'Test' 
-    };
+        username: data.email
+    }
 
     const options = {
         method: 'POST',
