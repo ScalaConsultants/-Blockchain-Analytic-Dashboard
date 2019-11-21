@@ -1,3 +1,5 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -9,7 +11,6 @@ import { Accumulator, BarChartProps } from './types';
 import { Wallet } from '../../types';
 
 import { useBarChartSegmentStyles } from './BarChart-styles';
-
 const BarChartContainer = (props: BarChartProps) => {
   const {
     wallets = [],

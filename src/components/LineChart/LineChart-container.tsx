@@ -1,3 +1,5 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import React, { useEffect, useState } from 'react';
 import { lineChartContainerStyle, chartLineOptions, chartLineData } from './LineChart-styles';
 import LineView from './Line-view';

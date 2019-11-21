@@ -1,3 +1,5 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import { useEffect } from 'react';
 
 import { AuthPropsTypes } from './types'
@@ -5,11 +7,7 @@ import { AuthPropsTypes } from './types'
 const Auth = ({ authCheck, children }: AuthPropsTypes) => {
 
     useEffect(() => {
-        const authCheckEffect = ()=> {
-            authCheck();
-        }
-
-        authCheckEffect();
+        authCheck();
     }, []);
 
     return children;
