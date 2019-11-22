@@ -7,10 +7,10 @@ RUN npm install yarn -g
 RUN yarn install
 RUN yarn run build
 
-FROM  node:latest
+FROM node:latest
 RUN yarn global add serve
 WORKDIR /app
 COPY --from=builder --chown=node /app/build .
-COPY  --chown=node .env /app/.env
+COPY --chown=node .env /app/.env
 USER node
 CMD ["serve", "-s", "."]
