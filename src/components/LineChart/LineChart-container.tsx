@@ -20,6 +20,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
 
   const walletHash = params.walletHash;
   const walletSource = params.walletSource;
+  const groupBy = params.groupBy;
 
   const classes = lineChartContainerStyle();
   const [labels, setLabels] = useState([
@@ -44,7 +45,7 @@ const LineCharts = (props: LineChartProps): React.ReactElement => {
   }, [transactionsSummed]);
 
   useEffect((): void => {
-    actions.fetchTransactionsSummed(walletSource, { walletHash:walletHash });
+    actions.fetchTransactionsSummed(walletSource, { walletHash:walletHash, groupBy: groupBy });
   }, [params.walletHash]);
 
   return (
