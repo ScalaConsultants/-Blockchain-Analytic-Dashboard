@@ -8,7 +8,12 @@ export const convertTimeStampToHours = (date: string): string => {
   const newDate = new Date(date);
   const hours = newDate.getHours();
   const minutes = newDate.getMinutes();
-  const formattedDate = `${hours}:${minutes}`;
+  let formattedDate;
+  if(minutes < 10) {
+    formattedDate = `${hours}:0${minutes}`;
+  } else {
+    formattedDate = `${hours}:${minutes}`;
+  }
 
   return formattedDate;
 };
