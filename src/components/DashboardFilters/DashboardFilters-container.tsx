@@ -1,3 +1,5 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';

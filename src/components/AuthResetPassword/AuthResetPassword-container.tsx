@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+/*eslint-disable react-hooks/exhaustive-deps*/
+
+import { useEffect } from 'react';
 
 import { AuthResetPasswordProps } from './types';
 
@@ -7,7 +9,6 @@ const AuthResetPassword = ({ unmount }: AuthResetPasswordProps) => {
     useEffect(() => {
 
         return () => {
-            console.log('unmount');
             unmount();
         }
 

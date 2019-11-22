@@ -5,8 +5,6 @@ import authActions from '../../actions/auth';
 import {
   doAuthUser,
   doAuthUserLogout,
-  doAuthUserForgotPassword,
-  doAuthCheck
 } from './user';
 
 export default function* watchAuth() {

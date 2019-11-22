@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+/*eslint-disable react-hooks/exhaustive-deps*/
+
+import { useEffect } from 'react';
 
 import { AuthPropsTypes } from './types'
 

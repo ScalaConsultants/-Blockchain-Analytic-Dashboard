@@ -1,5 +1,5 @@
 import { SetWalletsAction } from '../types';
-import { Wallets, ActionType } from '../../../types';
+import { Wallets } from '../../../types';
 
 export const ETHEREUM_FETCH_WALLETS = 'ETHEREUM_FETCH_WALLETS';
 export const ETHEREUM_FETCH_WALLETS_STARTED = 'ETHEREUM_FETCH_WALLETS_STARTED';

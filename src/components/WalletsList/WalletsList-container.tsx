@@ -16,7 +16,6 @@ import useWalletsListTableStyles from './WalletsList-styles';
 import View from '../View';
 import { walletsListPrivate } from './wallets';
 import { walletsListPublic } from './wallets';
-import EditWalletModal from '../EditWalletModal'
 import SwitchButton from '../SwitchButton';
 
 import { stableSort, getSorting } from "../../helpers/helpers";
@@ -37,7 +36,6 @@ const WalletsList = (): React.ReactElement => {
 
     const [switchWallet, setSwitchWallet] = React.useState(WalletType.PRIVATE);
     const [switchToggle, setSwitchToggle] = React.useState(false);
-    const [description, setDescription] = React.useState('Test title');
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<OrderBy>("id");
 
@@ -101,8 +99,6 @@ const WalletsList = (): React.ReactElement => {
         }
     }
 
-    const updateDescription = (value: string) => setDescription(value);
-
     const selectWalletColor = (market: string) => {
         switch (market) {
             case Markets.MARKET:
@@ -165,7 +161,7 @@ const WalletsList = (): React.ReactElement => {
                 </Grid>
                 <Grid item xs={1} className={classes.publicWallets}>
                     <Grid container justify="center" >
-                        <Grid item onClick={() => setSwitchWallet(WalletType.PUBLIC)} className={switchWallet == WalletType.PRIVATE ? classes.btnDisabled : ''}>
+                        <Grid item onClick={() => setSwitchWallet(WalletType.PUBLIC)} className={switchWallet === WalletType.PRIVATE ? classes.btnDisabled : ''}>
                             Public wallet
                         </Grid>
                         {switchWallet === 'public' && <Grid item className={classes.underline} />}
