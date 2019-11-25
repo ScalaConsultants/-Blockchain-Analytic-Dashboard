@@ -4,11 +4,20 @@ import * as actions from '../../actions/common/editWallet';
 async function editWallet(data: any) {
   const url = `api/v1/${data.blockchain_id}/wallets/edit`;
 
+  const token = localStorage.getItem('token');
+  const headers = { 'Content-Type': 'application/json', token: '' };
+
+  if (token) {
+    headers.token = token
+  }
+
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify(data)
   };
+
+  console.log(options)
 
   const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options);
 
