@@ -4,9 +4,9 @@ import { FetchTransactionsSummedAction } from '../../actions/types';
 import { TransactionsSummed } from '../../../types';
 import * as tezosActions from '../../actions/tezos/transactions-summed';
 
-async function fetchTransactionsSummed(walletHash:string): Promise<TransactionsSummed> {
+async function fetchTransactionsSummed(walletHash:string, groupBy:string): Promise<TransactionsSummed> {
   const res = await fetch(
-    `${process.env.REACT_APP_HOST}/api/v1/tezos/wallets/linechart?limit=100&walletHash=${walletHash}`
+    `${process.env.REACT_APP_HOST}/api/v1/tezos/wallets/linechart?groupBy=${groupBy}&&limit=100&walletHash=${walletHash}`
   );
   return res.json();
 }
@@ -22,7 +22,7 @@ function* doFetchTransactionsSummed(action:FetchTransactionsSummedAction) {
 
   yield put({ type: TEZOS_FETCH_TRANSACTIONS_SUMMED_STARTED });
 
-  const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash);
+  const transactionsSummed = yield fetchTransactionsSummed(transactionsSummedData.walletHash, transactionsSummedData.groupBy);
 
   try {
     if (transactionsSummed.length > 0) {

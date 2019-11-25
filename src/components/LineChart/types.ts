@@ -13,11 +13,15 @@ export type WalletSource = {
     walletSource: string
 }
 
+export type GroupBy = {
+    groupBy: string
+}
+
 export interface LineChartReduxProps extends RouteComponentProps<RouteProps>{
 }
 
 
-interface RouteProps extends WalletHash, WalletSource {}
+interface RouteProps extends WalletHash, WalletSource, GroupBy {}
 
 export interface DetailsViewActions {
     fetchTransactionsSummed: Function
