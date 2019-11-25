@@ -4,7 +4,7 @@ const getDefaultRoute = () => {
   const from = today.getTime() - oneDay;
   const to = today.getTime();
 
-  return `/buyer/ETH,XTZ/10/${from}/${to}`;
+  return `/buyer/ETH/10/${from}/${to}`;
 };
 
 export default getDefaultRoute;
