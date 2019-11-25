@@ -10,19 +10,21 @@ import { DetailsViewReduxProps, State } from './types';
 const DetailsViewRedux = (props: DetailsViewReduxProps) => {
     const mapState = (state: State) => ({
         ETH: state.ethereum.wallets,
-        XTZ: state.tezos.wallets
+        XTZ: state.tezos.wallets,
+        email: state.auth.email
     });
-    
-    const wallets = useMappedState(mapState);
-    
+
+    const { ETH, XTZ, email } = useMappedState(mapState);
+
     const dispatch = useDispatch();
-        
+
     const update = (data: string | undefined = '') => dispatch(actions.editWallet(data));
 
     const toProps = {
         ...props.match.params,
-        wallets,
-        update
+        wallets: { ETH, XTZ },
+        update,
+        email
     };
 
     return <DetailsViewContainer {...toProps} />
