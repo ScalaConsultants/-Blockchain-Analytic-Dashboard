@@ -6,9 +6,9 @@ export interface Props {
   blockchain?: string
 }
 
-
 export interface ContainerProps extends Props {
-  update: (data: any) => void
+  update: (data: any) => void;
+  email?: string | null
 }
 
 export interface ViewProps extends Props {

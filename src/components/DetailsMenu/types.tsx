@@ -12,4 +12,5 @@ export interface ViewProps {
   walletHash?: string;
   zoom: string;
   update: (data: string) => void ;
+  email?: string | null
 }
