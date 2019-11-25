@@ -40,7 +40,6 @@ const BarChartContainer = (props: BarChartProps) => {
   const classes = useBarChartSegmentStyles();
   const lastSegmentClasses = clsx([classes.color, classes.center, classes.rest]);
   const [activeSegment, updateActiveSegment] = useState({ isActive: false, index: 0 });
-  const [segments, updateSegments] = useState([]);
 
   const getOuterClasses = (index: number, type: string | null = 'market'): string => {
     const { activeSegmentZoom } = customization;
@@ -91,7 +90,7 @@ const BarChartContainer = (props: BarChartProps) => {
     return (
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
-        key={renderUniqueKey()} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
+        key={walletHash} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
         <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
@@ -123,8 +122,6 @@ const BarChartContainer = (props: BarChartProps) => {
       isActive: true,
       index: wallets.findIndex(val => val.walletHash === walletHash)
     });
-    //@ts-ignore
-    updateSegments([...createSegments()])
   }, [walletHash, wallets]);
 
   useEffect(() => {
@@ -133,6 +130,8 @@ const BarChartContainer = (props: BarChartProps) => {
       actions.fetchWalletsByBlockchain(limit, from, to, groupBy, walletSource);
     }
   }, [match.params.groupBy]);
+
+  const segments = createSegments();
   
   return <BarChartView data={segments} containerRef={segmentsContainer} isLoading={walletsIsFetching} />;
 };
