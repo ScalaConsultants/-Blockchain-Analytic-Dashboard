@@ -39,7 +39,7 @@ export const useBarChartSegmentStyles = makeStyles((theme: ExtendedTheme) => ({
     boxShadow: '0px 0px 20px rgba(135, 101, 239, .8)',
     borderRadius: '2px',
     zIndex: 100,
-    transform: 'scale(1.3)',
+    transform: 'scale(1.03)',
     color: theme.palette.common.white
   },
   firstInactive: {
