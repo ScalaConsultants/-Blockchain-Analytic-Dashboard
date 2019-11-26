@@ -15,4 +15,13 @@ const transactions = (state = initState, action: SetTransactionsAction): Transac
   }
 };
 
+// const errors = (state = initState, action: any): any => {
+//   switch (action.type) {
+//     case TEZOS_SET_TRANSACTIONS:
+//       return action.transactions;
+//     default:
+//       return state;
+//   }
+// };
+
 export default transactions;

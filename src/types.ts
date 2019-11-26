@@ -79,11 +79,12 @@ export interface TransactionsData {
   page:number,
   walletHash: string,
   resultsPerPage?:number,
-  dataSource?: any
+  dataSource?: any,
 }
 
 export interface TransactionsSummedData {
   walletHash: string,
+  groupBy: string
 }
 
 export interface ExtendedTheme extends Theme {

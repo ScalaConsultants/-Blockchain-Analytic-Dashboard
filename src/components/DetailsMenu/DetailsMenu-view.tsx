@@ -9,18 +9,19 @@ import ButtonBack from '../ButtonBack';
 
 const DetailsMenu = (props: ViewProps) => {
   const {
-      id,
-      zoom,
-      groupBy,
-      limit,
+      blockchain,
+      blockchains,
+      description,
+      email,
       from,
+      groupBy,
+      id,
+      limit,
       to,
       type,
+      update,
       walletHash,
-      blockchains,
-      blockchain,
-      description,
-      update
+      zoom
   } = props;
 
   const classes = DetailsMenuStyles();
@@ -52,12 +53,14 @@ const DetailsMenu = (props: ViewProps) => {
       </Grid>
       <Grid item xs={2}>
         <EditWalletModal
-            id={id}
             address={walletHash}
-            type={type}
-            description={description}
             blockchain={blockchain}
-            update={update} />
+            description={description}
+            email={email}
+            id={id}
+            type={type}
+            update={update}
+        />
       </Grid>
       <Grid item xs={1}>
         <ChartDescription type={type} />

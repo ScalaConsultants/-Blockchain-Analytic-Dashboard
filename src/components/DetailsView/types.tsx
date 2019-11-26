@@ -7,7 +7,7 @@ interface MatchProps {
 
 export interface Wallet {
   walletHash: string,
-  totalValue: number, 
+  totalValue: number,
   percentage: number,
   description?: string,
   type?: string
@@ -19,12 +19,15 @@ export interface State {
   }
   tezos: {
     wallets: Wallet[] | []
+  },
+  auth: {
+    email: string | null
   }
 }
 
 export interface DetailsViewReduxProps {
-  history: any, 
-  location: any, 
+  history: any,
+  location: any,
   match: MatchProps,
 }
 
@@ -40,6 +43,7 @@ export interface DetailsContainerProps {
   match?: MatchProps,
   blockchains?: string | any,
   update: (data: string) => void
+  email?: string | null
 }
 
 export interface DetailsViewProps extends DetailsContainerProps {

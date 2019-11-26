@@ -1,16 +1,12 @@
 import { put } from 'redux-saga/effects';
+
+import { doPost } from '../../helpers/fetch';
 import * as actions from '../../actions/common/editWallet';
 
 async function editWallet(data: any) {
   const url = `api/v1/${data.blockchain_id}/wallets/edit`;
 
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  };
-
-  const response = await fetch(`${process.env.REACT_APP_HOST}/${url}`, options);
+  const response = await doPost(url, data);
 
   return await response.json();
 }
