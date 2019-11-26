@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../../types';
 
-export const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
+const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
   
   container: {
     border: '1px solid' + theme.constants.SECONDARY_BG_COLOR,
@@ -34,3 +34,5 @@ export const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
   }
 
 }));
+
+export default useTimeFilterStyles;
