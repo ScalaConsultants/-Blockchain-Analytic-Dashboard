@@ -18,8 +18,8 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   const [timeValueTo, setTimeValueTo] : [number, Function] = useState(setTimeNow());
   const [timeValueFrom, setTimeValueFrom] : [number, Function] = useState(setTimeNow() - timeStep);
   
-  const handleChange = (event: any, newValue: number | number[]) => { 
-    const value:number = typeof newValue !== 'number' ? newValue[0] : newValue;
+  const handleChange = (event: any, newValue: number | number[]): void => { 
+    const value: number = typeof newValue !== 'number' ? newValue[0] : newValue;
     setTimeValueTo(value);
     setTimeValueFrom(value - timeStep);
   };
@@ -33,7 +33,11 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
       // onChangeCommitted={handleChangeCommitted}
     />
 
-  useEffect((): void => setTimeStep(setStep(props.activeTimeStep)), [props.activeTimeStep, timeValueTo]);
+  useEffect((): void => {
+    const newTimeStem = setStep(props.activeTimeStep);
+    setTimeStep(newTimeStem);
+    setTimeValueFrom(timeValueTo - newTimeStem);
+  }, [props.activeTimeStep, timeValueTo]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className={timeFilterClasses.container}>
