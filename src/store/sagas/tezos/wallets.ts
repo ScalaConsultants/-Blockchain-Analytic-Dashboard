@@ -1,17 +1,19 @@
 import { put, takeEvery } from 'redux-saga/effects';
+
+import { doGet } from '../../helpers/fetch';
 import * as blockchainActions from '../../actions/tezos/wallets';
 import { Wallets } from '../../../types';
 
-
 async function fetchWallets( {limit = 10, groupBy = 'buyer', from = 1567296000, to = 1567382400} ): Promise<Wallets> {
-  let res = null;
-  if(groupBy === 'data') {
-    res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/tezos/data-wallets?limit=${limit}&from=${from}&to=${to}`);
-  } else {
-    res = await fetch(`${process.env.REACT_APP_HOST}/api/v1/tezos/wallets?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`);
-  }
+  let url = `api/v1/tezos/wallets?groupBy=${groupBy}&limit=${limit}&from=${from}&to=${to}`;
 
-  return res.json();
+  if (groupBy === 'data') {
+    url = `${process.env.REACT_APP_HOST}/api/v1/tezos/data-wallets?limit=${limit}&from=${from}&to=${to}`;
+  };
+
+  const response = await doGet(url);
+
+  return response.json();
 }
 
 function* foFetchWallets(action: any) {
