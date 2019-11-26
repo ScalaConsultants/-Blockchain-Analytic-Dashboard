@@ -2,9 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../../types';
 
 const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
-  
   container: {
-    border: '1px solid' + theme.constants.SECONDARY_BG_COLOR,
+    border: `1px solid${theme.constants.SECONDARY_BG_COLOR}`,
     maxWidth: '230px',
     margin: '10px 4px',
     borderRadius: '4px'
@@ -32,7 +31,6 @@ const useTimeFilterStyles = makeStyles((theme: ExtendedTheme) => ({
     fontSize: '0.7rem',
     color: '#5975FF'
   }
-
 }));
 
 export default useTimeFilterStyles;
