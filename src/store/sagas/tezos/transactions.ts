@@ -1,15 +1,16 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
+import { doGet } from '../../helpers/fetch';
 import { FetchTransactionsAction } from '../../actions/types';
 import { Transactions } from '../../../types';
 import * as blockchainActions from '../../actions/tezos/transactions';
 
 async function fetchTransactions(walletHash: string, page: number, resultsPerPage: number = 20): Promise<Transactions> {
-  const res = await fetch(
-    /* eslint-disable-next-line max-len */
-    `${process.env.REACT_APP_HOST}/api/v1/tezos/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
-  );
-  return res.json();
+  const url = `api/v1/tezos/transactions?groupBy=buyer&resultsPerPage=${resultsPerPage}&page=${page}&walletHash=${walletHash}`
+
+  const response = await doGet(url);
+
+  return response.json();
 }
 
 function* doFetchTransactions(action: FetchTransactionsAction) {
