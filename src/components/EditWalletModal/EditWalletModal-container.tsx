@@ -26,7 +26,7 @@ const EditWalletModal = ({ id, address, type, description, blockchain, update, e
     const data = {
       wallet_address: address,
       blockchain_id: blockchain,
-      email_id: 'scalac@scalac.io',
+      email_id: email,
       type: typeState,
       description: descriptionState
     };
