@@ -117,16 +117,6 @@ const Filters = (props: any) => {
 
   const setZoomFilter = (): number[] => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()]
   
-  const fetchNewData = (activeBlockchains: string[]): void => {
-    activeBlockchains.forEach((blockchain: string) => 
-      actions.fetchWalletsByBlockchain({ 
-        limit: filters.limit, 
-        from: filters.from, 
-        to: filters.to, 
-        groupBy: urlParams.groupBy 
-      }, blockchain))
-  }
-
   const setActiveFilters = (): FiltersProps => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeTopList = activeFilters(activeTopListButtons);
@@ -142,7 +132,16 @@ const Filters = (props: any) => {
       timeStep: translatedActiveTimePeriod
     }
   }
-  
+
+  const fetchNewData = (activeBlockchains: string[]): void => 
+    activeBlockchains.forEach((blockchain: string) => 
+      actions.fetchWalletsByBlockchain({ 
+        limit: filters.limit, 
+        from: filters.from, 
+        to: filters.to, 
+        groupBy: urlParams.groupBy 
+      }, blockchain));
+
   const handleRefresh = (): void => {
     const activeFilters = setActiveFilters();
     const activeBlockchains = activeFilters.type || ['ETH', 'XTZ'];
@@ -151,7 +150,7 @@ const Filters = (props: any) => {
     fetchNewData(activeBlockchains);
     props.history.push(`/${match.params.groupBy}/${activeBlockchains}/${activeFilters.limit}/${activeFilters.from}/${activeFilters.to}`);
   }
-
+  
   useEffect((): void => handleRefresh(), [activeBlockchainButtons, activeTopListButtons, activePeriodTimeButtons]);
 
   return (
