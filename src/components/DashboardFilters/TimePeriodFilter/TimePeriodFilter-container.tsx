@@ -23,13 +23,24 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
     setTimeValueFrom(value - timeStep);
   };
 
-  const timePeriodSliderComponent = () => (
+  const handleChangeCommitted = (): void => {
+    const blockchains = props.urlParams.blockchains.split(',');
+    blockchains.forEach((blockchain: string) => 
+      props.actions.fetchWalletsByBlockchain({ 
+        limit: props.urlParams.limit, 
+        from: timeValueFrom, 
+        to: timeValueTo, 
+        groupBy: props.urlParams.groupBy 
+      }, blockchain))
+  };
+
+  const timePeriodSliderComponent = (): JSX.Element => (
     <Slider
       defaultValue={setTimeNow()}
       min={setMinValue() + timeStep}
       max={setTimeNow()}
       onChange={handleChange}
-      // onChangeCommitted={handleChangeCommitted}
+      onChangeCommitted={handleChangeCommitted}
     />
   );
 

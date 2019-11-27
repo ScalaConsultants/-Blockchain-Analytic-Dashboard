@@ -7,7 +7,9 @@ export interface FiltersProps {
 }
 
 export interface TimePeriodFilterProps {
-  activeTimeStep?: string 
+  activeTimeStep?: string,
+  actions?: any,
+  urlParams?: any
 }
 
 export interface ShowWatchedOnly {

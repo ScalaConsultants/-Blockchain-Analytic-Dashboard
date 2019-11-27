@@ -118,9 +118,13 @@ const Filters = (props: any) => {
   const setZoomFilter = (): number[] => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()]
   
   const fetchNewData = (activeBlockchains: string[]): void => {
-    activeBlockchains.forEach((blockchain: string) => {
-      actions.fetchWalletsByBlockchain({ limit: filters.limit, from: filters.from, to: filters.to, groupBy: urlParams.groupBy }, blockchain);
-    })
+    activeBlockchains.forEach((blockchain: string) => 
+      actions.fetchWalletsByBlockchain({ 
+        limit: filters.limit, 
+        from: filters.from, 
+        to: filters.to, 
+        groupBy: urlParams.groupBy 
+      }, blockchain))
   }
 
   const setActiveFilters = (): FiltersProps => {
@@ -166,7 +170,7 @@ const Filters = (props: any) => {
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
-          <TimePeriodFilter activeTimeStep={filters.timeStep}/>
+          <TimePeriodFilter activeTimeStep={filters.timeStep} actions={actions} urlParams={urlParams}/>
         </Grid>
       </Grid>
       <Grid item xs={3}>
