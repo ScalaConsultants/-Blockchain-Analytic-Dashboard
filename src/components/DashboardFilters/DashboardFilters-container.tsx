@@ -1,10 +1,9 @@
 /*eslint-disable react-hooks/exhaustive-deps*/
 
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography';
-import AutorenewIcon from '@material-ui/icons/Autorenew';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 
@@ -15,16 +14,15 @@ import { translateTimePeriod } from './helpers';
 import { FiltersProps } from './types'
 
 const Filters = (props: any) => {
-
   const { actions, match, showWatchedOnly } = props;
 
   const urlParams = match.params;
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const activeFilters = (filterObj: Record<string, boolean>) => Object.keys(filterObj).filter((item: string) => !!filterObj[item]);
+  const activeFilters = (filterObj: Record<string, boolean>): string[] => Object.keys(filterObj).filter((item: string) => !!filterObj[item]);
 
-  const checkActiveBlockchains = (label: string) => {
+  const checkActiveBlockchains = (label: string): boolean => {
     const activeBlockchains = urlParams.blockchains.split(',');
     return activeBlockchains.indexOf(label) !== -1;
   }
@@ -55,19 +53,17 @@ const Filters = (props: any) => {
   });
   
   const [filters, setFilters]: [FiltersProps, Function] = useState({});
-  
-  let newFilters: FiltersProps = {};
-  
+    
   const classes = useFiltersStyles();
 
-  const alert = () => {
+  const alert = (): void => {
     enqueueSnackbar('At least one blockchain required', {
       variant: 'info',
       persist: false,
     });
   }
 
-  const blockchainFilterHandler = (buttonLabel: string) => {
+  const blockchainFilterHandler = (buttonLabel: string): void => {
     const active = activeFilters(activeBlockchainButtons);
     if (active.length === 1 && active.includes(buttonLabel)) {
       alert();
@@ -80,75 +76,79 @@ const Filters = (props: any) => {
     }
   };
 
-  const zoomTopListHandler = (buttonLabel: string) => {
+  const zoomTopListHandler = (buttonLabel: string): void => {
     const buttons = { ...activeTopListButtons };
     Object.keys(buttons).map((label: string) => (buttons[label] = false));
     buttons[buttonLabel] = true;
     setTopListButtons({ ...buttons });
   };
 
-  const timePeriodHandler = (buttonLabel: string) => {
+  const timePeriodHandler = (buttonLabel: string): void => {
     const buttons = { ...activePeriodTimeButtons };
     Object.keys(buttons).map((label: string) => (buttons[label] = false));
     buttons[buttonLabel] = true;
     setPeriodTimeButtons({ ...buttons });
   };
 
-  const filterHandler = (buttonLabel: string, filterType: Record<string, boolean>) => {
+  const filterHandler = (buttonLabel: string, filterType: Record<string, boolean>): void => {
     filterType === activeBlockchainButtons && blockchainFilterHandler(buttonLabel);
     filterType === activeTopListButtons && zoomTopListHandler(buttonLabel);
     filterType === activePeriodTimeButtons && timePeriodHandler(buttonLabel);
   };
 
-  const renderButtons = (buttonLabels: Record<string, boolean>) =>
+  const renderButtons = (buttonLabels: Record<string, boolean>): JSX.Element[] =>
     Object.keys(buttonLabels).map((buttonLabel: string) => {
       const btnClass = clsx(classes.button, {
         [classes.active]: buttonLabels[buttonLabel]
       });
       return (
-        <button
-          type="button"
-          className={btnClass}
-          key={buttonLabel}
-          onClick={() => {
-            filterHandler(buttonLabel, buttonLabels);
-          }}
-        >
-          {buttonLabel}
-        </button>
+          <button
+            type="button"
+            className={btnClass}
+            key={buttonLabel}
+            onClick={() => {
+              filterHandler(buttonLabel, buttonLabels);
+            }}
+          >
+            {buttonLabel}
+          </button>
       );
     });
 
-  const setZoomFilter = () => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()]
+  const setZoomFilter = (): number[] => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()]
   
-  const fetchNewData = (activeBlockchains: string[]) => {
+  const fetchNewData = (activeBlockchains: string[]): void => {
     activeBlockchains.forEach((blockchain: string) => {
       actions.fetchWalletsByBlockchain({ limit: filters.limit, from: filters.from, to: filters.to, groupBy: urlParams.groupBy }, blockchain);
     })
   }
-  
-  const handleRefresh = (isDataFetched: boolean) => {
+
+  const setActiveFilters = (): FiltersProps => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
     const activeTopList = activeFilters(activeTopListButtons);
     const activeTimePeriod = activeFilters(activePeriodTimeButtons);
     const dates: number[] = setZoomFilter();
     const translatedActiveTimePeriod = translateTimePeriod(activeTimePeriod);
 
-    newFilters = {
+    return {
       limit: Number(activeTopList[0]),
       type: activeBlockchain,
       from: dates[0],
       to: dates[1],
       timeStep: translatedActiveTimePeriod
     }
+  }
+  
+  const handleRefresh = (): void => {
+    const activeFilters = setActiveFilters();
+    const activeBlockchains = activeFilters.type || ['ETH', 'XTZ'];
 
-    setFilters({ ...newFilters });
-    isDataFetched && fetchNewData(activeBlockchain);
+    setFilters({ ...activeFilters });
+    fetchNewData(activeBlockchains);
+    props.history.push(`/${match.params.groupBy}/${activeBlockchains}/${activeFilters.limit}/${activeFilters.from}/${activeFilters.to}`);
   }
 
-  useEffect((): void => {
-    handleRefresh(false);
-  }, [activeBlockchainButtons, activeTopListButtons, activePeriodTimeButtons]);
+  useEffect((): void => handleRefresh(), [activeBlockchainButtons, activeTopListButtons, activePeriodTimeButtons]);
 
   return (
     <Grid container justify="flex-start" alignItems="flex-start" className="Container">
@@ -169,15 +169,9 @@ const Filters = (props: any) => {
           <TimePeriodFilter activeTimeStep={filters.timeStep}/>
         </Grid>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Typography variant="h3">Top list</Typography>
         {renderButtons(activeTopListButtons)}
-      </Grid>
-      <Grid item xs={1}>
-        <Typography variant="h3">Refresh</Typography>
-        <Link replace={true} to={`/${match.params.groupBy}/${filters.type}/${filters.limit}/${filters.from}/${filters.to}`}>
-          <AutorenewIcon className={classes.refresh} onClick={() => handleRefresh(true)} />
-        </Link>
       </Grid>
     </Grid>
   );
