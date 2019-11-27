@@ -133,12 +133,12 @@ const Filters = (props: any) => {
     }
   }
 
-  const fetchNewData = (activeBlockchains: string[]): void => 
+  const fetchNewData = (activeBlockchains: string[], activeFilters: FiltersProps): void => 
     activeBlockchains.forEach((blockchain: string) => 
       actions.fetchWalletsByBlockchain({ 
-        limit: filters.limit, 
-        from: filters.from, 
-        to: filters.to, 
+        limit: activeFilters.limit, 
+        from: activeFilters.from, 
+        to: activeFilters.to, 
         groupBy: urlParams.groupBy 
       }, blockchain));
 
@@ -147,7 +147,7 @@ const Filters = (props: any) => {
     const activeBlockchains = activeFilters.type || ['ETH', 'XTZ'];
 
     setFilters({ ...activeFilters });
-    fetchNewData(activeBlockchains);
+    fetchNewData(activeBlockchains, activeFilters);
     props.history.push(`/${match.params.groupBy}/${activeBlockchains}/${activeFilters.limit}/${activeFilters.from}/${activeFilters.to}`);
   }
   
