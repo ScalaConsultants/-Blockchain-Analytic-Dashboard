@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import EditWalletModalView from './EditWalletModal-view';
 import { ContainerProps } from './types';
 
-const EditWalletModal = ({ id, address, type, description, blockchain, update, email }: ContainerProps) => {
+const EditWalletModal = ({ id, address, type, description, blockchain, update, email, canEdit }: ContainerProps) => {
   const [open, setOpen] = React.useState(false);
   const [descriptionState, setDescriptionState] = React.useState(description);
   const [typeState, setTypeState] = React.useState(type);
@@ -57,6 +57,7 @@ const EditWalletModal = ({ id, address, type, description, blockchain, update, e
       handleUpdate={handleUpdate}
       handleChange={handleChange}
       changeType={onChangeType}
+      canEdit={canEdit}
     />
   );
 };

@@ -1,6 +1,6 @@
 import { useMappedState } from 'redux-react-hook';
 
-const useRules = () => {
+const useRules = (): Record<string, boolean> => {
 
     const mapState = (state: any) => ({
         permissions: state.auth.permissions
@@ -9,7 +9,7 @@ const useRules = () => {
     const { permissions } = useMappedState(mapState);
     
     //Rules addOwnWallet, deleteOwnWallet, editOwnWallet
-    const rules = permissions.reduce((acc: any, value: any) => {
+    const rules = permissions.reduce((acc: boolean[], value: number) => {
         acc[value] = !!value;
         return acc
     }, {} );

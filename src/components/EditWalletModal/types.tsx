@@ -7,8 +7,9 @@ export interface Props {
 }
 
 export interface ContainerProps extends Props {
-  update: (data: any) => void;
+  update: (data: any) => void
   email?: string | null
+  canEdit?: boolean
 }
 
 export interface ViewProps extends Props {
@@ -18,4 +19,5 @@ export interface ViewProps extends Props {
   handleUpdate: () => void
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   changeType: (event: React.MouseEvent<HTMLElement>) => void
+  canEdit?: boolean
 }

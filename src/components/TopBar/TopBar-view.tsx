@@ -14,7 +14,7 @@ const TopBar = () => {
   const { PUBLIC_URL } = process.env;
   const classes = useTopBarStyles();
   const classesLogo = clsx([classes.logo, classes.flex]);
-  const {editOwnWallet} = useRules();
+  const { editOwnWallet } = useRules();
   
   return (
     <AppBar className={classes.appBar}>
