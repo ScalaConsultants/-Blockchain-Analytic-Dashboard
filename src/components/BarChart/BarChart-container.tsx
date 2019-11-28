@@ -82,15 +82,12 @@ const BarChartContainer = (props: BarChartProps) => {
     );
   };
 
-  //Temporary solution, when we get wallethash it should be remove
-  const renderUniqueKey = (): string =>  '_' + Math.random().toString(36).substr(2, 9);
-
   const createSegment = (walletHash: string, percentage: number, index: number, type: string | null = null) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
-        key={walletHash} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
+        key={walletHash+index} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
         <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
