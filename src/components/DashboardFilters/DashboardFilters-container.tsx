@@ -11,7 +11,7 @@ import TimePeriodFilter from './TimePeriodFilter';
 import WatchListFilter from './WatchListFilter';
 import { useFiltersStyles } from './DashboardFilters-styles';
 import { translateTimePeriod } from './helpers';
-import { FiltersProps } from './types'
+import { FiltersProps } from './types';
 
 const Filters = (props: any) => {
   const { actions, match, showWatchedOnly } = props;

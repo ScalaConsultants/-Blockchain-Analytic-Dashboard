@@ -8,11 +8,13 @@ import AuthModal from '../AuthModal';
 import UserMenu from '../UserMenu';
 
 import { useTopBarStyles } from './TopBar-styles';
+import useRules from '../hooks/Rules';
 
 const TopBar = () => {
   const { PUBLIC_URL } = process.env;
   const classes = useTopBarStyles();
   const classesLogo = clsx([classes.logo, classes.flex]);
+  const {editOwnWallet} = useRules();
   
   return (
     <AppBar className={classes.appBar}>
@@ -23,7 +25,7 @@ const TopBar = () => {
             </Link> 
           </div>
         <AuthModal />
-        <UserMenu />
+        {editOwnWallet && <UserMenu />}
       </Toolbar>
     </AppBar>
   );
