@@ -11,7 +11,7 @@ const transactions = (state = initState, action: SetTransactionsAction): Transac
     case TEZOS_FLUSH_TRANSACTIONS:
       return initState;
     default:
-      return state;
+      return state  ;
   }
 };
 
