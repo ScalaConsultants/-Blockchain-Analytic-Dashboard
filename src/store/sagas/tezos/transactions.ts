@@ -30,7 +30,7 @@ function* doFetchTransactions(action: FetchTransactionsAction) {
     try {
       if (transactions.length > 0) {
         yield put({
-          type: TEZOS_SET_TRANSACTIONS,
+          type: TEZOS_SET_TRANSACTIONS  ,
           transactions
         });
       }

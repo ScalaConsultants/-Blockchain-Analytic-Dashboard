@@ -51,7 +51,7 @@
     }
   },
   "lint-staged": {
-    "**/*s.ts' '**/*.tsx": ["npm run lint", "git add"]
+    "**/*s.ts' '**/*.tsx": ["npm run lint --fix", "git add"]
   },
   "eslintConfig": {
     "extends": "react-app"
