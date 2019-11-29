@@ -25,7 +25,7 @@ const EditWalletModalView = ({
    description,
    type,
    canEdit
-}: ViewProps) => {
+}: ViewProps): JSX.Element => {
   const { PUBLIC_URL } = process.env;
 
   const classes = EditWalletModalStyles();
@@ -50,7 +50,7 @@ const EditWalletModalView = ({
 
   const allowOpen = canEdit ? handleOpen : () => {}
 
-  const editButton = (): JSX.Element => (
+  const generateEditButton = (): JSX.Element => (
     <Button
       variant="outlined"
       color="inherit"
@@ -63,7 +63,7 @@ const EditWalletModalView = ({
 
   return (
     <>
-      {canEdit ? editButton() : <Tooltip title='Please sign/log in' placement="bottom">{editButton()}</Tooltip>}
+      {canEdit ? generateEditButton() : <Tooltip title='Please sign/log in' placement="bottom">{generateEditButton()}</Tooltip>}
       <Modal
         aria-labelledby="edit-wallet-modal-title"
         aria-describedby="edit-wallet-modal-description"
