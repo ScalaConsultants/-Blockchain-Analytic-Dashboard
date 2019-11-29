@@ -71,11 +71,6 @@ const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
   grey: {
     color: theme.palette.grey[400]
   },
-  // types: {
-  //   '& div:nth-child(2)': {
-  //     background: theme.constants.MARKET_COLOR
-  //   }
-  // },
   market: {
     background: theme.constants.MARKET_COLOR
   },
@@ -93,6 +88,10 @@ const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
     textTransform: 'none',
     borderRadius: '4px',
     border: 'none'
+  },
+  disableBtn: {
+    cursor: 'not-allowed',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)'
   }
 }));
 

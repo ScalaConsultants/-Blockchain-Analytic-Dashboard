@@ -6,6 +6,7 @@ import ChartDescription from '../ChartDescription';
 import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 import ButtonBack from '../ButtonBack';
+import useRules from '../hooks/Rules';
 
 const DetailsMenu = (props: ViewProps) => {
   const {
@@ -23,6 +24,8 @@ const DetailsMenu = (props: ViewProps) => {
       walletHash,
       zoom
   } = props;
+
+  const { editOwnWallet } = useRules();
 
   const classes = DetailsMenuStyles();
   const classesRoot = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
@@ -60,6 +63,7 @@ const DetailsMenu = (props: ViewProps) => {
             id={id}
             type={type}
             update={update}
+            canEdit={editOwnWallet}
         />
       </Grid>
       <Grid item xs={1}>

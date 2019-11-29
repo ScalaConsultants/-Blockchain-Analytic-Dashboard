@@ -11,7 +11,8 @@ const initState = {
   isResetPassword: false,
   loading: false,
   error: null,
-  message: null
+  message: null,
+  permissions: []
 };
 
 const authUserStart = (state: AuthState) => ({
@@ -33,7 +34,7 @@ const authUserSignUpSuccess = (state: AuthState) => ({
 });
 
 const authUserLoginSuccess = (state: AuthState, action: AuthUserResponse) => {
-  const { token, user, isAuthenticated } = action.data;
+  const { token, user, isAuthenticated, permissions } = action.data;
   return {
     ...state,
     loading: false,
@@ -41,7 +42,8 @@ const authUserLoginSuccess = (state: AuthState, action: AuthUserResponse) => {
     token,
     email: user.email,
     username: user.username,
-    isAuth: isAuthenticated
+    isAuth: isAuthenticated,
+    permissions: permissions
   }
 };
 

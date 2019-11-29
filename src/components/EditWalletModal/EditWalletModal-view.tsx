@@ -8,6 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import EditWalletModalStyles from './EditWalletModal-styles';
 import { ViewProps } from './types';
 
@@ -21,15 +23,16 @@ const EditWalletModalView = ({
    id,
    address,
    description,
-   type
-}: ViewProps) => {
+   type,
+   canEdit
+}: ViewProps): JSX.Element => {
   const { PUBLIC_URL } = process.env;
 
   const classes = EditWalletModalStyles();
   const classesPaper = clsx([classes.paper, classes.fonts, classes.grey]);
   const classesTextarea = clsx([classes.textarea, classes.fonts, classes.white]);
   const classesChip = clsx([classes.chip, classes.background]);
-  const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background]);
+  const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background, !canEdit && classes.disableBtn]);
   const classesFirstButton = clsx([classes.button, classes.fonts, classes.buttonFirst, classes.white]);
   const classesSecondButton = clsx([classes.button, classes.fonts]);
   const classesMarket = clsx(classesChip, {
@@ -45,16 +48,22 @@ const EditWalletModalView = ({
       [classes.fraud]: type === 'fraud'
   });
 
+  const allowOpen = canEdit ? handleOpen : () => {};
+
+  const generateEditButton = (): JSX.Element => (
+    <Button
+      variant="outlined"
+      color="inherit"
+      className={classesEditWalletButton}
+      onClick={allowOpen}
+    ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} alt="Wallet icon"/>
+      edit
+    </Button>
+  );
+
   return (
     <>
-      <Button
-        variant="outlined"
-        color="inherit"
-        className={classesEditWalletButton}
-        onClick={handleOpen}
-      ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} alt="Wallet icon"/>
-        edit
-      </Button>
+      { canEdit ? generateEditButton() : <Tooltip title='Please sign/log in' placement="bottom">{ generateEditButton() }</Tooltip> }
       <Modal
         aria-labelledby="edit-wallet-modal-title"
         aria-describedby="edit-wallet-modal-description"
