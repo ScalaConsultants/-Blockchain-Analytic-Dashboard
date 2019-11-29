@@ -46,12 +46,15 @@
     "lint": "eslint '**/*s.ts' '**/*.tsx'"
   },
   "husky": {
-    "hooks":{
+    "hooks": {
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "**/*s.ts' '**/*.tsx": ["eslint '**/*s.ts' '**/*.tsx'", "git add"]
+    "**/*.ts' '**/*.tsx": [
+      "eslint",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

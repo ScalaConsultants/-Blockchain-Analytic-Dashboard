@@ -84,7 +84,7 @@ export interface TransactionsData {
 
 export interface TransactionsSummedData {
   walletHash: string,
-  groupBy: string
+  groupBy:      string ; 
 }
 
 export interface ExtendedTheme extends Theme {
