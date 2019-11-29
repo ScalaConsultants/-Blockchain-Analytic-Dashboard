@@ -48,7 +48,7 @@ const EditWalletModalView = ({
       [classes.fraud]: type === 'fraud'
   });
 
-  const allowOpen = canEdit ? handleOpen : () => {}
+  const allowOpen = canEdit ? handleOpen : () => {};
 
   const generateEditButton = (): JSX.Element => (
     <Button
@@ -59,11 +59,11 @@ const EditWalletModalView = ({
     ><img src={`${PUBLIC_URL}/icons/wallet.png`} style={{ width: '13px', marginRight: '5px' }} alt="Wallet icon"/>
       edit
     </Button>
-  )
+  );
 
   return (
     <>
-      {canEdit ? generateEditButton() : <Tooltip title='Please sign/log in' placement="bottom">{generateEditButton()}</Tooltip>}
+      { canEdit ? generateEditButton() : <Tooltip title='Please sign/log in' placement="bottom">{ generateEditButton() }</Tooltip> }
       <Modal
         aria-labelledby="edit-wallet-modal-title"
         aria-describedby="edit-wallet-modal-description"
