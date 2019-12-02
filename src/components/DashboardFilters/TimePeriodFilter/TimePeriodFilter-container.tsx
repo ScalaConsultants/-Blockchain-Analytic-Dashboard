@@ -3,14 +3,25 @@ import Grid from '@material-ui/core/Grid/Grid';
 import Slider from '@material-ui/core/Slider';
 
 import useTimeFilterStyles from './TimePeriodFilter-styles';
-import { setDateToday, setDateYesterday, setTimeNow, setMinValue, convertTimestampToTime, setStep, roundTimeTo10Minutes } from '../helpers';
+import {
+  setDateToday,
+  setDateYesterday,
+  setTimeNow,
+  setMinValue,
+  convertTimestampToTime,
+  setStep,
+  roundTimeTo10Minutes
+} from '../helpers';
 import { TimePeriodFilterProps } from '../types';
 
 const TimePeriodFilter = (props: TimePeriodFilterProps) => {
-  const timeFilterClasses = useTimeFilterStyles();
+  const timeFilterClasses: Record<
+    'container' | 'right' | 'header' | 'timeField' | 'body',
+    string
+  > = useTimeFilterStyles();
 
-  const today = setDateToday();
-  const yesterday = setDateYesterday();
+  const today: string = setDateToday();
+  const yesterday: string = setDateYesterday();
 
   const [timeStep, setTimeStep]: [number, Function] = useState(60000);
 
@@ -19,26 +30,33 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
 
   const roundTime = (timestampToRound: number): number => {
     const timestamp: Date = new Date(timestampToRound);
-    return timeStep === 3600000 ? timestamp.setMinutes(0) : 
-      timeStep === 600000 ? roundTimeTo10Minutes(timestampToRound) : 
-      timestampToRound;
-  }
+    if (timeStep === 3600000) {
+      return timestamp.setMinutes(0);
+    }
+    if (timeStep === 600000) {
+      return roundTimeTo10Minutes(timestampToRound);
+    }
+    return timestampToRound;
+  };
 
   const handleChange = (event: any, newValue: number | number[]): void => {
-    let value: number = typeof newValue !== 'number' ? roundTime(newValue[0]) : roundTime(newValue);
+    const value: number = typeof newValue !== 'number' ? roundTime(newValue[0]) : roundTime(newValue);
     setTimeValueTo(value);
     setTimeValueFrom(value - timeStep);
   };
 
   const handleChangeCommitted = (): void => {
     const blockchains = props.urlParams.blockchains.split(',');
-    blockchains.forEach((blockchain: string) => 
-      props.actions.fetchWalletsByBlockchain({ 
-        limit: props.urlParams.limit, 
-        from: timeValueFrom, 
-        to: timeValueTo, 
-        groupBy: props.urlParams.groupBy 
-      }, blockchain))
+    blockchains.forEach((blockchain: string) =>
+      props.actions.fetchWalletsByBlockchain(
+        {
+          limit: props.urlParams.limit,
+          from: timeValueFrom,
+          to: timeValueTo,
+          groupBy: props.urlParams.groupBy
+        },
+        blockchain
+      ));
   };
 
   const timePeriodSliderComponent = (): JSX.Element => (
