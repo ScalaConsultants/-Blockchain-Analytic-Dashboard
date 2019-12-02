@@ -1,4 +1,4 @@
-const setTodayDate = () => {
+const setTodayDate = (): Record<string, number> => {
   const date = new Date();
   const day: string | number = date.getDate();
   const month: string | number = date.getMonth()+1;
@@ -11,15 +11,15 @@ const setTodayDate = () => {
   }
 }
 
-const formatDate = (date: number | string) =>  date < 10 ? (date = '0' + date) : date; 
+const formatDate = (date: number | string): string | number =>  date < 10 ? (date = '0' + date) : date; 
 
-export const setDateToday = () => {
+export const setDateToday = (): string => {
   let day: string | number = setTodayDate().day;
   let month: string | number = setTodayDate().month; 
   return formatDate(day) + '.' + formatDate(month);
 }
 
-export const setDateYesterday = () => {
+export const setDateYesterday = (): string => {
   let day: string | number = setTodayDate().day;
   let month: string | number = setTodayDate().month;
   let year: string | number = setTodayDate().year; 
@@ -36,7 +36,7 @@ export const setDateYesterday = () => {
   return formatDate(day) + '.' + formatDate(month);
 }
 
-export const translateTimePeriod = (activeLabel: string[]) => {
+export const translateTimePeriod = (activeLabel: string[]): string => {
   switch(activeLabel[0].toString()) {
     case('By hour'): 
     return 'BY_1_HOUR';
@@ -49,15 +49,25 @@ export const translateTimePeriod = (activeLabel: string[]) => {
   }
 }
 
-export const setMinValue = () =>  Number(setTimeNow() - 24*60*60*1000);
-export const setTimeNow = () =>  Number(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000);
-export const convertTimestampToTime = (timestamp: number) => new Date(timestamp).toISOString().substr(0, 19).slice(11, -3);
+export const setMinValue = (): number =>  Number(setTimeNow() - 24*60*60*1000);
+export const setTimeNow = (): number =>  Number(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000);
+export const convertTimestampToTime = (timestamp: number): string => new Date(timestamp).toISOString().substr(0, 19).slice(11, -3);
 
-export const setStep = (timeStepString: string | undefined = 'BY_1_MINUTE') => {
+export const setStep = (timeStepString: string | undefined = 'BY_1_MINUTE'): number => {
   switch(timeStepString) {
     case('BY_1_HOUR'): return 3600000;
     case('BY_10_MINUTES'): return 600000;
     case('BY_1_MINUTE'): return 60000;
     default: return 60000;
   }
+}
+
+export const roundTimeTo10Minutes = (timestampToRound: number): number => {
+  const timestamp: Date = new Date(timestampToRound);
+  const timeStampTime: number = Number(timestamp.getTime() - timestamp.getTimezoneOffset() * 60 * 1000);
+  const generateTimestamp: number = Date.parse(
+    `${timestamp.getMonth()+1}-${timestamp.getDay()+1}-${timestamp.getFullYear()} 
+    ${convertTimestampToTime(timeStampTime).slice(0, 4).concat('0')}`
+  );
+  return generateTimestamp;
 }

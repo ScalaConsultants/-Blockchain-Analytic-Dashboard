@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid/Grid';
 import Slider from '@material-ui/core/Slider';
 
 import useTimeFilterStyles from './TimePeriodFilter-styles';
-import { setDateToday, setDateYesterday, setTimeNow, setMinValue, convertTimestampToTime, setStep } from '../helpers';
+import { setDateToday, setDateYesterday, setTimeNow, setMinValue, convertTimestampToTime, setStep, roundTimeTo10Minutes } from '../helpers';
 import { TimePeriodFilterProps } from '../types';
 
 const TimePeriodFilter = (props: TimePeriodFilterProps) => {
@@ -17,8 +17,15 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   const [timeValueTo, setTimeValueTo]: [number, Function] = useState(setTimeNow());
   const [timeValueFrom, setTimeValueFrom]: [number, Function] = useState(setTimeNow() - timeStep);
 
+  const roundTime = (timestampToRound: number): number => {
+    const timestamp: Date = new Date(timestampToRound);
+    return timeStep === 3600000 ? timestamp.setMinutes(0) : 
+      timeStep === 600000 ? roundTimeTo10Minutes(timestampToRound) : 
+      timestampToRound;
+  }
+
   const handleChange = (event: any, newValue: number | number[]): void => {
-    const value: number = typeof newValue !== 'number' ? newValue[0] : newValue;
+    let value: number = typeof newValue !== 'number' ? roundTime(newValue[0]) : roundTime(newValue);
     setTimeValueTo(value);
     setTimeValueFrom(value - timeStep);
   };
