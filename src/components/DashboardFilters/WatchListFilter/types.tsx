@@ -1,7 +1,7 @@
 export interface WatchListFilterProps {
-    actions: WatchListFilterActions
-};
+  actions: WatchListFilterActions;
+}
 
 interface WatchListFilterActions {
-    toggleWatchedList: Function
-};
+  toggleWatchedList: Function;
+}

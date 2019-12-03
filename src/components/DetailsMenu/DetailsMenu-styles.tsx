@@ -31,6 +31,11 @@ const DetailsMenuStyles = makeStyles((theme: ExtendedTheme) => ({
     '&::first-letter': {
       textTransform: 'uppercase'
     }
+  },
+  backgroundInfo: {
+    background: theme.constants.SECONDARY_BG_COLOR,
+    padding: '10px',
+    color: theme.constants.GREY_TEXT_COLOR
   }
 }));
 

@@ -10,7 +10,8 @@ const MuiButton = {
     background: SECONDARY_BG_COLOR,
     height: '28px',
     borderRadius: '4px',
-    border: 'none'
+    border: 'none',
+    padding: '5px 14px'
   },
   label: {
     height: '16px'
