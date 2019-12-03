@@ -16,3 +16,4 @@ export const FRAUD_COLOR = 'linear-gradient(90deg, #2A2D3A 0%, #34363F 100%)';
 export const REST_COLOR = 'linear-gradient(90deg, #B38D1B 0%, #FFD659 100%)';
 export const DECOR_COLOR = 'linear-gradient(90deg, #78CC33 4.76%, #9EE32D 100%)';
 export const GREY_TEXT_COLOR = '#A3A7B0';
+denerwujemnieto
