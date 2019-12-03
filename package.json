@@ -20,7 +20,6 @@
     "clsx": "^1.0.4",
     "conseiljs": "0.2.2",
     "eslint-plugin-react-hooks": "^1.6.1",
-    "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "notistack": "^0.9.3",
     "react": "^16.8.6",
@@ -47,7 +46,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm test",
+      "pre-push": "npm test",
+      "...": "..."
     }
   },
   "lint-staged": {
@@ -84,6 +85,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
+    "husky": "^4.0.0-beta.5",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
     "tslint-config-prettier": "^1.18.0"
