@@ -84,5 +84,3 @@ const useWalletsListTableStyles = makeStyles((theme: ExtendedTheme) => ({
 }));
 
 export default useWalletsListTableStyles;
-
-draznimnieto
