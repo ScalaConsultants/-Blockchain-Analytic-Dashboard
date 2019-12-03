@@ -6,32 +6,36 @@ import ChartDescription from '../ChartDescription';
 import DetailsMenuStyles from './DetailsMenu-styles';
 import { ViewProps } from './types';
 import ButtonBack from '../ButtonBack';
+import useRules from '../hooks/Rules';
 
 const DetailsMenu = (props: ViewProps) => {
   const {
-      blockchain,
-      blockchains,
-      description,
-      email,
-      from,
-      groupBy,
-      id,
-      limit,
-      to,
-      type,
-      update,
-      walletHash,
-      zoom
+    blockchain,
+    blockchains,
+    description,
+    email,
+    from,
+    groupBy,
+    id,
+    limit,
+    to,
+    type,
+    update,
+    walletHash,
+    zoom
   } = props;
 
+  const { editOwnWallet } = useRules();
+
   const classes = DetailsMenuStyles();
-  const classesRoot = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
-  const classesInfo = clsx([classes.margin, classes.white]);
+  const classesRoot: string = clsx([classes.root, classes.fonts, classes.fontWeightBold]);
+  const classesInfo: string = clsx([classes.margin, classes.white]);
+  const classesFiltersInfo: string = clsx([classes.margin, classes.backgroundInfo]);
 
   return (
     <Grid container direction="row" alignItems="center" className={classesRoot}>
       <Grid item xs={1}>
-        <ButtonBack customBackLink={`/${groupBy}/${blockchains}/${limit}/${from}/${to}`}/>
+        <ButtonBack customBackLink={`/${groupBy}/${blockchains}/${limit}/${from}/${to}`} />
       </Grid>
       <Grid item xs={8}>
         <Grid container alignItems="center" className={classesInfo}>
@@ -53,33 +57,34 @@ const DetailsMenu = (props: ViewProps) => {
       </Grid>
       <Grid item xs={2}>
         <EditWalletModal
-            address={walletHash}
-            blockchain={blockchain}
-            description={description}
-            email={email}
-            id={id}
-            type={type}
-            update={update}
+          address={walletHash}
+          blockchain={blockchain}
+          description={description}
+          email={email}
+          id={id}
+          type={type}
+          update={update}
+          canEdit={editOwnWallet}
         />
       </Grid>
       <Grid item xs={1}>
         <ChartDescription type={type} />
       </Grid>
-      <Grid container direction="row" justify="flex-start" alignItems="center" className={classesInfo}>
-        <Grid item xs={1}>
-          FILTERS
+      <Grid container direction="row" justify="flex-end" alignItems="center" className={classesFiltersInfo}>
+        <Grid item xs={2}>
+          Active filters:
         </Grid>
-        <Grid item xs={1}>
-          {blockchain}
+        <Grid item xs={2}>
+          {`Blockchain: ${blockchain}`}
         </Grid>
-        <Grid item xs={1} className={classes.firstLetterUppercase}>
-          {groupBy}
+        <Grid item xs={2} className={classes.firstLetterUppercase}>
+          {`Group by: ${groupBy}`}
         </Grid>
-        <Grid item xs={1}>
-          {zoom}
+        <Grid item xs={2}>
+          {`Zoom: ${zoom}`}
         </Grid>
-        <Grid item xs={1}>
-          {`Top ${limit}`}
+        <Grid item xs={2}>
+          {`Top: ${limit}`}
         </Grid>
       </Grid>
     </Grid>

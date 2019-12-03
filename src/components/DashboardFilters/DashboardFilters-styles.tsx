@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../types';
 
- export const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
+const useFiltersStyles: any = makeStyles((theme: ExtendedTheme) => ({
   button: {
     color: theme.constants.GREY_TEXT_COLOR,
     background: theme.constants.SECONDARY_BG_COLOR,
@@ -35,6 +35,12 @@ import { ExtendedTheme } from '../../types';
 
   noClick: {
     cursor: 'not-allowed',
-    pointerEvents: 'none',
+    pointerEvents: 'none'
+  },
+
+  mainContainer: {
+    width: '80%'
   }
 }));
+
+export default useFiltersStyles;

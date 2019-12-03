@@ -24,6 +24,7 @@ export interface AuthUserResponse extends ActionType {
     token: null | string
     id: null | string
     isAuthenticated: boolean
+    permissions: string[]
     user: {
       email: string
       username: string

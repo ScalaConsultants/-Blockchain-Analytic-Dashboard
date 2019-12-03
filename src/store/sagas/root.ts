@@ -11,8 +11,8 @@ export default function* root(): any {
     ethereumSagas.watchDoFetchWallets(),
     ethereumSagas.watchDoFetchTransactionsSummed(),
     ethereumSagas.watchDoFetchTransactions(),
-    // tezosSagas.watchDoFetchWallets(),
-    // tezosSagas.watchDoFetchTransactionsSummed(),
-    // tezosSagas.watchDoFetchTransactions()
+    tezosSagas.watchDoFetchWallets(),
+    tezosSagas.watchDoFetchTransactionsSummed(),
+    tezosSagas.watchDoFetchTransactions()
   ]);
 }
