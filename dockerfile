@@ -7,7 +7,7 @@ RUN npm install yarn -g
 RUN yarn install
 RUN yarn run build
 
-FROM node:8.12.0
+FROM node:latest
 RUN yarn global add serve
 WORKDIR /app
 COPY --from=builder --chown=node /app/build .
