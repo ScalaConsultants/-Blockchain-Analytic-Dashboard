@@ -8,7 +8,7 @@ const WatchListFilterRedux = () => {
 
   const toggleWatchedList = (): void => {
     dispatch({
-      type: watchListFilter.TOGGLE_WATCHED_LIST,
+      type: watchListFilter.TOGGLE_WATCHED_LIST
     });
   };
 
@@ -16,9 +16,7 @@ const WatchListFilterRedux = () => {
     toggleWatchedList
   };
 
-  return (
-    <WatchListFilter actions={actions} />
-  );
+  return <WatchListFilter actions={actions} />;
 };
 
 export default WatchListFilterRedux;

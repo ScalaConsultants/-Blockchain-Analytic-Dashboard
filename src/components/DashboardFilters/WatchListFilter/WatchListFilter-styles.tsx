@@ -1,7 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedTheme } from '../../../types';
 
-export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
+const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
+  mainContainer: {
+    width: '80%'
+  },
+
   container: {
     marginTop: '-10px'
   },
@@ -15,6 +19,7 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
   },
 
   select: {
+    marginRight: '10px',
     background: theme.constants.SECONDARY_BG_COLOR,
     borderRadius: '4px',
     minWidth: '13.2rem',
@@ -26,7 +31,7 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
     paddingLeft: '10px',
     '& > ul': {
       padding: '0',
-      background: theme.constants.SECONDARY_BG_COLOR,
+      background: theme.constants.SECONDARY_BG_COLOR
     },
     '& > svg': {
       color: theme.constants.GREY_TEXT_COLOR,
@@ -36,11 +41,11 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
 
   button: {
     textAlign: 'right',
-    paddingRight: '7px'
+    paddingRight: '25px'
   },
 
   listItems: {
-    background: theme.constants.SECONDARY_BG_COLOR + '!important',
+    background: `${theme.constants.SECONDARY_BG_COLOR}!important`,
     color: theme.constants.GREY_TEXT_COLOR,
     fontSize: '0.8rem',
     fontFamily: theme.constants.DEFAULT_FONT_FAMILY,
@@ -52,5 +57,11 @@ export const useWatchListFilterStyles = makeStyles((theme: ExtendedTheme) => ({
 
   link: {
     textDecoration: 'none'
+  },
+
+  switchButtonItem: {
+    transform: 'translateX(50%)'
   }
 }));
+
+export default useWatchListFilterStyles;

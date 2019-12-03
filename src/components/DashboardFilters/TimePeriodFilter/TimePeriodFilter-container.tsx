@@ -70,9 +70,9 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   );
 
   useEffect((): void => {
-    const newTimeStem = setStep(props.activeTimeStep);
-    setTimeStep(newTimeStem);
-    setTimeValueFrom(timeValueTo - newTimeStem);
+    const newTimeStep = setStep(props.activeTimeStep);
+    setTimeStep(newTimeStep);
+    setTimeValueFrom(timeValueTo - newTimeStep);
   }, [props.activeTimeStep, timeValueTo]);
 
   return (
@@ -82,7 +82,7 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
           {yesterday}
         </Grid>
         <Grid item xs={8} className={timeFilterClasses.timeField}>
-          {`${convertTimestampToTime(timeValueFrom)}-${convertTimestampToTime(timeValueTo)}`}
+          {`${convertTimestampToTime(roundTime(timeValueFrom))}-${convertTimestampToTime(roundTime(timeValueTo))}`}
         </Grid>
         <Grid item xs={2} className={timeFilterClasses.right}>
           {today}
