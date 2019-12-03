@@ -35,7 +35,8 @@
     "redux-react-hook": "^3.3.2",
     "redux-saga": "^1.0.5",
     "typescript": "3.5.3",
-    "util": "^0.12.1"
+    "util": "^0.12.1",
+    "husky": "^4.0.0-beta.5"
   },
   "scripts": {
     "start": "react-scripts start",
