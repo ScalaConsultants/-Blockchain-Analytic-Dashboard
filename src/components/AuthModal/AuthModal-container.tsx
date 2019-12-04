@@ -6,14 +6,9 @@ import { validation, rules } from './helpers';
 
 import { AuthModalProps, User } from './types';
 
-const AuthModal = ({
-  onAuthUser,
-  onAuthUserForgotPassword,
-  auth
-}: AuthModalProps) => {
+const AuthModal = ({ onAuthUser, onAuthUserForgotPassword, auth }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
   const [shouldSignUp, setShouldSignUp] = useState(false);
 
   const [user, setUser] = useState({
@@ -37,7 +32,6 @@ const AuthModal = ({
 
   const setInitialState = () => {
     setForgotPassword(false);
-    setRememberMe(true);
     setShouldSignUp(false);
     setUser({
       email: '',
@@ -59,16 +53,15 @@ const AuthModal = ({
     })
   }
 
-  const handleOpen = () => setOpen(prevState => !prevState);
+  const handleOpen = (): void => setOpen(prevState => !prevState);
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(prevState => !prevState);
     setInitialState();
   };
 
-  const handleSwitchForms = () => setForgotPassword(prevState => !prevState);
+  const handleSwitchForms = (): void => setForgotPassword(prevState => !prevState);
 
-  const handleRememberMe = () => setRememberMe(prevState => !prevState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
@@ -112,7 +105,7 @@ const AuthModal = ({
     }
   };
 
-  const btnClick = (btn: boolean) => {
+  const btnClick = (btn: boolean): void => {
     const { email, password } = formValidation;
     if (email.isValid && password.isValid) {
       if ((btn && shouldSignUp) || (!btn && !shouldSignUp)) return onAuthUser(user.email, user.password, btn);
@@ -144,14 +137,12 @@ const AuthModal = ({
         handleClose={handleClose}
         handleLogin={handleLogin}
         handleSignUp={handleSignUp}
-        handleRememberMe={handleRememberMe}
         handleSwitchForms={handleSwitchForms}
         handleForgotPassword={handleForgotPassword}
         handleEmailFocus={handleEmailFocus}
         handleEmailBlur={handleEmailBlur}
         handlePasswordFocus={handlePasswordFocus}
         handlePasswordBlur={handlePasswordBlur}
-        rememberMe={rememberMe}
         forgotPassword={forgotPassword}
         user={user}
         shouldSignUp={shouldSignUp}
