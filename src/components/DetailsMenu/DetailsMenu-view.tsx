@@ -12,6 +12,7 @@ const DetailsMenu = (props: ViewProps) => {
   const {
     blockchain,
     blockchains,
+    title,
     description,
     email,
     from,
@@ -59,6 +60,7 @@ const DetailsMenu = (props: ViewProps) => {
         <EditWalletModal
           address={walletHash}
           blockchain={blockchain}
+          title={title}
           description={description}
           email={email}
           id={id}

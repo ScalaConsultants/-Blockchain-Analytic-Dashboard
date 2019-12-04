@@ -9,6 +9,7 @@ export interface Wallet {
   walletHash: string,
   totalValue: number,
   percentage: number,
+  title?: string,
   description?: string,
   type?: string
 }
@@ -39,6 +40,7 @@ export interface DetailsContainerProps {
   to?: string | any,
   from?: string | any,
   wallets?: Record<string, any> | any,
+  title?: string | any,
   description?: string | any,
   match?: MatchProps,
   blockchains?: string | any,
@@ -49,6 +51,7 @@ export interface DetailsContainerProps {
 export interface DetailsViewProps extends DetailsContainerProps {
   id: string,
   zoom: string,
+  title: string,
   description: string,
   type: string,
   blockchain: string

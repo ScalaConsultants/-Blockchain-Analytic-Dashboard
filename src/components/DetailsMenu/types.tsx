@@ -1,6 +1,7 @@
 export interface ViewProps {
   id: string;
   address?: string | any;
+  title: string;
   description: string;
   type?: string | any;
   blockchain?: string;
