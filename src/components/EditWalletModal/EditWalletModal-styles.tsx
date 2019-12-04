@@ -35,6 +35,10 @@ const EditWalletModalStyles = makeStyles((theme: ExtendedTheme) => ({
       padding: '6px 9px'
     }
   },
+  titleField: {
+    maxHeight: '21px',
+    padding: '5px'
+  },
   textarea: {
     minHeight: '44px'
   },

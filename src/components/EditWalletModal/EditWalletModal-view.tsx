@@ -19,18 +19,22 @@ const EditWalletModalView = ({
    handleClose,
    handleUpdate,
    handleChange,
+   handleTitleChange,
    changeType,
    id,
    address,
    description,
+   title,
    type,
    canEdit
 }: ViewProps): JSX.Element => {
+
   const { PUBLIC_URL } = process.env;
 
   const classes = EditWalletModalStyles();
   const classesPaper = clsx([classes.paper, classes.fonts, classes.grey]);
   const classesTextarea = clsx([classes.textarea, classes.fonts, classes.white]);
+  const classesTitleField = clsx([classes.fonts, classes.white, classes.titleField]);
   const classesChip = clsx([classes.chip, classes.background]);
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background, !canEdit && classes.disableBtn]);
   const classesFirstButton = clsx([classes.button, classes.fonts, classes.buttonFirst, classes.white]);
@@ -63,7 +67,10 @@ const EditWalletModalView = ({
 
   return (
     <>
-      { canEdit ? generateEditButton() : <Tooltip title='Please sign/log in' placement="bottom">{ generateEditButton() }</Tooltip> }
+      { canEdit 
+        ? generateEditButton() 
+        : <Tooltip title='Please sign/log in' placement="bottom">{ generateEditButton() }</Tooltip>
+      }
       <Modal
         aria-labelledby="edit-wallet-modal-title"
         aria-describedby="edit-wallet-modal-description"
@@ -103,6 +110,22 @@ const EditWalletModalView = ({
               <Grid item className={classesPrivate} onClick={changeType} data-name="private">Private</Grid>
               <Grid item className={classesDapp} onClick={changeType} data-name="dapp">DAPP</Grid>
               <Grid item className={classesFraud} onClick={changeType} data-name="fraud">Fraud</Grid>
+            </Grid>
+            <Grid container className={classes.marginTop30}>
+              <Grid item xs={12}>Title</Grid>
+              <Grid item xs={12}>
+                <TextField
+                  /* eslint-disable-next-line react/jsx-boolean-value */
+                  fullWidth={true}
+                  id="edit-wallet-modal-title"
+                  className={classes.description}
+                  defaultValue={title}
+                  onChange={handleTitleChange}
+                  margin="normal"
+                  variant="outlined"
+                  inputProps={{ 'aria-label': 'edit-wallet-modal-title', className: classesTitleField }}
+                />
+              </Grid>
             </Grid>
             <Grid container className={classes.marginTop30}>
               <Grid item xs={12}>Description</Grid>
