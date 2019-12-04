@@ -20,7 +20,6 @@
     "clsx": "^1.0.4",
     "conseiljs": "0.2.2",
     "eslint-plugin-react-hooks": "^1.6.1",
-    "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "notistack": "^0.9.3",
     "react": "^16.8.6",
