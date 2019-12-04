@@ -34,6 +34,7 @@ const EditWalletModalView = ({
   const classes = EditWalletModalStyles();
   const classesPaper = clsx([classes.paper, classes.fonts, classes.grey]);
   const classesTextarea = clsx([classes.textarea, classes.fonts, classes.white]);
+  const classesTitleField = clsx([classes.fonts, classes.white, classes.titleField]);
   const classesChip = clsx([classes.chip, classes.background]);
   const classesEditWalletButton = clsx([classes.editButton, classes.fonts, classes.grey, classes.background, !canEdit && classes.disableBtn]);
   const classesFirstButton = clsx([classes.button, classes.fonts, classes.buttonFirst, classes.white]);
@@ -114,7 +115,6 @@ const EditWalletModalView = ({
               <Grid item xs={12}>Title</Grid>
               <Grid item xs={12}>
                 <TextField
-                  multiline
                   /* eslint-disable-next-line react/jsx-boolean-value */
                   fullWidth={true}
                   id="edit-wallet-modal-title"
@@ -123,7 +123,7 @@ const EditWalletModalView = ({
                   onChange={handleTitleChange}
                   margin="normal"
                   variant="outlined"
-                  inputProps={{ 'aria-label': 'edit-wallet-modal-title', className: classesTextarea }}
+                  inputProps={{ 'aria-label': 'edit-wallet-modal-title', className: classesTitleField }}
                 />
               </Grid>
             </Grid>
