@@ -44,11 +44,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint '**/*s.ts' '**/*.tsx'"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --quiet",
@@ -75,7 +70,6 @@
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "enzyme": "^3.10.0",
-    "husky": "^4.0.0-beta.5",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
     "eslint-config-airbnb": "^18.0.1",
