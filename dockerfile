@@ -4,7 +4,7 @@ COPY . .
 RUN apt-get update -yq
 RUN apt-get install nodejs npm git libusb-1.0-0-dev libudev-dev -yq
 RUN npm install yarn -g
-RUN yarn install
+RUN yarn install --network-timeout 600000
 RUN yarn run build
 
 FROM node:12.13.1
