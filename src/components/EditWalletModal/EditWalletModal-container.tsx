@@ -2,44 +2,52 @@ import React, { useEffect } from 'react';
 import EditWalletModalView from './EditWalletModal-view';
 import { ContainerProps } from './types';
 
-const EditWalletModal = ({ id, address, type, description, blockchain, update, email, canEdit }: ContainerProps) => {
+const EditWalletModal = ({ id, address, type, title, description, blockchain, update, email, canEdit }: ContainerProps) => {
   const [open, setOpen] = React.useState(false);
+  const [titleState, setTitleState] = React.useState(title);
   const [descriptionState, setDescriptionState] = React.useState(description);
   const [typeState, setTypeState] = React.useState(type);
 
-  useEffect(() => {
+  useEffect((): void => {
     setDescriptionState(description);
+    setTitleState(title);
     setTypeState(type);
-  }, [type, description]);
+  }, [type, description, title]);
 
-  const handleOpen = () => {
+  const handleOpen = (): void => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
     setDescriptionState(description);
+    setTitleState(title);
     setTypeState(type);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (): void => {
     const data = {
       wallet_address: address,
       blockchain_id: blockchain,
       email_id: email,
       type: typeState,
-      description: descriptionState
+      description: descriptionState,
+      title: titleState
     };
 
     update(data);
     handleClose();
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDescriptionState(event.target.value);
   };
 
-  const onChangeType = (event: any) => {
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setTitleState(event.target.value);
+  };
+
+  const onChangeType = (event: any): void => {
     event.persist();
     const name = event.target.dataset.name;
     setTypeState(name);
@@ -52,6 +60,8 @@ const EditWalletModal = ({ id, address, type, description, blockchain, update, e
       address={address}
       type={typeState}
       description={descriptionState}
+      title={titleState}
+      handleTitleChange={handleTitleChange}
       handleOpen={handleOpen}
       handleClose={handleClose}
       handleUpdate={handleUpdate}
