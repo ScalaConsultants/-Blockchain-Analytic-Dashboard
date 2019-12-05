@@ -32,14 +32,12 @@ export interface AuthModalViewProps extends AuthState {
   handleLogin?: () => void;
   handleSignUp?: () => void;
   handleSwitchForms?: () => void;
-  handleRememberMe?: () => void;
   handleForgotPassword?: () => void;
   handleEmailFocus?: () => void;
   handleEmailBlur?: () => void;
   handlePasswordFocus?: () => void;
   handlePasswordBlur?: () => void;
   forgotPassword?: boolean;
-  rememberMe?: boolean;
   user?: Record<string, string>;
   shouldSignUp?: boolean;
   formValidation?: FormValidation;

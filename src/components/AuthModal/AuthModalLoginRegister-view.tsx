@@ -13,12 +13,10 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
     handleLogin,
     handleSignUp,
     handleSwitchForms,
-    handleRememberMe,
     handleEmailFocus,
     handleEmailBlur,
     handlePasswordFocus,
     handlePasswordBlur,
-    rememberMe = true,
     user = { email: '', password: '' },
     shouldSignUp = false,
     formValidation = {
@@ -34,19 +32,11 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
   const classesModal = useModalStyles();
   const classesInput = useInputStyles();
   const classesLabel = useLabelStyles();
-  const classesButtons = clsx([classesModal.flex, classesModal.buttons]);
-  const classesRememberMe = clsx([
-    classesModal.cursor,
-    classesModal.optionsHeight,
-    classesModal.flex,
-    classesModal.font
-  ]);
-  const classesForgotPassword = clsx([classesModal.cursor, classesModal.font, classesModal.marginLeftAuto]);
-  const classesCircle = clsx(classesModal.circle, {
-    [classesModal.circleActive]: rememberMe
-  });
+  const classesButtons: string = clsx([classesModal.flex, classesModal.buttons]);
 
-  const buttons = [
+  const classesForgotPassword: string = clsx([classesModal.cursor, classesModal.font, classesModal.marginLeftAuto]);
+
+  const buttons: React.ReactElement[] = [
     <Button onClick={handleLogin} key="login">Login</Button>,
     <Button onClick={handleSignUp} key="signup">Sign up</Button>
   ];
@@ -84,10 +74,6 @@ const AuthModalLoginRegister = (props: AuthModalViewProps) => {
         onBlur={handlePasswordBlur}
       />
       {!shouldSignUp && <Grid container className={classesModal.options}>
-        <Grid item className={classesRememberMe} onClick={handleRememberMe}>
-          <div className={classesCircle} />
-          Remember me
-        </Grid>
         <Grid item className={classesForgotPassword} onClick={handleSwitchForms}>
           Forgot password?
         </Grid>
