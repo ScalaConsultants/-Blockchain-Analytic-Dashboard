@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 
+import AuthModalResetPassword from './AuthModalResetPassword-view';
 import { AuthResetPasswordProps } from './types';
 
 const AuthResetPassword = ({ unmount }: AuthResetPasswordProps) => {
@@ -14,7 +15,7 @@ const AuthResetPassword = ({ unmount }: AuthResetPasswordProps) => {
 
     }, []);
 
-    return null;
+    return <AuthModalResetPassword {...unmount}/>;
 };
 
 export default AuthResetPassword;

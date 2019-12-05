@@ -3,14 +3,9 @@ import React, { useState, useEffect } from 'react';
 import AuthModalView from './AuthModal-view';
 
 import { validation, rules } from './helpers';
-
 import { AuthModalProps, User } from './types';
 
-const AuthModal = ({
-  onAuthUser,
-  onAuthUserForgotPassword,
-  auth
-}: AuthModalProps) => {
+const AuthModal = ({ onAuthUser, onAuthUserForgotPassword, auth }: AuthModalProps) => {
   const [open, setOpen] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
@@ -35,7 +30,7 @@ const AuthModal = ({
     }
   });
 
-  const setInitialState = () => {
+  const setInitialState = (): void => {
     setForgotPassword(false);
     setRememberMe(true);
     setShouldSignUp(false);
@@ -59,18 +54,18 @@ const AuthModal = ({
     })
   }
 
-  const handleOpen = () => setOpen(prevState => !prevState);
+  const handleOpen = (): void => setOpen(prevState => !prevState);
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(prevState => !prevState);
     setInitialState();
   };
 
-  const handleSwitchForms = () => setForgotPassword(prevState => !prevState);
+  const handleSwitchForms = (): void => setForgotPassword(prevState => !prevState);
 
-  const handleRememberMe = () => setRememberMe(prevState => !prevState);
+  const handleRememberMe = (): void => setRememberMe(prevState => !prevState);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.persist();
     const { type } = event.target;
     const { value } = event.target;
@@ -85,7 +80,7 @@ const AuthModal = ({
     );
   };
 
-  const onFocus = (type: string) => {
+  const onFocus = (type: string): void => {
     const { email, password } = formValidation.touched;
     if (!email || !password) {
       setFormValidation(prevState => {
@@ -97,7 +92,7 @@ const AuthModal = ({
     }
   };
 
-  const onBlur = (type: string) => {
+  const onBlur = (type: string): void => {
     const { email, password } = formValidation.touched;
     if (email || password) {
       // @ts-ignore
@@ -112,7 +107,7 @@ const AuthModal = ({
     }
   };
 
-  const btnClick = (btn: boolean) => {
+  const btnClick = (btn: boolean): void => {
     const { email, password } = formValidation;
     if (email.isValid && password.isValid) {
       if ((btn && shouldSignUp) || (!btn && !shouldSignUp)) return onAuthUser(user.email, user.password, btn);
@@ -128,6 +123,7 @@ const AuthModal = ({
   const handleLogin = () => btnClick(false);
   const handleSignUp = () => btnClick(true);
   const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
+  const handleChangePassword = () => () => {};
 
   useEffect(() => {
     setOpen(prevState => prevState && !auth.isAuth);
@@ -147,6 +143,7 @@ const AuthModal = ({
         handleRememberMe={handleRememberMe}
         handleSwitchForms={handleSwitchForms}
         handleForgotPassword={handleForgotPassword}
+        handleChangePassword={handleChangePassword}
         handleEmailFocus={handleEmailFocus}
         handleEmailBlur={handleEmailBlur}
         handlePasswordFocus={handlePasswordFocus}
@@ -157,7 +154,7 @@ const AuthModal = ({
         shouldSignUp={shouldSignUp}
         formValidation={formValidation}
       />
-</div>
+    </div>
   );
 };
 
