@@ -123,7 +123,6 @@ const AuthModal = ({ onAuthUser, onAuthUserForgotPassword, auth }: AuthModalProp
   const handleLogin = () => btnClick(false);
   const handleSignUp = () => btnClick(true);
   const handleForgotPassword = () => onAuthUserForgotPassword(user.email);
-  const handleChangePassword = () => () => {};
 
   useEffect(() => {
     setOpen(prevState => prevState && !auth.isAuth);
@@ -143,7 +142,6 @@ const AuthModal = ({ onAuthUser, onAuthUserForgotPassword, auth }: AuthModalProp
         handleRememberMe={handleRememberMe}
         handleSwitchForms={handleSwitchForms}
         handleForgotPassword={handleForgotPassword}
-        handleChangePassword={handleChangePassword}
         handleEmailFocus={handleEmailFocus}
         handleEmailBlur={handleEmailBlur}
         handlePasswordFocus={handlePasswordFocus}

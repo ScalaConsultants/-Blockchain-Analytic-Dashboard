@@ -18,6 +18,8 @@ const BarChartContainer = (props: BarChartProps) => {
     override
   } = props;
 
+  console.log(wallets);
+
   const { match } = override;
   const walletSource = override.walletSource || match.params.walletSource;
   const segmentsContainer: React.MutableRefObject<any> = useRef();

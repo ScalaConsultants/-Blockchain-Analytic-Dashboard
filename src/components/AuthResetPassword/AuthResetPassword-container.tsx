@@ -1,6 +1,5 @@
 /*eslint-disable react-hooks/exhaustive-deps*/
-
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import AuthModalResetPassword from './AuthModalResetPassword-view';
 import { AuthResetPasswordProps } from './types';
