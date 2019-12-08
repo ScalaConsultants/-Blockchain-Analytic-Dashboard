@@ -1,7 +1,7 @@
 import React from 'react';
 import volumeBarStyles from './VolumeBar-style';
 
-const VolumeBar = (): React.ReactElement => {
+const VolumeBar = (props: any): React.ReactElement => {
     const classes = volumeBarStyles();
 
     return (
