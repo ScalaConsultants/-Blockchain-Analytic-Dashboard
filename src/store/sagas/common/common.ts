@@ -1,9 +1,16 @@
+import { GET_WALLETS_LIST } from './../../actions/common/walletsList';
 import { takeEvery } from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 
 import * as editWalletActions from '../../actions/common/editWallet';
+import * as walletsList from '../../actions/common/walletsList';
 
 import { doEditWallet } from './editWallet';
+import { doWalletsList } from './walletsList';
 
 export default function* watchCommon() {
-    yield takeEvery(editWalletActions.EDIT_WALLET, doEditWallet);
+    yield all([
+    takeEvery(editWalletActions.EDIT_WALLET, doEditWallet),
+    takeEvery(walletsList.GET_WALLETS_LIST, doWalletsList)
+    ]);
 }
