@@ -39,7 +39,7 @@ const WalletsList = (props: any): React.ReactElement => {
     const [switchToggle, setSwitchToggle] = React.useState(false);
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<OrderBy>("id");
-    const { actions, publicList } = props;
+    const { actions, publicList, userList } = props;
 
     const handleRequestSort = (property: string) => {
         if (order === "desc") {
@@ -80,6 +80,7 @@ const WalletsList = (props: any): React.ReactElement => {
 
     useEffect((): void => {
         actions.getWalletsList();
+        actions.getWalletsListUser();
     }, []);
 
     const selectIcon = (blockchain: string) => {
@@ -182,7 +183,7 @@ const WalletsList = (props: any): React.ReactElement => {
                             <TableBody
                                 id="walletsListTableBody"
                             >
-                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(publicList)}</TableBody>
+                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(userList) : renderWalletsListRows(publicList)}</TableBody>
                         </Table>
                     </Grid>
                 </Grid>

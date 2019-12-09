@@ -7,10 +7,13 @@ import * as walletsList from '../../actions/common/walletsList';
 
 import { doEditWallet } from './editWallet';
 import { doWalletsList } from './walletsList';
+import { doWalletsListUser } from './walletsList';
+
 
 export default function* watchCommon() {
     yield all([
     takeEvery(editWalletActions.EDIT_WALLET, doEditWallet),
-    takeEvery(walletsList.GET_WALLETS_LIST, doWalletsList)
+    takeEvery(walletsList.GET_WALLETS_LIST, doWalletsList),
+    takeEvery(walletsList.GET_WALLETS_LIST_USER, doWalletsListUser)
     ]);
 }

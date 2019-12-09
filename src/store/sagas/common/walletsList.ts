@@ -17,3 +17,10 @@ export function* doWalletsList () {
      yield put(actions.setWalletsList(response));
 
 }
+
+export function* doWalletsListUser () {
+    const response = yield getWalletList('user');
+
+     yield put(actions.setWalletsListUser(response));
+
+}
