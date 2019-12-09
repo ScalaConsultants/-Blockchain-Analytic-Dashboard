@@ -5,12 +5,20 @@ import { useDashboardTableStyles } from './DashboardTable-styles';
 
 import SwitchButton from '../SwitchButton';
  
-const DashboardTableHeader = () => {
+const DashboardTableHeader = ({ currency, actions }: any) => {
   const classes = useDashboardTableStyles();
 
   const [switchState, setSwitchState] = React.useState(true);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setSwitchState(event.target.checked);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // setSwitchState(event.target.checked);
+    console.log('change')
+    if (currency) {
+      actions.setCurrencyOff();
+      return;
+    }
+    actions.setCurrencyOn();
+  }
 
   return (
     <Grid container alignItems="center" className={classes.header}>
@@ -30,10 +38,11 @@ const DashboardTableHeader = () => {
           Value
         </Grid>
         <Grid item xs={2}>
+        <div>HELLO</div>
           <SwitchButton 
             labelLeft={'$'}
             labelRight={'%'}
-            switchState={switchState}
+            switchState={currency}
             handleChange={handleChange}
             dashboaradSwitch={true}
           />

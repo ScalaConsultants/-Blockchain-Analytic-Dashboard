@@ -32,11 +32,13 @@ export interface BarChartProps {
   actions: BarChartActions,
   status: StatusRedux,
   override: Customization,
+  isCurrency: boolean
 }
 
 export interface State {
   ethereum: Wallets,
-  notifications: NotificationTypes
+  notifications: NotificationTypes,
+  common: Record<string, boolean>
 }
 
 export interface Customization extends RouteComponentProps<WalletHash> {

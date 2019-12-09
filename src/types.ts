@@ -24,12 +24,15 @@ export interface Wallet {
   walletHash: string,
   totalValue: number,
   percentage: number,
-  type?: string
+  type?: string,
+  currency: number,
+  value: number
 }
 
 export interface Wallets {
   wallets: Wallet[],
-  status: StatusRedux
+  status: StatusRedux,
+  currency: boolean
 }
 
 export interface Transaction {

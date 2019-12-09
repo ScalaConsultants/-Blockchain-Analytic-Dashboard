@@ -15,7 +15,8 @@ const BarChartContainer = (props: BarChartProps) => {
     wallets = [],
     actions,
     status: { walletsIsFetching },
-    override
+    override,
+    isCurrency
   } = props;
 
   const { match } = override;
@@ -82,7 +83,7 @@ const BarChartContainer = (props: BarChartProps) => {
     );
   };
 
-  const createSegment = (walletHash: string, percentage: number, index: number, type: string | null = null) => {
+  const createSegment = (walletHash: string, percentage: number, index: number, type: string | null = null, currency: number, value: number) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
     return (
       <Link
@@ -91,7 +92,7 @@ const BarChartContainer = (props: BarChartProps) => {
         <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
-              <div>{`${Math.floor(percentage)}%`}</div> : null}
+              <div>{!isCurrency ? `$${Math.floor(value * currency)}` : `${Math.floor(percentage)}%`}</div> : null}
           </div>
         </Tooltip>
       </Link>
@@ -101,8 +102,8 @@ const BarChartContainer = (props: BarChartProps) => {
   const createSegments = () => {
     return wallets.reduce(
       (acc: Accumulator, obj: Wallet, index: number) => {
-        const { walletHash, percentage, type } = obj;
-        acc.elements.push(createSegment(walletHash, percentage, index, type));
+        const { walletHash, percentage, type, currency, value } = obj;
+        acc.elements.push(createSegment(walletHash, percentage, index, type, currency, value));
         // Last Segment
         acc.total < 100 && index === wallets.length - 1 && acc.elements.push(createLastSegment(acc.total));
         return {

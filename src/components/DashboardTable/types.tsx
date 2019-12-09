@@ -9,13 +9,31 @@ export interface Row {
 }
 
 export interface Table {
-  rows: BlockchainCell[]
+  rows: BlockchainCell[],
+  currency?: boolean,
+  actions?: {
+    setCurrencyOn: () => void,
+    setCurrencyOff: () => void
+  },
 };
 
 export interface Props {
+  currency: boolean,
+  actions: {
+    setCurrencyOn: () => void,
+    setCurrencyOff: () => void
+  },
   match: {
     params: {
       blockchains: string
     }
   }
-}
+};
+
+export interface Currency {
+  currency: boolean;
+};
+
+export interface State {
+  common: Currency;
+};
