@@ -14,12 +14,20 @@ const WalletsListRedux = () => {
 
     const dispatch = useDispatch();
 
-    dispatch({
+
+    const getWalletsList = () => dispatch({
         type: actions.GET_WALLETS_LIST,
     });
 
+    const props = {
+        actions: {
+            getWalletsList
+        },
+        publicList
+    }
 
-    return <WallletsListContainer/>
+
+    return <WallletsListContainer {...props} />
 };
 
 export default WalletsListRedux;

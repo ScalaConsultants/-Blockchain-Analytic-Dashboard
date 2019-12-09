@@ -4,7 +4,7 @@ import * as actions from '../../actions/common/walletsList';
 import { doGet } from '../../helpers/fetch';
 
 async function getWalletList(type: any) {
-  const url = `/api/v1/wallets/`+type;
+  const url = `api/v1/wallets/`+type;
 
   const response = await doGet(url);
 

@@ -8,6 +8,7 @@ import Table from '@material-ui/core/Table';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 
 import { Markets, Blockchains, WalletType } from '../../types';
 import { Order, OrderBy, HeaderColsInterface, Wallet } from './types';
@@ -32,12 +33,13 @@ const headerCols: HeaderColsInterface[] = [
     { id: 'edit', numeric: false, disablePadding: false, label: '', sort: false },
 ];
 
-const WalletsList = (): React.ReactElement => {
+const WalletsList = (props: any): React.ReactElement => {
 
     const [switchWallet, setSwitchWallet] = React.useState(WalletType.PRIVATE);
     const [switchToggle, setSwitchToggle] = React.useState(false);
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<OrderBy>("id");
+    const { actions, publicList } = props;
 
     const handleRequestSort = (property: string) => {
         if (order === "desc") {
@@ -61,11 +63,11 @@ const WalletsList = (): React.ReactElement => {
                         <div>
                             <ArrowDropUpIcon
                                 fontSize='small'
-                                className={(orderBy === row.id && order === 'asc')  ? classes.arrowUp :  clsx([classes.labelDisabled,classes.arrowUp])}
+                                className={(orderBy === row.id && order === 'asc') ? classes.arrowUp : clsx([classes.labelDisabled, classes.arrowUp])}
                             />
                             <ArrowDropDownIcon
                                 fontSize='small'
-                                className={(orderBy === row.id && order  === 'desc') ?  classes.arrowDown :  clsx([classes.labelDisabled,classes.arrowDown])}
+                                className={(orderBy === row.id && order === 'desc') ? classes.arrowDown : clsx([classes.labelDisabled, classes.arrowDown])}
                             />
                         </div>
                     }
@@ -75,6 +77,10 @@ const WalletsList = (): React.ReactElement => {
                 }
             </TableCell>
         ));
+
+    useEffect((): void => {
+        actions.getWalletsList();
+    }, []);
 
     const selectIcon = (blockchain: string) => {
         switch (blockchain) {
@@ -91,10 +97,10 @@ const WalletsList = (): React.ReactElement => {
         setSwitchToggle(!switchToggle);
         let index = 0;
         if (switchWallet === WalletType.PRIVATE) {
-            index = walletsListPrivate.findIndex(( wallet:Wallet) => wallet.id === id);
+            index = walletsListPrivate.findIndex((wallet: Wallet) => wallet.id === id);
             walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
         } else {
-            index = walletsListPublic.findIndex(( wallet:Wallet ) => wallet.id === id);
+            index = walletsListPublic.findIndex((wallet: Wallet) => wallet.id === id);
             walletsListPublic[index].watched = !walletsListPublic[index].watched;
         }
     }
@@ -116,33 +122,33 @@ const WalletsList = (): React.ReactElement => {
         }
     }
 
-    const renderWalletsListRows = (walletsList: Wallet[]) => {
+    const renderWalletsListRows = (walletsList: any[]) => {
         return walletsList.length &&
-        (stableSort(
-            walletsList,
-            getSorting(order, orderBy)
-        )).map((row: Wallet, index: number) => (
-            <TableRow key={`${index}`}>
-                <TableCell scope="row"><b>{row.id}</b>&nbsp; &nbsp;<b className={classes.labelDisabled}>{row.walletHash}</b></TableCell>
-                <TableCell className={classes.rowEl}>{row.title}</TableCell>
-                <TableCell className={classes.rowEl}>
-                    <div className={classes.verticalAlign}>
-                        <img alt="Blockchain icon" src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} className={classes.blockchainIcon} />
-                        {row.blockchain}
-                    </div>
-                </TableCell>
-                <TableCell className={classes.rowEl}>
-                    <div className={classes.verticalAlign}>
-                        <div className={ clsx([selectWalletColor(row.market),classes.walletTypeIcon])}></div>
-                        <span className={row.market === Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.market}</span>
-                    </div>
-                </TableCell>
-                <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(row.id)} /></TableCell>
-                <TableCell className={classes.rowEl}>
-                    {/*<EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription} />*/}
-                </TableCell>
-            </TableRow>
-        ));
+            (stableSort(
+                walletsList,
+                getSorting(order, orderBy)
+            )).map((row: any, index: number) => (
+                <TableRow key={`${index}`}>
+                    <TableCell scope="row"><b>{index}</b>&nbsp; &nbsp;<b className={classes.labelDisabled}>{row.wallet_address}</b></TableCell>
+                    <TableCell className={classes.rowEl}>{row.title}</TableCell>
+                    <TableCell className={classes.rowEl}>
+                        <div className={classes.verticalAlign}>
+                            <img alt="Blockchain icon" src={`${PUBLIC_URL}/icons/${selectIcon(row.blockchain)}.png`} className={classes.blockchainIcon} />
+                            {row.blockchain}
+                        </div>
+                    </TableCell>
+                    <TableCell className={classes.rowEl}>
+                        <div className={classes.verticalAlign}>
+                            <div className={clsx([selectWalletColor(row.type), classes.walletTypeIcon])}></div>
+                            <span className={row.type === Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.type}</span>
+                        </div>
+                    </TableCell>
+                    <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(row.id)} /></TableCell>
+                    <TableCell className={classes.rowEl}>
+                        {/*<EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription} />*/}
+                    </TableCell>
+                </TableRow>
+            ));
     }
 
     const classes = useWalletsListTableStyles();
@@ -176,7 +182,7 @@ const WalletsList = (): React.ReactElement => {
                             <TableBody
                                 id="walletsListTableBody"
                             >
-                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(walletsListPublic)}</TableBody>
+                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(walletsListPrivate) : renderWalletsListRows(publicList)}</TableBody>
                         </Table>
                     </Grid>
                 </Grid>
