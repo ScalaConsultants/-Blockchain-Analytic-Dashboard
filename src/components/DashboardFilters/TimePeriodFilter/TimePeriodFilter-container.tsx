@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Slider from '@material-ui/core/Slider';
 
@@ -22,6 +23,8 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
 
   const today: string = setDateToday();
   const yesterday: string = setDateYesterday();
+
+  console.log(props);
 
   const [timeStep, setTimeStep]: [number, Function] = useState(60000);
 
@@ -57,16 +60,24 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
         },
         blockchain
       ));
+      props.history.push(
+        `/${props.urlParams.groupBy}/${props.urlParams.blockchains}/${props.urlParams.limit}/${timeValueFrom}/${timeValueTo}`
+      );
+    // props.history.push(`/app/${props.match.params.appId + 1}/detail`);
   };
 
   const timePeriodSliderComponent = (): JSX.Element => (
+    <Link
+      to={`${props.urlParams.blockchains}/${props.urlParams.limit}/${timeValueFrom}/${timeValueTo}`}
+    >
     <Slider
       defaultValue={setTimeNow()}
       min={setMinValue() + timeStep}
       max={setTimeNow()}
       onChange={handleChange}
       onChangeCommitted={handleChangeCommitted}
-    />
+      />
+    </Link>
   );
 
   useEffect((): void => {

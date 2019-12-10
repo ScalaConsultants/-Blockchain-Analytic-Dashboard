@@ -186,7 +186,7 @@ const Filters = (props: any) => {
           <Grid item xs={12}>
             {renderButtons(activePeriodTimeButtons)}
           </Grid>
-          <TimePeriodFilter activeTimeStep={filters.timeStep} actions={actions} urlParams={urlParams} />
+          <TimePeriodFilter activeTimeStep={filters.timeStep} actions={actions} urlParams={urlParams} history={props.history}/>
         </Grid>
       </Grid>
       <Grid item xs={2}>

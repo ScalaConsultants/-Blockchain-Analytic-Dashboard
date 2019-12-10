@@ -15,7 +15,8 @@ export interface TimePeriodFilterProps {
   actions: {
     fetchWalletsByBlockchain: (arg0: fetchWalletsByBlockchainProps, arg1: string) => void
   },
-  urlParams: urlParamsProps
+  urlParams: urlParamsProps,
+  history: any
 }
 
 export interface FiltersProps {
