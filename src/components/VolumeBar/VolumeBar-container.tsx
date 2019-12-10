@@ -6,16 +6,18 @@ const VolumeBar = (props: any): React.ReactElement => {
 
     const timestamp = new Date().getTime();
 
-    useEffect((): void => props.actions.getCurrencyByDatasource(timestamp), []);
+    const { actions, currency, walletSource } = props
 
-    console.log(props.currency);
+    useEffect((): void => actions.getCurrencyByDatasource(timestamp), []);
+
+    const label = `${Number.parseFloat(currency).toFixed(2)} ${walletSource}`;
 
     return (
         <>
             <div className={classes.containerOutside}>
                 <div className={classes.containerInside}>
                     <div className={classes.totalVolume}>total volume</div>
-                    <div className={classes.blokchain}>{props.currency[0]} {props.walletSource}</div>
+                    <div className={classes.blokchain}>{label}</div>
                 </div>
             </div>
         </>

@@ -23,7 +23,9 @@ function* doFetchCurrency(action: any) {
   yield put({ type: TEZOS_FETCH_CURRENCY_STARTED });
 
   try {
-    const currency = yield fetchCurrency(payload);
+    const data = yield fetchCurrency(payload);
+    const currency = data.value;
+
     yield put({
       type: TEZOS_SET_CURRENCY,
       currency

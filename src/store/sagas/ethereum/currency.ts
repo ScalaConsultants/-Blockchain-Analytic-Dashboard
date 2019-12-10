@@ -21,9 +21,11 @@ function* doFetchCurrency(action: any) {
   } = ethereumActions;
 
   yield put({ type: ETHEREUM_FETCH_CURRENCY_STARTED });
-
+  
   try {
-    const currency = yield fetchCurrency(payload);
+    const data = yield fetchCurrency(payload);
+    const currency = data.value;
+
     yield put({
       type: ETHEREUM_SET_CURRENCY,
       currency
