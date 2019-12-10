@@ -23,7 +23,7 @@ const DashboardTableRow = (props: Row) => {
           increaseSegmentSize={2}
           walletSource={props.row.name}
         />
-        <VolumeBar/>
+        <VolumeBar walletSource={props.row.name} />
       </Grid>
     </Grid>
   );

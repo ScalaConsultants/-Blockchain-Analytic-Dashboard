@@ -2,33 +2,35 @@ import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 
 import { fetchCurrencyByDatasource } from '../../store/actions/blockchainSelectors';
+import { getBlockchainByDatasource } from '../../store/reducers/blockchainSelectors';
 
 import VolumeBar from './VolumeBar-container';
 
-const VolumeBarRedux = () => {
+const VolumeBarRedux = (props: any) => {
+
+  const blockchain = props.walletSource;
 
   const mapState = (state: any) => ({
-    currencyTezos: state.tezos.currency,
-    currencyEthereum: state.ethereum.currency
+    currency: getBlockchainByDatasource(state, blockchain).currency
   });
 
   const dispatch = useDispatch();
   
-  const getCurrencyByDatasource = (payload: number = 1, blockchain:string): void => {
+  const getCurrencyByDatasource = (payload: number = 1): void => {
     dispatch({
       type: fetchCurrencyByDatasource(blockchain),
       payload: payload
     });
   };
   
-  const { currencyTezos, currencyEthereum } = useMappedState(mapState);
+  const { currency } = useMappedState(mapState);
   
   const actions = {
-    getCurrencyByDatasource,
+    getCurrencyByDatasource
   };
 
   return (
-    <VolumeBar actions={actions} currencyTezos={currencyTezos} currencyEthereum={currencyEthereum} />
+    <VolumeBar actions={actions} currency={currency} walletSource={props.walletSource} />
   );
 };
 
