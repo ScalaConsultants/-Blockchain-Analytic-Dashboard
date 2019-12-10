@@ -25,10 +25,10 @@ import { stableSort, getSorting } from "../../helpers/helpers";
 const { PUBLIC_URL } = process.env;
 
 const headerCols: HeaderColsInterface[] = [
-    { id: 'id', numeric: false, disablePadding: false, label: 'ID', sort: true },
+    { id: 'wallet_address', numeric: false, disablePadding: false, label: 'ID', sort: true },
     { id: 'title', numeric: false, disablePadding: false, label: 'Title', sort: true },
     { id: 'blockchain', numeric: false, disablePadding: false, label: 'Blockchain', sort: true },
-    { id: 'market', numeric: false, disablePadding: false, label: 'Wallet type', sort: true },
+    { id: 'type', numeric: false, disablePadding: false, label: 'Wallet type', sort: true },
     { id: 'watched', numeric: false, disablePadding: false, label: 'Watched', sort: false },
     { id: 'edit', numeric: false, disablePadding: false, label: '', sort: false },
 ];
@@ -93,7 +93,7 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const toggleSwitch = (data: any, type: string) => {
+    const toggleSwitch = (data: Wallet, type: string) => {
         data.watched = !data.watched;
         if (type === 'public') {
             actions.editWalletsList(data);
