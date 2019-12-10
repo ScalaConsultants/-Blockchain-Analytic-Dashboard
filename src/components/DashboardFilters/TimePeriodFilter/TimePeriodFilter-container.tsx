@@ -23,8 +23,6 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   const today: string = setDateToday();
   const yesterday: string = setDateYesterday();
 
-  console.log(props);
-
   const [timeStep, setTimeStep]: [number, Function] = useState(60000);
 
   const [timeValueTo, setTimeValueTo]: [number, Function] = useState(setTimeNow());
