@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid';
 import Slider from '@material-ui/core/Slider';
 
@@ -67,9 +66,7 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   };
 
   const timePeriodSliderComponent = (): JSX.Element => (
-    <Link
-      to={`${props.urlParams.blockchains}/${props.urlParams.limit}/${timeValueFrom}/${timeValueTo}`}
-    >
+
     <Slider
       defaultValue={setTimeNow()}
       min={setMinValue() + timeStep}
@@ -77,7 +74,6 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
       onChange={handleChange}
       onChangeCommitted={handleChangeCommitted}
       />
-    </Link>
   );
 
   useEffect((): void => {

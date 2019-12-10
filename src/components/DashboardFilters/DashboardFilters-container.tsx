@@ -122,7 +122,7 @@ const Filters = (props: any) => {
       );
     });
 
-  const setZoomFilter = (): number[] => [new Date().getTime() - 1000 * 3600 * 24, new Date().getTime()];
+  const setZoomFilter = (): number[] => [match.params.from, match.params.to];
 
   const setActiveFilters = (): FiltersProps => {
     const activeBlockchain = activeFilters(activeBlockchainButtons);
