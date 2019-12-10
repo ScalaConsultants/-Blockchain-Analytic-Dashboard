@@ -1,11 +1,12 @@
 import React from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
+import { withRouter } from 'react-router-dom';
 
 import DashboardTableContainer from './DashboardTable-container'
 import { currencyOn, currencyOff } from '../../store/actions/common/currencySwitch'
-import { Currency, State } from './types';
+import { Currency, State, Params } from './types';
 
-const DashboardTable = () => {
+const DashboardTable = ({ match: { params: { blockchains }}}: Params) => {
 
   const mapState = (state: State): Currency => ({
     currency: state.common.currency
@@ -23,7 +24,7 @@ const DashboardTable = () => {
     setCurrencyOff,
   };
 
-  return <DashboardTableContainer currency={currency} actions={actions}/>;
+  return <DashboardTableContainer currency={currency} actions={actions} blockchains={blockchains}/>;
 };
 
-export default DashboardTable;
+export default withRouter(DashboardTable);
