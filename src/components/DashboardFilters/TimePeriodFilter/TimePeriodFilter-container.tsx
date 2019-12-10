@@ -62,7 +62,6 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
       props.history.push(
         `/${props.urlParams.groupBy}/${props.urlParams.blockchains}/${props.urlParams.limit}/${timeValueFrom}/${timeValueTo}`
       );
-    // props.history.push(`/app/${props.match.params.appId + 1}/detail`);
   };
 
   const timePeriodSliderComponent = (): JSX.Element => (
