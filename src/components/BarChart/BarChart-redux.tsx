@@ -13,11 +13,12 @@ const BarChartRedux = (props: Customization) => {
 
   const mapState = (state: State): Wallets => ({
     status: getBlockchainByDatasource(state, walletSource || match.params.walletSource).status,
-    wallets: getBlockchainByDatasource(state, walletSource || match.params.walletSource).wallets
+    wallets: getBlockchainByDatasource(state, walletSource || match.params.walletSource).wallets,
+    currency: state.common.currency
   });
   const dispatch = useDispatch();
 
-  const { status, wallets } = useMappedState(mapState);
+  const { status, wallets, currency } = useMappedState(mapState);
 
   const fetchWalletsByBlockchain = (
     limit: string,
@@ -41,7 +42,12 @@ const BarChartRedux = (props: Customization) => {
     fetchWalletsByBlockchain
   };
 
-  return <BarChartContainer actions={actions} status={status} wallets={wallets} override={{ ...props }} />;
+  return <BarChartContainer 
+    actions={actions} 
+    status={status} 
+    wallets={wallets}
+    isCurrency={currency}
+    override={{ ...props }} />;
 };
 
 export default withRouter(BarChartRedux);
