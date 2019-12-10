@@ -4,7 +4,7 @@ import { doGet } from '../../helpers/fetch';
 import * as blockchainActions from '../../actions/tezos/currency';
 
 async function fetchCurrency(to = 1575542946846): Promise<any> {
-  let url = `api/v1/currency?blockchain=tezos&timestamp=${1575542946846}`;
+  let url = `api/v1/currency?blockchain=tezos&timestamp=${to}`;
 
   const response = await doGet(url);
 
