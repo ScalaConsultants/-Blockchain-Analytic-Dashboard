@@ -6,7 +6,7 @@ import volumeBarStyles from './VolumeBar-style';
 const VolumeBar = (props: any): React.ReactElement => {
     const classes = volumeBarStyles();
 
-    const timestamp: number = props.match.params.from;
+    const timestamp: number = props.match.params.from - 6000;
 
     const { actions, currency, walletSource } = props
 
