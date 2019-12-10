@@ -23,6 +23,8 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
   const today: string = setDateToday();
   const yesterday: string = setDateYesterday();
 
+  console.log(props);
+
   const [timeStep, setTimeStep]: [number, Function] = useState(60000);
 
   const [timeValueTo, setTimeValueTo]: [number, Function] = useState(setTimeNow());
@@ -57,16 +59,20 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
         },
         blockchain
       ));
+      props.history.push(
+        `/${props.urlParams.groupBy}/${props.urlParams.blockchains}/${props.urlParams.limit}/${timeValueFrom}/${timeValueTo}`
+      );
   };
 
   const timePeriodSliderComponent = (): JSX.Element => (
+
     <Slider
       defaultValue={setTimeNow()}
       min={setMinValue() + timeStep}
       max={setTimeNow()}
       onChange={handleChange}
       onChangeCommitted={handleChangeCommitted}
-    />
+      />
   );
 
   useEffect((): void => {
