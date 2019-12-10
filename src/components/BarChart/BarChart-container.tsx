@@ -85,14 +85,15 @@ const BarChartContainer = (props: BarChartProps) => {
 
   const createSegment = (walletHash: string, percentage: number, index: number, type: string | null = null, currency: number, value: number) => {
     const { groupBy, blockchains, limit, from, to } = match.params;
+    const $value = value * currency;
     return (
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
         key={walletHash+index} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
-        <Tooltip title={percentage.toFixed(3) + '%'} placement="bottom" >
+        <Tooltip title={!isCurrency ? `${$value.toFixed(3)}` : percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
-              <div>{!isCurrency ? `$${Math.floor(value * currency)}` : `${Math.floor(percentage)}%`}</div> : null}
+              <div>{!isCurrency ? `$${Math.floor($value)}` : `${Math.floor(percentage)}%`}</div> : null}
           </div>
         </Tooltip>
       </Link>
