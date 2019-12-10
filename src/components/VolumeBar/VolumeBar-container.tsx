@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import volumeBarStyles from './VolumeBar-style';
 
 const VolumeBar = (props: any): React.ReactElement => {
     const classes = volumeBarStyles();
 
-    const timestamp: number = new Date().getTime() - 6000;
+    const timestamp: number = props.match.params.from;
 
     const { actions, currency, walletSource } = props
 
-    useEffect((): void => actions.getCurrencyByDatasource(timestamp), []);
+    useEffect((): void => actions.getCurrencyByDatasource(timestamp), [props.match.params.from]);
 
     const label = `${Number.parseFloat(currency).toFixed(2)} ${walletSource}`;
 
@@ -24,4 +26,4 @@ const VolumeBar = (props: any): React.ReactElement => {
     );
 };
 
-export default VolumeBar;
+export default withRouter(VolumeBar);
