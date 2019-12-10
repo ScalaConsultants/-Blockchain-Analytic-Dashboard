@@ -10,7 +10,7 @@ export const ethereumSetCurrency = (currency: any): any => ({
   currency
 });
 
-export const ethereumFetchCurrency = (payload: any = {to: 1567382400}): any => ({
+export const ethereumFetchCurrency = (payload: any = {to: 1575971788507}): any => ({
   type: ETHEREUM_FETCH_CURRENCY,
   payload: payload
 });

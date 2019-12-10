@@ -1,24 +1,25 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
 import { doGet } from '../../helpers/fetch';
-import * as blockchainActions from '../../actions/ethereum/currency';
+import * as ethereumActions from '../../actions/ethereum/currency';
 
-async function fetchCurrency( {to = 1567382400} ): Promise<any> {
-  let url = `api/v1/currency?blockchain=tezos&timestamp=${to}`;
+async function fetchCurrency( {to = 1575971788507} ): Promise<any> {
+  let url = `api/v1/currency?blockchain=ethereum&timestamp=${1575971788507}`;
 
   const response = await doGet(url);
+  console.log('response ethereum', response);
 
   return response.json();
 }
 
-function* foFetchCurrency(action: any) {
+function* doFetchCurrency(action: any) {
   const { payload } = action;
   const {
     ETHEREUM_FETCH_CURRENCY_FAILED,
     ETHEREUM_FETCH_CURRENCY_STARTED,
     ETHEREUM_FETCH_CURRENCY_SUCCEEDED,
     ETHEREUM_SET_CURRENCY
-  } = blockchainActions;
+  } = ethereumActions;
 
   yield put({ type: ETHEREUM_FETCH_CURRENCY_STARTED });
 
@@ -32,12 +33,11 @@ function* foFetchCurrency(action: any) {
       });
     }
     yield put({ type: ETHEREUM_FETCH_CURRENCY_SUCCEEDED });
-  } catch (e) {
-    // TODO temporary solution - I will fix it in next step
-    yield put({type: ETHEREUM_FETCH_CURRENCY_FAILED, message: e.code});
+  } catch (error) {
+    yield put({type: ETHEREUM_FETCH_CURRENCY_FAILED, message: error.code});
   }
 }
 
-export function* fetchActualCurrency() {
-  yield takeEvery(blockchainActions.ETHEREUM_FETCH_CURRENCY, foFetchCurrency);
+export function* watchDoFetchCurrency() {
+  yield takeEvery(ethereumActions.ETHEREUM_FETCH_CURRENCY, doFetchCurrency);
 }

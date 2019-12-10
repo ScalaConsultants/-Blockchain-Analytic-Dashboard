@@ -3,13 +3,13 @@ import { put, takeEvery } from 'redux-saga/effects';
 import { doGet } from '../../helpers/fetch';
 import * as blockchainActions from '../../actions/tezos/currency';
 
-async function fetchCurrency( {to = 1567382400} ): Promise<any> {
-  let url = `api/v1/currency?blockchain=tezos&timestamp=${to}`;
+async function fetchCurrency( {to = 1575971788507} ): Promise<any> {
+  let url = `api/v1/currency?blockchain=tezos&timestamp=${1575971788507}`;
 
   const response = await doGet(url);
-
+  console.log('response', response);
   return response.json();
-}
+};
 
 function* foFetchCurrency(action: any) {
   const { payload } = action;
@@ -21,6 +21,7 @@ function* foFetchCurrency(action: any) {
   } = blockchainActions;
 
   yield put({ type: TEZOS_FETCH_CURRENCY_STARTED });
+  console.log('payload', payload);
 
   const currency = yield fetchCurrency(payload);
 
@@ -32,12 +33,11 @@ function* foFetchCurrency(action: any) {
       });
     }
     yield put({ type: TEZOS_FETCH_CURRENCY_SUCCEEDED });
-  } catch (e) {
-    // TODO temporary solution - I will fix it in next step
-    yield put({type: TEZOS_FETCH_CURRENCY_FAILED, message: e.code});
+  } catch (error) {
+    yield put({type: TEZOS_FETCH_CURRENCY_FAILED, message: error.code});
   }
 }
 
-export function* fetchActualCurrency() {
+export function* watchDoFetchCurrency() {
   yield takeEvery(blockchainActions.TEZOS_FETCH_CURRENCY, foFetchCurrency);
 }
