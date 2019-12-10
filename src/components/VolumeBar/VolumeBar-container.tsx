@@ -15,7 +15,7 @@ const VolumeBar = (props: any): React.ReactElement => {
             <div className={classes.containerOutside}>
                 <div className={classes.containerInside}>
                     <div className={classes.totalVolume}>total volume</div>
-                    <div className={classes.blokchain}>{props.currency} {props.walletSource}</div>
+                    <div className={classes.blokchain}>{props.currency[0]} {props.walletSource}</div>
                 </div>
             </div>
         </>
