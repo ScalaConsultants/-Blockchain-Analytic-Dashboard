@@ -20,11 +20,9 @@ const VolumeBarRedux = () => {
       payload: payload
     });
   };
-
   
-  const { currencyTezos, currencyEthereum} = useMappedState(mapState);
+  const { currencyTezos, currencyEthereum } = useMappedState(mapState);
   
-  console.log(currencyEthereum)
   const actions = {
     getCurrencyByDatasource,
   };

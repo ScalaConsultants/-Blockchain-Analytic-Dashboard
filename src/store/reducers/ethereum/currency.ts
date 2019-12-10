@@ -5,7 +5,7 @@ const initState: any[] = [];
 export default (state = initState, action: any): any[] => {
   switch (action.type) {
     case ETHEREUM_SET_CURRENCY:
-      return [...action.currency];
+      return [...action.currency.value];
     default:
       return state;
   }

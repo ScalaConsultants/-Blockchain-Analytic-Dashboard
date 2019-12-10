@@ -5,7 +5,7 @@ const initState: any[] = [];
 export default (state = initState, action: any): any[] => {
   switch (action.type) {
     case TEZOS_SET_CURRENCY:
-      return [...action.currency];
+      return [...action.currency.value];
     default:
       return state;
   }

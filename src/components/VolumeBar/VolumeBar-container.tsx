@@ -3,14 +3,13 @@ import volumeBarStyles from './VolumeBar-style';
 
 const VolumeBar = (props: any): React.ReactElement => {
     const classes = volumeBarStyles();
-    console.log(props);
 
-    const timestamp = new Date();
-
+    const timestamp = new Date().getTime();
 
     useEffect((): void => {
-        props.actions.getCurrencyByDatasource(1575542946846);
-        console.log(props);
+        const currencyTezos = props.actions.getCurrencyByDatasource(timestamp, 'XTZ');
+        const currencyEthereum = props.actions.getCurrencyByDatasource(timestamp, 'ETH');
+        console.log(currencyTezos, currencyEthereum);
        }, []);
     
 
