@@ -1,9 +1,9 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
 import { doGet } from '../../helpers/fetch';
-import * as blockchainActions from '../../actions/tezos/wallets';
+import * as blockchainActions from '../../actions/ethereum/currency';
 
-async function fetchActualCurrency( {to = 1567382400} ): Promise<any> {
+async function fetchCurrency( {to = 1567382400} ): Promise<any> {
   let url = `api/v1/currency?blockchain=tezos&timestamp=${to}`;
 
   const response = await doGet(url);
@@ -11,33 +11,33 @@ async function fetchActualCurrency( {to = 1567382400} ): Promise<any> {
   return response.json();
 }
 
-function* foFetchWallets(action: any) {
+function* foFetchCurrency(action: any) {
   const { payload } = action;
   const {
-    TEZOS_FETCH_WALLETS_FAILED,
-    TEZOS_FETCH_WALLETS_STARTED,
-    TEZOS_FETCH_WALLETS_SUCCEEDED,
-    TEZOS_SET_WALLETS
+    ETHEREUM_FETCH_CURRENCY_FAILED,
+    ETHEREUM_FETCH_CURRENCY_STARTED,
+    ETHEREUM_FETCH_CURRENCY_SUCCEEDED,
+    ETHEREUM_SET_CURRENCY
   } = blockchainActions;
 
-  yield put({ type: TEZOS_FETCH_WALLETS_STARTED });
+  yield put({ type: ETHEREUM_FETCH_CURRENCY_STARTED });
 
-  const wallets = yield fetchWallets(payload);
+  const currency = yield fetchCurrency(payload);
 
   try {
-    if (wallets.length >= 0) {
+    if (currency.length >= 0) {
       yield put({
-        type: TEZOS_SET_WALLETS,
-        wallets
+        type: ETHEREUM_SET_CURRENCY,
+        currency
       });
     }
-    yield put({ type: TEZOS_FETCH_WALLETS_SUCCEEDED });
+    yield put({ type: ETHEREUM_FETCH_CURRENCY_SUCCEEDED });
   } catch (e) {
     // TODO temporary solution - I will fix it in next step
-    yield put({type: TEZOS_FETCH_WALLETS_FAILED, message: e.code});
+    yield put({type: ETHEREUM_FETCH_CURRENCY_FAILED, message: e.code});
   }
 }
 
 export function* fetchActualCurrency() {
-  yield takeEvery(blockchainActions.TEZOS_FETCH_WALLETS, foFetchWallets);
+  yield takeEvery(blockchainActions.ETHEREUM_FETCH_CURRENCY, foFetchCurrency);
 }
