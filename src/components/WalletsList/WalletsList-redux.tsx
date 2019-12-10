@@ -6,12 +6,12 @@ import WallletsListContainer from './WalletsList-container';
 import * as actions from '../../store/actions/common/walletsList';
 
 const WalletsListRedux = () => {
-    const mapState = (state:any) => ({
+    const mapState = (state: any) => ({
         publicList: state.common.walletsList.setWalletsList,
         userList: state.common.walletsList.setWalletsListUser
     });
 
-    const { publicList, userList} = useMappedState(mapState);
+    const { publicList, userList } = useMappedState(mapState);
 
     const dispatch = useDispatch();
 
@@ -24,10 +24,22 @@ const WalletsListRedux = () => {
         type: actions.GET_WALLETS_LIST_USER,
     });
 
+    const editWalletsList = (data: any) => dispatch({
+        type: actions.EDIT_WALLETS_LIST,
+        data
+    });
+
+    const editWalletsListUser = (data: any) => dispatch({
+        type: actions.EDIT_WALLETS_LIST_USER,
+        data
+    });
+
     const props = {
         actions: {
             getWalletsList,
-            getWalletsListUser
+            getWalletsListUser,
+            editWalletsListUser,
+            editWalletsList
         },
         publicList,
         userList

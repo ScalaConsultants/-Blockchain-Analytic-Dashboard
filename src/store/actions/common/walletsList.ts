@@ -4,6 +4,10 @@ export const SET_WALLETS_LIST = 'SET_WALLETS_LIST';
 export const GET_WALLETS_LIST_USER = 'GET_WALLETS_LIST_USER';
 export const SET_WALLETS_LIST_USER = 'SET_WALLETS_LIST_USER';
 
+export const EDIT_WALLETS_LIST_USER = 'EDIT_WALLETS_LIST_USER';
+export const EDIT_WALLETS_LIST = 'EDIT_WALLETS_LIST';
+
+
 export const getWalletsList = () => ({
     type: GET_WALLETS_LIST,
 });
@@ -20,5 +24,16 @@ export const getWalletsListUser = () => ({
 
 export const setWalletsListUser = (data:any) => ({
     type: SET_WALLETS_LIST_USER,
+    data
+});
+
+
+export const editWalletsListUser = (data:any) => ({
+    type: EDIT_WALLETS_LIST_USER,
+    data
+});
+
+export const editWalletsList = (data:any) => ({
+    type: EDIT_WALLETS_LIST_USER,
     data
 });

@@ -14,8 +14,7 @@ export interface HeaderColsInterface {
 }
 
 export interface Wallet {
-    id: string;
-    walletHash: string;
+    wallet_address: string;
     title: string;
     blockchain: string;
     market: string;

@@ -1,3 +1,5 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import React from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,15 +10,13 @@ import Table from '@material-ui/core/Table';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Markets, Blockchains, WalletType } from '../../types';
 import { Order, OrderBy, HeaderColsInterface, Wallet } from './types';
 import useWalletsListTableStyles from './WalletsList-styles';
 
 import View from '../View';
-import { walletsListPrivate } from './wallets';
-import { walletsListPublic } from './wallets';
 import SwitchButton from '../SwitchButton';
 
 import { stableSort, getSorting } from "../../helpers/helpers";
@@ -36,7 +36,6 @@ const headerCols: HeaderColsInterface[] = [
 const WalletsList = (props: any): React.ReactElement => {
 
     const [switchWallet, setSwitchWallet] = React.useState(WalletType.PRIVATE);
-    const [switchToggle, setSwitchToggle] = React.useState(false);
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<OrderBy>("id");
     const { actions, publicList, userList } = props;
@@ -94,15 +93,15 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const toggleSwitch = (id: string) => {
-        setSwitchToggle(!switchToggle);
-        let index = 0;
-        if (switchWallet === WalletType.PRIVATE) {
-            index = walletsListPrivate.findIndex((wallet: Wallet) => wallet.id === id);
-            walletsListPrivate[index].watched = !walletsListPrivate[index].watched;
+    const toggleSwitch = (data: any, type: string) => {
+        data.watched = !data.watched;
+        if (type === 'public') {
+            actions.editWalletsList(data);
+            actions.getWalletsList();
+
         } else {
-            index = walletsListPublic.findIndex((wallet: Wallet) => wallet.id === id);
-            walletsListPublic[index].watched = !walletsListPublic[index].watched;
+            actions.editWalletsListUser(data);
+            actions.getWalletsListUser();
         }
     }
 
@@ -123,7 +122,7 @@ const WalletsList = (props: any): React.ReactElement => {
         }
     }
 
-    const renderWalletsListRows = (walletsList: any[]) => {
+    const renderWalletsListRows = (walletsList: Wallet[], type: string) => {
         return walletsList.length &&
             (stableSort(
                 walletsList,
@@ -144,7 +143,7 @@ const WalletsList = (props: any): React.ReactElement => {
                             <span className={row.type === Markets.UNASSIGNED ? classes.labelDisabled : ''}>{row.type}</span>
                         </div>
                     </TableCell>
-                    <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(row.id)} /></TableCell>
+                    <TableCell className={classes.rowEl}><SwitchButton dashboaradSwitch={false} switchState={row.watched} handleChange={() => toggleSwitch(row, type)} /></TableCell>
                     <TableCell className={classes.rowEl}>
                         {/*<EditWalletModal id="1" address={row.walletHash} description={row.title} update={updateDescription} />*/}
                     </TableCell>
@@ -183,7 +182,7 @@ const WalletsList = (props: any): React.ReactElement => {
                             <TableBody
                                 id="walletsListTableBody"
                             >
-                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(userList) : renderWalletsListRows(publicList)}</TableBody>
+                                {switchWallet === WalletType.PRIVATE ? renderWalletsListRows(userList, 'user') : renderWalletsListRows(publicList, 'public')}</TableBody>
                         </Table>
                     </Grid>
                 </Grid>
