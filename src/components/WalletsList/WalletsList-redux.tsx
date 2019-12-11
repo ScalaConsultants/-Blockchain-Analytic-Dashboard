@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
 import WallletsListContainer from './WalletsList-container';
+import { Wallet } from './types';
 
 import * as actions from '../../store/actions/common/walletsList';
 
@@ -24,12 +25,12 @@ const WalletsListRedux = () => {
         type: actions.GET_WALLETS_LIST_USER,
     });
 
-    const editWalletsList = (data: any) => dispatch({
+    const editWalletsList = (data: Wallet) => dispatch({
         type: actions.EDIT_WALLETS_LIST,
         data
     });
 
-    const editWalletsListUser = (data: any) => dispatch({
+    const editWalletsListUser = (data: Wallet) => dispatch({
         type: actions.EDIT_WALLETS_LIST_USER,
         data
     });
