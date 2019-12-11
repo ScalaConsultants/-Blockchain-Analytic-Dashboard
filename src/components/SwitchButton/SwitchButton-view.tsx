@@ -17,6 +17,7 @@ const SwitchButton = (props: SwitchButtonProps) => {
           <Grid item>{props.labelLeft}</Grid>
           <Grid item>
             <SwitchStyle
+              disabled={props.disabled}
               checked={props.switchState}
               onChange={props.handleChange}
             />

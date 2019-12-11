@@ -6,7 +6,7 @@ import DashboardTableContainer from './DashboardTable-container'
 import { currencyOn, currencyOff } from '../../store/actions/common/currencySwitch'
 import { Currency, State, Params } from './types';
 
-const DashboardTable = ({ match: { params: { blockchains }}}: Params) => {
+const DashboardTable = ({ match: { params: { blockchains, groupBy }}}: Params) => {
 
   const mapState = (state: State): Currency => ({
     currency: state.common.currency
@@ -24,7 +24,7 @@ const DashboardTable = ({ match: { params: { blockchains }}}: Params) => {
     setCurrencyOff,
   };
 
-  return <DashboardTableContainer currency={currency} actions={actions} blockchains={blockchains}/>;
+  return <DashboardTableContainer currency={currency} actions={actions} blockchains={blockchains} type={groupBy} />;
 };
 
 export default withRouter(DashboardTable);

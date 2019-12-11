@@ -5,7 +5,7 @@ import { useDashboardTableStyles } from './DashboardTable-styles';
 
 import SwitchButton from '../SwitchButton';
  
-const DashboardTableHeader = ({ currency, actions }: any) => {
+const DashboardTableHeader = ({ currency, actions, type }: any) => {
   const classes = useDashboardTableStyles();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,13 +34,14 @@ const DashboardTableHeader = ({ currency, actions }: any) => {
           Value
         </Grid>
         <Grid item xs={2}>
-          <SwitchButton 
+        <SwitchButton 
+            disabled={type === 'data'}
             labelLeft={'$'}
             labelRight={'%'}
             switchState={currency}
             handleChange={handleChange}
             dashboaradSwitch={true}
-          />
+            />
         </Grid>
         <Grid item xs={8}>
           <Legend />

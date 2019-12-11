@@ -68,7 +68,7 @@ const BarChartContainer = (props: BarChartProps) => {
   };
 
   const createLastSegment = (total: number) => {
-    const num = Math.floor(100 - total);
+    const num = 100 - Math.floor(total);
     return (
       <div
         key="last-segment-label"
@@ -90,10 +90,10 @@ const BarChartContainer = (props: BarChartProps) => {
       <Link
         to={`/wallet/${walletSource}/${walletHash}/${groupBy}/${blockchains}/${limit}/${from}/${to}`}
         key={walletHash+index} style={{ width: percentage + '%' , textDecoration: 'none'}} className={getOuterClasses(index, type)}>
-        <Tooltip title={!isCurrency ? `${$value.toFixed(3)}` : percentage.toFixed(3) + '%'} placement="bottom" >
+        <Tooltip title={!isCurrency ? `${$value.toFixed(2)}` : percentage.toFixed(3) + '%'} placement="bottom" >
           <div className={getInnerClasses(index)}>
             {index < 10 && percentage >= 1 ?
-              <div>{!isCurrency ? `$${Math.floor($value)}` : `${Math.floor(percentage)}%`}</div> : null}
+              <div>{!(match.params.groupBy === 'data') && !isCurrency ? `$${Math.floor($value)}` : `${Math.floor(percentage)}%`}</div> : null}
           </div>
         </Tooltip>
       </Link>

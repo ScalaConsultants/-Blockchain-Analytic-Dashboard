@@ -12,6 +12,7 @@ export interface Row {
 
 export interface Table {
   rows: BlockchainCell[],
+  type?: string,
   currency?: boolean,
   actions?: {
     setCurrencyOn: () => void,
@@ -22,6 +23,7 @@ export interface Table {
 export interface Props {
   currency: boolean,
   blockchains: string,
+  type: string,
   actions: {
     setCurrencyOn: () => void,
     setCurrencyOff: () => void
@@ -31,7 +33,8 @@ export interface Props {
 export interface Params {
   match: {
     params: {
-      blockchains: string
+      blockchains: string,
+      groupBy: string
     }
   }
 }

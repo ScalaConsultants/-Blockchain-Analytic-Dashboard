@@ -4,7 +4,7 @@ import DashboardTableView from './DashboardTable-view';
 
 import { BlockchainCell, Props } from './types';
 
-const DashboardTable = ({ blockchains, currency, actions}: Props) => {
+const DashboardTable = ({ blockchains, type, currency, actions}: Props) => {
 
   const blockchainNamesMap: any = {
     ETH: { name: 'ETH', icon: 'eth', fullName: 'Ethereum'},
@@ -14,7 +14,8 @@ const DashboardTable = ({ blockchains, currency, actions}: Props) => {
   const rows = blockchains.split(',').map((name: string): BlockchainCell  => blockchainNamesMap[name]);
   const props = {
     currency,
-    actions
+    actions,
+    type
   };
 
   return (
