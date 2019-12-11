@@ -50,7 +50,7 @@ export const translateTimePeriod = (activeLabel: string[]): string => {
 }
 
 export const setMinValue = (): number =>  Number(setTimeNow() - 24*60*60*1000);
-export const setTimeNow = (): number =>  Number(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000);
+export const setTimeNow = (): number =>  Number(new Date().getTime());
 export const convertTimestampToTime = (timestamp: number): string => new Date(timestamp).toISOString().substr(0, 19).slice(11, -3);
 
 export const setStep = (timeStepString: string | undefined = 'BY_1_MINUTE'): number => {
@@ -62,9 +62,8 @@ export const setStep = (timeStepString: string | undefined = 'BY_1_MINUTE'): num
   }
 }
 
-export const roundTimeTo10Minutes = (timestampToRound: number): number => {
+export const roundTimeTo10Minutes = (date: Date): number => {
   const round: number = 1000 * 60 * 10;
-  const date: Date = new Date(timestampToRound);  //or use any other date
   const roundedTimestamp: number = new Date(Math.round(date.getTime() / round) * round).getTime();
   return roundedTimestamp;
 }
