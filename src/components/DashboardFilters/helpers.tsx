@@ -63,8 +63,8 @@ export const setStep = (timeStepString: string | undefined = 'BY_1_MINUTE'): num
 }
 
 export const roundTimeTo10Minutes = (timestampToRound: number): number => {
-  const t: Date = new Date(timestampToRound);
-  // const tim: number = Number(timestamp.getTime() - timestamp.getTimezoneOffset() * 60 * 1000);
-  const generateTimestamp: number = new Date(t.getTime() - (parseInt(t.getMinutes().toString().split('')[1]) * 60 * 1000) - t.getSeconds() * 1000).getTime();
-  return generateTimestamp;
+  const round: number = 1000 * 60 * 10;
+  const date: Date = new Date(timestampToRound);  //or use any other date
+  const roundedTimestamp: number = new Date(Math.round(date.getTime() / round) * round).getTime();
+  return roundedTimestamp;
 }
