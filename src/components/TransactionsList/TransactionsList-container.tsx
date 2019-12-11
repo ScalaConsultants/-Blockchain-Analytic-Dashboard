@@ -74,14 +74,14 @@ const TransactionList = (props: TransactionsListProps): React.ReactElement => {
   // on route change (when user clicked on bar-chart) - cleared transactions list and download the first page 
   // and on handleScroll fetch next page of transactions
   useEffect((): void => {
-    if (match.params.walletHash === walletHash) {
-      checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber, dataSource);
-    } else {
-      actions.flushTransactions();
-      setPageNumber(1);
-      checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber, dataSource);
-    }
-   }, [match.params.walletHash, pageNumber]);
+    checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber, dataSource);
+   }, [pageNumber]);
+
+   useEffect(() => {
+    actions.flushTransactions();
+    setPageNumber(1);
+    checkWalletHashAndFetchTransactions(match.params.walletHash, pageNumber, dataSource);
+   }, [match.params.walletHash])
 
   return (
     <Grid container className="Container">

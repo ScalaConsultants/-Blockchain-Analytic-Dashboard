@@ -7,7 +7,7 @@ const initState: Transaction[] = [];
 const transactions = (state = initState, action: SetTransactionsAction): Transaction[] => {
   switch (action.type) {
     case TEZOS_SET_TRANSACTIONS:
-      return [...state, ...action.transactions];
+      return [...action.transactions];
     case TEZOS_FLUSH_TRANSACTIONS:
       return initState;
     default:
