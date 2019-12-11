@@ -34,7 +34,7 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
       return timestamp.setMinutes(0);
     }
     if (timeStep === 600000) {
-      return roundTimeTo10Minutes(timestampToRound);
+      return roundTimeTo10Minutes(timestamp);
     }
     return timestampToRound;
   };
@@ -86,7 +86,8 @@ const TimePeriodFilter = (props: TimePeriodFilterProps) => {
           {yesterday}
         </Grid>
         <Grid item xs={8} className={timeFilterClasses.timeField}>
-          {`${convertTimestampToTime(roundTime(timeValueFrom))}-${convertTimestampToTime(roundTime(timeValueTo))}`}
+          {`${convertTimestampToTime(roundTime(timeValueFrom - new Date().getTimezoneOffset() * 60 * 1000))}
+          -${convertTimestampToTime(roundTime(timeValueTo - new Date().getTimezoneOffset() * 60 * 1000))}`}
         </Grid>
         <Grid item xs={2} className={timeFilterClasses.right}>
           {today}
